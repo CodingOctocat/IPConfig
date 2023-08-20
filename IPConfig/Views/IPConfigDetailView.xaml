@@ -1,0 +1,156 @@
+﻿<UserControl x:Class="IPConfig.Views.IPConfigDetailView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:b="clr-namespace:IPConfig.Behaviors"
+             xmlns:c="clr-namespace:IPConfig.Controls"
+             xmlns:lang="clr-namespace:IPConfig.Languages"
+             xmlns:vm="clr-namespace:IPConfig.ViewModels"
+             xmlns:v="clr-namespace:IPConfig.Views"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             d:DataContext="{d:DesignInstance Type=vm:IPConfigDetailViewModel,
+                                              IsDesignTimeCreatable=True}"
+             d:DesignWidth="500"
+             d:FontSize="14"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style x:Key="MyTextBoxStyle"
+               BasedOn="{StaticResource TextBoxPlusBaseStyle}"
+               TargetType="{x:Type hc:TextBox}">
+            <Setter Property="ToolTip" Value="{Binding Text, RelativeSource={RelativeSource Self}}" />
+            <!--  隐藏验证错误信息，此方法对 ComboBox 无效。  -->
+            <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
+            <Setter Property="b:TripleClickToSelectAllBehavior.Enabled" Value="True" />
+            <Setter Property="hc:InfoElement.ShowClearButton" Value="{Binding IsReadOnly, Converter={StaticResource Boolean2BooleanReConverter}, RelativeSource={RelativeSource Mode=Self}}" />
+            <Setter Property="hc:TitleElement.TitlePlacement" Value="Left" />
+
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="ToolTip" Value="{Binding (Validation.Errors), RelativeSource={RelativeSource Self}, Converter={StaticResource ValidationErrorsToolTipConverter}}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto"
+                               MaxHeight="{Binding ActualHeight, ElementName=iPv4ConfigView, Mode=OneTime}" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <hc:TextBox x:Name="tbIPConfigName"
+                        Margin="0,0,0,4"
+                        hc:InfoElement.Necessary="True"
+                        hc:InfoElement.Placeholder="{lang:Lang {x:Static lang:LangKey.NameMaxLength50}}"
+                        hc:InfoElement.ShowClearButton="True"
+                        hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.IPConfigName}}"
+                        hc:TitleElement.TitlePlacement="Left"
+                        MaxLength="50"
+                        Style="{StaticResource MyTextBoxStyle}"
+                        Text="{Binding EditingIPConfig.Name, UpdateSourceTrigger=PropertyChanged}" />
+
+            <c:AlignDashCornerRect Margin="0,0,0,4"
+                                   d:Visibility="Visible"
+                                   Style="{StaticResource ContrastViewRectStyle}"
+                                   Tag="{Binding CanShowTitleChangedIndicator}" />
+
+            <v:IPv4ConfigView x:Name="iPv4ConfigView"
+                              Grid.Row="1" />
+
+            <GridSplitter Grid.Row="2"
+                          Width="64"
+                          Style="{StaticResource HGridSplitterStyle}" />
+
+            <hc:TextBox Grid.Row="3"
+                        Padding="4"
+                        VerticalContentAlignment="Top"
+                        hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.Remark}}"
+                        AcceptsReturn="True"
+                        MinLines="1"
+                        Text="{Binding EditingIPConfig.Remark, UpdateSourceTrigger=PropertyChanged}"
+                        TextWrapping="Wrap"
+                        VerticalScrollBarVisibility="Auto">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="LostFocus">
+                        <i:InvokeCommandAction Command="{Binding TrimRemarkTextCommand}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </hc:TextBox>
+
+            <c:AlignDashCornerRect Grid.Row="3"
+                                   Style="{StaticResource ContrastViewRectStyle}"
+                                   Tag="{Binding CanShowRemarkChangedIndicator}" />
+        </Grid>
+
+        <hc:UniformSpacingPanel Grid.Row="1"
+                                Margin="0,3,0,0"
+                                HorizontalAlignment="Right"
+                                ItemHorizontalAlignment="Right"
+                                Spacing="4">
+            <hc:ElementGroup HorizontalAlignment="Stretch"
+                             Layout="Stack">
+                <Button IsEnabled="{Binding IsEditingIPConfigModifield}"
+                        ToolTip="{lang:Lang {x:Static lang:LangKey.Contrast_ToolTip}}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseEnter">
+                            <i:InvokeCommandAction Command="{Binding RaiseContrastViewButtonMouseEnterCommand}" />
+                        </i:EventTrigger>
+
+                        <i:EventTrigger EventName="MouseLeave">
+                            <i:InvokeCommandAction Command="{Binding RaiseContrastViewButtonMouseLeaveCommand}" />
+                        </i:EventTrigger>
+
+                        <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                            <i:InvokeCommandAction Command="{Binding RaiseContrastViewButtonMouseDownCommand}" />
+                        </i:EventTrigger>
+
+                        <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding RaiseContrastViewButtonMouseUpCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+
+                    <Viewbox Style="{StaticResource IconViewBoxStyle}">
+                        <Path Data="{StaticResource ContrastViewGeometry}"
+                              Style="{StaticResource IconParkStyle}" />
+                    </Viewbox>
+                </Button>
+
+                <Button Command="{Binding DiscardChangesCommand}"
+                        CommandParameter="{StaticResource True}"
+                        Content="{lang:Lang {x:Static lang:LangKey.DiscardChanges_}}" />
+            </hc:ElementGroup>
+
+            <hc:SplitButton HorizontalContentAlignment="Right"
+                            Command="{Binding PrimarySaveOrApplyCommand}"
+                            Content="{Binding PrimarySaveOrApplyString, Mode=OneWay}"
+                            Style="{StaticResource SplitButtonPrimary}">
+                <hc:SplitButton.DropDownContent>
+                    <Menu Style="{StaticResource SplitButtonDropDownMenuStyle}">
+                        <MenuItem Command="{Binding ValidateCommand}"
+                                  Header="{lang:Lang {x:Static lang:LangKey.DataValidation_}}"
+                                  ToolTip="{lang:Lang {x:Static lang:LangKey.DataValidation_ToolTip}}" />
+
+                        <Separator Margin="-24,4,8,4" />
+
+                        <MenuItem Command="{Binding SecondarySaveOrApplyCommand}"
+                                  Header="{Binding SecondarySaveOrApplyString}" />
+
+                        <MenuItem Command="{Binding SaveAndApplyCommand}"
+                                  Header="{lang:Lang {x:Static lang:LangKey.SaveAndApply_}}" />
+                    </Menu>
+                </hc:SplitButton.DropDownContent>
+            </hc:SplitButton>
+        </hc:UniformSpacingPanel>
+    </Grid>
+</UserControl>

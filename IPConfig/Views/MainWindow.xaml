@@ -1,0 +1,622 @@
+﻿<hc:Window x:Class="IPConfig.Views.MainWindow"
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+           xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+           xmlns:hcd="clr-namespace:HandyControl.Data;assembly=HandyControl"
+           xmlns:app="clr-namespace:IPConfig"
+           xmlns:b="clr-namespace:IPConfig.Behaviors"
+           xmlns:conv="clr-namespace:IPConfig.Converters"
+           xmlns:lang="clr-namespace:IPConfig.Languages"
+           xmlns:m="clr-namespace:IPConfig.Models"
+           xmlns:vm="clr-namespace:IPConfig.ViewModels"
+           xmlns:v="clr-namespace:IPConfig.Views"
+           xmlns:net="clr-namespace:System.Net.NetworkInformation;assembly=System"
+           xmlns:hc="https://handyorg.github.io/handycontrol"
+           Width="484"
+           Height="600"
+           MinWidth="486"
+           MinHeight="520"
+           d:DataContext="{d:DesignInstance Type=vm:MainViewModel,
+                                            IsDesignTimeCreatable=True}"
+           Background="{DynamicResource RegionBrush}"
+           FontFamily="Consolas,Microsoft YaHei UI"
+           FontSize="14"
+           Icon="/Resources/ipconfig.ico"
+           PreviewKeyDown="Window_PreviewKeyDown"
+           ResizeMode="CanResize"
+           SizeChanged="Window_SizeChanged"
+           SnapsToDevicePixels="True"
+           Topmost="{Binding Topmost}"
+           UseLayoutRounding="True"
+           WindowStartupLocation="CenterScreen"
+           mc:Ignorable="d">
+    <Window.Resources>
+        <conv:OperationalStatusToolTipConverter x:Key="OpStatusToolTipConverter" />
+
+        <conv:NicIPConfigToolTipConverter x:Key="NicIPConfigToolTipConverter" />
+        <conv:SelectedNicIPConfigNameConverter x:Key="SelectedNicIPConfigNameConverter" />
+
+        <conv:SkinTypeToImageConverter x:Key="SkinTypeToImageConverter" />
+        <conv:SkinTypeToolTipConverter x:Key="SkinTypeToolTipConverter" />
+
+        <Style BasedOn="{StaticResource TextBoxPlusBaseStyle}"
+               TargetType="{x:Type hc:TextBox}">
+            <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
+        </Style>
+    </Window.Resources>
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
+        </i:EventTrigger>
+
+        <i:EventTrigger EventName="Closing">
+            <i:InvokeCommandAction Command="{Binding ClosingCommand}"
+                                   PassEventArgsToCommand="True" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <Window.InputBindings>
+        <KeyBinding Key="F11"
+                    Command="{Binding ViewNicIPConfigCommand}"
+                    CommandParameter="{StaticResource True}" />
+
+        <KeyBinding Key="F12"
+                    Command="{Binding ViewToNicConfigDetailCommand}" />
+
+        <KeyBinding Key="Esc"
+                    Command="{Binding ViewNicIPConfigCommand}"
+                    CommandParameter="{StaticResource False}" />
+
+        <KeyBinding Key="Backspace"
+                    Command="{Binding GoBackCommand}" />
+
+        <KeyBinding Key="F5"
+                    Command="{Binding RefreshCommand}" />
+
+        <KeyBinding Command="{Binding AddUntitledIPConfigCommand}"
+                    Gesture="Ctrl+N" />
+
+        <KeyBinding Command="{Binding SaveCommand}"
+                    Gesture="Ctrl+S" />
+    </Window.InputBindings>
+
+    <hc:Window.NonClientAreaContent>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock x:Name="txtTitle"
+                       VerticalAlignment="Center"
+                       IsHitTestVisible="False"
+                       TextTrimming="CharacterEllipsis" />
+
+            <hc:SimpleStackPanel Grid.Column="1"
+                                 MinWidth="68"
+                                 Margin="12,0"
+                                 HorizontalAlignment="Right"
+                                 Orientation="Horizontal">
+                <Button b:ContextMenuLeftClickBehavior.IsLeftClickEnabled="True"
+                        Background="Transparent"
+                        ContextMenuService.HorizontalOffset="-94"
+                        ContextMenuService.IsEnabled="false"
+                        ContextMenuService.Placement="Bottom"
+                        Style="{StaticResource ButtonCustom}"
+                        Tag="{Binding DataContext, RelativeSource={RelativeSource Self}}">
+                    <Button.ToolTip>
+                        <TextBlock>
+                            <Run Text="{lang:Lang {x:Static lang:LangKey.Language}}" /><Run Text=":" />
+                            <Run Text="{Binding Source={x:Static lang:LangSource.Instance}, Path=CurrentCulture.NativeName, Mode=OneWay}" />
+                        </TextBlock>
+                    </Button.ToolTip>
+
+                    <Button.ContextMenu>
+                        <ContextMenu ItemsSource="{Binding Languages}">
+                            <ContextMenu.ItemContainerStyle>
+                                <Style BasedOn="{StaticResource MenuItemBaseStyle}"
+                                       TargetType="{x:Type MenuItem}">
+                                    <Setter Property="Command" Value="{Binding PlacementTarget.Tag.ChangeLanguageCommand, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}" />
+                                    <Setter Property="CommandParameter" Value="{Binding Name}" />
+                                    <Setter Property="Header" Value="{Binding NativeName}" />
+                                    <Setter Property="InputGestureText" Value="{Binding Name}" />
+
+                                    <Style.Triggers>
+                                        <DataTrigger Value="{StaticResource True}">
+                                            <DataTrigger.Binding>
+                                                <MultiBinding Converter="{StaticResource MultiValueEqualsConverter}">
+                                                    <Binding Path="Name" />
+                                                    <Binding Path="CurrentCulture.Name"
+                                                             Source="{x:Static lang:LangSource.Instance}" />
+                                                </MultiBinding>
+                                            </DataTrigger.Binding>
+
+                                            <Setter Property="FontWeight" Value="Bold" />
+                                            <Setter Property="Foreground" Value="{DynamicResource PrimaryBrush}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ContextMenu.ItemContainerStyle>
+                        </ContextMenu>
+                    </Button.ContextMenu>
+
+                    <Viewbox Width="18"
+                             Height="18">
+                        <Path Data="{StaticResource LangGeometry}"
+                              Fill="{DynamicResource PrimaryBrush}" />
+                    </Viewbox>
+                </Button>
+
+                <ToggleButton Margin="12,0,0,0"
+                              IsChecked="{Binding Topmost}"
+                              Style="{StaticResource ToggleButtonSwitch}"
+                              ToolTip="{lang:Lang {x:Static lang:LangKey.Topmost_ToolTip}}" />
+            </hc:SimpleStackPanel>
+        </Grid>
+    </hc:Window.NonClientAreaContent>
+
+    <Grid Margin="4">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <hc:ComboBox Height="36"
+                         hc:InfoElement.Placeholder="{Binding GetNicsToolTip}"
+                         ItemsSource="{Binding AllNics}"
+                         SelectedItem="{Binding SelectedNic}"
+                         ToolTip="{Binding SelectedNic}"
+                         UseLayoutRounding="False">
+                <hc:ComboBox.ItemTemplate>
+                    <DataTemplate DataType="{x:Type m:Nic}">
+                        <hc:SimpleStackPanel Orientation="Horizontal"
+                                             UseLayoutRounding="True">
+                            <Border x:Name="NicOpStatusBorder"
+                                    Padding="2"
+                                    VerticalAlignment="Center"
+                                    Background="{StaticResource DarkOpacityBrush}"
+                                    CornerRadius="4"
+                                    ToolTip="{Binding OperationalStatus, Converter={StaticResource OpStatusToolTipConverter}}">
+                                <TextBlock Foreground="White">
+                                    <Run Text="[" /><Run Text="{Binding OperationalStatus, Mode=OneTime}" /><Run Text="]" />
+                                </TextBlock>
+                            </Border>
+
+                            <Border x:Name="NicTypeBorder"
+                                    Margin="4,0,0,0"
+                                    Padding="2"
+                                    VerticalAlignment="Center"
+                                    Background="{StaticResource DarkWarningBrush}"
+                                    CornerRadius="4"
+                                    ToolTip="{Binding NetworkInterfaceType}">
+                                <TextBlock Foreground="White">
+                                    <Run Text="[" /><Run Text="{Binding Name, Mode=OneTime}" /><Run Text="]" />
+                                </TextBlock>
+                            </Border>
+
+                            <TextBlock Margin="4,0,0,0"
+                                       VerticalAlignment="Center"
+                                       Text="{Binding Description}"
+                                       ToolTip="{Binding}" />
+                        </hc:SimpleStackPanel>
+
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding OperationalStatus}"
+                                         Value="{x:Static net:OperationalStatus.Up}">
+                                <Setter TargetName="NicOpStatusBorder" Property="Background" Value="{StaticResource SuccessBrush}" />
+                            </DataTrigger>
+
+                            <DataTrigger Binding="{Binding SimpleNicType}"
+                                         Value="{x:Static m:SimpleNicType.Wlan}">
+                                <Setter TargetName="NicTypeBorder" Property="Background" Value="{StaticResource InfoBrush}" />
+                            </DataTrigger>
+
+                            <DataTrigger Binding="{Binding SimpleNicType}"
+                                         Value="{x:Static m:SimpleNicType.Vm}">
+                                <Setter TargetName="NicTypeBorder" Property="Background" Value="{StaticResource SecondaryBorderBrush}" />
+                            </DataTrigger>
+
+                            <DataTrigger Binding="{Binding SimpleNicType}"
+                                         Value="{x:Static m:SimpleNicType.Ethernet}">
+                                <Setter TargetName="NicTypeBorder" Property="Background" Value="{StaticResource PrimaryBrush}" />
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </hc:ComboBox.ItemTemplate>
+            </hc:ComboBox>
+
+            <Button Grid.Column="1"
+                    Height="36"
+                    Margin="4,0,0,0"
+                    Command="{Binding RefreshCommand}"
+                    Content="{lang:Lang {x:Static lang:LangKey.Refresh}}"
+                    ToolTip="{lang:Lang {x:Static lang:LangKey.Refresh_ToolTip}}" />
+        </Grid>
+
+        <hc:Divider Grid.Row="1"
+                    Margin="64,4"
+                    LineStrokeThickness="1" />
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.3*"
+                                  MinWidth="200" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*"
+                                  MinWidth="270" />
+            </Grid.ColumnDefinitions>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <RadioButton HorizontalAlignment="Stretch"
+                             VerticalAlignment="Stretch"
+                             HorizontalContentAlignment="Stretch"
+                             VerticalContentAlignment="Stretch"
+                             IsChecked="{Binding IsSelectedNicIPConfigChecked}"
+                             Style="{StaticResource ToggleButtonCustom}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Checked">
+                            <i:InvokeCommandAction Command="{Binding SelectedNicIPConfigCheckedCommand}" />
+                        </i:EventTrigger>
+
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <i:InvokeCommandAction Command="{Binding ViewToNicConfigDetailCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+
+                    <RadioButton.ToolTip>
+                        <MultiBinding Converter="{StaticResource NicIPConfigToolTipConverter}">
+                            <MultiBinding.Bindings>
+                                <Binding Path="SelectedNic" />
+                                <Binding Path="SelectedNicIPConfig" />
+                            </MultiBinding.Bindings>
+                        </MultiBinding>
+                    </RadioButton.ToolTip>
+
+                    <RadioButton.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Command="{Binding CopySelectedNicIPConfigAsTextCommand}"
+                                      Header="{lang:Lang {x:Static lang:LangKey.CopySelectedIPConfigAsText_}}" />
+
+                            <MenuItem Command="{Binding MakeSelectedNicIPConfigCopyCommand}"
+                                      Header="{lang:Lang {x:Static lang:LangKey.MakeSelectedIPConfigCopy_}}" />
+
+                            <Separator />
+
+                            <MenuItem Command="{Binding ViewToNicConfigDetailCommand}"
+                                      Header="{lang:Lang {x:Static lang:LangKey.ViewToAdapterConfigDetail_}}"
+                                      InputGestureText="F12" />
+                        </ContextMenu>
+                    </RadioButton.ContextMenu>
+
+                    <Border>
+                        <Border.Style>
+                            <Style BasedOn="{StaticResource BorderTipBaseStyle}"
+                                   TargetType="{x:Type Border}">
+                                <Setter Property="Background" Value="{StaticResource LightPrimaryBrush}" />
+                                <Setter Property="BorderBrush" Value="{StaticResource PrimaryBrush}" />
+                                <Setter Property="BorderThickness" Value="1" />
+                                <Setter Property="Padding" Value="10,9,10,8" />
+
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsSelectedNicIPConfigChecked}"
+                                                 Value="True">
+                                        <Setter Property="BorderThickness" Value="4,1,1,1" />
+                                        <Setter Property="Padding" Value="7,9,10,8" />
+                                    </DataTrigger>
+
+                                    <DataTrigger Binding="{Binding SelectedNic}"
+                                                 Value="{x:Null}">
+                                        <Setter Property="Background" Value="{StaticResource LightDangerBrush}" />
+                                        <Setter Property="BorderBrush" Value="{StaticResource DangerBrush}" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+
+                        <hc:SimpleStackPanel TextElement.FontSize="14">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Margin="2,0,0,0"
+                                           FontSize="16"
+                                           Text="{Binding SelectedNicIPConfig, Converter={StaticResource SelectedNicIPConfigNameConverter}}"
+                                           TextTrimming="CharacterEllipsis">
+                                    <TextBlock.Style>
+                                        <Style TargetType="{x:Type TextBlock}">
+                                            <Setter Property="Foreground" Value="{DynamicResource MyPrimaryTextBrush}" />
+
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsSelectedNicIPConfigChecked}"
+                                                             Value="True">
+                                                    <Setter Property="FontWeight" Value="Bold" />
+                                                </DataTrigger>
+
+                                                <DataTrigger Binding="{Binding SelectedNic}"
+                                                             Value="{x:Null}">
+                                                    <Setter Property="Foreground" Value="{StaticResource DangerBrush}" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+
+                                <Viewbox Grid.Column="1"
+                                         Width="14"
+                                         Height="14"
+                                         Margin="7,0,0,0"
+                                         HorizontalAlignment="Right"
+                                         VerticalAlignment="Top"
+                                         ToolTip="{lang:Lang {x:Static lang:LangKey.AdapterNotFound_ToolTip}}"
+                                         Visibility="{Binding IsSelectedNicNotNull, Converter={StaticResource Boolean2VisibilityReConverter}}">
+                                    <Path Data="{StaticResource WarningGeometry}"
+                                          Fill="{StaticResource DangerBrush}" />
+                                </Viewbox>
+                            </Grid>
+
+                            <TextBlock Margin="0,2,0,0">
+                                <Run Text="{Binding SelectedNicIPConfig.IPv4Config.IP, FallbackValue='IP'}" />
+                                <Run Text="/" /><Run Text="{Binding SelectedNicIPConfig.IPv4Config.Mask, FallbackValue='CIDR', Converter={StaticResource GetIPCIDRConverter}}" />
+                            </TextBlock>
+
+                            <TextBlock Margin="0,2,0,0"
+                                       FontStyle="Italic"
+                                       Text="{Binding SelectedNic.FormatedMacAddress, FallbackValue='MAC'}" />
+                        </hc:SimpleStackPanel>
+                    </Border>
+                </RadioButton>
+
+                <v:IPConfigListView Grid.Row="1"
+                                    Margin="0,4,0,0" />
+            </Grid>
+
+            <GridSplitter Grid.Column="1"
+                          Height="64"
+                          Style="{StaticResource VGridSplitterStyle}" />
+
+            <hc:ToggleBlock Grid.Column="2"
+                            Margin="0,0,2,3"
+                            HorizontalContentAlignment="Stretch"
+                            VerticalContentAlignment="Stretch"
+                            IsChecked="{Binding IsViewToNicConfigDetail}">
+                <hc:ToggleBlock.UnCheckedContent>
+                    <hc:TransitioningContentControl TransitionMode="Left2Right">
+                        <v:IPConfigDetailView />
+                    </hc:TransitioningContentControl>
+                </hc:ToggleBlock.UnCheckedContent>
+
+                <hc:ToggleBlock.CheckedContent>
+                    <hc:TransitioningContentControl TransitionMode="Right2Left">
+                        <v:NicConfigDetailView />
+                    </hc:TransitioningContentControl>
+                </hc:ToggleBlock.CheckedContent>
+            </hc:ToggleBlock>
+        </Grid>
+
+        <StatusBar Grid.Row="3"
+                   Height="28"
+                   Margin="0,0,0,-4"
+                   HorizontalContentAlignment="Stretch"
+                   VerticalContentAlignment="Stretch"
+                   hc:WindowAttach.IsDragElement="True"
+                   FontSize="10">
+            <StatusBar.Resources>
+                <Style BasedOn="{StaticResource TextBlockDefault}"
+                       TargetType="{x:Type TextBlock}" />
+            </StatusBar.Resources>
+
+            <StatusBar.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <DockPanel LastChildFill="True" />
+                </ItemsPanelTemplate>
+            </StatusBar.ItemsPanel>
+
+            <StatusBarItem>
+                <hc:SimpleStackPanel Orientation="Horizontal">
+                    <hc:CircleProgressBar Width="14"
+                                          Height="14"
+                                          Margin="0,0,4,0"
+                                          d:Visibility="Visible"
+                                          IsIndeterminate="True"
+                                          ToolTip="{lang:Lang {x:Static lang:LangKey.DbSyncing_ToolTip}}"
+                                          ToolTipService.ShowOnDisabled="True"
+                                          Visibility="{Binding Path=(app:App.IsDbSyncing), Mode=OneWay, Converter={StaticResource Boolean2VisibilityConverter}}" />
+
+                    <TextBlock>
+                        <Run Text="{lang:Lang {x:Static lang:LangKey.Selected}}" />
+                        <Run Text="{Binding SelectedIPConfigsCount}" />
+                        <Run Text="/" />
+                        <Run Text="{Binding TotalIPConfigsCount}" />
+                    </TextBlock>
+                </hc:SimpleStackPanel>
+            </StatusBarItem>
+
+            <Separator />
+
+            <StatusBarItem>
+                <hc:UniformSpacingPanel Spacing="8">
+                    <TextBlock MinWidth="50"
+                               Foreground="{DynamicResource PrimaryBrush}">
+                        <TextBlock.ToolTip>
+                            <ToolTip Content="{Binding SelectedNic.Name}"
+                                     ContentStringFormat="[Tx] {0}" />
+                        </TextBlock.ToolTip>
+
+                        <Run Text="↑" />
+                        <Run Text="{Binding SelectedNicUploadSpeed}" />
+                    </TextBlock>
+
+                    <TextBlock MinWidth="50"
+                               Foreground="{DynamicResource SuccessBrush}">
+                        <TextBlock.ToolTip>
+                            <ToolTip Content="{Binding SelectedNic.Name}"
+                                     ContentStringFormat="[Rx] {0}" />
+                        </TextBlock.ToolTip>
+
+                        <Run Text="↓" />
+                        <Run Text="{Binding SelectedNicDownloadSpeed}" />
+                    </TextBlock>
+                </hc:UniformSpacingPanel>
+            </StatusBarItem>
+
+            <Separator />
+
+            <!--  DockPanel 特性：Right 部分将以相反的顺序显示。  -->
+            <StatusBarItem DockPanel.Dock="Right">
+                <hc:SimpleStackPanel Orientation="Horizontal">
+                    <Button Style="{StaticResource ButtonCustom}"
+                            ToolTip="{x:Static app:App.GithubRepositoryUrl}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:LaunchUriOrFileAction Path="{x:Static app:App.GithubRepositoryUrl}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+
+                        <Viewbox Style="{StaticResource IconViewBoxStyle}">
+                            <Path Data="{StaticResource GithubGeometry}"
+                                  Fill="{DynamicResource MyReverseBrush}" />
+                        </Viewbox>
+                    </Button>
+
+                    <Button Margin="8,0,0,0"
+                            Command="{Binding ShowUpdateGrowlCommand}"
+                            Content="{x:Static app:App.VersionString}"
+                            ToolTip="{Binding NewVersionAvailableToolTip}">
+                        <Button.Style>
+                            <Style BasedOn="{StaticResource ButtonCustom}"
+                                   TargetType="{x:Type Button}">
+                                <Setter Property="Foreground" Value="{DynamicResource MyReverseBrush}" />
+
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding CheckUpdateError, Converter={StaticResource Object2BooleanConverter}}"
+                                                 Value="{StaticResource True}">
+                                        <Setter Property="Foreground" Value="{StaticResource DangerBrush}" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <TextBlock Margin="4,0,0,0"
+                               VerticalAlignment="Center"
+                               FontWeight="Bold"
+                               Foreground="{DynamicResource MyPrimaryTextBrush}"
+                               IsHitTestVisible="False"
+                               Text="↑"
+                               Visibility="{Binding HasNewVersion, Converter={StaticResource Boolean2VisibilityConverter}}" />
+                </hc:SimpleStackPanel>
+            </StatusBarItem>
+
+            <Separator DockPanel.Dock="Right" />
+
+            <StatusBarItem DockPanel.Dock="Right">
+                <Button b:ContextMenuLeftClickBehavior.IsLeftClickEnabled="True"
+                        ContextMenuService.HorizontalOffset="-72"
+                        ContextMenuService.IsEnabled="false"
+                        ContextMenuService.Placement="Top"
+                        Style="{StaticResource ButtonCustom}"
+                        ToolTip="{Binding CurrentSkinType, Converter={StaticResource SkinTypeToolTipConverter}}">
+                    <Button.ContextMenu>
+                        <ContextMenu Width="144">
+                            <ContextMenu.Resources>
+                                <Style TargetType="{x:Type Image}">
+                                    <Setter Property="Height" Value="16" />
+                                    <Setter Property="Width" Value="16" />
+                                </Style>
+                            </ContextMenu.Resources>
+
+                            <MenuItem Command="{Binding ChangeThemeCommand}"
+                                      CommandParameter="{x:Static hcd:SkinType.Default}"
+                                      Header="{lang:Lang {x:Static lang:LangKey.Light}}">
+                                <MenuItem.Icon>
+                                    <Image Source="/Resources/sun_3d.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+
+                            <MenuItem Command="{Binding ChangeThemeCommand}"
+                                      CommandParameter="{x:Static hcd:SkinType.Dark}"
+                                      Header="{lang:Lang {x:Static lang:LangKey.Dark}}">
+                                <MenuItem.Icon>
+                                    <Image Source="/Resources/crescent_moon_3d.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+
+                            <MenuItem Command="{Binding ChangeThemeCommand}"
+                                      CommandParameter="{x:Static hcd:SkinType.Violet}"
+                                      Header="{lang:Lang {x:Static lang:LangKey.Violet}}">
+                                <MenuItem.Icon>
+                                    <Image Source="/Resources/purple_circle_3d.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+
+                            <MenuItem Command="{Binding ChangeThemeCommand}"
+                                      CommandParameter="{x:Null}"
+                                      Header="{lang:Lang {x:Static lang:LangKey.UseSystemSetting}}">
+                                <MenuItem.Icon>
+                                    <Image Source="/Resources/artist_palette_3d.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                        </ContextMenu>
+                    </Button.ContextMenu>
+
+                    <Image d:Source="/Resources/artist_palette_3d.png"
+                           Source="{Binding CurrentSkinType, Converter={StaticResource SkinTypeToImageConverter}}"
+                           Style="{StaticResource IconImageStyle}" />
+                </Button>
+            </StatusBarItem>
+
+            <Separator DockPanel.Dock="Right" />
+
+            <StatusBarItem DockPanel.Dock="Right">
+                <hc:UniformSpacingPanel Spacing="12">
+                    <Button Style="{StaticResource ButtonCustom}"
+                            ToolTip="{lang:Lang {x:Static lang:LangKey.ControlPanel_ToolTip}}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:LaunchUriOrFileAction Path="NCPA.cpl" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+
+                        <Image Source="/Resources/shell32.dll(22).png"
+                               Style="{StaticResource IconImageStyle}" />
+                    </Button>
+
+                    <Button Style="{StaticResource ButtonCustom}"
+                            ToolTip="{lang:Lang {x:Static lang:LangKey.OpenInternetProperties_ToolTip}}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:LaunchUriOrFileAction Path="inetcpl.cpl" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+
+                        <Image Source="/Resources/inetcpl.cpl(4487).png"
+                               Style="{StaticResource IconImageStyle}" />
+                    </Button>
+                </hc:UniformSpacingPanel>
+            </StatusBarItem>
+
+            <Separator DockPanel.Dock="Right" />
+
+            <!--  最后一个子元素将拉伸以填充剩余的可用空间。  -->
+            <StatusBarItem />
+        </StatusBar>
+    </Grid>
+</hc:Window>

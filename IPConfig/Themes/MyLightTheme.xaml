@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <SolidColorBrush x:Key="MyReverseBrush"
+                     Color="{DynamicResource ReverseTextColor}" />
+
+    <SolidColorBrush x:Key="MyPrimaryTextBrush"
+                     Color="{DynamicResource PrimaryColor}" />
+
+    <SolidColorBrush x:Key="EmptyBrush"
+                     Color="LightGray" />
+</ResourceDictionary>

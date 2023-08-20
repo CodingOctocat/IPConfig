@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33530.505
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IPConfig", "IPConfig\IPConfig.csproj", "{BB63F771-3406-4600-B774-AF6DE6499347}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D44A49D4-79B7-466B-A512-CA4C2125E89D}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		Directory.Build.props = Directory.Build.props
+		Languages.Designer.t4 = Languages.Designer.t4
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BB63F771-3406-4600-B774-AF6DE6499347}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB63F771-3406-4600-B774-AF6DE6499347}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB63F771-3406-4600-B774-AF6DE6499347}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB63F771-3406-4600-B774-AF6DE6499347}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		RESX_SortFileContentOnSave = True
+		RESX_MoveToResources = {"Items":[{"Extensions":".cs,.vb","Patterns":"$File.$Key|{$File.$Key}|$Namespace.$File.$Key|LangKey.$Key|$Namespace.LangKey.$Key|nameof($File.$Key), ResourceType = typeof($File)|ErrorMessageResourceType = typeof($File), ErrorMessageResourceName = nameof($File.$Key)"},{"Extensions":".cshtml,.vbhtml","Patterns":"@$Namespace.$File.$Key|@$File.$Key|@StringResourceKey.$Key|@$Namespace.StringResourceKey.$Key"},{"Extensions":".cpp,.c,.hxx,.h","Patterns":"$File::$Key"},{"Extensions":".aspx,.ascx","Patterns":"<%$ Resources:$File,$Key %>|<%= $File.$Key %>|<%= $Namespace.$File.$Key %>"},{"Extensions":".xaml","Patterns":"\"{lang:Lang {x:Static lang:LangKey.$Key}}\""},{"Extensions":".ts","Patterns":"resources.$Key"},{"Extensions":".html","Patterns":"{{ resources.$Key }}"}]}
+		SolutionGuid = {570D33A3-1D7B-44F2-9A79-313E68E608D8}
+		RESX_NeutralResourcesLanguage = zh-CN
+		RESX_SaveFilesImmediatelyUponChange = True
+	EndGlobalSection
+EndGlobal

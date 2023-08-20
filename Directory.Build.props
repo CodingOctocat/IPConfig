@@ -1,0 +1,6 @@
+<Project>
+  <PropertyGroup>
+    <!--  移除 StackTrace 中可能涉及到敏感信息的计算机路径。  -->
+    <PathMap>$(MSBuildProjectDirectory)=$(MSBuildProjectName)</PathMap>
+  </PropertyGroup>
+</Project>

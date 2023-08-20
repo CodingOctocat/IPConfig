@@ -1,0 +1,16 @@
+﻿<Application x:Class="IPConfig.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/SkinDefault.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml" />
+                <ResourceDictionary Source="/Themes/MyResources.xaml" />
+                <ResourceDictionary Source="/Themes/MyLightTheme.xaml" />
+                <ResourceDictionary Source="/Themes/MyStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <!--  Other app resources here  -->
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

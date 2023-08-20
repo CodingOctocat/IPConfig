@@ -1,0 +1,83 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net7.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<UseWPF>true</UseWPF>
+		<ApplicationManifest>app.manifest</ApplicationManifest>
+		<ApplicationIcon>Resources\ipconfig.ico</ApplicationIcon>
+		<IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
+		<StartupObject>IPConfig.App</StartupObject>
+		<Version>1.0.0</Version>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+		<PackageReference Include="CsvHelper" Version="30.0.1" />
+		<PackageReference Include="HandyControl" Version="3.4.0" />
+		<PackageReference Include="HandyControl.Lang.en" Version="3.4.0" />
+		<PackageReference Include="LightImage.DragDrop.Wpf" Version="0.5.5" />
+		<PackageReference Include="LiteDB" Version="5.0.17" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
+		<PackageReference Include="System.Management" Version="7.0.2" />
+		<PackageReference Include="WpfObservableRangeCollection" Version="2.2.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Resource Include="Resources\artist_palette_3d.png" />
+		<Resource Include="Resources\crescent_moon_3d.png" />
+		<Resource Include="Resources\inetcpl.cpl(4487).png" />
+		<Resource Include="Resources\ipconfig.ico" />
+		<Resource Include="Resources\purple_circle_3d.png" />
+		<Resource Include="Resources\shell32.dll(22).png" />
+		<Resource Include="Resources\sun_3d.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include=".dns\ipv4_public_dns.en.csv">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Include=".dns\ipv4_public_dns.zh-CN.csv">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Include=".mask\ipv4_mask.en.csv">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Include=".mask\ipv4_mask.zh-CN.csv">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="Languages\Lang.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Lang.Designer.tt</DependentUpon>
+		</Compile>
+		<Compile Update="Properties\Settings.Designer.cs">
+			<DesignTimeSharedInput>True</DesignTimeSharedInput>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Settings.settings</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="Languages\Lang.Designer.tt">
+			<Generator>TextTemplatingFileGenerator</Generator>
+			<DependentUpon>Lang.resx</DependentUpon>
+			<LastGenOutput>Lang.Designer.cs</LastGenOutput>
+		</None>
+		<None Update="Properties\Settings.settings">
+			<Generator>SettingsSingleFileGenerator</Generator>
+			<LastGenOutput>Settings.Designer.cs</LastGenOutput>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+	</ItemGroup>
+
+</Project>

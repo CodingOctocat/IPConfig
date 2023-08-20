@@ -1,0 +1,534 @@
+﻿<UserControl x:Class="IPConfig.Views.NicConfigDetailView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:b="clr-namespace:IPConfig.Behaviors"
+             xmlns:conv="clr-namespace:IPConfig.Converters"
+             xmlns:lang="clr-namespace:IPConfig.Languages"
+             xmlns:vm="clr-namespace:IPConfig.ViewModels"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             d:DataContext="{d:DesignInstance Type=vm:NicConfigDetailViewModel,
+                                              IsDesignTimeCreatable=True}"
+             d:DesignWidth="500"
+             d:FontSize="14"
+             hc:TitleElement.TitleWidth="{Binding TitleWidth, RelativeSource={RelativeSource Self}}"
+             IsVisibleChanged="UserControl_IsVisibleChanged"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <conv:CopyContentFormatConverter x:Key="CopyContentFormatConverter" />
+            <conv:BytesToFileSizeConverter x:Key="BytesToFileSizeConverter" />
+
+            <Style x:Key="HeaderStyle"
+                   TargetType="{x:Type TextBlock}">
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="Padding" Value="0,4" />
+
+                <Setter Property="TextBlock.ContextMenu">
+                    <Setter.Value>
+                        <ContextMenu>
+                            <!--
+                                CommandPatameter 绑定问题解决方案：
+                                https://stackoverflow.com/a/505185
+                            -->
+                            <MenuItem Command="{Binding CopyContentsAsTextCommand}"
+                                      CommandParameter="{Binding PlacementTarget.Text, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}"
+                                      Header="{Binding PlacementTarget.Text, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Converter={StaticResource CopyContentFormatConverter}}" />
+                        </ContextMenu>
+                    </Setter.Value>
+                </Setter>
+
+                <Setter Property="Width" Value="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Expander}}}" />
+            </Style>
+
+            <Style BasedOn="{StaticResource TextBoxPlusBaseStyle}"
+                   TargetType="{x:Type hc:TextBox}">
+                <Setter Property="IsReadOnly" Value="True" />
+                <Setter Property="ToolTip" Value="{Binding Text, RelativeSource={RelativeSource Self}}" />
+                <Setter Property="b:TripleClickToSelectAllBehavior.Enabled" Value="True" />
+                <Setter Property="hc:TitleElement.TitlePlacement" Value="Left" />
+            </Style>
+
+            <Style BasedOn="{StaticResource ListBoxCustom}"
+                   TargetType="{x:Type ListBox}">
+                <Setter Property="Background" Value="{x:Null}" />
+                <Setter Property="BorderThickness" Value="0" />
+
+                <Setter Property="ItemContainerStyle">
+                    <Setter.Value>
+                        <Style BasedOn="{StaticResource ListBoxItemBaseStyle}"
+                               TargetType="{x:Type ListBoxItem}">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            <Setter Property="Margin" Value="0,0,0,4" />
+                            <Setter Property="Padding" Value="0" />
+
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="{x:Null}" />
+                                    <Setter Property="Foreground" Value="{x:Null}" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Setter.Value>
+                </Setter>
+
+                <Setter Property="ItemTemplate">
+                    <Setter.Value>
+                        <DataTemplate DataType="{x:Type sys:String}">
+                            <TextBox b:TripleClickToSelectAllBehavior.Enabled="True"
+                                     FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                                     IsReadOnly="True"
+                                     Text="{Binding Mode=OneWay}"
+                                     ToolTip="{Binding Text, RelativeSource={RelativeSource Self}}" />
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+
+                <Setter Property="Margin" Value="{Binding TitleWidthMargin, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" />
+                <Setter Property="Padding" Value="0,0,0,-4" />
+                <Setter Property="b:IgnoreMouseWheelBehavior.Enabled" Value="True" />
+            </Style>
+
+            <Style TargetType="{x:Type hc:UniformSpacingPanel}">
+                <Setter Property="Margin" Value="4" />
+                <Setter Property="Orientation" Value="Vertical" />
+                <Setter Property="Spacing" Value="4" />
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid Margin="4"
+              HorizontalAlignment="Center"
+              TextElement.FontWeight="Bold">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <hc:SimpleText Foreground="{DynamicResource MyPrimaryTextBrush}"
+                           Text="{Binding Nic.Name}"
+                           TextTrimming="CharacterEllipsis" />
+
+            <hc:SimpleText Grid.Column="1"
+                           Margin="8,0,0,0"
+                           Foreground="{DynamicResource MyPrimaryTextBrush}"
+                           Text="{lang:Lang {x:Static lang:LangKey.Status}}" />
+        </Grid>
+
+        <hc:ScrollViewer x:Name="scrollViewer"
+                         Grid.Row="1"
+                         IsInertiaEnabled="True">
+            <hc:UniformSpacingPanel>
+                <Expander IsExpanded="True">
+                    <Expander.Header>
+                        <TextBlock Style="{StaticResource HeaderStyle}"
+                                   Text="{lang:Lang {x:Static lang:LangKey.AdapterProperties_Header}}" />
+                    </Expander.Header>
+
+                    <hc:UniformSpacingPanel>
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.AdapterDescription}}"
+                                    Text="{Binding Nic.Description, Mode=OneWay}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.AdapterMAC}}"
+                                    Text="{Binding Nic.FormatedMacAddress, Mode=OneWay}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.AdapterType}}"
+                                    Text="{Binding Nic.NetworkInterfaceType, Mode=OneWay}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.AdapterOperationalStatus}}"
+                                    Text="{Binding Nic.OperationalStatus, Mode=OneWay}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.AdapterLinkSpeed}}"
+                                    Text="{Binding Nic.FormatedSpeed, Mode=OneWay}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.AdapterSupportsMulticast}}"
+                                    Text="{Binding Nic.SupportsMulticast, Mode=OneWay}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.AdapterId}}"
+                                    Text="{Binding Nic.Id, Mode=OneWay}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.AdapterIsReceiveOnly}}"
+                                    Text="{Binding Nic.IsReceiveOnly, Mode=OneWay}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.AdapterSupportsIPv4}}"
+                                    Text="{Binding Nic.SupportsIPv4, Mode=OneWay}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.AdapterSupportsIPv6}}"
+                                    Text="{Binding Nic.SupportsIPv6, Mode=OneWay}" />
+                    </hc:UniformSpacingPanel>
+                </Expander>
+
+                <hc:Divider Margin="0,8">
+                    <hc:SimpleStackPanel Orientation="Horizontal">
+                        <TextBlock Margin="4,0"
+                                   VerticalAlignment="Center"
+                                   Foreground="{StaticResource DangerBrush}"
+                                   Text="{lang:Lang {x:Static lang:LangKey.AdapterNotSupported}}"
+                                   ToolTip="{lang:Lang {x:Static lang:LangKey.AdapterNotSupportedIPv4_ToolTip}}"
+                                   Visibility="{Binding Nic.SupportsIPv4, Converter={StaticResource Boolean2VisibilityReConverter}}" />
+
+                        <TextBlock FontSize="14"
+                                   Style="{StaticResource HeaderStyle}"
+                                   Text="{lang:Lang {x:Static lang:LangKey.TcpIPv4_Header}}" />
+                    </hc:SimpleStackPanel>
+                </hc:Divider>
+
+                <Expander IsExpanded="{Binding Nic.SupportsIPv4, Mode=OneWay}">
+                    <Expander.Header>
+                        <TextBlock Style="{StaticResource HeaderStyle}"
+                                   Text="{lang:Lang {x:Static lang:LangKey.IPv4GeneralProperties_Header}}" />
+                    </Expander.Header>
+
+                    <hc:UniformSpacingPanel>
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.IPv4IsDhcpEnabled}}"
+                                    Text="{Binding IPv4AdvancedCofnig.IsDhcpEnabled, Mode=OneWay}" />
+
+                        <hc:TextBox hc:TitleElement.Title="IP"
+                                    Text="{Binding IPv4AdvancedCofnig.PreferredIP, Mode=OneWay}" />
+
+                        <ListBox d:ItemsSource="{d:SampleData ItemCount=3}"
+                                 ItemsSource="{Binding IPv4AdvancedCofnig.AlternateIPCollection}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.IPv4Mask}}"
+                                    Text="{Binding IPv4AdvancedCofnig.PreferredMask, Mode=OneWay}" />
+
+                        <ListBox d:ItemsSource="{d:SampleData ItemCount=3}"
+                                 ItemsSource="{Binding IPv4AdvancedCofnig.AlternateMaskCollection}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.Gateway}}"
+                                    Text="{Binding IPv4AdvancedCofnig.PreferredGateway, Mode=OneWay}" />
+
+                        <ListBox d:ItemsSource="{d:SampleData ItemCount=3}"
+                                 ItemsSource="{Binding IPv4AdvancedCofnig.AlternateGatewayCollection}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.IPv4IsAutoDns}}"
+                                    Text="{Binding IPv4AdvancedCofnig.IsAutoDns, Mode=OneWay}" />
+
+                        <hc:TextBox hc:TitleElement.Title="DNS"
+                                    Text="{Binding IPv4AdvancedCofnig.PreferredDns, Mode=OneWay}" />
+
+                        <ListBox d:ItemsSource="{d:SampleData ItemCount=3}"
+                                 ItemsSource="{Binding IPv4AdvancedCofnig.AlternateDnsCollection}" />
+                    </hc:UniformSpacingPanel>
+                </Expander>
+
+                <Expander IsExpanded="{Binding Nic.SupportsIPv4, Mode=OneWay}">
+                    <Expander.Header>
+                        <TextBlock Style="{StaticResource HeaderStyle}"
+                                   Text="{lang:Lang {x:Static lang:LangKey.IPv4Lifetimes_Header}}" />
+                    </Expander.Header>
+
+                    <hc:UniformSpacingPanel>
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.ValidLifetime}}"
+                                    Text="{Binding IPv4AdvancedCofnig.ValidLifetime, Mode=OneWay}" />
+
+                        <ListBox d:ItemsSource="{d:SampleData ItemCount=3}"
+                                 ItemsSource="{Binding IPv4AdvancedCofnig.ValidLifetimeCollection}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.PreferredLifetime}}"
+                                    Text="{Binding IPv4AdvancedCofnig.PreferredLifetime, Mode=OneWay}" />
+
+                        <ListBox d:ItemsSource="{d:SampleData ItemCount=3}"
+                                 ItemsSource="{Binding IPv4AdvancedCofnig.PreferredLifetimeCollection}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.DhcpLeaseLifetime}}"
+                                    Text="{Binding IPv4AdvancedCofnig.DhcpLeaseLifetime, Mode=OneWay}" />
+
+                        <ListBox d:ItemsSource="{d:SampleData ItemCount=3}"
+                                 ItemsSource="{Binding IPv4AdvancedCofnig.DhcpLeaseLifetimeCollection}" />
+                    </hc:UniformSpacingPanel>
+                </Expander>
+
+                <Expander IsExpanded="{Binding Nic.SupportsIPv4, Mode=OneWay}">
+                    <Expander.Header>
+                        <TextBlock Style="{StaticResource HeaderStyle}"
+                                   Text="{lang:Lang {x:Static lang:LangKey.IPv4AdvancedProperties_Header}}" />
+                    </Expander.Header>
+
+                    <hc:UniformSpacingPanel>
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.Index}}"
+                                    Text="{Binding Nic.IPv4InterfaceProperties.Index, Mode=OneWay}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.MTU}}"
+                                    Text="{Binding Nic.IPv4InterfaceProperties.Mtu, Mode=OneWay}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.APIPAActive}}"
+                                    Text="{Binding Nic.IPv4InterfaceProperties.IsAutomaticPrivateAddressingActive, Mode=OneWay}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.APIPAEnabled}}"
+                                    Text="{Binding Nic.IPv4InterfaceProperties.IsAutomaticPrivateAddressingEnabled, Mode=OneWay}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.ForwardingEnabled}}"
+                                    Text="{Binding Nic.IPv4InterfaceProperties.IsForwardingEnabled, Mode=OneWay}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.UsesWINS}}"
+                                    Text="{Binding Nic.IPv4InterfaceProperties.UsesWins, Mode=OneWay}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.IPv4WinsServer}}"
+                                    Text="{Binding IPv4AdvancedCofnig.WinsServerAddress, Mode=OneWay}" />
+
+                        <ListBox d:ItemsSource="{d:SampleData ItemCount=3}"
+                                 ItemsSource="{Binding IPv4AdvancedCofnig.WinsServerAddressCollection}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.IsTransient}}"
+                                    Text="{Binding IPv4AdvancedCofnig.IsTransient, Mode=OneWay}" />
+
+                        <ListBox d:ItemsSource="{d:SampleData ItemCount=3}"
+                                 ItemsSource="{Binding IPv4AdvancedCofnig.IsTransient}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.DnsEligible}}"
+                                    Text="{Binding IPv4AdvancedCofnig.IsDnsEligible, Mode=OneWay}" />
+
+                        <ListBox d:ItemsSource="{d:SampleData ItemCount=3}"
+                                 ItemsSource="{Binding IPv4AdvancedCofnig.IsDnsEligibleCollcetion}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.DuplicateAddressDetectionState}}"
+                                    Text="{Binding IPv4AdvancedCofnig.DuplicateAddressDetectionState, Mode=OneWay}" />
+
+                        <ListBox d:ItemsSource="{d:SampleData ItemCount=3}"
+                                 ItemsSource="{Binding IPv4AdvancedCofnig.DuplicateAddressDetectionStateCollcetion}" />
+                    </hc:UniformSpacingPanel>
+                </Expander>
+
+                <Expander IsExpanded="{Binding Nic.SupportsIPv4, Mode=OneWay}">
+                    <Expander.Header>
+                        <TextBlock Style="{StaticResource HeaderStyle}"
+                                   Text="{lang:Lang {x:Static lang:LangKey.IPv4Statistics_Header}}" />
+                    </Expander.Header>
+
+                    <hc:UniformSpacingPanel>
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.IPv4BytesSent},
+                                                                      StringFormat='↑ {0}'}"
+                                    Foreground="{DynamicResource PrimaryBrush}"
+                                    Text="{Binding IPv4InterfaceStatistics.BytesSent, Mode=OneWay, StringFormat=\{0:N0\}}"
+                                    ToolTip="{Binding IPv4InterfaceStatistics.BytesSent, Converter={StaticResource BytesToFileSizeConverter}, ConverterParameter={x:Static lang:LangKey.IPv4BytesSent}}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.IPv4BytesReceived},
+                                                                      StringFormat='↓ {0}'}"
+                                    Foreground="{DynamicResource SuccessBrush}"
+                                    Text="{Binding IPv4InterfaceStatistics.BytesReceived, Mode=OneWay, StringFormat=\{0:N0\}}"
+                                    ToolTip="{Binding IPv4InterfaceStatistics.BytesReceived, Converter={StaticResource BytesToFileSizeConverter}, ConverterParameter={x:Static lang:LangKey.IPv4BytesReceived}}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.UnicastPacketsSent},
+                                                                      StringFormat='↑ {0}'}"
+                                    Foreground="{DynamicResource InfoBrush}"
+                                    Text="{Binding IPv4InterfaceStatistics.UnicastPacketsSent, Mode=OneWay, StringFormat=\{0:N0\}}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.UnicastPacketsReceived},
+                                                                      StringFormat='↓ {0}'}"
+                                    Foreground="{DynamicResource SuccessBrush}"
+                                    Text="{Binding IPv4InterfaceStatistics.UnicastPacketsReceived, Mode=OneWay, StringFormat=\{0:N0\}}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.NonUnicastPacketsSent},
+                                                                      StringFormat='↑ {0}'}"
+                                    Foreground="{DynamicResource InfoBrush}"
+                                    Text="{Binding IPv4InterfaceStatistics.NonUnicastPacketsSent, Mode=OneWay, StringFormat=\{0:N0\}}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.NonUnicastPacketsReceived},
+                                                                      StringFormat='↓ {0}'}"
+                                    Foreground="{DynamicResource SuccessBrush}"
+                                    Text="{Binding IPv4InterfaceStatistics.NonUnicastPacketsReceived, Mode=OneWay, StringFormat=\{0:N0\}}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.OutgoingPacketsDiscarded},
+                                                                      StringFormat='↗ {0}'}"
+                                    Foreground="{DynamicResource WarningBrush}"
+                                    Text="{Binding IPv4InterfaceStatistics.OutgoingPacketsDiscarded, Mode=OneWay, StringFormat=\{0:N0\}}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.OutgoingPacketsWithErrors},
+                                                                      StringFormat='↗ {0}'}"
+                                    Foreground="{DynamicResource DangerBrush}"
+                                    Text="{Binding IPv4InterfaceStatistics.OutgoingPacketsWithErrors, Mode=OneWay, StringFormat=\{0:N0\}}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.IncomingPacketsDiscarded},
+                                                                      StringFormat='↙ {0}'}"
+                                    Foreground="{DynamicResource WarningBrush}"
+                                    Text="{Binding IPv4InterfaceStatistics.IncomingPacketsDiscarded, Mode=OneWay, StringFormat=\{0:N0\}}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.IncomingPacketsWithErrors},
+                                                                      StringFormat='↙ {0}'}"
+                                    Foreground="{DynamicResource DangerBrush}"
+                                    Text="{Binding IPv4InterfaceStatistics.IncomingPacketsWithErrors, Mode=OneWay, StringFormat=\{0:N0\}}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.IncomingUnknownProtocolPackets},
+                                                                      StringFormat='↙ {0}'}"
+                                    Foreground="{DynamicResource AccentBrush}"
+                                    Text="{Binding IPv4InterfaceStatistics.IncomingUnknownProtocolPackets, Mode=OneWay, StringFormat=\{0:N0\}}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.OutputQueueLength},
+                                                                      StringFormat='→ {0}'}"
+                                    Foreground="{DynamicResource InfoBrush}"
+                                    Text="{Binding IPv4InterfaceStatistics.OutputQueueLength, Mode=OneWay, StringFormat=\{0:N0\}}" />
+                    </hc:UniformSpacingPanel>
+                </Expander>
+
+                <hc:Divider Margin="0,8">
+                    <hc:SimpleStackPanel Orientation="Horizontal">
+                        <TextBlock Margin="4,0"
+                                   VerticalAlignment="Center"
+                                   Foreground="{StaticResource DangerBrush}"
+                                   Text="{lang:Lang {x:Static lang:LangKey.AdapterNotSupported}}"
+                                   ToolTip="{lang:Lang {x:Static lang:LangKey.AdapterNotSupportedIPv6_ToolTip}}"
+                                   Visibility="{Binding Nic.SupportsIPv6, Converter={StaticResource Boolean2VisibilityReConverter}}" />
+
+                        <TextBlock FontSize="14"
+                                   Style="{StaticResource HeaderStyle}"
+                                   Text="{lang:Lang {x:Static lang:LangKey.TcpIPv6_Header}}" />
+                    </hc:SimpleStackPanel>
+                </hc:Divider>
+
+                <Expander IsExpanded="{Binding Nic.SupportsIPv6, Mode=OneWay}">
+                    <Expander.Header>
+                        <TextBlock Style="{StaticResource HeaderStyle}"
+                                   Text="{lang:Lang {x:Static lang:LangKey.IPv6GeneralProperties_Header}}" />
+                    </Expander.Header>
+
+                    <hc:UniformSpacingPanel>
+                        <hc:TextBox hc:TitleElement.Title="IP"
+                                    Text="{Binding IPv6AdvancedCofnig.PreferredIP, Mode=OneWay}" />
+
+                        <ListBox d:ItemsSource="{d:SampleData ItemCount=3}"
+                                 ItemsSource="{Binding IPv6AdvancedCofnig.AlternateIPCollection}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.IPv6PrefixLength}}"
+                                    Text="{Binding IPv6AdvancedCofnig.PreferredPrefixLength, Mode=OneWay}" />
+
+                        <ListBox d:ItemsSource="{d:SampleData ItemCount=3}"
+                                 ItemsSource="{Binding IPv6AdvancedCofnig.AlternatePrefixLengthCollection}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.IPv6PrefixOrigin}}"
+                                    Text="{Binding IPv6AdvancedCofnig.PrefixOrigin, Mode=OneWay}" />
+
+                        <ListBox d:ItemsSource="{d:SampleData ItemCount=3}"
+                                 ItemsSource="{Binding IPv6AdvancedCofnig.PrefixOriginCollection}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.IPv6SuffixOrigin}}"
+                                    Text="{Binding IPv6AdvancedCofnig.SuffixOrigin, Mode=OneWay}" />
+
+                        <ListBox d:ItemsSource="{d:SampleData ItemCount=3}"
+                                 ItemsSource="{Binding IPv6AdvancedCofnig.SuffixOriginCollection}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.Gateway}}"
+                                    Text="{Binding IPv6AdvancedCofnig.PreferredGateway, Mode=OneWay}" />
+
+                        <ListBox d:ItemsSource="{d:SampleData ItemCount=3}"
+                                 ItemsSource="{Binding IPv6AdvancedCofnig.AlternateGatewayCollection}" />
+
+                        <hc:TextBox hc:TitleElement.Title="DNS"
+                                    Text="{Binding IPv6AdvancedCofnig.PreferredDns, Mode=OneWay}" />
+
+                        <ListBox d:ItemsSource="{d:SampleData ItemCount=3}"
+                                 ItemsSource="{Binding IPv6AdvancedCofnig.AlternateDnsCollection}" />
+                    </hc:UniformSpacingPanel>
+                </Expander>
+
+                <Expander IsExpanded="{Binding Nic.SupportsIPv6, Mode=OneWay}">
+                    <Expander.Header>
+                        <TextBlock Style="{StaticResource HeaderStyle}"
+                                   Text="{lang:Lang {x:Static lang:LangKey.IPv6Lifetimes_Header}}" />
+                    </Expander.Header>
+
+                    <hc:UniformSpacingPanel>
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.ValidLifetime}}"
+                                    Text="{Binding IPv6AdvancedCofnig.ValidLifetime, Mode=OneWay}" />
+
+                        <ListBox d:ItemsSource="{d:SampleData ItemCount=3}"
+                                 ItemsSource="{Binding IPv6AdvancedCofnig.ValidLifetimeCollection}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.PreferredLifetime}}"
+                                    Text="{Binding IPv6AdvancedCofnig.PreferredLifetime, Mode=OneWay}" />
+
+                        <ListBox d:ItemsSource="{d:SampleData ItemCount=3}"
+                                 ItemsSource="{Binding IPv6AdvancedCofnig.PreferredLifetimeCollection}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.DhcpLeaseLifetime}}"
+                                    Text="{Binding IPv6AdvancedCofnig.DhcpLeaseLifetime, Mode=OneWay}" />
+
+                        <ListBox d:ItemsSource="{d:SampleData ItemCount=3}"
+                                 ItemsSource="{Binding IPv6AdvancedCofnig.DhcpLeaseLifetimeCollection}" />
+                    </hc:UniformSpacingPanel>
+                </Expander>
+
+                <Expander IsExpanded="{Binding Nic.SupportsIPv6, Mode=OneWay}">
+                    <Expander.Header>
+                        <TextBlock Style="{StaticResource HeaderStyle}"
+                                   Text="{lang:Lang {x:Static lang:LangKey.IPv6AdvancedProperties_Header}}" />
+                    </Expander.Header>
+
+                    <hc:UniformSpacingPanel>
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.Index}}"
+                                    Text="{Binding Nic.IPv6InterfaceProperties.Index, Mode=OneWay}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.MTU}}"
+                                    Text="{Binding Nic.IPv6InterfaceProperties.Mtu, Mode=OneWay}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.IsTransient}}"
+                                    Text="{Binding IPv6AdvancedCofnig.IsTransient, Mode=OneWay}" />
+
+                        <ListBox d:ItemsSource="{d:SampleData ItemCount=3}"
+                                 ItemsSource="{Binding IPv6AdvancedCofnig.IsTransient}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.DnsEligible}}"
+                                    Text="{Binding IPv6AdvancedCofnig.IsDnsEligible, Mode=OneWay}" />
+
+                        <ListBox d:ItemsSource="{d:SampleData ItemCount=3}"
+                                 ItemsSource="{Binding IPv6AdvancedCofnig.IsDnsEligibleCollcetion}" />
+
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.DuplicateAddressDetectionState}}"
+                                    Text="{Binding IPv6AdvancedCofnig.DuplicateAddressDetectionState, Mode=OneWay}" />
+
+                        <ListBox d:ItemsSource="{d:SampleData ItemCount=3}"
+                                 ItemsSource="{Binding IPv6AdvancedCofnig.DuplicateAddressDetectionStateCollcetion}" />
+                    </hc:UniformSpacingPanel>
+                </Expander>
+
+                <Expander Foreground="{DynamicResource SecondaryTextBrush}"
+                          Header="{lang:Lang {x:Static lang:LangKey.IPv6Statistics_Header}}"
+                          IsExpanded="{Binding Nic.SupportsIPv6, Mode=OneWay}">
+                    <hc:UniformSpacingPanel>
+                        <TextBlock Margin="0,8,0,0"
+                                   Text="{lang:Lang {x:Static lang:LangKey.NotSupported}}" />
+                    </hc:UniformSpacingPanel>
+                </Expander>
+            </hc:UniformSpacingPanel>
+        </hc:ScrollViewer>
+
+        <hc:UniformSpacingPanel Grid.Row="2"
+                                Margin="0,3,0,0"
+                                HorizontalAlignment="Right"
+                                ItemHorizontalAlignment="Right"
+                                Orientation="Horizontal"
+                                Spacing="4">
+            <Button Command="{Binding GoBackCommand}"
+                    Content="{lang:Lang {x:Static lang:LangKey.GoBack_}}" />
+
+            <hc:SplitButton HorizontalContentAlignment="Center"
+                            Command="{Binding CopyAllContentsAsTextCommand}"
+                            Content="{lang:Lang {x:Static lang:LangKey.CopyContents_}}"
+                            Style="{StaticResource SplitButtonPrimary}">
+                <i:Interaction.Behaviors>
+                    <b:SplitButtonToggleDropDownBehavior />
+                </i:Interaction.Behaviors>
+
+                <hc:SplitButton.DropDownContent>
+                    <Menu Style="{StaticResource SplitButtonDropDownMenuStyle}">
+                        <MenuItem Command="{Binding ExportToPlaintextCommand}"
+                                  Header="{lang:Lang {x:Static lang:LangKey.ExportToPlaintext_}}" />
+
+                        <MenuItem Command="{Binding ExportToCsvCommand}"
+                                  Header="{lang:Lang {x:Static lang:LangKey.ExportToCsv_}}" />
+                    </Menu>
+                </hc:SplitButton.DropDownContent>
+            </hc:SplitButton>
+        </hc:UniformSpacingPanel>
+    </Grid>
+</UserControl>

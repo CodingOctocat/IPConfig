@@ -1,0 +1,758 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+		Microsoft ResX Schema
+
+		Version 1.3
+
+		The primary goals of this format is to allow a simple XML format 
+		that is mostly human readable. The generation and parsing of the 
+		various data types are done through the TypeConverter classes 
+		associated with the data types.
+
+		Example:
+
+		... ado.net/XML headers & schema ...
+		<resheader name="resmimetype">text/microsoft-resx</resheader>
+		<resheader name="version">1.3</resheader>
+		<resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+		<resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+		<data name="Name1">this is my long string</data>
+		<data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+		<data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+			[base64 mime encoded serialized .NET Framework object]
+		</data>
+		<data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+			[base64 mime encoded string representing a byte array form of the .NET Framework object]
+		</data>
+
+		There are any number of "resheader" rows that contain simple 
+		name/value pairs.
+
+		Each data row contains a name, and value. The row also contains a 
+		type or mimetype. Type corresponds to a .NET class that support 
+		text/value conversion through the TypeConverter architecture. 
+		Classes that don't support this are serialized and stored with the 
+		mimetype set.
+
+		The mimetype is used for serialized objects, and tells the 
+		ResXResourceReader how to depersist the object. This is currently not 
+		extensible. For a given mimetype the value must be set accordingly:
+
+		Note - application/x-microsoft.net.object.binary.base64 is the format 
+		that the ResXResourceWriter will generate, however the reader can 
+		read any of the formats listed below.
+
+		mimetype: application/x-microsoft.net.object.binary.base64
+		value   : The object must be serialized with 
+			: System.Serialization.Formatters.Binary.BinaryFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.soap.base64
+		value   : The object must be serialized with 
+			: System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.bytearray.base64
+		value   : The object must be serialized into a byte array 
+			: using a System.ComponentModel.TypeConverter
+			: and then encoded with base64 encoding.
+	-->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AdapterDescription" xml:space="preserve">
+    <value>描述</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="AdapterId" xml:space="preserve">
+    <value>标识符</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="AdapterIsReceiveOnly" xml:space="preserve">
+    <value>仅接收数据包</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="AdapterLinkSpeed" xml:space="preserve">
+    <value>链接速度</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="AdapterMAC" xml:space="preserve">
+    <value>物理地址(MAC)</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="AdapterName" xml:space="preserve">
+    <value>适配器名称</value>
+    <comment>Nic</comment>
+  </data>
+  <data name="AdapterNotFound" xml:space="preserve">
+    <value>未找到网卡/适配器</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="AdapterNotFound_ToolTip" xml:space="preserve">
+    <value>请检查网络适配器是否被卸载或禁用</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="AdapterNotSupported" xml:space="preserve">
+    <value>[不支持]</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="AdapterNotSupportedIPv4_ToolTip" xml:space="preserve">
+    <value>请检查是否已启用 Internet 协议版本 4 (TCP/IPv4) 属性</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="AdapterNotSupportedIPv6_ToolTip" xml:space="preserve">
+    <value>请检查是否已启用 Internet 协议版本 6 (TCP/IPv6) 属性</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="AdapterOperationalStatus" xml:space="preserve">
+    <value>操作状态</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="AdapterProperties_Header" xml:space="preserve">
+    <value>网卡/适配器 属性</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="AdapterSupportsIPv4" xml:space="preserve">
+    <value>IPv4 支持</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="AdapterSupportsIPv6" xml:space="preserve">
+    <value>IPv6 支持</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="AdapterSupportsMulticast" xml:space="preserve">
+    <value>多播</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="AdapterType" xml:space="preserve">
+    <value>接口类型</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="AddIPConfig" xml:space="preserve">
+    <value>添加配置</value>
+    <comment>IPConfigListView</comment>
+  </data>
+  <data name="AlternateDns" xml:space="preserve">
+    <value>备用 DNS</value>
+    <comment>IPv4ConfigView</comment>
+  </data>
+  <data name="APIPAActive" xml:space="preserve">
+    <value>APIPA Active</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="APIPAEnabled" xml:space="preserve">
+    <value>已启用 APIPA</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="ApplyAsk_Format" xml:space="preserve">
+    <value>确定将配置应用到 {0} - {1}？</value>
+    <comment>IPConfigDetailViewModel</comment>
+  </data>
+  <data name="ApplyFailed" xml:space="preserve">
+    <value>设置失败，未找到网卡/适配器</value>
+    <comment>IPConfigDetailViewModel</comment>
+  </data>
+  <data name="ApplySuccessful" xml:space="preserve">
+    <value>应用成功</value>
+    <comment>IPConfigDetailViewModel</comment>
+  </data>
+  <data name="Apply_" xml:space="preserve">
+    <value>应用(_A)</value>
+    <comment>IPConfigDetailViewModel</comment>
+  </data>
+  <data name="AutoDhcp" xml:space="preserve">
+    <value>自动(DHCP)</value>
+    <comment>IPv4ConfigView</comment>
+  </data>
+  <data name="Bottom_" xml:space="preserve">
+    <value>底部(_B)</value>
+    <comment>IPConfigListView</comment>
+  </data>
+  <data name="Bytes" xml:space="preserve">
+    <value>字节</value>
+    <comment>PingReplyToolTipConverter</comment>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>取消</value>
+    <comment>MainViewModel</comment>
+  </data>
+  <data name="CheckUpdateFailed" xml:space="preserve">
+    <value>检查更新失败</value>
+    <comment>MainViewModel</comment>
+  </data>
+  <data name="ClosingInfoDbSyncing" xml:space="preserve">
+    <value>正在同步数据库，请稍后再试。</value>
+    <comment>MainViewModel</comment>
+  </data>
+  <data name="ClosingSaveAsk_Format" xml:space="preserve">
+    <value>是否要将更改保存到 {0}？</value>
+    <comment>MainViewModel</comment>
+  </data>
+  <data name="ConfigTool" xml:space="preserve">
+    <value>配置工具</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="Contrast_ToolTip" xml:space="preserve">
+    <value>对比修改</value>
+    <comment>IPConfigDetailView</comment>
+  </data>
+  <data name="ControlPanel_ToolTip" xml:space="preserve">
+    <value>打开控制面板 &gt; 网络和 Internet &gt; 网络连接</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="Copied" xml:space="preserve">
+    <value>已复制</value>
+    <comment>SplitButtonToggleDropDownBehavior</comment>
+  </data>
+  <data name="CopyContents_" xml:space="preserve">
+    <value>复制内容(_C)</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="CopyContent_Format_" xml:space="preserve">
+    <value>复制 {0} 内容(_C)</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="CopySelectedIPConfigAsText_" xml:space="preserve">
+    <value>将此配置复制为文本(_T)</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="Copy_Noun" xml:space="preserve">
+    <value>副本</value>
+    <comment>IPConfigListViewModel</comment>
+  </data>
+  <data name="Copy_Verb" xml:space="preserve">
+    <value>复制</value>
+    <comment>IPv4ConfigView</comment>
+  </data>
+  <data name="Dark" xml:space="preserve">
+    <value>深色</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="DataValidation_" xml:space="preserve">
+    <value>数据验证(_V)</value>
+    <comment>IPConfigDetailView</comment>
+  </data>
+  <data name="DataValidation_ToolTip" xml:space="preserve">
+    <value>检查配置是否符合基本要求</value>
+    <comment>IPConfigDetailView</comment>
+  </data>
+  <data name="DbSyncing_ToolTip" xml:space="preserve">
+    <value>正在同步到数据库...</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="Default" xml:space="preserve">
+    <value>默认</value>
+    <comment>IPv4Mask</comment>
+  </data>
+  <data name="DefaultGateway" xml:space="preserve">
+    <value>默认网关</value>
+    <comment>IPv4Config</comment>
+  </data>
+  <data name="DeleteAsk_Format" xml:space="preserve">
+    <value>确定要删除 {0} 个配置？</value>
+    <comment>IPConfigListViewModel</comment>
+  </data>
+  <data name="DeleteIPConfig" xml:space="preserve">
+    <value>删除配置</value>
+    <comment>IPConfigListView</comment>
+  </data>
+  <data name="DeleteIPConfig_" xml:space="preserve">
+    <value>删除配置(_D)</value>
+    <comment>IPConfigListView</comment>
+  </data>
+  <data name="DhcpLeaseLifetime" xml:space="preserve">
+    <value>DHCP 剩余</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="DiscardAsk" xml:space="preserve">
+    <value>确定放弃修改？</value>
+    <comment>IPConfigDetailViewModel</comment>
+  </data>
+  <data name="DiscardChanges_" xml:space="preserve">
+    <value>放弃修改(_D)</value>
+    <comment>IPConfigDetailView</comment>
+  </data>
+  <data name="Dns1" xml:space="preserve">
+    <value>首选 DNS</value>
+    <comment>IPv4ConfigView</comment>
+  </data>
+  <data name="Dns2" xml:space="preserve">
+    <value>备用 DNS</value>
+    <comment>IPv4ConfigView</comment>
+  </data>
+  <data name="DnsEligible" xml:space="preserve">
+    <value>Dns Eligible</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="DuplicateAddressDetectionState" xml:space="preserve">
+    <value>重复地址检测状态</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="DuplicateIPConfigName" xml:space="preserve">
+    <value>重复的配置名称</value>
+    <comment>IPConfigListViewModel</comment>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>错误</value>
+    <comment>PingDnsLabelContentConverter</comment>
+  </data>
+  <data name="Ethernet_Lower" xml:space="preserve">
+    <value>以太网</value>
+    <comment>Nic</comment>
+  </data>
+  <data name="ExportToCsv_" xml:space="preserve">
+    <value>导出到 _CSV...</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="ExportToCsv_FileDialogFilter" xml:space="preserve">
+    <value>CSV (逗号分隔)(*.csv)|*.csv</value>
+    <comment>NicConfigDetailViewModel</comment>
+  </data>
+  <data name="ExportToCsv_FileDialogTitle" xml:space="preserve">
+    <value>导出到 CSV (逗号分隔)</value>
+    <comment>NicConfigDetailViewModel</comment>
+  </data>
+  <data name="ExportToPlaintext_" xml:space="preserve">
+    <value>导出到 _TXT...</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="ExportToPlaintext_FileDialogFilter" xml:space="preserve">
+    <value>文本文档 (*.txt)|*.txt</value>
+    <comment>NicConfigDetailViewModel</comment>
+  </data>
+  <data name="ExportToPlaintext_FileDialogTitle" xml:space="preserve">
+    <value>导出到 文本文档</value>
+    <comment>NicConfigDetailViewModel</comment>
+  </data>
+  <data name="ExportFailed" xml:space="preserve">
+    <value>导出失败</value>
+    <comment>NicConfigDetailViewModel</comment>
+  </data>
+  <data name="ExportSuccessful" xml:space="preserve">
+    <value>导出成功</value>
+    <comment>NicConfigDetailViewModel</comment>
+  </data>
+  <data name="ForwardingEnabled" xml:space="preserve">
+    <value>已启用转发(路由)</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="Gateway" xml:space="preserve">
+    <value>默认网关</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="GoBack_" xml:space="preserve">
+    <value>返回(_B)</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="IncomingPacketsDiscarded" xml:space="preserve">
+    <value>传入丢包</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="IncomingPacketsWithErrors" xml:space="preserve">
+    <value>传入错误包</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="IncomingUnknownProtocolPackets" xml:space="preserve">
+    <value>传入未知包</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="Index" xml:space="preserve">
+    <value>Index</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="InvalidIPv4Address" xml:space="preserve">
+    <value>无效的 IPv4 地址</value>
+    <comment>IPv4Config</comment>
+  </data>
+  <data name="InvalidIPv4DefaultGatewayAddress" xml:space="preserve">
+    <value>无效的 IPv4 默认网关地址</value>
+    <comment>IPv4Config</comment>
+  </data>
+  <data name="InvalidIPv4Dns" xml:space="preserve">
+    <value>无效的 IPv4 DNS 地址</value>
+    <comment>IPv4Config</comment>
+  </data>
+  <data name="InvalidIPv4SubnetMask" xml:space="preserve">
+    <value>无效的 IPv4 子网掩码</value>
+    <comment>IPv4Config</comment>
+  </data>
+  <data name="IPConfigName" xml:space="preserve">
+    <value>配置名称</value>
+    <comment>IPConfigDetailView</comment>
+  </data>
+  <data name="IPv4AdvancedProperties_Header" xml:space="preserve">
+    <value>IPv4 高级信息</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="IPv4BytesReceived" xml:space="preserve">
+    <value>已接收</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="IPv4BytesSent" xml:space="preserve">
+    <value>已发送</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="IPv4Dns_Header" xml:space="preserve">
+    <value>IPv4 DNS 服务器分配</value>
+    <comment>IPv4ConfigView</comment>
+  </data>
+  <data name="IPv4GeneralProperties_Header" xml:space="preserve">
+    <value>IPv4 常规属性</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="IPv4IsAutoDns" xml:space="preserve">
+    <value>自动获取 DNS</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="IPv4IsDhcpEnabled" xml:space="preserve">
+    <value>已启用 DHCP</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="IPv4Lifetimes_Header" xml:space="preserve">
+    <value>IPv4 剩余时间</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="IPv4Mask" xml:space="preserve">
+    <value>子网掩码</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="IPv4Statistics_Header" xml:space="preserve">
+    <value>IPv4 统计信息</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="IPv4SubnetMask" xml:space="preserve">
+    <value>子网掩码</value>
+    <comment>IPv4Config</comment>
+  </data>
+  <data name="IPv4WinsServer" xml:space="preserve">
+    <value>WINS 服务器</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="IPv4_Header" xml:space="preserve">
+    <value>IPv4 分配</value>
+    <comment>IPv4ConfigView</comment>
+  </data>
+  <data name="IPv6AdvancedProperties_Header" xml:space="preserve">
+    <value>IPv6 高级信息</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="IPv6GeneralProperties_Header" xml:space="preserve">
+    <value>IPv6 常规属性</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="IPv6Lifetimes_Header" xml:space="preserve">
+    <value>IPv6 剩余时间</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="IPv6PrefixLength" xml:space="preserve">
+    <value>子网前缀长度</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="IPv6PrefixOrigin" xml:space="preserve">
+    <value>前缀源</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="IPv6Statistics_Header" xml:space="preserve">
+    <value>IPv6 统计信息</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="IPv6SuffixOrigin" xml:space="preserve">
+    <value>后缀源</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="IsTransient" xml:space="preserve">
+    <value>瞬态 (群集地址)</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="JumpToGithub" xml:space="preserve">
+    <value>跳转到 Github...</value>
+    <comment>MainViewModel</comment>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>语言</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="LatestVersion" xml:space="preserve">
+    <value>最新版本: </value>
+    <comment>MainViewModel</comment>
+  </data>
+  <data name="Light" xml:space="preserve">
+    <value>浅色</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="MakeSelectedIPConfigCopy_" xml:space="preserve">
+    <value>生成副本(_C)</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="Manual" xml:space="preserve">
+    <value>手动</value>
+    <comment>IPv4ConfigView</comment>
+  </data>
+  <data name="Modified" xml:space="preserve">
+    <value>已修改</value>
+    <comment>IPConfigListView</comment>
+  </data>
+  <data name="MoveTo_" xml:space="preserve">
+    <value>移动到(_M)...</value>
+    <comment>IPConfigListView</comment>
+  </data>
+  <data name="MTU" xml:space="preserve">
+    <value>MTU</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="NameMaxLength50" xml:space="preserve">
+    <value>最大字符数: 50</value>
+    <comment>IPConfigDetailView</comment>
+  </data>
+  <data name="NewVersionAvailable_Format_ToolTip" xml:space="preserve">
+    <value>新版本可用: {0}
+
+{1} -&gt; {2}</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="NoConfiguration" xml:space="preserve">
+    <value>暂无配置</value>
+    <comment>IPConfigListView</comment>
+  </data>
+  <data name="NoData" xml:space="preserve">
+    <value>暂无数据</value>
+    <comment>NicIPConfigToolTipConverter</comment>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>无</value>
+    <comment>IPConfigModel</comment>
+  </data>
+  <data name="NonUnicastPacketsReceived" xml:space="preserve">
+    <value>已接收非单播包</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="NonUnicastPacketsSent" xml:space="preserve">
+    <value>已发送非单播包</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="NotSupported" xml:space="preserve">
+    <value>暂不支持</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="OpenInternetProperties_ToolTip" xml:space="preserve">
+    <value>打开 Internet 属性</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="OpStatus_Dormant_ToolTip" xml:space="preserve">
+    <value>[Dormant] 网络接口不处于传输数据包的状态；它正等待外部事件</value>
+    <comment>OperationalStatusToolTipConverter</comment>
+  </data>
+  <data name="OpStatus_Down_ToolTip" xml:space="preserve">
+    <value>[Down] 网络接口无法传输数据包</value>
+    <comment>OperationalStatusToolTipConverter</comment>
+  </data>
+  <data name="OpStatus_LowerLayerDown_ToolTip" xml:space="preserve">
+    <value>[LowerLayerDown] 网络接口无法传输数据包，因为它运行在一个或多个其他接口之上，而这些“低层”接口中至少有一个已关闭</value>
+    <comment>OperationalStatusToolTipConverter</comment>
+  </data>
+  <data name="OpStatus_NotPresent_ToolTip" xml:space="preserve">
+    <value>[NotPresent] 由于缺少组件（通常为硬件组件），网络接口无法传输数据包</value>
+    <comment>OperationalStatusToolTipConverter</comment>
+  </data>
+  <data name="OpStatus_Testing_ToolTip" xml:space="preserve">
+    <value>[Testing] 网络接口正在运行测试</value>
+    <comment>OperationalStatusToolTipConverter</comment>
+  </data>
+  <data name="OpStatus_Unknown_ToolTip" xml:space="preserve">
+    <value>[Unknown] 网络接口的状态未知</value>
+    <comment>OperationalStatusToolTipConverter</comment>
+  </data>
+  <data name="OpStatus_Up_ToolTip" xml:space="preserve">
+    <value>[Up] 网络接口已运行，可以传输数据包</value>
+    <comment>OperationalStatusToolTipConverter</comment>
+  </data>
+  <data name="OutgoingPacketsDiscarded" xml:space="preserve">
+    <value>传出丢包</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="OutgoingPacketsWithErrors" xml:space="preserve">
+    <value>传出错误包</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="OutputQueueLength" xml:space="preserve">
+    <value>输出队列长度</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="PreferredDns" xml:space="preserve">
+    <value>首选 DNS</value>
+    <comment>IPv4ConfigView</comment>
+  </data>
+  <data name="PreferredLifetime" xml:space="preserve">
+    <value>首选剩余</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>刷新</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="Refresh_ToolTip" xml:space="preserve">
+    <value>刷新 (F5)</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="Remark" xml:space="preserve">
+    <value>备注</value>
+    <comment>IPConfigDetailView</comment>
+  </data>
+  <data name="ReplyFrom_Format" xml:space="preserve">
+    <value>来自 {0} 的回复</value>
+    <comment>PingReplyToolTipConverter</comment>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>必填</value>
+    <comment>IPConfigModel</comment>
+  </data>
+  <data name="SaveAndApply_" xml:space="preserve">
+    <value>保存并应用(_Y)</value>
+    <comment>IPConfigDetailView</comment>
+  </data>
+  <data name="SaveFailed" xml:space="preserve">
+    <value>保存失败</value>
+    <comment>IPConfigDetailViewModel</comment>
+  </data>
+  <data name="SaveFailedValidationError" xml:space="preserve">
+    <value>保存失败，配置存在验证错误</value>
+    <comment>MainViewModel</comment>
+  </data>
+  <data name="SaveSuccessful" xml:space="preserve">
+    <value>保存成功</value>
+    <comment>IPConfigDetailViewModel</comment>
+  </data>
+  <data name="Save_" xml:space="preserve">
+    <value>保存(_S)</value>
+    <comment>IPConfigDetailViewModel</comment>
+  </data>
+  <data name="SelectAdapter_ToolTip" xml:space="preserve">
+    <value>请选择网卡/适配器...</value>
+    <comment>MainViewModel</comment>
+  </data>
+  <data name="Selected" xml:space="preserve">
+    <value>已选择</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="Shortcut_F11" xml:space="preserve">
+    <value>快捷键: F11</value>
+    <comment>NicIPConfigToolTipConverter</comment>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>状态</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="TcpIPv4_Header" xml:space="preserve">
+    <value>Internet 协议版本 4 (TCP/IPv4)</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="TcpIPv6_Header" xml:space="preserve">
+    <value>Internet 协议版本 6 (TCP/IPv6)</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="Test" xml:space="preserve">
+    <value>检测</value>
+    <comment>PingDnsLabelContentConverter</comment>
+  </data>
+  <data name="Theme" xml:space="preserve">
+    <value>主题</value>
+    <comment>SkinTypeToolTipConverter</comment>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>时间</value>
+    <comment>PingReplyToolTipConverter</comment>
+  </data>
+  <data name="TimedOut" xml:space="preserve">
+    <value>超时</value>
+    <comment>PingDnsLabelContentConverter</comment>
+  </data>
+  <data name="Topmost_ToolTip" xml:space="preserve">
+    <value>置于顶层</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="Top_" xml:space="preserve">
+    <value>顶部(_T)</value>
+    <comment>IPConfigListView</comment>
+  </data>
+  <data name="UnicastPacketsReceived" xml:space="preserve">
+    <value>已接收单播包</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="UnicastPacketsSent" xml:space="preserve">
+    <value>已发送单播包</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="Untitled" xml:space="preserve">
+    <value>未命名</value>
+    <comment>IPConfigModel</comment>
+  </data>
+  <data name="UsesWINS" xml:space="preserve">
+    <value>使用 WINS</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="UseSystemSetting" xml:space="preserve">
+    <value>使用系统设置</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="ValidateSuccessful" xml:space="preserve">
+    <value>配置验证成功</value>
+    <comment>IPConfigDetailViewModel</comment>
+  </data>
+  <data name="ValidationError" xml:space="preserve">
+    <value>配置存在验证错误</value>
+    <comment>IPConfigDetailViewModel</comment>
+  </data>
+  <data name="ValidLifetime" xml:space="preserve">
+    <value>有效剩余</value>
+    <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="ViewToAdapterConfigDetail_" xml:space="preserve">
+    <value>详细信息(_D)</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="Violet" xml:space="preserve">
+    <value>紫罗兰</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="YouAreUpToDate" xml:space="preserve">
+    <value>你使用的是最新版本</value>
+    <comment>MainViewModel</comment>
+  </data>
+</root>

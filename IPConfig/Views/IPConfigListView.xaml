@@ -1,0 +1,260 @@
+﻿<UserControl x:Class="IPConfig.Views.IPConfigListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:b="clr-namespace:IPConfig.Behaviors"
+             xmlns:lang="clr-namespace:IPConfig.Languages"
+             xmlns:m="clr-namespace:IPConfig.Models"
+             xmlns:vm="clr-namespace:IPConfig.ViewModels"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             xmlns:dd="urn:gong-wpf-dragdrop"
+             d:DataContext="{d:DesignInstance Type=vm:IPConfigListViewModel,
+                                              IsDesignTimeCreatable=True}"
+             d:DesignHeight="450"
+             d:DesignWidth="300"
+             FontSize="14"
+             SnapsToDevicePixels="True"
+             mc:Ignorable="d">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <hc:SearchBar x:Name="tbSearchBar"
+                      b:TripleClickToSelectAllBehavior.Enabled="True"
+                      hc:InfoElement.ShowClearButton="True"
+                      Command="{Binding SearchCommand}"
+                      IsRealTime="False"
+                      Style="{StaticResource SearchBarPlus}"
+                      Text="{Binding SearchKeyword, Delay=100, UpdateSourceTrigger=PropertyChanged}" />
+
+        <!--  如果设置 dd:DragDrop.CanDragWithMouseRightButton="True"，则右键菜单时将取消多选。  -->
+        <ListBox x:Name="lbIPConfigs"
+                 Grid.Row="1"
+                 Margin="0,6,0,0"
+                 HorizontalContentAlignment="Stretch"
+                 b:SelectedItemsBehavior.SelectedItems="{Binding SelectedIPConfigs}"
+                 d:ItemsSource="{d:SampleData ItemCount=5}"
+                 dd:DragDrop.CanDragWithMouseRightButton="False"
+                 dd:DragDrop.IsDragSource="True"
+                 dd:DragDrop.IsDropTarget="True"
+                 dd:DragDrop.SelectDroppedItems="True"
+                 dd:DragDrop.UseDefaultDragAdorner="True"
+                 ItemsSource="{Binding IPConfigListCollectionView}"
+                 Loaded="LbIPConfigs_Loaded"
+                 ScrollViewer.CanContentScroll="True"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 SelectedItem="{Binding SelectedIPConfig, Mode=TwoWay}"
+                 SelectionChanged="LbIPConfigs_SelectionChanged"
+                 SelectionMode="Extended"
+                 UseLayoutRounding="False"
+                 VirtualizingStackPanel.ScrollUnit="Pixel">
+            <ListBox.Resources>
+                <!--
+                    d:DataContext="{Binding}" 提供设计时智能感知。
+                    运行时 DataContext 不能直接用  DataContext="{Binding}"，这不起作用。
+                    解决方法：DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}}"
+                -->
+                <ContextMenu x:Key="ItemContextMenu"
+                             d:DataContext="{Binding}"
+                             DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}}"
+                             UseLayoutRounding="True">
+                    <MenuItem Command="{Binding CopySelectedIPConfigsAsTextCommand}"
+                              Header="{lang:Lang {x:Static lang:LangKey.CopySelectedIPConfigAsText_}}"
+                              InputGestureText="{Binding SelectedIPConfigsCountString}" />
+
+                    <MenuItem Command="{Binding MakeSelectedIPConfigCopyCommand}"
+                              Header="{lang:Lang {x:Static lang:LangKey.MakeSelectedIPConfigCopy_}}" />
+
+                    <Separator />
+
+                    <MenuItem Header="{lang:Lang {x:Static lang:LangKey.MoveTo_}}">
+                        <MenuItem Command="{Binding MoveToTopCommand}"
+                                  Header="{lang:Lang {x:Static lang:LangKey.Top_}}" />
+
+                        <MenuItem Command="{Binding MoveToBottomCommand}"
+                                  Header="{lang:Lang {x:Static lang:LangKey.Bottom_}}" />
+                    </MenuItem>
+
+                    <Separator />
+
+                    <MenuItem Command="{Binding DeleteIPConfigCommand}"
+                              Header="{lang:Lang {x:Static lang:LangKey.DeleteIPConfig_}}"
+                              InputGestureText="Delete" />
+                </ContextMenu>
+            </ListBox.Resources>
+
+            <ListBox.InputBindings>
+                <KeyBinding Key="Delete"
+                            Command="{Binding DeleteIPConfigCommand}" />
+            </ListBox.InputBindings>
+
+            <!--
+                ListBox 必须在 Template 中设置 VirtualizingStackPanel 才能正确启用 UI 虚拟化。
+                如果需要同时支持 UI 虚拟化和平滑逐像素滚动(物理滚动)，
+                则需要在 ListBox 上直接设置 ScrollUnit="Pixel" 和 CanContentScroll="True"。
+            -->
+            <ListBox.Template>
+                <ControlTemplate>
+                    <Border Background="{DynamicResource SecondaryRegionBrush}"
+                            CornerRadius="4">
+                        <hc:ScrollViewer Padding="0,2"
+                                         IsInertiaEnabled="True"
+                                         VirtualizingStackPanel.IsContainerVirtualizable="True"
+                                         VirtualizingStackPanel.IsVirtualizing="True"
+                                         VirtualizingStackPanel.IsVirtualizingWhenGrouping="True"
+                                         VirtualizingStackPanel.VirtualizationMode="Recycling">
+                            <ItemsPresenter />
+                        </hc:ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </ListBox.Template>
+
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel IsItemsHost="True" />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+
+            <ListBox.ItemTemplate>
+                <DataTemplate DataType="{x:Type m:EditableIPConfigModel}">
+                    <hc:SimplePanel>
+                        <Border Background="{x:Null}"
+                                Style="{StaticResource BorderTipPrimary}"
+                                Visibility="{Binding Path=IsSelected, RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}, Converter={StaticResource Boolean2VisibilityConverter}}" />
+
+                        <hc:SimpleStackPanel Margin="12,10"
+                                             ToolTip="{Binding}">
+                            <Grid TextElement.FontSize="16">
+                                <Grid.Style>
+                                    <Style TargetType="{x:Type Grid}">
+                                        <Setter Property="TextElement.FontWeight" Value="Normal" />
+
+                                        <Style.Triggers>
+                                            <DataTrigger Value="{StaticResource True}">
+                                                <DataTrigger.Binding>
+                                                    <MultiBinding Converter="{StaticResource MultiValueEqualsConverter}">
+                                                        <Binding Path="." />
+                                                        <!--
+                                                            选择项验证错误时，整个 ListBox 将变成错误状态，绑定引用了这个 ListBox，将导致所有项目产生错误样式。
+                                                            绑定源更改为 UserControl 也是如此，因为 UserControl 引用了 ListBox，错误仍将传播。
+                                                            解决方法：设置 ValidatesOnNotifyDataErrors="False" 阻止错误验证。
+                                                        -->
+                                                        <Binding Path="DataContext.PrimarySelectedIPConfig"
+                                                                 RelativeSource="{RelativeSource AncestorType={x:Type ListBox}}"
+                                                                 ValidatesOnNotifyDataErrors="False" />
+                                                    </MultiBinding>
+                                                </DataTrigger.Binding>
+
+                                                <Setter Property="TextElement.FontWeight" Value="Bold" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Grid.Style>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="{Binding Name}"
+                                           TextTrimming="CharacterEllipsis" />
+
+                                <TextBlock Grid.Column="1"
+                                           Margin="2,0,0,0"
+                                           d:ToolTip="这个设计时 ToolTip 仅仅是为了消除设计器 Bug：XDG0006。"
+                                           Foreground="{DynamicResource MyPrimaryTextBrush}"
+                                           Text="*"
+                                           ToolTip="{lang:Lang {x:Static lang:LangKey.Modified}}"
+                                           Visibility="{Binding IsChanged, Converter={StaticResource Boolean2VisibilityConverter}}" />
+                            </Grid>
+
+                            <TextBlock Margin="0,2,0,0">
+                                <Run Text="{Binding IPv4Config.IP}" />
+                                <Run Text="/" /><Run Text="{Binding IPv4Config.Mask, Converter={StaticResource GetIPCIDRConverter}}" />
+                            </TextBlock>
+
+                            <TextBlock Margin="0,2,0,0"
+                                       FontStyle="Italic"
+                                       Text="{Binding Remark, Converter={StaticResource StringRemoveNewLineConverter}}"
+                                       TextTrimming="CharacterEllipsis"
+                                       Visibility="{Binding Remark, Converter={StaticResource String2VisibilityConverter}}" />
+                        </hc:SimpleStackPanel>
+                    </hc:SimplePanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+
+            <ListBox.ItemContainerStyle>
+                <Style BasedOn="{StaticResource ListBoxItemBaseStyle.Small}"
+                       TargetType="{x:Type ListBoxItem}">
+                    <Setter Property="ContextMenu" Value="{StaticResource ItemContextMenu}" />
+                    <Setter Property="Margin" Value="4,2" />
+                    <Setter Property="Padding" Value="0" />
+
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource DarkDefaultBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource MyReverseBrush}" />
+                        </Trigger>
+
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="{StaticResource LightPrimaryBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource MyReverseBrush}" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+
+        <hc:Empty Grid.Row="1"
+                  d:Visibility="Visible"
+                  hc:Empty.ShowEmpty="True"
+                  IsHitTestVisible="False"
+                  Visibility="{Binding ElementName=lbIPConfigs, Path=HasItems, Converter={StaticResource Boolean2VisibilityReConverter}}">
+            <hc:Empty.Logo>
+                <Viewbox Width="36"
+                         Height="36">
+                    <Path Data="{StaticResource DataGeometry}"
+                          Stroke="{DynamicResource EmptyBrush}"
+                          StrokeThickness="2" />
+                </Viewbox>
+            </hc:Empty.Logo>
+
+            <hc:Empty.Description>
+                <TextBlock Margin="0,8"
+                           HorizontalAlignment="Center"
+                           Foreground="{DynamicResource EmptyBrush}"
+                           Text="{lang:Lang {x:Static lang:LangKey.NoConfiguration}}" />
+            </hc:Empty.Description>
+        </hc:Empty>
+
+        <UniformGrid Grid.Row="2"
+                     Height="36"
+                     Columns="2"
+                     Rows="1">
+            <Button Padding="0"
+                    HorizontalAlignment="Stretch"
+                    Command="{Binding AddUntitledIPConfigCommand}"
+                    Content="+"
+                    FontSize="14"
+                    ToolTip="{lang:Lang {x:Static lang:LangKey.AddIPConfig}}" />
+
+            <Button Padding="0"
+                    HorizontalAlignment="Stretch"
+                    Command="{Binding DeleteIPConfigCommand}"
+                    Content="-"
+                    FontSize="14"
+                    ToolTip="{lang:Lang {x:Static lang:LangKey.DeleteIPConfig}}" />
+        </UniformGrid>
+    </Grid>
+</UserControl>

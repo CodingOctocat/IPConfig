@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 26.3.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+	<!ENTITY ns_extend "http://ns.adobe.com/Extensibility/1.0/">
+	<!ENTITY ns_ai "http://ns.adobe.com/AdobeIllustrator/10.0/">
+	<!ENTITY ns_graphs "http://ns.adobe.com/Graphs/1.0/">
+	<!ENTITY ns_vars "http://ns.adobe.com/Variables/1.0/">
+	<!ENTITY ns_imrep "http://ns.adobe.com/ImageReplacement/1.0/">
+	<!ENTITY ns_sfw "http://ns.adobe.com/SaveForWeb/1.0/">
+	<!ENTITY ns_custom "http://ns.adobe.com/GenericCustomNamespace/1.0/">
+	<!ENTITY ns_adobe_xpath "http://ns.adobe.com/XPath/1.0/">
+]>
+<svg version="1.1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1024 1024"
+	 style="enable-background:new 0 0 1024 1024;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#2F88FF;stroke:#333333;stroke-width:93.0909;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2;}
+	.st1{fill:none;stroke:#333333;stroke-width:93.0909;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2;}
+	.st2{fill:none;stroke:#FFFFFF;stroke-width:93.0909;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2;}
+	.st3{fill:#FFFFFF;}
+	.st4{font-family:'Unispace-Bold';}
+	.st5{font-size:96px;}
+	.st6{display:none;opacity:0.15;fill:#FF0000;enable-background:new    ;}
+</style>
+<metadata>
+	<sfw  xmlns="&ns_sfw;">
+		<slices></slices>
+		<sliceSourceBounds  bottomLeftOrigin="true" height="930.9" width="1024.1" x="0" y="46.6"></sliceSourceBounds>
+		<optimizationSettings>
+			<targetSettings  fileFormat="PNG24Format" targetSettingsID="0">
+				<PNG24Format  filtered="false" interlaced="true" matteColor="#FFFFFF" noMatteColor="false" transparency="true">
+					</PNG24Format>
+			</targetSettings>
+		</optimizationSettings>
+	</sfw>
+</metadata>
+<g id="原稿">
+	<rect x="46.5" y="744.7" class="st0" width="186.2" height="186.2"/>
+	<rect x="139.6" y="93.1" class="st0" width="744.7" height="279.3"/>
+	<path class="st1" d="M512,744.7V372.4"/>
+	<path class="st1" d="M139.6,744.7V558.5h744.7v186.2"/>
+	<rect x="791.3" y="744.7" class="st0" width="186.2" height="186.2"/>
+	<rect x="418.9" y="744.7" class="st0" width="186.2" height="186.2"/>
+	<path class="st2" d="M279.3,232.7h46.5"/>
+</g>
+<g id="文字">
+	<text transform="matrix(1 0 0 1 399.4252 271.6775)" class="st3 st4 st5">192.168</text>
+</g>
+<g id="辅助">
+	<rect x="372.4" y="93.1" class="st6" width="465.5" height="279.3"/>
+</g>
+</svg>

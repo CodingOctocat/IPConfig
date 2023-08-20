@@ -1,0 +1,618 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AdapterDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="AdapterId" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="AdapterIsReceiveOnly" xml:space="preserve">
+    <value>Receive Only</value>
+  </data>
+  <data name="AdapterLinkSpeed" xml:space="preserve">
+    <value>Link Speed</value>
+  </data>
+  <data name="AdapterMAC" xml:space="preserve">
+    <value>MAC Address</value>
+  </data>
+  <data name="AdapterName" xml:space="preserve">
+    <value>Adapter Name</value>
+  </data>
+  <data name="AdapterNotFound" xml:space="preserve">
+    <value>Network Adapter Not Found</value>
+  </data>
+  <data name="AdapterNotFound_ToolTip" xml:space="preserve">
+    <value>Please check if the network adapter is uninstalled or disabled</value>
+  </data>
+  <data name="AdapterNotSupported" xml:space="preserve">
+    <value>[Not Supported]</value>
+  </data>
+  <data name="AdapterNotSupportedIPv4_ToolTip" xml:space="preserve">
+    <value>Please check that Internet Protocol Version 4 (TCP/IPv4) properties is enabled</value>
+  </data>
+  <data name="AdapterNotSupportedIPv6_ToolTip" xml:space="preserve">
+    <value>Please check that Internet Protocol Version 6 (TCP/IPv6) properties is enabled</value>
+  </data>
+  <data name="AdapterOperationalStatus" xml:space="preserve">
+    <value>Operational Status</value>
+  </data>
+  <data name="AdapterProperties_Header" xml:space="preserve">
+    <value>Network Adapter Properties</value>
+  </data>
+  <data name="AdapterSupportsIPv4" xml:space="preserve">
+    <value>Supports IPv4</value>
+  </data>
+  <data name="AdapterSupportsIPv6" xml:space="preserve">
+    <value>Supports IPv6</value>
+  </data>
+  <data name="AdapterSupportsMulticast" xml:space="preserve">
+    <value>Multicast</value>
+  </data>
+  <data name="AdapterType" xml:space="preserve">
+    <value>Interface Type</value>
+  </data>
+  <data name="AddIPConfig" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="AlternateDns" xml:space="preserve">
+    <value>Alternate DNS</value>
+  </data>
+  <data name="APIPAActive" xml:space="preserve">
+    <value>APIPA Active</value>
+    
+  </data>
+  <data name="APIPAEnabled" xml:space="preserve">
+    <value>APIPA Enabled</value>
+    
+  </data>
+  <data name="ApplyAsk_Format" xml:space="preserve">
+    <value>Are you sure you want to apply the configuration to {0} - {1}?</value>
+  </data>
+  <data name="ApplyFailed" xml:space="preserve">
+    <value>Apply failed, Network adapter not found</value>
+  </data>
+  <data name="ApplySuccessful" xml:space="preserve">
+    <value>Apply successful</value>
+  </data>
+  <data name="Apply_" xml:space="preserve">
+    <value>_Apply</value>
+  </data>
+  <data name="AutoDhcp" xml:space="preserve">
+    <value>Auto(DHCP)</value>
+  </data>
+  <data name="Bottom_" xml:space="preserve">
+    <value>_Bottom</value>
+  </data>
+  <data name="Bytes" xml:space="preserve">
+    <value>Bytes</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="CheckUpdateFailed" xml:space="preserve">
+    <value>Failed to check for updates</value>
+  </data>
+  <data name="ClosingInfoDbSyncing" xml:space="preserve">
+    <value>Syncing the database, please try again later.</value>
+  </data>
+  <data name="ClosingSaveAsk_Format" xml:space="preserve">
+    <value>Do you want to save the changes to {0}?</value>
+  </data>
+  <data name="ConfigTool" xml:space="preserve">
+    <value>Config Tool</value>
+  </data>
+  <data name="Contrast_ToolTip" xml:space="preserve">
+    <value>Contrast</value>
+  </data>
+  <data name="ControlPanel_ToolTip" xml:space="preserve">
+    <value>Open Control Panel &gt; Network and Internet &gt; Network Connections</value>
+  </data>
+  <data name="Copied" xml:space="preserve">
+    <value>Copied</value>
+  </data>
+  <data name="CopyContents_" xml:space="preserve">
+    <value>_Copy Contents</value>
+  </data>
+  <data name="CopyContent_Format_" xml:space="preserve">
+    <value>_Copy {0} Content</value>
+  </data>
+  <data name="CopySelectedIPConfigAsText_" xml:space="preserve">
+    <value>Copy as _Text</value>
+  </data>
+  <data name="Copy_Noun" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="Copy_Verb" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="Dark" xml:space="preserve">
+    <value>Dark</value>
+  </data>
+  <data name="DataValidation_" xml:space="preserve">
+    <value>_Validate</value>
+  </data>
+  <data name="DataValidation_ToolTip" xml:space="preserve">
+    <value>Check that the configuration meets the basic requirements</value>
+  </data>
+  <data name="DbSyncing_ToolTip" xml:space="preserve">
+    <value>Database syncing...</value>
+  </data>
+  <data name="Default" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="DefaultGateway" xml:space="preserve">
+    <value>Default Gateway</value>
+  </data>
+  <data name="DeleteAsk_Format" xml:space="preserve">
+    <value>Are you sure you want to delete {0} configuration(s)?</value>
+  </data>
+  <data name="DeleteIPConfig" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DeleteIPConfig_" xml:space="preserve">
+    <value>_Delete</value>
+  </data>
+  <data name="DhcpLeaseLifetime" xml:space="preserve">
+    <value>DHCP Lease Lifetime</value>
+  </data>
+  <data name="DiscardAsk" xml:space="preserve">
+    <value>Are you sure you want to discard changes?</value>
+  </data>
+  <data name="DiscardChanges_" xml:space="preserve">
+    <value>_Discard</value>
+  </data>
+  <data name="Dns1" xml:space="preserve">
+    <value>DNS 1</value>
+  </data>
+  <data name="Dns2" xml:space="preserve">
+    <value>DNS 2</value>
+  </data>
+  <data name="DnsEligible" xml:space="preserve">
+    <value>Dns Eligible</value>
+  </data>
+  <data name="DuplicateAddressDetectionState" xml:space="preserve">
+    <value>Duplicate Address Detection State</value>
+  </data>
+  <data name="DuplicateIPConfigName" xml:space="preserve">
+    <value>Duplicate configuration name</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Ethernet_Lower" xml:space="preserve">
+    <value>ethernet</value>
+  </data>
+  <data name="ExportToCsv_" xml:space="preserve">
+    <value>Export to _CSV...</value>
+  </data>
+  <data name="ExportToCsv_FileDialogFilter" xml:space="preserve">
+    <value>CSV (Comma delimited)(*.csv)|*.csv</value>
+  </data>
+  <data name="ExportToCsv_FileDialogTitle" xml:space="preserve">
+    <value>Export to CSV (Comma delimited)</value>
+  </data>
+  <data name="ExportToPlaintext_" xml:space="preserve">
+    <value>Export to _TXT...</value>
+  </data>
+  <data name="ExportToPlaintext_FileDialogFilter" xml:space="preserve">
+    <value>Plaintext (*.txt)|*.txt</value>
+  </data>
+  <data name="ExportToPlaintext_FileDialogTitle" xml:space="preserve">
+    <value>Export to Plaintext</value>
+  </data>
+  <data name="ExportFailed" xml:space="preserve">
+    <value>Export failed</value>
+  </data>
+  <data name="ExportSuccessful" xml:space="preserve">
+    <value>Export successful</value>
+  </data>
+  <data name="ForwardingEnabled" xml:space="preserve">
+    <value>Forwarding Enabled</value>
+    
+  </data>
+  <data name="Gateway" xml:space="preserve">
+    <value>Gateway</value>
+  </data>
+  <data name="GoBack_" xml:space="preserve">
+    <value>_Back</value>
+  </data>
+  <data name="IncomingPacketsDiscarded" xml:space="preserve">
+    <value>Incoming Packets Discarded</value>
+  </data>
+  <data name="IncomingPacketsWithErrors" xml:space="preserve">
+    <value>Incoming Packets With Errors</value>
+  </data>
+  <data name="IncomingUnknownProtocolPackets" xml:space="preserve">
+    <value>Incoming Unknown Protocol Packets</value>
+  </data>
+  <data name="Index" xml:space="preserve">
+    <value>Index</value>
+  </data>
+  <data name="InvalidIPv4Address" xml:space="preserve">
+    <value>Invalid IPv4 Address</value>
+  </data>
+  <data name="InvalidIPv4DefaultGatewayAddress" xml:space="preserve">
+    <value>Invalid IPv4 Default Gateway Address</value>
+  </data>
+  <data name="InvalidIPv4Dns" xml:space="preserve">
+    <value>Invalid IPv4 DNS Address</value>
+  </data>
+  <data name="InvalidIPv4SubnetMask" xml:space="preserve">
+    <value>Invalid IPv4 Subnet Mask</value>
+  </data>
+  <data name="IPConfigName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="IPv4AdvancedProperties_Header" xml:space="preserve">
+    <value>IPv4 Advanced Properties</value>
+  </data>
+  <data name="IPv4BytesReceived" xml:space="preserve">
+    <value>Bytes Received</value>
+  </data>
+  <data name="IPv4BytesSent" xml:space="preserve">
+    <value>Bytes Sent</value>
+  </data>
+  <data name="IPv4Dns_Header" xml:space="preserve">
+    <value>IPv4 DNS Server</value>
+  </data>
+  <data name="IPv4GeneralProperties_Header" xml:space="preserve">
+    <value>IPv4 General Properties</value>
+  </data>
+  <data name="IPv4IsAutoDns" xml:space="preserve">
+    <value>Obtain DNS Automatically</value>
+  </data>
+  <data name="IPv4IsDhcpEnabled" xml:space="preserve">
+    <value>DHCP Enabled</value>
+  </data>
+  <data name="IPv4Lifetimes_Header" xml:space="preserve">
+    <value>IPv4 Lifetimes</value>
+  </data>
+  <data name="IPv4Mask" xml:space="preserve">
+    <value>Mask</value>
+  </data>
+  <data name="IPv4Statistics_Header" xml:space="preserve">
+    <value>IPv4 Statistics</value>
+  </data>
+  <data name="IPv4SubnetMask" xml:space="preserve">
+    <value>Subnet Mask</value>
+  </data>
+  <data name="IPv4WinsServer" xml:space="preserve">
+    <value>WINS Server</value>
+  </data>
+  <data name="IPv4_Header" xml:space="preserve">
+    <value>IPv4</value>
+  </data>
+  <data name="IPv6AdvancedProperties_Header" xml:space="preserve">
+    <value>IPv6 Advanced Properties</value>
+  </data>
+  <data name="IPv6GeneralProperties_Header" xml:space="preserve">
+    <value>IPv6 General Properties</value>
+  </data>
+  <data name="IPv6Lifetimes_Header" xml:space="preserve">
+    <value>IPv6 Lifetimes</value>
+  </data>
+  <data name="IPv6PrefixLength" xml:space="preserve">
+    <value>Prefix Length</value>
+  </data>
+  <data name="IPv6PrefixOrigin" xml:space="preserve">
+    <value>Prefix Origin</value>
+  </data>
+  <data name="IPv6Statistics_Header" xml:space="preserve">
+    <value>IPv6 Statistics</value>
+  </data>
+  <data name="IPv6SuffixOrigin" xml:space="preserve">
+    <value>Suffix Origin</value>
+  </data>
+  <data name="IsTransient" xml:space="preserve">
+    <value>Transient</value>
+  </data>
+  <data name="JumpToGithub" xml:space="preserve">
+    <value>Jump to Github...</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="LatestVersion" xml:space="preserve">
+    <value>Latest Version: </value>
+  </data>
+  <data name="Light" xml:space="preserve">
+    <value>Light</value>
+  </data>
+  <data name="MakeSelectedIPConfigCopy_" xml:space="preserve">
+    <value>Make _Copy</value>
+  </data>
+  <data name="Manual" xml:space="preserve">
+    <value>Manual</value>
+  </data>
+  <data name="Modified" xml:space="preserve">
+    <value>Modified</value>
+  </data>
+  <data name="MoveTo_" xml:space="preserve">
+    <value>_Move to...</value>
+  </data>
+  <data name="MTU" xml:space="preserve">
+    <value>MTU</value>
+    
+  </data>
+  <data name="NameMaxLength50" xml:space="preserve">
+    <value>Max length: 50</value>
+  </data>
+  <data name="NewVersionAvailable_Format_ToolTip" xml:space="preserve">
+    <value>New Version Available: {0}
+
+{1} -&gt; {2}</value>
+  </data>
+  <data name="NoConfiguration" xml:space="preserve">
+    <value>No Configuration</value>
+  </data>
+  <data name="NoData" xml:space="preserve">
+    <value>No Data</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="NonUnicastPacketsReceived" xml:space="preserve">
+    <value>Non-Unicast Packets Received</value>
+  </data>
+  <data name="NonUnicastPacketsSent" xml:space="preserve">
+    <value>Non-Unicast Packets Sent</value>
+  </data>
+  <data name="NotSupported" xml:space="preserve">
+    <value>Not Supported</value>
+  </data>
+  <data name="OpenInternetProperties_ToolTip" xml:space="preserve">
+    <value>Open Internet Properties</value>
+  </data>
+  <data name="OpStatus_Dormant_ToolTip" xml:space="preserve">
+    <value>[Dormant] The network interface is not in a condition to transmit data packets; it is waiting for an external event</value>
+  </data>
+  <data name="OpStatus_Down_ToolTip" xml:space="preserve">
+    <value>[Down] The network interface is unable to transmit data packets</value>
+  </data>
+  <data name="OpStatus_LowerLayerDown_ToolTip" xml:space="preserve">
+    <value>[LowerLayerDown] The network interface is unable to transmit data packets because it runs on top of one or more other interfaces, and at least one of these "lower layer" interfaces is down</value>
+  </data>
+  <data name="OpStatus_NotPresent_ToolTip" xml:space="preserve">
+    <value>[NotPresent] The network interface is unable to transmit data packets because of a missing component, typically a hardware component</value>
+  </data>
+  <data name="OpStatus_Testing_ToolTip" xml:space="preserve">
+    <value>[Testing] The network interface is running tests</value>
+  </data>
+  <data name="OpStatus_Unknown_ToolTip" xml:space="preserve">
+    <value>[Unknown] The network interface status is not known</value>
+  </data>
+  <data name="OpStatus_Up_ToolTip" xml:space="preserve">
+    <value>[Up] The network interface is up; it can transmit data packets</value>
+  </data>
+  <data name="OutgoingPacketsDiscarded" xml:space="preserve">
+    <value>Outgoing Packets Discarded</value>
+  </data>
+  <data name="OutgoingPacketsWithErrors" xml:space="preserve">
+    <value>Outgoing Packets With Errors</value>
+  </data>
+  <data name="OutputQueueLength" xml:space="preserve">
+    <value>Output Queue Length</value>
+  </data>
+  <data name="PreferredDns" xml:space="preserve">
+    <value>Preferred DNS</value>
+  </data>
+  <data name="PreferredLifetime" xml:space="preserve">
+    <value>Preferred Lifetime</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="Refresh_ToolTip" xml:space="preserve">
+    <value>Refresh (F5)</value>
+  </data>
+  <data name="Remark" xml:space="preserve">
+    <value>Remark</value>
+  </data>
+  <data name="ReplyFrom_Format" xml:space="preserve">
+    <value>Reply from {0}</value>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>Required</value>
+  </data>
+  <data name="SaveAndApply_" xml:space="preserve">
+    <value>Save &amp; Appl_y</value>
+  </data>
+  <data name="SaveFailed" xml:space="preserve">
+    <value>Save failed</value>
+  </data>
+  <data name="SaveFailedValidationError" xml:space="preserve">
+    <value>Save failed, Configuration contains validation errors</value>
+  </data>
+  <data name="SaveSuccessful" xml:space="preserve">
+    <value>Save successful</value>
+  </data>
+  <data name="Save_" xml:space="preserve">
+    <value>_Save</value>
+  </data>
+  <data name="SelectAdapter_ToolTip" xml:space="preserve">
+    <value>Please select a network adapter...</value>
+  </data>
+  <data name="Selected" xml:space="preserve">
+    <value>Selected</value>
+  </data>
+  <data name="Shortcut_F11" xml:space="preserve">
+    <value>Shortcut: F11</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="TcpIPv4_Header" xml:space="preserve">
+    <value>Internet Protocol Version 4 (TCP/IPv4)</value>
+  </data>
+  <data name="TcpIPv6_Header" xml:space="preserve">
+    <value>Internet Protocol Version 6 (TCP/IPv6)</value>
+  </data>
+  <data name="Test" xml:space="preserve">
+    <value>Test</value>
+  </data>
+  <data name="Theme" xml:space="preserve">
+    <value>Theme</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="TimedOut" xml:space="preserve">
+    <value>Timed Out</value>
+  </data>
+  <data name="Topmost_ToolTip" xml:space="preserve">
+    <value>Always on top</value>
+  </data>
+  <data name="Top_" xml:space="preserve">
+    <value>_Top</value>
+  </data>
+  <data name="UnicastPacketsReceived" xml:space="preserve">
+    <value>Unicast Packets Received</value>
+  </data>
+  <data name="UnicastPacketsSent" xml:space="preserve">
+    <value>Unicast Packets Sent</value>
+  </data>
+  <data name="Untitled" xml:space="preserve">
+    <value>Untitled</value>
+  </data>
+  <data name="UsesWINS" xml:space="preserve">
+    <value>Uses WINS</value>
+  </data>
+  <data name="UseSystemSetting" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="ValidateSuccessful" xml:space="preserve">
+    <value>Validate successful</value>
+  </data>
+  <data name="ValidationError" xml:space="preserve">
+    <value>Configuration contains validation errors</value>
+  </data>
+  <data name="ValidLifetime" xml:space="preserve">
+    <value>Valid Lifetime</value>
+  </data>
+  <data name="ViewToAdapterConfigDetail_" xml:space="preserve">
+    <value>_Details</value>
+  </data>
+  <data name="Violet" xml:space="preserve">
+    <value>Violet</value>
+  </data>
+  <data name="YouAreUpToDate" xml:space="preserve">
+    <value>You're up to date</value>
+  </data>
+</root>

@@ -1,0 +1,40 @@
+﻿Provider,Filter,Dns1,Dns2,Group,Description
+114DNS,NULL,114.114.114.114,114.114.115.115,Public DNS(China),"Pure and hijack-free, no need to endure the pain of being forced to watch adverts or vulgar websites"
+114DNS,Enhanced Security,114.114.114.119,114.114.115.119,Public DNS(China),"Block phishing virus and Trojan horse websites to enhance the security of online banking, securities, shopping, gaming and privacy information"
+114DNS,Minor,114.114.114.110,114.114.115.110,Public DNS(China),Schools or parents have the option of blocking pornographic websites to protect children and adolescents from pornographic content on the internet
+DNS Pai,Telecom,101.226.4.6,218.30.118.6,Public DNS(China),"Fast, smart, stable and pure"
+DNS Pai,Unicom,123.125.81.6,140.207.198.6,Public DNS(China),"Fast, smart, stable and pure"
+DNS Pai,Mobile,101.226.4.6,218.30.118.6,Public DNS(China),"Fast, smart, stable and pure"
+DNS Pai,Tietong,101.226.4.6,218.30.118.6,Public DNS(China),"Fast, smart, stable and pure"
+OneDNS,Pure,117.50.10.10,52.80.52.52,Public DNS(China),"Not to intercept any filtering of the visiting site, directly return its real response results"
+OneDNS,Blocking,117.50.11.11,52.80.66.66,Public DNS(China),"Protect against all kinds of malware, filter ads and nuisances"
+OneDNS,Family,117.50.60.30,52.80.60.30,Public DNS(China),"On the basis of the blocking version, pornographic and violent site filtering and gambling site filtering are added to better purify the home network environment"
+SDNS,NULL,1.2.4.8,202.98.0.68,Public DNS(China),China Internet Network Information Centre (CNNIC)
+Alibaba Cloud,NULL,223.5.5.5,223.5.5.5,Public DNS(China),"Fast, stable and secure"
+Baidu DNS,NULL,180.76.76.76,NULL,Public DNS(China),"Secure, hijack-free and more accurate"
+Tencent DNSPod,NULL,119.29.29.29,182.254.116.116,Public DNS(China),Free and reliable public resolution
+AdGuard,Default,94.140.14.14,94.140.15.15,Public DNS,AdGuard DNS will block ads and trackers
+AdGuard,Non-Filtering,94.140.14.140,94.140.14.141,Public DNS,"AdGuard DNS will not block ads, trackers, or any other DNS requests"
+AdGuard,Family Protection,94.140.14.15,94.140.15.16,Public DNS,"AdGuard DNS will block ads, trackers, adult content, and enable Safe Search and Safe Mode, where possible"
+CleanBrowsing,Family Filter,185.228.168.168,185.228.169.168,Public DNS,"Blocks access to all adult, pornographic and explicit sites. It also blocks proxy and VPN domains that are used to bypass the filters. Mixed content sites (like Reddit) are also blocked. Google, Bing and Youtube are set to the Safe Mode. Malicious and Phishing domains are blocked"
+CleanBrowsing,Adult Filter,185.228.168.10,185.228.169.11,Public DNS,"Blocks access to all adult, pornographic and explicit sites. It does not block proxy or VPNs, nor mixed-content sites. Sites like Reddit are allowed. Google and Bing are set to the Safe Mode. Malicious and Phishing domains are blocked"
+CleanBrowsing,Security Filter,185.228.168.9,185.228.169.9,Public DNS,"Blocks access to phishing, spam, malware and malicious domains. Our database of malicious domains is updated hourly and considered to be one of the best in the industry. Note that it does not block adult content"
+Cloudflare,NULL,1.1.1.1,1.0.0.1,Public DNS,Fast. Free. Private
+Cloudflare,Security Filter,1.1.1.2,1.0.0.2,Public DNS,Malware Blocking Only
+Cloudflare,Family Filter,1.1.1.3,1.0.0.3,Public DNS,Malware and Adult Content Blocking Together
+Google,NULL,8.8.8.8,8.8.4.4,Public DNS,"Speed up your browsing experience, Improve your security, Get the results you expect with absolutely no redirection"
+Level 3,NULL,209.244.0.3,209.244.0.4,Public DNS,"The free DNS servers listed above as Level 3 will automatically route to the nearest DNS server operated by Level 3 Communications, the company that provides most of the ISPs in the US their access to the internet backbone"
+Level 3,Verizon DNS,4.2.2.1,4.2.2.2,Public DNS,These servers are often given as Verizon DNS servers but that is not technically the case
+Level 3,Verizon DNS,4.2.2.3,4.2.2.4,Public DNS,These servers are often given as Verizon DNS servers but that is not technically the case
+Level 3,Verizon DNS,4.2.2.5,4.2.2.6,Public DNS,These servers are often given as Verizon DNS servers but that is not technically the case
+OpenDNS,Basic Security,208.67.222.222,208.67.220.220,Public DNS,"Our classic, free service with customizable filtering and basic protection"
+OpenDNS,Family Shield,208.67.222.123,208.67.220.123,Public DNS,Preconfigured to block adult content - set it & forget it
+OpenDNS,Sandbox,208.67.222.2,208.67.220.2,Public DNS,OpenDNS Sandbox is an RFC-compliant DNS service that does not provide any level of filtering
+OpenNIC,NULL,185.121.177.177,169.239.202.202,Public DNS,"DNS Neutrality, No Cost, Stop DNS Hijacking"
+Quad9,NULL,9.9.9.9,149.112.112.112,Public DNS,"Recommended: Malware Blocking, DNSSEC Validation (this is the most typical configuration)"
+Quad9,ECS,9.9.9.11,149.112.112.11,Public DNS,"Secured w/ECS: Malware blocking, DNSSEC Validation, ECS enabled"
+Quad9,Unsecured,9.9.9.10,149.112.112.10,Public DNS,"Unsecured: No Malware blocking, no DNSSEC validation (for experts only!)"
+V2EX,NULL,199.91.73.222,178.79.131.110,Public DNS,Powered by V2EX webmaster
+Yandex,Basic,77.88.8.1,77.88.8.8,Public DNS,No traffic filtering
+Yandex,Safe,77.88.8.2,77.88.8.88,Public DNS,Protection from infected and fraudulent sites is provided
+Yandex,Family,77.88.8.3,77.88.8.7,Public DNS,Protection from dangerous sites and blocks sites with adult content
