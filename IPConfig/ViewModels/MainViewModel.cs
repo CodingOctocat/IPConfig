@@ -295,10 +295,10 @@ public partial class MainViewModel : ObservableRecipient,
     }
 
     [RelayCommand(CanExecute = nameof(IsSelectedNicNotNull))]
-    private void CopySelectedNicIPConfigAsText()
+    private async Task CopySelectedNicIPConfigAsTextAsync()
     {
         string text = $"{SelectedNic}\n\n{SelectedNicIPConfig}".Trim();
-        Clipboard.SetText(text);
+        await ClipboardHelper.SetTextAsync(text);
     }
 
     [RelayCommand]

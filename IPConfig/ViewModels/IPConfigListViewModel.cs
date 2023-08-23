@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 
@@ -201,7 +202,7 @@ public partial class IPConfigListViewModel : ObservableRecipient
     }
 
     [RelayCommand]
-    private void CopySelectedIPConfigsAsText()
+    private async Task CopySelectedIPConfigsAsTextAsync()
     {
         string sep = new('=', 64);
         var sb = new StringBuilder();
@@ -213,7 +214,7 @@ public partial class IPConfigListViewModel : ObservableRecipient
         }
 
         string text = sb.ToString().Trim()[..^64];
-        Clipboard.SetText(text);
+        await ClipboardHelper.SetTextAsync(text);
     }
 
     [RelayCommand(CanExecute = nameof(CanDeleteIPConfig))]

@@ -5,7 +5,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Timers;
-using System.Windows;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -69,7 +68,7 @@ public partial class NicConfigDetailViewModel : ObservableRecipient,
     #region Relay Commands
 
     [RelayCommand]
-    private void CopyAllContentsAsText()
+    private async Task CopyAllContentsAsTextAsync()
     {
         string iPv4Header = Nic.SupportsIPv4 ? Lang.TcpIPv4_Header : $"{Lang.AdapterNotSupported} {Lang.TcpIPv4_Header}";
         string iPv6Header = Nic.SupportsIPv6 ? Lang.TcpIPv6_Header : $"{Lang.AdapterNotSupported} {Lang.TcpIPv6_Header}";
@@ -104,51 +103,51 @@ public partial class NicConfigDetailViewModel : ObservableRecipient,
             {Lang.NotSupported}
             """;
 
-        Clipboard.SetText(text);
+        await ClipboardHelper.SetTextAsync(text);
     }
 
     [RelayCommand]
-    private void CopyContentsAsText(string tag)
+    private async Task CopyContentsAsTextAsync(string tag)
     {
         if (tag == Lang.AdapterProperties_Header)
         {
-            Clipboard.SetText(Nic.ToString());
+            await ClipboardHelper.SetTextAsync(Nic.ToString());
         }
         else if (tag == Lang.TcpIPv4_Header)
         {
-            Clipboard.SetText(GetIPv4PropertyContents());
+            await ClipboardHelper.SetTextAsync(GetIPv4PropertyContents());
         }
         else if (tag == Lang.IPv4GeneralProperties_Header)
         {
-            Clipboard.SetText(IPv4AdvancedCofnig.FormatGeneralProperties());
+            await ClipboardHelper.SetTextAsync(IPv4AdvancedCofnig.FormatGeneralProperties());
         }
         else if (tag == Lang.IPv4Lifetimes_Header)
         {
-            Clipboard.SetText(IPv4AdvancedCofnig.FormatLifetimes());
+            await ClipboardHelper.SetTextAsync(IPv4AdvancedCofnig.FormatLifetimes());
         }
         else if (tag == Lang.IPv4AdvancedProperties_Header)
         {
-            Clipboard.SetText(FormatIPv4InterfaceProperties());
+            await ClipboardHelper.SetTextAsync(FormatIPv4InterfaceProperties());
         }
         else if (tag == Lang.IPv4Statistics_Header)
         {
-            Clipboard.SetText(FormatIPv4InterfaceStatistics());
+            await ClipboardHelper.SetTextAsync(FormatIPv4InterfaceStatistics());
         }
         else if (tag == Lang.TcpIPv6_Header)
         {
-            Clipboard.SetText(GetIPv6PropertyContents());
+            await ClipboardHelper.SetTextAsync(GetIPv6PropertyContents());
         }
         else if (tag == Lang.IPv6GeneralProperties_Header)
         {
-            Clipboard.SetText(IPv6AdvancedCofnig.FormatGeneralProperties());
+            await ClipboardHelper.SetTextAsync(IPv6AdvancedCofnig.FormatGeneralProperties());
         }
         else if (tag == Lang.IPv6Lifetimes_Header)
         {
-            Clipboard.SetText(IPv6AdvancedCofnig.FormatLifetimes());
+            await ClipboardHelper.SetTextAsync(IPv6AdvancedCofnig.FormatLifetimes());
         }
         else if (tag == Lang.IPv6AdvancedProperties_Header)
         {
-            Clipboard.SetText(FormatIPv6InterfaceProperties());
+            await ClipboardHelper.SetTextAsync(FormatIPv6InterfaceProperties());
         }
         else if (tag == Lang.IPv6Statistics_Header)
         {

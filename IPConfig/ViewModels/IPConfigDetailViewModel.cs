@@ -372,9 +372,9 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
     #region RelayCommands
 
     [RelayCommand]
-    private static void CopyDns(string dns)
+    private static async Task CopyDnsAsync(string dns)
     {
-        Clipboard.SetText(dns);
+        await ClipboardHelper.SetTextAsync(dns);
     }
 
     [RelayCommand(AllowConcurrentExecutions = true)]
