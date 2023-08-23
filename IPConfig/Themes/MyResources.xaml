@@ -6,8 +6,6 @@
     <sys:Boolean x:Key="True">True</sys:Boolean>
     <sys:Boolean x:Key="False">False</sys:Boolean>
 
-    <conv:EnumDescriptionConverter x:Key="EnumDescriptionConverter" />
-
     <conv:MultiValueEqualsConverter x:Key="MultiValueEqualsConverter" />
 
     <conv:StringRemoveNewLineConverter x:Key="StringRemoveNewLineConverter" />

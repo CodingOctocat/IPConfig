@@ -31,9 +31,9 @@ public static class ThemeWatcher
         Dark = 2,
     }
 
-    private const string _registryKeyPath = @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize";
+    private const string RegistryKeyPath = @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize";
 
-    private const string _registryValueName = "AppsUseLightTheme";
+    private const string RegistryValueName = "AppsUseLightTheme";
 
     private static WindowsTheme _currentWindowsTheme;
 
@@ -45,8 +45,8 @@ public static class ThemeWatcher
 
         try
         {
-            using var key = Registry.CurrentUser.OpenSubKey(_registryKeyPath);
-            object? registryValueObject = key?.GetValue(_registryValueName);
+            using var key = Registry.CurrentUser.OpenSubKey(RegistryKeyPath);
+            object? registryValueObject = key?.GetValue(RegistryValueName);
 
             if (registryValueObject is null)
             {
@@ -72,8 +72,8 @@ public static class ThemeWatcher
             CultureInfo.InvariantCulture,
             @"SELECT * FROM RegistryValueChangeEvent WHERE Hive = 'HKEY_USERS' AND KeyPath = '{0}\\{1}' AND ValueName = '{2}'",
             currentUser?.User?.Value,
-            _registryKeyPath.Replace(@"\", @"\\"),
-            _registryValueName);
+            RegistryKeyPath.Replace(@"\", @"\\"),
+            RegistryValueName);
 
         try
         {

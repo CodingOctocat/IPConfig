@@ -67,7 +67,7 @@ dotnet_style_readonly_field = true
 dotnet_code_quality_unused_parameters = all
 
 # 禁止显示首选项
-dotnet_remove_unnecessary_suppression_exclusions = 0
+dotnet_remove_unnecessary_suppression_exclusions = none
 
 # 新行首选项
 dotnet_style_allow_multiple_blank_lines_experimental = false:suggestion
@@ -105,12 +105,14 @@ csharp_style_conditional_delegate_call = true
 csharp_prefer_static_local_function = true
 csharp_preferred_modifier_order = public,private,protected,internal,static,extern,new,virtual,abstract,sealed,override,readonly,unsafe,volatile,async
 csharp_style_prefer_readonly_struct = true
+csharp_style_prefer_readonly_struct_member = true
 
 # 代码块首选项
 csharp_prefer_braces = true:suggestion
 csharp_prefer_simple_using_statement = true
 csharp_style_namespace_declarations = file_scoped:suggestion
 csharp_style_prefer_method_group_conversion = true
+csharp_style_prefer_primary_constructors = true
 csharp_style_prefer_top_level_statements = true
 
 # 表达式级首选项
@@ -125,7 +127,7 @@ csharp_style_prefer_range_operator = true
 csharp_style_prefer_tuple_swap = true
 csharp_style_prefer_utf8_string_literals = true
 csharp_style_throw_expression = true
-csharp_style_unused_value_assignment_preference = discard_variable:silent
+csharp_style_unused_value_assignment_preference = discard_variable
 csharp_style_unused_value_expression_statement_preference = discard_variable
 
 # "using" 指令首选项
@@ -205,6 +207,10 @@ dotnet_naming_rule.抽象类_should_be_abstractmethod.severity = suggestion
 dotnet_naming_rule.抽象类_should_be_abstractmethod.symbols = 抽象类
 dotnet_naming_rule.抽象类_should_be_abstractmethod.style = abstractmethod
 
+dotnet_naming_rule.常量_should_be_pascalcase.severity = suggestion
+dotnet_naming_rule.常量_should_be_pascalcase.symbols = 常量
+dotnet_naming_rule.常量_should_be_pascalcase.style = pascalcase
+
 dotnet_naming_rule.非字段成员_should_be_pascalcase.severity = suggestion
 dotnet_naming_rule.非字段成员_should_be_pascalcase.symbols = 非字段成员
 dotnet_naming_rule.非字段成员_should_be_pascalcase.style = pascalcase
@@ -270,6 +276,10 @@ dotnet_naming_symbols.局部参数.required_modifiers =
 dotnet_naming_symbols.异步方法.applicable_kinds = method, local_function
 dotnet_naming_symbols.异步方法.applicable_accessibilities = *
 dotnet_naming_symbols.异步方法.required_modifiers = async
+
+dotnet_naming_symbols.常量.applicable_kinds = property, field
+dotnet_naming_symbols.常量.applicable_accessibilities = *
+dotnet_naming_symbols.常量.required_modifiers = const
 
 # 命名样式
 
