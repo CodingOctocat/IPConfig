@@ -162,8 +162,8 @@ public partial class IPConfigListViewModel : ObservableRecipient
 
     public static ValidationResult ValidateName(string name)
     {
-        var instance = App.Current.Services.GetService<IPConfigListViewModel>();
-        bool isValid = instance?.IPConfigList.Count(x => x.Name == name) <= 1;
+        var instance = App.Current.Services.GetRequiredService<IPConfigListViewModel>();
+        bool isValid = instance.IPConfigList.Count(x => x.Name == name) <= 1;
 
         if (isValid)
         {

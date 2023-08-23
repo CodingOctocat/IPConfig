@@ -45,7 +45,7 @@ public partial class MainWindow : HcWindow
             return;
         }
 
-        DataContext = App.Current.Services.GetService<MainViewModel>();
+        DataContext = App.Current.Services.GetRequiredService<MainViewModel>();
 
         LangSource.Instance.LanguageChanged += (s, e) => UpdateTitle();
     }

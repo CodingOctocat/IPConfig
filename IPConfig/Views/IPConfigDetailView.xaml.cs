@@ -25,7 +25,7 @@ public partial class IPConfigDetailView : UserControl
             return;
         }
 
-        DataContext = App.Current.Services.GetService<IPConfigDetailViewModel>();
+        DataContext = App.Current.Services.GetRequiredService<IPConfigDetailViewModel>();
 
         WeakReferenceMessenger.Default.Register<KeyPressMessage>(this,
             (r, m) => {

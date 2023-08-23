@@ -32,7 +32,7 @@ public partial class IPConfigListView : UserControl
             return;
         }
 
-        DataContext = App.Current.Services.GetService<IPConfigListViewModel>();
+        DataContext = App.Current.Services.GetRequiredService<IPConfigListViewModel>();
 
         WeakReferenceMessenger.Default.Register<KeyPressMessage>(this,
             (r, m) => {

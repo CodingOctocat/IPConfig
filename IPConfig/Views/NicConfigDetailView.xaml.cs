@@ -34,7 +34,7 @@ public partial class NicConfigDetailView : UserControl
             return;
         }
 
-        DataContext = App.Current.Services.GetService<NicConfigDetailViewModel>();
+        DataContext = App.Current.Services.GetRequiredService<NicConfigDetailViewModel>();
 
         App.Current.ThemeChanging += (s, e) => _scrollViewerVOffset = scrollViewer.VerticalOffset;
         App.Current.ThemeChanged += (s, e) => scrollViewer.ScrollToVerticalOffset(_scrollViewerVOffset);

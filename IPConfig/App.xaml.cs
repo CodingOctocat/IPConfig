@@ -169,8 +169,8 @@ public partial class App : Application
             DefaultValue = Current.FindResource(typeof(Window))
         });
 
-        var mainWindow = Services?.GetService<MainWindow>();
-        mainWindow!.Show();
+        var mainWindow = Services.GetRequiredService<MainWindow>();
+        mainWindow.Show();
 
         base.OnStartup(e);
     }
@@ -268,7 +268,7 @@ public partial class App : Application
 
     private void ThemeWatcher_WindowsThemeChanged(object? sender, ThemeWatcher.ThemeChangedArgs e)
     {
-        if (Services?.GetService<MainViewModel>()?.CurrentSkinType is null)
+        if (Services.GetRequiredService<MainViewModel>().CurrentSkinType is null)
         {
             UpdateSkin(ThemeWatcher.GetCurrentWindowsTheme().ToSkinType());
         }

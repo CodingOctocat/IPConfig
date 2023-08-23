@@ -28,7 +28,7 @@ public partial class IPv4ConfigView : UserControl
             return;
         }
 
-        DataContext = App.Current.Services.GetService<IPConfigDetailViewModel>();
+        DataContext = App.Current.Services.GetRequiredService<IPConfigDetailViewModel>();
 
         _updateTargetTimer.Interval = TimeSpan.FromMicroseconds(100);
         _updateTargetTimer.Tick += DispatcherTimer_Tick;
