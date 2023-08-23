@@ -14,9 +14,9 @@
            xmlns:v="clr-namespace:IPConfig.Views"
            xmlns:net="clr-namespace:System.Net.NetworkInformation;assembly=System"
            xmlns:hc="https://handyorg.github.io/handycontrol"
-           Width="484"
+           Width="488"
            Height="600"
-           MinWidth="486"
+           MinWidth="488"
            MinHeight="520"
            d:DataContext="{d:DesignInstance Type=vm:MainViewModel,
                                             IsDesignTimeCreatable=True}"
@@ -158,265 +158,270 @@
         </Grid>
     </hc:Window.NonClientAreaContent>
 
-    <Grid Margin="4">
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-
-            <hc:ComboBox Height="36"
-                         hc:InfoElement.Placeholder="{Binding GetNicsToolTip}"
-                         ItemsSource="{Binding AllNics}"
-                         SelectedItem="{Binding SelectedNic}"
-                         ToolTip="{Binding SelectedNic}"
-                         UseLayoutRounding="False">
-                <hc:ComboBox.ItemTemplate>
-                    <DataTemplate DataType="{x:Type m:Nic}">
-                        <hc:SimpleStackPanel Orientation="Horizontal"
-                                             UseLayoutRounding="True">
-                            <Border x:Name="NicOpStatusBorder"
-                                    Padding="2"
-                                    VerticalAlignment="Center"
-                                    Background="{StaticResource DarkOpacityBrush}"
-                                    CornerRadius="4"
-                                    ToolTip="{Binding OperationalStatus, Converter={StaticResource OpStatusToolTipConverter}}">
-                                <TextBlock Foreground="White">
-                                    <Run Text="[" /><Run Text="{Binding OperationalStatus, Mode=OneTime}" /><Run Text="]" />
-                                </TextBlock>
-                            </Border>
-
-                            <Border x:Name="NicTypeBorder"
-                                    Margin="4,0,0,0"
-                                    Padding="2"
-                                    VerticalAlignment="Center"
-                                    Background="{StaticResource DarkWarningBrush}"
-                                    CornerRadius="4"
-                                    ToolTip="{Binding NetworkInterfaceType}">
-                                <TextBlock Foreground="White">
-                                    <Run Text="[" /><Run Text="{Binding Name, Mode=OneTime}" /><Run Text="]" />
-                                </TextBlock>
-                            </Border>
-
-                            <TextBlock Margin="4,0,0,0"
-                                       VerticalAlignment="Center"
-                                       Text="{Binding Description}"
-                                       ToolTip="{Binding}" />
-                        </hc:SimpleStackPanel>
-
-                        <DataTemplate.Triggers>
-                            <DataTrigger Binding="{Binding OperationalStatus}"
-                                         Value="{x:Static net:OperationalStatus.Up}">
-                                <Setter TargetName="NicOpStatusBorder" Property="Background" Value="{StaticResource SuccessBrush}" />
-                            </DataTrigger>
-
-                            <DataTrigger Binding="{Binding SimpleNicType}"
-                                         Value="{x:Static m:SimpleNicType.Wlan}">
-                                <Setter TargetName="NicTypeBorder" Property="Background" Value="{StaticResource InfoBrush}" />
-                            </DataTrigger>
-
-                            <DataTrigger Binding="{Binding SimpleNicType}"
-                                         Value="{x:Static m:SimpleNicType.Vm}">
-                                <Setter TargetName="NicTypeBorder" Property="Background" Value="{StaticResource SecondaryBorderBrush}" />
-                            </DataTrigger>
-
-                            <DataTrigger Binding="{Binding SimpleNicType}"
-                                         Value="{x:Static m:SimpleNicType.Ethernet}">
-                                <Setter TargetName="NicTypeBorder" Property="Background" Value="{StaticResource PrimaryBrush}" />
-                            </DataTrigger>
-                        </DataTemplate.Triggers>
-                    </DataTemplate>
-                </hc:ComboBox.ItemTemplate>
-            </hc:ComboBox>
-
-            <Button Grid.Column="1"
-                    Height="36"
-                    Margin="4,0,0,0"
-                    Command="{Binding RefreshCommand}"
-                    Content="{lang:Lang {x:Static lang:LangKey.Refresh}}"
-                    ToolTip="{lang:Lang {x:Static lang:LangKey.Refresh_ToolTip}}" />
-        </Grid>
-
-        <hc:Divider Grid.Row="1"
-                    Margin="64,4"
-                    LineStrokeThickness="1" />
-
-        <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.3*"
-                                  MinWidth="200" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*"
-                                  MinWidth="270" />
-            </Grid.ColumnDefinitions>
+        <Grid Margin="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
 
             <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
 
-                <RadioButton HorizontalAlignment="Stretch"
-                             VerticalAlignment="Stretch"
-                             HorizontalContentAlignment="Stretch"
-                             VerticalContentAlignment="Stretch"
-                             IsChecked="{Binding IsSelectedNicIPConfigChecked}"
-                             Style="{StaticResource ToggleButtonCustom}">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Checked">
-                            <i:InvokeCommandAction Command="{Binding SelectedNicIPConfigCheckedCommand}" />
-                        </i:EventTrigger>
+                <hc:ComboBox Height="36"
+                             hc:InfoElement.Placeholder="{Binding GetNicsToolTip}"
+                             ItemsSource="{Binding AllNics}"
+                             SelectedItem="{Binding SelectedNic}"
+                             ToolTip="{Binding SelectedNic}"
+                             UseLayoutRounding="False">
+                    <hc:ComboBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type m:Nic}">
+                            <hc:SimpleStackPanel Orientation="Horizontal"
+                                                 UseLayoutRounding="True">
+                                <Border x:Name="NicOpStatusBorder"
+                                        Padding="2"
+                                        VerticalAlignment="Center"
+                                        Background="{StaticResource DarkOpacityBrush}"
+                                        CornerRadius="4"
+                                        ToolTip="{Binding OperationalStatus, Converter={StaticResource OpStatusToolTipConverter}}">
+                                    <TextBlock Foreground="White">
+                                        <Run Text="[" /><Run Text="{Binding OperationalStatus, Mode=OneTime}" /><Run Text="]" />
+                                    </TextBlock>
+                                </Border>
 
-                        <i:EventTrigger EventName="MouseDoubleClick">
-                            <i:InvokeCommandAction Command="{Binding ViewToNicConfigDetailCommand}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
+                                <Border x:Name="NicTypeBorder"
+                                        Margin="4,0,0,0"
+                                        Padding="2"
+                                        VerticalAlignment="Center"
+                                        Background="{StaticResource DarkWarningBrush}"
+                                        CornerRadius="4"
+                                        ToolTip="{Binding NetworkInterfaceType}">
+                                    <TextBlock Foreground="White">
+                                        <Run Text="[" /><Run Text="{Binding Name, Mode=OneTime}" /><Run Text="]" />
+                                    </TextBlock>
+                                </Border>
 
-                    <RadioButton.ToolTip>
-                        <MultiBinding Converter="{StaticResource NicIPConfigToolTipConverter}">
-                            <MultiBinding.Bindings>
-                                <Binding Path="SelectedNic" />
-                                <Binding Path="SelectedNicIPConfig" />
-                            </MultiBinding.Bindings>
-                        </MultiBinding>
-                    </RadioButton.ToolTip>
+                                <TextBlock Margin="4,0,0,0"
+                                           VerticalAlignment="Center"
+                                           Text="{Binding Description}"
+                                           ToolTip="{Binding}" />
+                            </hc:SimpleStackPanel>
 
-                    <RadioButton.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Command="{Binding CopySelectedNicIPConfigAsTextCommand}"
-                                      Header="{lang:Lang {x:Static lang:LangKey.CopySelectedIPConfigAsText_}}" />
+                            <DataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding OperationalStatus}"
+                                             Value="{x:Static net:OperationalStatus.Up}">
+                                    <Setter TargetName="NicOpStatusBorder" Property="Background" Value="{StaticResource SuccessBrush}" />
+                                </DataTrigger>
 
-                            <MenuItem Command="{Binding MakeSelectedNicIPConfigCopyCommand}"
-                                      Header="{lang:Lang {x:Static lang:LangKey.MakeSelectedIPConfigCopy_}}" />
+                                <DataTrigger Binding="{Binding SimpleNicType}"
+                                             Value="{x:Static m:SimpleNicType.Wlan}">
+                                    <Setter TargetName="NicTypeBorder" Property="Background" Value="{StaticResource InfoBrush}" />
+                                </DataTrigger>
 
-                            <Separator />
+                                <DataTrigger Binding="{Binding SimpleNicType}"
+                                             Value="{x:Static m:SimpleNicType.Vm}">
+                                    <Setter TargetName="NicTypeBorder" Property="Background" Value="{StaticResource SecondaryBorderBrush}" />
+                                </DataTrigger>
 
-                            <MenuItem Command="{Binding ViewToNicConfigDetailCommand}"
-                                      Header="{lang:Lang {x:Static lang:LangKey.ViewToAdapterConfigDetail_}}"
-                                      InputGestureText="F12" />
-                        </ContextMenu>
-                    </RadioButton.ContextMenu>
+                                <DataTrigger Binding="{Binding SimpleNicType}"
+                                             Value="{x:Static m:SimpleNicType.Ethernet}">
+                                    <Setter TargetName="NicTypeBorder" Property="Background" Value="{StaticResource PrimaryBrush}" />
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
+                        </DataTemplate>
+                    </hc:ComboBox.ItemTemplate>
+                </hc:ComboBox>
 
-                    <Border>
-                        <Border.Style>
-                            <Style BasedOn="{StaticResource BorderTipBaseStyle}"
-                                   TargetType="{x:Type Border}">
-                                <Setter Property="Background" Value="{StaticResource LightPrimaryBrush}" />
-                                <Setter Property="BorderBrush" Value="{StaticResource PrimaryBrush}" />
-                                <Setter Property="BorderThickness" Value="1" />
-                                <Setter Property="Padding" Value="10,9,10,8" />
-
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding IsSelectedNicIPConfigChecked}"
-                                                 Value="True">
-                                        <Setter Property="BorderThickness" Value="4,1,1,1" />
-                                        <Setter Property="Padding" Value="7,9,10,8" />
-                                    </DataTrigger>
-
-                                    <DataTrigger Binding="{Binding SelectedNic}"
-                                                 Value="{x:Null}">
-                                        <Setter Property="Background" Value="{StaticResource LightDangerBrush}" />
-                                        <Setter Property="BorderBrush" Value="{StaticResource DangerBrush}" />
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Border.Style>
-
-                        <hc:SimpleStackPanel TextElement.FontSize="14">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-
-                                <TextBlock Margin="2,0,0,0"
-                                           FontSize="16"
-                                           Text="{Binding SelectedNicIPConfig, Converter={StaticResource SelectedNicIPConfigNameConverter}}"
-                                           TextTrimming="CharacterEllipsis">
-                                    <TextBlock.Style>
-                                        <Style TargetType="{x:Type TextBlock}">
-                                            <Setter Property="Foreground" Value="{DynamicResource MyPrimaryTextBrush}" />
-
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding IsSelectedNicIPConfigChecked}"
-                                                             Value="True">
-                                                    <Setter Property="FontWeight" Value="Bold" />
-                                                </DataTrigger>
-
-                                                <DataTrigger Binding="{Binding SelectedNic}"
-                                                             Value="{x:Null}">
-                                                    <Setter Property="Foreground" Value="{StaticResource DangerBrush}" />
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </TextBlock.Style>
-                                </TextBlock>
-
-                                <Viewbox Grid.Column="1"
-                                         Width="14"
-                                         Height="14"
-                                         Margin="7,0,0,0"
-                                         HorizontalAlignment="Right"
-                                         VerticalAlignment="Top"
-                                         ToolTip="{lang:Lang {x:Static lang:LangKey.AdapterNotFound_ToolTip}}"
-                                         Visibility="{Binding IsSelectedNicNotNull, Converter={StaticResource Boolean2VisibilityReConverter}}">
-                                    <Path Data="{StaticResource WarningGeometry}"
-                                          Fill="{StaticResource DangerBrush}" />
-                                </Viewbox>
-                            </Grid>
-
-                            <TextBlock Margin="0,2,0,0">
-                                <Run Text="{Binding SelectedNicIPConfig.IPv4Config.IP, FallbackValue='IP'}" />
-                                <Run Text="/" /><Run Text="{Binding SelectedNicIPConfig.IPv4Config.Mask, FallbackValue='CIDR', Converter={StaticResource GetIPCIDRConverter}}" />
-                            </TextBlock>
-
-                            <TextBlock Margin="0,2,0,0"
-                                       FontStyle="Italic"
-                                       Text="{Binding SelectedNic.FormatedMacAddress, FallbackValue='MAC'}" />
-                        </hc:SimpleStackPanel>
-                    </Border>
-                </RadioButton>
-
-                <v:IPConfigListView Grid.Row="1"
-                                    Margin="0,4,0,0" />
+                <Button Grid.Column="1"
+                        Height="36"
+                        Margin="4,0,0,0"
+                        Command="{Binding RefreshCommand}"
+                        Content="{lang:Lang {x:Static lang:LangKey.Refresh}}"
+                        ToolTip="{lang:Lang {x:Static lang:LangKey.Refresh_ToolTip}}" />
             </Grid>
 
-            <GridSplitter Grid.Column="1"
-                          Height="64"
-                          Style="{StaticResource VGridSplitterStyle}" />
+            <hc:Divider Grid.Row="1"
+                        Margin="64,4"
+                        LineStrokeThickness="1" />
 
-            <hc:ToggleBlock Grid.Column="2"
-                            Margin="0,0,2,3"
-                            HorizontalContentAlignment="Stretch"
-                            VerticalContentAlignment="Stretch"
-                            IsChecked="{Binding IsViewToNicConfigDetail}">
-                <hc:ToggleBlock.UnCheckedContent>
-                    <hc:TransitioningContentControl TransitionMode="Left2Right">
-                        <v:IPConfigDetailView />
-                    </hc:TransitioningContentControl>
-                </hc:ToggleBlock.UnCheckedContent>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.3*"
+                                      MinWidth="200" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*"
+                                      MinWidth="270" />
+                </Grid.ColumnDefinitions>
 
-                <hc:ToggleBlock.CheckedContent>
-                    <hc:TransitioningContentControl TransitionMode="Right2Left">
-                        <v:NicConfigDetailView />
-                    </hc:TransitioningContentControl>
-                </hc:ToggleBlock.CheckedContent>
-            </hc:ToggleBlock>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <RadioButton HorizontalAlignment="Stretch"
+                                 VerticalAlignment="Stretch"
+                                 HorizontalContentAlignment="Stretch"
+                                 VerticalContentAlignment="Stretch"
+                                 IsChecked="{Binding IsSelectedNicIPConfigChecked}"
+                                 Style="{StaticResource ToggleButtonCustom}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Checked">
+                                <i:InvokeCommandAction Command="{Binding SelectedNicIPConfigCheckedCommand}" />
+                            </i:EventTrigger>
+
+                            <i:EventTrigger EventName="MouseDoubleClick">
+                                <i:InvokeCommandAction Command="{Binding ViewToNicConfigDetailCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+
+                        <RadioButton.ToolTip>
+                            <MultiBinding Converter="{StaticResource NicIPConfigToolTipConverter}">
+                                <MultiBinding.Bindings>
+                                    <Binding Path="SelectedNic" />
+                                    <Binding Path="SelectedNicIPConfig" />
+                                </MultiBinding.Bindings>
+                            </MultiBinding>
+                        </RadioButton.ToolTip>
+
+                        <RadioButton.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Command="{Binding CopySelectedNicIPConfigAsTextCommand}"
+                                          Header="{lang:Lang {x:Static lang:LangKey.CopySelectedIPConfigAsText_}}" />
+
+                                <MenuItem Command="{Binding MakeSelectedNicIPConfigCopyCommand}"
+                                          Header="{lang:Lang {x:Static lang:LangKey.MakeSelectedIPConfigCopy_}}" />
+
+                                <Separator />
+
+                                <MenuItem Command="{Binding ViewToNicConfigDetailCommand}"
+                                          Header="{lang:Lang {x:Static lang:LangKey.ViewToAdapterConfigDetail_}}"
+                                          InputGestureText="F12" />
+                            </ContextMenu>
+                        </RadioButton.ContextMenu>
+
+                        <Border>
+                            <Border.Style>
+                                <Style BasedOn="{StaticResource BorderTipBaseStyle}"
+                                       TargetType="{x:Type Border}">
+                                    <Setter Property="Background" Value="{StaticResource LightPrimaryBrush}" />
+                                    <Setter Property="BorderBrush" Value="{StaticResource PrimaryBrush}" />
+                                    <Setter Property="BorderThickness" Value="1" />
+                                    <Setter Property="Padding" Value="10,9,10,8" />
+
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsSelectedNicIPConfigChecked}"
+                                                     Value="True">
+                                            <Setter Property="BorderThickness" Value="4,1,1,1" />
+                                            <Setter Property="Padding" Value="7,9,10,8" />
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding SelectedNic}"
+                                                     Value="{x:Null}">
+                                            <Setter Property="Background" Value="{StaticResource LightDangerBrush}" />
+                                            <Setter Property="BorderBrush" Value="{StaticResource DangerBrush}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+
+                            <hc:SimpleStackPanel TextElement.FontSize="14">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock Margin="2,0,0,0"
+                                               FontSize="16"
+                                               Text="{Binding SelectedNicIPConfig, Converter={StaticResource SelectedNicIPConfigNameConverter}}"
+                                               TextTrimming="CharacterEllipsis">
+                                        <TextBlock.Style>
+                                            <Style TargetType="{x:Type TextBlock}">
+                                                <Setter Property="Foreground" Value="{DynamicResource MyPrimaryTextBrush}" />
+
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsSelectedNicIPConfigChecked}"
+                                                                 Value="True">
+                                                        <Setter Property="FontWeight" Value="Bold" />
+                                                    </DataTrigger>
+
+                                                    <DataTrigger Binding="{Binding SelectedNic}"
+                                                                 Value="{x:Null}">
+                                                        <Setter Property="Foreground" Value="{StaticResource DangerBrush}" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+
+                                    <Viewbox Grid.Column="1"
+                                             Width="14"
+                                             Height="14"
+                                             Margin="7,0,0,0"
+                                             HorizontalAlignment="Right"
+                                             VerticalAlignment="Top"
+                                             ToolTip="{lang:Lang {x:Static lang:LangKey.AdapterNotFound_ToolTip}}"
+                                             Visibility="{Binding IsSelectedNicNotNull, Converter={StaticResource Boolean2VisibilityReConverter}}">
+                                        <Path Data="{StaticResource WarningGeometry}"
+                                              Fill="{StaticResource DangerBrush}" />
+                                    </Viewbox>
+                                </Grid>
+
+                                <TextBlock Margin="0,2,0,0">
+                                    <Run Text="{Binding SelectedNicIPConfig.IPv4Config.IP, FallbackValue='IP'}" />
+                                    <Run Text="/" /><Run Text="{Binding SelectedNicIPConfig.IPv4Config.Mask, FallbackValue='CIDR', Converter={StaticResource GetIPCIDRConverter}}" />
+                                </TextBlock>
+
+                                <TextBlock Margin="0,2,0,0"
+                                           FontStyle="Italic"
+                                           Text="{Binding SelectedNic.FormatedMacAddress, FallbackValue='MAC'}" />
+                            </hc:SimpleStackPanel>
+                        </Border>
+                    </RadioButton>
+
+                    <v:IPConfigListView Grid.Row="1"
+                                        Margin="0,4,0,0" />
+                </Grid>
+
+                <GridSplitter Grid.Column="1"
+                              Height="64"
+                              Style="{StaticResource VGridSplitterStyle}" />
+
+                <hc:ToggleBlock Grid.Column="2"
+                                HorizontalContentAlignment="Stretch"
+                                VerticalContentAlignment="Stretch"
+                                IsChecked="{Binding IsViewToNicConfigDetail}">
+                    <hc:ToggleBlock.UnCheckedContent>
+                        <hc:TransitioningContentControl TransitionMode="Left2Right">
+                            <v:IPConfigDetailView />
+                        </hc:TransitioningContentControl>
+                    </hc:ToggleBlock.UnCheckedContent>
+
+                    <hc:ToggleBlock.CheckedContent>
+                        <hc:TransitioningContentControl TransitionMode="Right2Left">
+                            <v:NicConfigDetailView />
+                        </hc:TransitioningContentControl>
+                    </hc:ToggleBlock.CheckedContent>
+                </hc:ToggleBlock>
+            </Grid>
         </Grid>
 
-        <StatusBar Grid.Row="3"
-                   Height="28"
-                   Margin="0,0,0,-4"
+        <StatusBar Grid.Row="1"
+                   Height="24"
                    HorizontalContentAlignment="Stretch"
                    VerticalContentAlignment="Stretch"
                    hc:WindowAttach.IsDragElement="True"
+                   DockPanel.Dock="Bottom"
                    FontSize="10">
             <StatusBar.Resources>
                 <Style BasedOn="{StaticResource TextBlockDefault}"

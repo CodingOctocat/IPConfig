@@ -9,6 +9,7 @@
              xmlns:lang="clr-namespace:IPConfig.Languages"
              xmlns:vm="clr-namespace:IPConfig.ViewModels"
              xmlns:v="clr-namespace:IPConfig.Views"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:hc="https://handyorg.github.io/handycontrol"
              d:DataContext="{d:DesignInstance Type=vm:IPConfigDetailViewModel,
                                               IsDesignTimeCreatable=True}"
@@ -44,7 +45,8 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto"
-                               MaxHeight="{Binding ActualHeight, ElementName=iPv4ConfigView, Mode=OneTime}" />
+                               MaxHeight="{Binding ActualHeight, ElementName=iPv4ConfigView, Mode=OneTime}"
+                               d:MaxHeight="{x:Static sys:Double.PositiveInfinity}" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition />
             </Grid.RowDefinitions>
@@ -94,7 +96,7 @@
         </Grid>
 
         <hc:UniformSpacingPanel Grid.Row="1"
-                                Margin="0,3,0,0"
+                                Margin="0,4,0,0"
                                 HorizontalAlignment="Right"
                                 ItemHorizontalAlignment="Right"
                                 Spacing="4">

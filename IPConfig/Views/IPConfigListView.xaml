@@ -1,15 +1,15 @@
 ﻿<UserControl x:Class="IPConfig.Views.IPConfigListView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:b="clr-namespace:IPConfig.Behaviors"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dd="urn:gong-wpf-dragdrop"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:lang="clr-namespace:IPConfig.Languages"
              xmlns:m="clr-namespace:IPConfig.Models"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:IPConfig.ViewModels"
-             xmlns:hc="https://handyorg.github.io/handycontrol"
-             xmlns:dd="urn:gong-wpf-dragdrop"
              d:DataContext="{d:DesignInstance Type=vm:IPConfigListViewModel,
                                               IsDesignTimeCreatable=True}"
              d:DesignHeight="450"
@@ -239,7 +239,7 @@
         </hc:Empty>
 
         <UniformGrid Grid.Row="2"
-                     Height="36"
+                     Margin="0,4,0,0"
                      Columns="2"
                      Rows="1">
             <Button Padding="0"

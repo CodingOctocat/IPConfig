@@ -503,7 +503,7 @@
         </hc:ScrollViewer>
 
         <hc:UniformSpacingPanel Grid.Row="2"
-                                Margin="0,3,0,0"
+                                Margin="0,4,0,0"
                                 HorizontalAlignment="Right"
                                 ItemHorizontalAlignment="Right"
                                 Orientation="Horizontal"
