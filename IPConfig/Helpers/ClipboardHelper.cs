@@ -2,8 +2,6 @@
 using System.Threading.Tasks;
 using System.Windows;
 
-using HandyControl.Controls;
-
 namespace IPConfig.Helpers;
 
 public static class ClipboardHelper
@@ -17,7 +15,6 @@ public static class ClipboardHelper
             try
             {
                 Clipboard.SetDataObject(text, true);
-                Growl.Error(i.ToString());
 
                 return;
             }
