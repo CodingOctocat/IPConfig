@@ -55,7 +55,7 @@ public sealed class LangSource : INotifyPropertyChanged
 
     public static List<CultureInfo> GetAvailableCultures()
     {
-        var result = new List<CultureInfo>() { new("zh-CN") };
+        var result = new List<CultureInfo>() { CultureInfo.GetCultureInfo("zh-CN") };
 
         var rm = new ResourceManager(typeof(Lang));
 
@@ -94,7 +94,7 @@ public sealed class LangSource : INotifyPropertyChanged
             return;
         }
 
-        CultureInfo newCulture = new(locale);
+        var newCulture = CultureInfo.GetCultureInfo(locale);
         Lang.Culture = newCulture;
         CurrentCulture = newCulture;
         HcLang.Culture = newCulture;
