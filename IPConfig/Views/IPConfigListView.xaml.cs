@@ -81,8 +81,6 @@ public partial class IPConfigListView : UserControl
         if (lbIPConfigs.SelectedItems.Count == 1)
         {
             lbIPConfigs.ScrollIntoView(lbIPConfigs.SelectedItem);
-            lbIPConfigs.Focus();
-            lbIPConfigs.UpdateLayout();
         }
     }
 }
