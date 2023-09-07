@@ -424,6 +424,11 @@
                    DockPanel.Dock="Bottom"
                    FontSize="10">
             <StatusBar.Resources>
+                <Style BasedOn="{StaticResource StatusBarItemBaseStyle}"
+                       TargetType="{x:Type StatusBarItem}">
+                    <Setter Property="Padding" Value="10,0" />
+                </Style>
+
                 <Style BasedOn="{StaticResource TextBlockDefault}"
                        TargetType="{x:Type TextBlock}" />
             </StatusBar.Resources>
