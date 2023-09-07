@@ -9,7 +9,7 @@
 		<ApplicationIcon>Resources\ipconfig.ico</ApplicationIcon>
 		<IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
 		<StartupObject>IPConfig.App</StartupObject>
-		<Version>1.0.3</Version>
+		<Version>1.0.4</Version>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	</PropertyGroup>
 
