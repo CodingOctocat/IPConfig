@@ -328,6 +328,13 @@ public partial class MainViewModel : ObservableRecipient,
     [RelayCommand]
     private async Task LoadedAsync()
     {
+        if (Settings.Default.UpgradeRequired)
+        {
+            Settings.Default.Upgrade();
+            Settings.Default.UpgradeRequired = false;
+            Settings.Default.Save();
+        }
+
         SkinType? skinType;
 
         if (Enum.TryParse(Settings.Default.Theme, out SkinType skin))
