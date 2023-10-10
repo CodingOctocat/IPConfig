@@ -13,7 +13,9 @@ using LiteDB;
 
 namespace IPConfig.Models;
 
-public partial class EditableIPConfigModel : IPConfigModel, IDeepCloneTo<EditableIPConfigModel>, IEditableObject, IRevertibleChangeTracking
+public partial class EditableIPConfigModel : IPConfigModel,
+    IDeepCloneTo<EditableIPConfigModel>,
+    IEditableObject, IRevertibleChangeTracking
 {
     private IPConfigModel _backup = IPConfigModel.Empty;
 
@@ -24,7 +26,9 @@ public partial class EditableIPConfigModel : IPConfigModel, IDeepCloneTo<Editabl
     [JsonIgnore]
     public int Order { get; set; } = -1;
 
-    public event PropertyChangedEventHandler? EditableChanged;
+    public event EventHandler<bool>? EditableChanged;
+
+    public event PropertyChangedEventHandler? EditablePropertyChanged;
 
     [BsonCtor]
     public EditableIPConfigModel(string name) : base(name)
@@ -37,18 +41,20 @@ public partial class EditableIPConfigModel : IPConfigModel, IDeepCloneTo<Editabl
 
     public bool IsPropertyChanged<T>(Func<IPConfigModel, T> property, [NotNullWhen(true)] out T? oldValue) where T : notnull
     {
+        var prop = property(this);
+
         if (!_inTxn)
         {
-            oldValue = default;
+            oldValue = prop;
 
             return false;
         }
 
         var backup = property(_backup);
 
-        if (EqualityComparer<T>.Default.Equals(property(this), backup))
+        if (EqualityComparer<T>.Default.Equals(prop, backup))
         {
-            oldValue = default;
+            oldValue = prop;
 
             return false;
         }
@@ -86,7 +92,11 @@ public partial class EditableIPConfigModel : IPConfigModel, IDeepCloneTo<Editabl
         if (e.PropertyName != nameof(IsChanged))
         {
             OnPropertyChanged(nameof(IsChanged));
-            EditableChanged?.Invoke(this, e);
+            EditablePropertyChanged?.Invoke(this, e);
+        }
+        else
+        {
+            EditableChanged?.Invoke(this, IsChanged);
         }
     }
 

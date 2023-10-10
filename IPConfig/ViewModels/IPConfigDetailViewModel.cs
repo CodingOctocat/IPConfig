@@ -90,10 +90,6 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
     private EditableIPConfigModel _editingIPConfig = IPConfigModel.Empty.AsEditable();
 
     [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(PrimarySaveOrApplyString),
-        nameof(SecondarySaveOrApplyString),
-        nameof(PrimarySaveOrApplyCommand),
-        nameof(SecondarySaveOrApplyCommand))]
     private object _editingIPConfigSender = null!;
 
     [ObservableProperty]
@@ -297,6 +293,7 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
         EditingIPConfig.EditableChanged += EditingIPConfig_EditableChanged;
 
         // 初始化页面状态。
+        RaisePropertyChanged();
         CanShowChangedIndicator = false;
         CanShowUnchangedIndicator = false;
     }
@@ -658,12 +655,9 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
 
     #region Event Handlers
 
-    private void EditingIPConfig_EditableChanged(object? sender, PropertyChangedEventArgs e)
+    private void EditingIPConfig_EditableChanged(object? sender, bool e)
     {
-        OnPropertyChanged(nameof(PrimarySaveOrApplyCommand));
-        OnPropertyChanged(nameof(PrimarySaveOrApplyString));
-        OnPropertyChanged(nameof(SecondarySaveOrApplyCommand));
-        OnPropertyChanged(nameof(SecondarySaveOrApplyString));
+        RaisePropertyChanged();
     }
 
     private void EditingIPConfig_PropertyChanged(object? sender, PropertyChangedEventArgs e)
@@ -685,6 +679,14 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
         {
             Dns1AutoCompletePreview = GetAutoCompleteDns1();
         }
+    }
+
+    private void RaisePropertyChanged()
+    {
+        OnPropertyChanged(nameof(PrimarySaveOrApplyCommand));
+        OnPropertyChanged(nameof(PrimarySaveOrApplyString));
+        OnPropertyChanged(nameof(SecondarySaveOrApplyCommand));
+        OnPropertyChanged(nameof(SecondarySaveOrApplyString));
     }
 
     #endregion Event Handlers
