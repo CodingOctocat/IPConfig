@@ -242,6 +242,12 @@ public partial class NicConfigDetailViewModel : ObservableRecipient,
         Messenger.Send<GoBackMessage>(new(this));
     }
 
+    [RelayCommand]
+    private void Loaded()
+    {
+        Nic = Messenger.Send<RequestMessage<Nic?>>().Response!;
+    }
+
     #endregion Relay Commands
 
     #region Partial OnPropertyChanged Methods
