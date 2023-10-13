@@ -24,7 +24,7 @@ public partial class MainWindow : HcWindow
 {
     public static Version? Version => App.Version;
 
-    public static string WindowTitle1 => $"IPConfig: TCP/IPv4 {Lang.ConfigTool}";
+    public static string WindowTitle1 => $": TCP/IPv4 {Lang.ConfigTool}";
 
     public static string WindowTitle2 => $"{WindowTitle1} by CodingNinja";
 

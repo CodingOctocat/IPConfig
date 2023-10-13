@@ -15,6 +15,7 @@
            xmlns:v="clr-namespace:IPConfig.Views"
            xmlns:net="clr-namespace:System.Net.NetworkInformation;assembly=System"
            xmlns:hc="https://handyorg.github.io/handycontrol"
+           Title="IPConfig"
            Width="488"
            Height="600"
            MinWidth="488"
