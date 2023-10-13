@@ -162,6 +162,8 @@ public partial class App : Application
 
     protected override void OnStartup(StartupEventArgs e)
     {
+        base.OnStartup(e);
+
         // 全局异常处理。
         SetupExceptionHandling();
 
@@ -171,8 +173,6 @@ public partial class App : Application
 
         var mainWindow = Services.GetRequiredService<MainWindow>();
         mainWindow.Show();
-
-        base.OnStartup(e);
     }
 
     /// <summary>
