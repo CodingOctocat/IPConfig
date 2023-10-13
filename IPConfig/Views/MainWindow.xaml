@@ -7,6 +7,7 @@
            xmlns:hcd="clr-namespace:HandyControl.Data;assembly=HandyControl"
            xmlns:app="clr-namespace:IPConfig"
            xmlns:b="clr-namespace:IPConfig.Behaviors"
+           xmlns:c="clr-namespace:IPConfig.Controls"
            xmlns:conv="clr-namespace:IPConfig.Converters"
            xmlns:lang="clr-namespace:IPConfig.Languages"
            xmlns:m="clr-namespace:IPConfig.Models"
@@ -408,9 +409,15 @@
                     </hc:ToggleBlock.UnCheckedContent>
 
                     <hc:ToggleBlock.CheckedContent>
-                        <hc:TransitioningContentControl TransitionMode="Right2Left">
-                            <v:NicConfigDetailView />
-                        </hc:TransitioningContentControl>
+                        <c:DeferredContent>
+                            <c:DeferredContent.DeferredContentTemplate>
+                                <DataTemplate>
+                                    <hc:TransitioningContentControl TransitionMode="Right2Left">
+                                        <v:NicConfigDetailView />
+                                    </hc:TransitioningContentControl>
+                                </DataTemplate>
+                            </c:DeferredContent.DeferredContentTemplate>
+                        </c:DeferredContent>
                     </hc:ToggleBlock.CheckedContent>
                 </hc:ToggleBlock>
             </Grid>
