@@ -107,6 +107,7 @@ public partial class EditableIPConfigModel : IPConfigModel,
         base.DeepCloneTo(other);
         _backup.DeepCloneTo(other._backup);
         other._inTxn = _inTxn;
+        other.Order = Order;
     }
 
     #endregion IDeepCloneTo
