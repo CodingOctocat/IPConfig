@@ -267,7 +267,14 @@ public partial class MainViewModel : ObservableRecipient,
             }
             else if (result == MessageBoxResult.No)
             {
-                Messenger.Send<CollectionChangeActionMessage<EditableIPConfigModel>>(new(this, CollectionChangeAction.Remove, item));
+                if (item.Order < 0)
+                {
+                    Messenger.Send<CollectionChangeActionMessage<EditableIPConfigModel>>(new(this, CollectionChangeAction.Remove, item));
+                }
+                else
+                {
+                    item.RejectChanges();
+                }
 
                 continue;
             }
