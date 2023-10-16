@@ -76,7 +76,7 @@ public partial class MainViewModel : ObservableRecipient,
     private bool _isViewToNicConfigDetail;
 
     [ObservableProperty]
-    private ObservableCollection<CultureInfo> _languages;
+    private ObservableCollection<CultureInfo> _languages = null!;
 
     [ObservableProperty]
     private int _selectedIPConfigsCount;
@@ -140,9 +140,6 @@ public partial class MainViewModel : ObservableRecipient,
         IsActive = true;
 
         BindingOperations.EnableCollectionSynchronization(AllNics, _syncLock);
-
-        var cultures = LangSource.GetAvailableCultures().OrderBy(x => x.Name);
-        Languages = new(cultures);
 
         LangSource.Instance.LanguageChanged += (s, e) => {
             // 更新 ToolTip 信息。
@@ -328,6 +325,9 @@ public partial class MainViewModel : ObservableRecipient,
     [RelayCommand]
     private async Task LoadedAsync()
     {
+        var cultures = LangSource.GetAvailableCultures().OrderBy(x => x.Name);
+        Languages = new(cultures);
+
         if (Settings.Default.UpgradeRequired)
         {
             Settings.Default.Upgrade();
