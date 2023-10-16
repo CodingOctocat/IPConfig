@@ -293,7 +293,7 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
         EditingIPConfig.EditableChanged += EditingIPConfig_EditableChanged;
 
         // 初始化页面状态。
-        RaisePropertyChanged();
+        UpdateSaveOrApplyButton();
         CanShowChangedIndicator = false;
         CanShowUnchangedIndicator = false;
     }
@@ -657,7 +657,7 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
 
     private void EditingIPConfig_EditableChanged(object? sender, bool e)
     {
-        RaisePropertyChanged();
+        UpdateSaveOrApplyButton();
     }
 
     private void EditingIPConfig_PropertyChanged(object? sender, PropertyChangedEventArgs e)
@@ -681,7 +681,7 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
         }
     }
 
-    private void RaisePropertyChanged()
+    private void UpdateSaveOrApplyButton()
     {
         OnPropertyChanged(nameof(PrimarySaveOrApplyCommand));
         OnPropertyChanged(nameof(PrimarySaveOrApplyString));
