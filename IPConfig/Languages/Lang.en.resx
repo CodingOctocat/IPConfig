@@ -299,6 +299,12 @@
   <data name="Ethernet_Lower" xml:space="preserve">
     <value>ethernet</value>
   </data>
+  <data name="ExportFailed" xml:space="preserve">
+    <value>Export failed</value>
+  </data>
+  <data name="ExportSuccessful" xml:space="preserve">
+    <value>Export successful</value>
+  </data>
   <data name="ExportToCsv_" xml:space="preserve">
     <value>Export to _CSV...</value>
   </data>
@@ -316,12 +322,6 @@
   </data>
   <data name="ExportToPlaintext_FileDialogTitle" xml:space="preserve">
     <value>Export to Plaintext</value>
-  </data>
-  <data name="ExportFailed" xml:space="preserve">
-    <value>Export failed</value>
-  </data>
-  <data name="ExportSuccessful" xml:space="preserve">
-    <value>Export successful</value>
   </data>
   <data name="ForwardingEnabled" xml:space="preserve">
     <value>Forwarding Enabled</value>
@@ -602,6 +602,9 @@
   </data>
   <data name="ValidationError" xml:space="preserve">
     <value>Configuration contains validation errors</value>
+  </data>
+  <data name="ValidationErrorWarning" xml:space="preserve">
+    <value>Warning: Configuration contains validation errors!</value>
   </data>
   <data name="ValidLifetime" xml:space="preserve">
     <value>Valid Lifetime</value>

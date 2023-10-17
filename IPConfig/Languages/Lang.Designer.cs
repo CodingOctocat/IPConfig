@@ -2007,6 +2007,18 @@ namespace IPConfig.Languages {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to "警告：配置存在验证错误！"
+        /// </summary>
+        /// <remarks>
+        /// IPConfigDetailViewModel
+        /// </remarks>
+        public static string ValidationErrorWarning {
+            get {
+                return ResourceManager.GetString("ValidationErrorWarning", resourceCulture) ?? string.Empty;
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to "有效剩余"
         /// </summary>
         /// <remarks>
@@ -3182,6 +3194,13 @@ namespace IPConfig.Languages {
         /// IPConfigDetailViewModel
         /// </remarks>
         ValidationError,
+        /// <summary>
+        ///   Looks up a localized string similar to 警告：配置存在验证错误！.
+        /// </summary>
+        /// <remarks>
+        /// IPConfigDetailViewModel
+        /// </remarks>
+        ValidationErrorWarning,
         /// <summary>
         ///   Looks up a localized string similar to 有效剩余.
         /// </summary>

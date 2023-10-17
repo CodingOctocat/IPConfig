@@ -337,6 +337,14 @@
     <value>以太网</value>
     <comment>Nic</comment>
   </data>
+  <data name="ExportFailed" xml:space="preserve">
+    <value>导出失败</value>
+    <comment>NicConfigDetailViewModel</comment>
+  </data>
+  <data name="ExportSuccessful" xml:space="preserve">
+    <value>导出成功</value>
+    <comment>NicConfigDetailViewModel</comment>
+  </data>
   <data name="ExportToCsv_" xml:space="preserve">
     <value>导出到 _CSV...</value>
     <comment>NicConfigDetailView</comment>
@@ -359,14 +367,6 @@
   </data>
   <data name="ExportToPlaintext_FileDialogTitle" xml:space="preserve">
     <value>导出到 文本文档</value>
-    <comment>NicConfigDetailViewModel</comment>
-  </data>
-  <data name="ExportFailed" xml:space="preserve">
-    <value>导出失败</value>
-    <comment>NicConfigDetailViewModel</comment>
-  </data>
-  <data name="ExportSuccessful" xml:space="preserve">
-    <value>导出成功</value>
     <comment>NicConfigDetailViewModel</comment>
   </data>
   <data name="ForwardingEnabled" xml:space="preserve">
@@ -737,6 +737,10 @@
   </data>
   <data name="ValidationError" xml:space="preserve">
     <value>配置存在验证错误</value>
+    <comment>IPConfigDetailViewModel</comment>
+  </data>
+  <data name="ValidationErrorWarning" xml:space="preserve">
+    <value>警告：配置存在验证错误！</value>
     <comment>IPConfigDetailViewModel</comment>
   </data>
   <data name="ValidLifetime" xml:space="preserve">

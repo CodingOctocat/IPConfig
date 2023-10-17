@@ -44,11 +44,11 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
 
     private bool _inTxn;
 
+    private bool _isSaveSuccessful;
+
     private bool _loaded;
 
     private Nic? _nic;
-
-    private bool _saved;
 
     #endregion Fields
 
@@ -391,8 +391,6 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
     [RelayCommand]
     private void Apply()
     {
-        FormatInput();
-
         if (_nic is null)
         {
             Growl.Error(Lang.ApplyFailed);
@@ -400,11 +398,21 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
             return;
         }
 
+        FormatInput();
+        Validate(false);
+
+        string msg = Lang.ApplyAsk_Format.Format(_nic.Name, _nic.Description);
+
+        if (EditingIPConfig.HasErrors)
+        {
+            msg = $"{msg}\n\n{Lang.ValidationErrorWarning}";
+        }
+
         var result = HcMessageBox.Show(
-            Lang.ApplyAsk_Format.Format(_nic.Name, _nic.Description),
+            msg,
             App.AppName,
             MessageBoxButton.OKCancel,
-            MessageBoxImage.Question,
+            EditingIPConfig.HasErrors ? MessageBoxImage.Warning : MessageBoxImage.Question,
             MessageBoxResult.OK);
 
         if (result != MessageBoxResult.OK)
@@ -526,7 +534,7 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
             {
                 Growl.Error(Lang.SaveFailedValidationError);
 
-                _saved = false;
+                _isSaveSuccessful = false;
 
                 return;
             }
@@ -552,13 +560,13 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
 
             EditingIPConfig.AcceptChanges();
 
-            _saved = true;
+            _isSaveSuccessful = true;
         }
         catch (Exception ex)
         {
             Growl.Error($"{Lang.SaveFailed}\n\n{ex.Message}");
 
-            _saved = false;
+            _isSaveSuccessful = false;
         }
     }
 
@@ -567,7 +575,7 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
     {
         Save();
 
-        if (_saved)
+        if (_isSaveSuccessful)
         {
             Apply();
         }
@@ -616,9 +624,14 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
     }
 
     [RelayCommand]
-    private void Validate()
+    private void Validate(bool showGrowl = true)
     {
         EditingIPConfig.ValidateAllProperties();
+
+        if (!showGrowl)
+        {
+            return;
+        }
 
         if (EditingIPConfig.HasErrors)
         {
@@ -726,7 +739,10 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
 
     private void FormatInput()
     {
-        EditingIPConfig?.IPv4Config.FormatProperties();
+        if (EditingIPConfig.IsChanged)
+        {
+            EditingIPConfig.IPv4Config.FormatProperties();
+        }
     }
 
     private string GetAutoCompleteDns1()
