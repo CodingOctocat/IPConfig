@@ -399,7 +399,7 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
         }
 
         FormatInput();
-        Validate(false);
+        EditingIPConfig.ValidateAllProperties();
 
         string msg = Lang.ApplyAsk_Format.Format(_nic.Name, _nic.Description);
 
@@ -624,14 +624,9 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
     }
 
     [RelayCommand]
-    private void Validate(bool showGrowl = true)
+    private void Validate()
     {
         EditingIPConfig.ValidateAllProperties();
-
-        if (!showGrowl)
-        {
-            return;
-        }
 
         if (EditingIPConfig.HasErrors)
         {
