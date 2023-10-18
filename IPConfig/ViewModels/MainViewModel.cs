@@ -310,12 +310,10 @@ public partial class MainViewModel : ObservableRecipient,
     {
         var nics = NetworkInterface.GetAllNetworkInterfaces()
             .Select(x => new Nic(x))
-            .OrderBy(x => {
-                return x.OperationalStatus is OperationalStatus.Up
+            .OrderBy(x => x.OperationalStatus is OperationalStatus.Up
                     && x.NetworkInterfaceType is not NetworkInterfaceType.Loopback or NetworkInterfaceType.Tunnel
                     ? (int)x.OperationalStatus
-                    : Int32.MaxValue;
-            })
+                    : Int32.MaxValue)
             .ThenBy(x => x.SimpleNicType)
             .ThenBy(x => x.Name);
 
@@ -431,13 +429,13 @@ public partial class MainViewModel : ObservableRecipient,
             ConfirmStr = Lang.JumpToGithub,
             CancelStr = Lang.Cancel,
             Message = $"""
-                            {Lang.LatestVersion}{_githubReleaseInfo.Name}
-                            {App.VersionString} -> {_githubReleaseInfo.TagName}
-                            {_githubReleaseInfo.CreatedAt}
+                {Lang.LatestVersion}{_githubReleaseInfo.Name}
+                {App.VersionString} -> {_githubReleaseInfo.TagName}
+                {_githubReleaseInfo.CreatedAt}
 
-                            What's Changed
-                            {note}
-                            """,
+                What's Changed
+                {note}
+                """,
             ActionBeforeClose = (isConfirm) => {
                 if (isConfirm)
                 {

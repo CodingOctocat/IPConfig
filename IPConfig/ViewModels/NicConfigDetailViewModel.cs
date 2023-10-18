@@ -355,19 +355,20 @@ public partial class NicConfigDetailViewModel : ObservableRecipient,
         string header = Nic.SupportsIPv4 ? Lang.TcpIPv4_Header : $"{Lang.AdapterNotSupported} {Lang.TcpIPv4_Header}";
 
         string text = $"""
-                {header}
-                [{Lang.IPv4GeneralProperties_Header}]
-                {IPv4AdvancedCofnig.FormatGeneralProperties()}
+            {header}
+            [{Lang.IPv4GeneralProperties_Header}]
+            {IPv4AdvancedCofnig.FormatGeneralProperties()}
 
-                [{Lang.IPv4Lifetimes_Header}]
-                {IPv4AdvancedCofnig.FormatLifetimes()}
+            [{Lang.IPv4Lifetimes_Header}]
+            {IPv4AdvancedCofnig.FormatLifetimes()}
 
-                [{Lang.IPv4AdvancedProperties_Header}]
-                {FormatIPv4InterfaceProperties()}
+            [{Lang.IPv4AdvancedProperties_Header}]
+            {FormatIPv4InterfaceProperties()}
 
-                [{Lang.IPv4Statistics_Header}]
-                {FormatIPv4InterfaceStatistics()}
-                """;
+            [{Lang.IPv4Statistics_Header}]
+            {FormatIPv4InterfaceStatistics()}
+            """;
+
         return text;
     }
 
@@ -376,19 +377,20 @@ public partial class NicConfigDetailViewModel : ObservableRecipient,
         string header = Nic.SupportsIPv6 ? Lang.TcpIPv6_Header : $"{Lang.AdapterNotSupported} {Lang.TcpIPv6_Header}";
 
         string text = $"""
-                {header}
-                [{Lang.IPv6GeneralProperties_Header}]
-                {IPv6AdvancedCofnig.FormatGeneralProperties()}
+            {header}
+            [{Lang.IPv6GeneralProperties_Header}]
+            {IPv6AdvancedCofnig.FormatGeneralProperties()}
 
-                [{Lang.IPv6Lifetimes_Header}]
-                {IPv6AdvancedCofnig.FormatLifetimes()}
+            [{Lang.IPv6Lifetimes_Header}]
+            {IPv6AdvancedCofnig.FormatLifetimes()}
 
-                [{Lang.IPv6AdvancedProperties_Header}]
-                {FormatIPv6InterfaceProperties()}
+            [{Lang.IPv6AdvancedProperties_Header}]
+            {FormatIPv6InterfaceProperties()}
 
-                [{Lang.IPv6Statistics_Header}]
-                {Lang.NotSupported}
-                """;
+            [{Lang.IPv6Statistics_Header}]
+            {Lang.NotSupported}
+            """;
+
         return text;
     }
 
