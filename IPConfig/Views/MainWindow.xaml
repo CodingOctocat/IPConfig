@@ -148,7 +148,8 @@
                     <Viewbox Width="18"
                              Height="18">
                         <Path Data="{StaticResource LangGeometry}"
-                              Fill="{DynamicResource PrimaryBrush}" />
+                              Fill="{DynamicResource PrimaryBrush}"
+                              Style="{StaticResource IconParkStyle}" />
                     </Viewbox>
                 </Button>
 
@@ -512,7 +513,8 @@
 
                         <Viewbox Style="{StaticResource IconViewBoxStyle}">
                             <Path Data="{StaticResource GithubGeometry}"
-                                  Fill="{DynamicResource MyReverseBrush}" />
+                                  Fill="{DynamicResource MyReverseBrush}"
+                                  Style="{StaticResource IconParkStyle}" />
                         </Viewbox>
                     </Button>
 

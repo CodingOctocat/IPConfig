@@ -229,7 +229,8 @@
                          Height="36">
                     <Path Data="{StaticResource DataGeometry}"
                           Stroke="{DynamicResource EmptyBrush}"
-                          StrokeThickness="2" />
+                          StrokeThickness="2"
+                          Style="{StaticResource IconParkStyle}" />
                 </Viewbox>
             </hc:Empty.Logo>
 
