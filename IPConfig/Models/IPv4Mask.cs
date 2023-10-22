@@ -47,7 +47,7 @@ public record IPv4Mask(string Mask, int CIDR, string Group)
 
 public enum IPv4MaskClass
 {
-    [Languages.LocalizedDescription(LangKey.Default)]
+    [LocalizedDescription(LangKey.Default)]
     Default = 1,
 
     [Description("/0 ~ /8")]

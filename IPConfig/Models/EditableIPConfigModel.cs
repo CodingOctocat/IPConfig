@@ -36,7 +36,7 @@ public partial class EditableIPConfigModel : IPConfigModel,
 
     public bool IsPropertyChanged<T>(Func<IPConfigModel, T> property) where T : notnull
     {
-        return IsPropertyChanged<T>(property, out _);
+        return IsPropertyChanged(property, out _);
     }
 
     public bool IsPropertyChanged<T>(Func<IPConfigModel, T> property, [NotNullWhen(true)] out T? oldValue) where T : notnull
@@ -82,7 +82,7 @@ public partial class EditableIPConfigModel : IPConfigModel,
 
     public bool IsPropertyError<T>(Expression<Func<IPConfigModel, T>> property)
     {
-        return IsPropertyError<T>(property, out _);
+        return IsPropertyError(property, out _);
     }
 
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)

@@ -555,7 +555,7 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
 
             if (EditingIPConfigSender is MainViewModel)
             {
-                Messenger.Send<EditableIPConfigModel, string>(EditingIPConfig, "MakeSelectedNicIPConfigCopy");
+                Messenger.Send(EditingIPConfig, "MakeSelectedNicIPConfigCopy");
             }
 
             Growl.Success(new() {

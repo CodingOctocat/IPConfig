@@ -385,7 +385,7 @@ public partial class MainViewModel : ObservableRecipient,
     [RelayCommand(CanExecute = nameof(IsSelectedNicNotNull))]
     private void MakeSelectedNicIPConfigCopy()
     {
-        Messenger.Send<EditableIPConfigModel, string>(SelectedNicIPConfig!, "MakeSelectedNicIPConfigCopy");
+        Messenger.Send(SelectedNicIPConfig!, "MakeSelectedNicIPConfigCopy");
     }
 
     [RelayCommand(CanExecute = nameof(IsSelectedNicNotNull))]
