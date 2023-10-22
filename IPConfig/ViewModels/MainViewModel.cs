@@ -379,7 +379,8 @@ public partial class MainViewModel : ObservableRecipient,
     private void LoadLastUsedIPv4Config()
     {
         LastUsedIPv4Config!.DeepCloneTo(SelectedNicIPConfig!.IPv4Config);
-        SelectedNicIPConfigCheckedCommand.Execute(null);
+        SelectedNicIPConfigChecked();
+        GoBack();
     }
 
     [RelayCommand(CanExecute = nameof(IsSelectedNicNotNull))]
