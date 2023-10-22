@@ -122,15 +122,9 @@ public partial class IPConfigModel : ObservableValidator, IDeepCloneTo<IPConfigM
 
     public bool PropertyEquals(IPConfigModel other)
     {
-        if (Name == other.Name
-            && IPv4Config.IP == other.IPv4Config.IP
-            && IPv4Config.IsDhcpEnabled == other.IPv4Config.IsDhcpEnabled
-            && IPv4Config.Mask == other.IPv4Config.Mask
-            && IPv4Config.Gateway == other.IPv4Config.Gateway
-            && IPv4Config.IsAutoDns == other.IPv4Config.IsAutoDns
-            && IPv4Config.Dns1 == other.IPv4Config.Dns1
-            && IPv4Config.Dns2 == other.IPv4Config.Dns2
-            && Remark == other.Remark)
+        bool iPv4ConfigEquals = IPv4Config.PropertyEquals(other.IPv4Config);
+
+        if (iPv4ConfigEquals && Name == other.Name && Remark == other.Remark)
         {
             return true;
         }

@@ -6,7 +6,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace IPConfig.Models;
 
-public abstract partial class IPConfigBase<T> : ObservableValidator, IDeepCloneTo<T> where T : IPConfigBase<T>
+public abstract partial class IPConfigBase<T> : ObservableValidator,
+    IDeepCloneable<T>, IDeepCloneTo<T> where T : IPConfigBase<T>, new()
 {
     protected bool _allowAutoDisableAutoDns;
 
@@ -131,7 +132,24 @@ public abstract partial class IPConfigBase<T> : ObservableValidator, IDeepCloneT
         _allowAutoDisableDhcp = allow;
     }
 
-    public abstract void DeepCloneTo(T other);
+    public virtual T DeepClone()
+    {
+        T clone = new();
+        DeepCloneTo(clone);
+
+        return clone;
+    }
+
+    public virtual void DeepCloneTo(T other)
+    {
+        other.IP = IP;
+        other.IsDhcpEnabled = IsDhcpEnabled;
+        other.Mask = Mask;
+        other.Gateway = Gateway;
+        other.IsAutoDns = IsAutoDns;
+        other.Dns1 = Dns1;
+        other.Dns2 = Dns2;
+    }
 
     public virtual void FormatProperties()
     {

@@ -40,15 +40,20 @@ public class IPv4Config : IPConfigBase<IPv4Config>
         base.ClearErrors(propertyName);
     }
 
-    public override void DeepCloneTo(IPv4Config other)
+    public bool PropertyEquals(IPv4Config other)
     {
-        other.IP = IP;
-        other.IsDhcpEnabled = IsDhcpEnabled;
-        other.Mask = Mask;
-        other.Gateway = Gateway;
-        other.IsAutoDns = IsAutoDns;
-        other.Dns1 = Dns1;
-        other.Dns2 = Dns2;
+        if (IP == other.IP
+            && IsDhcpEnabled == other.IsDhcpEnabled
+            && Mask == other.Mask
+            && Gateway == other.Gateway
+            && IsAutoDns == other.IsAutoDns
+            && Dns1 == other.Dns1
+            && Dns2 == other.Dns2)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     public override string ToString()
