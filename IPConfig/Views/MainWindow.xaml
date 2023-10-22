@@ -186,6 +186,12 @@
                              SelectedItem="{Binding SelectedNic}"
                              ToolTip="{Binding SelectedNic}"
                              UseLayoutRounding="False">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding ReadLastUsedIPv4ConfigCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+
                     <hc:ComboBox.ItemTemplate>
                         <DataTemplate DataType="{x:Type m:Nic}">
                             <hc:SimpleStackPanel Orientation="Horizontal"
@@ -285,6 +291,10 @@
                             <i:EventTrigger EventName="MouseDoubleClick">
                                 <i:InvokeCommandAction Command="{Binding ViewToNicConfigDetailCommand}" />
                             </i:EventTrigger>
+
+                            <i:EventTrigger EventName="ContextMenuOpening">
+                                <i:InvokeCommandAction Command="{Binding ReadLastUsedIPv4ConfigCommand}" />
+                            </i:EventTrigger>
                         </i:Interaction.Triggers>
 
                         <RadioButton.ToolTip>
@@ -303,6 +313,20 @@
 
                                 <MenuItem Command="{Binding MakeSelectedNicIPConfigCopyCommand}"
                                           Header="{lang:Lang {x:Static lang:LangKey.MakeSelectedIPConfigCopy_}}" />
+
+                                <Separator />
+
+                                <MenuItem Command="{Binding LoadLastUsedIPv4ConfigCommand}"
+                                          Header="{lang:Lang {x:Static lang:LangKey.LoadLastUsedConfiguration_}}">
+                                    <MenuItem.ToolTip>
+                                        <TextBlock>
+                                            <Run Text="{Binding LastUsedIPv4Config.FormatedLastUsedTime, Mode=OneWay}" />
+                                            <LineBreak />
+                                            <LineBreak />
+                                            <Run Text="{Binding LastUsedIPv4Config, Mode=OneWay}" />
+                                        </TextBlock>
+                                    </MenuItem.ToolTip>
+                                </MenuItem>
 
                                 <Separator />
 

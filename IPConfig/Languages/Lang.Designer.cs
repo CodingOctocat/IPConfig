@@ -1347,6 +1347,18 @@ namespace IPConfig.Languages {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to "加载上次使用的配置(_L)"
+        /// </summary>
+        /// <remarks>
+        /// MainWindow
+        /// </remarks>
+        public static string LoadLastUsedConfiguration_ {
+            get {
+                return ResourceManager.GetString("LoadLastUsedConfiguration_", resourceCulture) ?? string.Empty;
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to "生成副本(_C)"
         /// </summary>
         /// <remarks>
@@ -2809,6 +2821,13 @@ namespace IPConfig.Languages {
         /// MainWindow
         /// </remarks>
         Light,
+        /// <summary>
+        ///   Looks up a localized string similar to 加载上次使用的配置(_L).
+        /// </summary>
+        /// <remarks>
+        /// MainWindow
+        /// </remarks>
+        LoadLastUsedConfiguration_,
         /// <summary>
         ///   Looks up a localized string similar to 生成副本(_C).
         /// </summary>

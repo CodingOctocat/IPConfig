@@ -90,6 +90,7 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
     private EditableIPConfigModel _editingIPConfig = IPConfigModel.Empty.AsEditable();
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsNicIPConfig))]
     private object _editingIPConfigSender = null!;
 
     [ObservableProperty]
@@ -131,6 +132,8 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
     public CollectionViewSource? IPv4MaskListCvs { get; }
 
     public bool IsEditingIPConfigModifield => IsInContrastView || EditingIPConfig.IsChanged;
+
+    public bool IsNicIPConfig => EditingIPConfigSender is MainViewModel;
 
     public ICommand PrimarySaveOrApplyCommand
     {
@@ -389,7 +392,7 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
     }
 
     [RelayCommand]
-    private void Apply()
+    private async Task ApplyAsync()
     {
         if (_nic is null)
         {
@@ -419,6 +422,8 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
         {
             return;
         }
+
+        await BackupAsync();
 
         var ipv4Config = EditingIPConfig.IPv4Config;
 
@@ -571,13 +576,13 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
     }
 
     [RelayCommand]
-    private void SaveAndApply()
+    private async Task SaveAndApplyAsync()
     {
         Save();
 
         if (_isSaveSuccessful)
         {
-            Apply();
+            await ApplyAsync();
         }
     }
 
@@ -712,6 +717,28 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
         var iPv4DnsList = iPv4Dns1List.Concat(iPv4Dns2List);
 
         return iPv4DnsList;
+    }
+
+    private async Task BackupAsync()
+    {
+        if (_nic is null)
+        {
+            return;
+        }
+
+        try
+        {
+            var current = NetworkManagement.GetIPv4Config(_nic);
+
+            if (current.PropertyEquals(EditingIPConfig.IPv4Config))
+            {
+                return;
+            }
+
+            await LastUsedIPv4Config.BackupAsync(_nic.Id, current);
+        }
+        catch
+        { }
     }
 
     private bool? CanShowIPConfigPropertyChangedIndicator<T>(Func<IPConfigModel, T> property) where T : notnull

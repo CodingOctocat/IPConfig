@@ -435,6 +435,9 @@
   <data name="Light" xml:space="preserve">
     <value>Light</value>
   </data>
+  <data name="LoadLastUsedConfiguration_" xml:space="preserve">
+    <value>_Load Last Used Configuration</value>
+  </data>
   <data name="MakeSelectedIPConfigCopy_" xml:space="preserve">
     <value>Make _Copy</value>
   </data>

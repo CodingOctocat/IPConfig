@@ -517,6 +517,10 @@
     <value>浅色</value>
     <comment>MainWindow</comment>
   </data>
+  <data name="LoadLastUsedConfiguration_" xml:space="preserve">
+    <value>加载上次使用的配置(_L)</value>
+    <comment>MainWindow</comment>
+  </data>
   <data name="MakeSelectedIPConfigCopy_" xml:space="preserve">
     <value>生成副本(_C)</value>
     <comment>MainWindow</comment>

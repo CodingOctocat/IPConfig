@@ -51,6 +51,8 @@ public partial class MainViewModel : ObservableRecipient,
 
     private EditableIPConfigModel? _lastSelectedIPConfig;
 
+    private IPv4Config? _selectedNicIPv4Config;
+
     #endregion Fields
 
     #region ObservableProperties
@@ -79,12 +81,20 @@ public partial class MainViewModel : ObservableRecipient,
     private ObservableCollection<CultureInfo> _languages = null!;
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(CanLoadLastUsedIPv4Config))]
+    [NotifyCanExecuteChangedFor(nameof(LoadLastUsedIPv4ConfigCommand))]
+    private LastUsedIPv4Config? _lastUsedIPv4Config;
+
+    [ObservableProperty]
     private int _selectedIPConfigsCount;
 
     [ObservableProperty]
     [NotifyPropertyChangedRecipients]
     [NotifyPropertyChangedFor(nameof(IsSelectedNicNotNull))]
-    [NotifyCanExecuteChangedFor(nameof(CopySelectedNicIPConfigAsTextCommand), nameof(MakeSelectedNicIPConfigCopyCommand), nameof(ViewToNicConfigDetailCommand))]
+    [NotifyCanExecuteChangedFor(nameof(CopySelectedNicIPConfigAsTextCommand),
+        nameof(MakeSelectedNicIPConfigCopyCommand),
+        nameof(ViewToNicConfigDetailCommand),
+        nameof(ReadLastUsedIPv4ConfigCommand))]
     private Nic? _selectedNic;
 
     [ObservableProperty]
@@ -105,6 +115,8 @@ public partial class MainViewModel : ObservableRecipient,
     #endregion ObservableProperties
 
     #region Properties
+
+    public bool CanLoadLastUsedIPv4Config => LastUsedIPv4Config is not null;
 
     public string GetNicsToolTip { get; private set; } = Lang.AdapterNotFound;
 
@@ -363,10 +375,32 @@ public partial class MainViewModel : ObservableRecipient,
         await GetLatestReleaseInfoAsync();
     }
 
+    [RelayCommand(CanExecute = nameof(CanLoadLastUsedIPv4Config))]
+    private void LoadLastUsedIPv4Config()
+    {
+        LastUsedIPv4Config!.DeepCloneTo(SelectedNicIPConfig!.IPv4Config);
+        SelectedNicIPConfigCheckedCommand.Execute(null);
+    }
+
     [RelayCommand(CanExecute = nameof(IsSelectedNicNotNull))]
     private void MakeSelectedNicIPConfigCopy()
     {
         Messenger.Send<EditableIPConfigModel, string>(SelectedNicIPConfig!, "MakeSelectedNicIPConfigCopy");
+    }
+
+    [RelayCommand(CanExecute = nameof(IsSelectedNicNotNull))]
+    private async Task ReadLastUsedIPv4ConfigAsync()
+    {
+        var backup = await LastUsedIPv4Config.ReadAsync(SelectedNic!.Id);
+
+        if (backup is null || backup.PropertyEquals(_selectedNicIPv4Config!))
+        {
+            LastUsedIPv4Config = null;
+        }
+        else
+        {
+            LastUsedIPv4Config = backup;
+        }
     }
 
     [RelayCommand]
@@ -496,12 +530,11 @@ public partial class MainViewModel : ObservableRecipient,
             return;
         }
 
-        var iPv4Config = NetworkManagement.GetIPv4Config(nic);
-
         var oldSelectedNicIPConfig = SelectedNicIPConfig;
+        _selectedNicIPv4Config = NetworkManagement.GetIPv4Config(nic);
 
         SelectedNicIPConfig = new($"{nic.Name} - {nic.Description}") {
-            IPv4Config = iPv4Config
+            IPv4Config = _selectedNicIPv4Config.DeepClone()
         };
 
         SelectedNicIPConfig.BeginEdit();
@@ -582,6 +615,9 @@ public partial class MainViewModel : ObservableRecipient,
 
     [GeneratedRegex("^\\-\\s", RegexOptions.Multiline)]
     private static partial Regex ReleaseNoteFormatRegex();
+
+    [GeneratedRegex("^[0-9A-Z]{8}-[0-9A-Z]{4}-[0-9A-Z]{4}-[0-9A-Z]{4}-[0-9A-Z]{12}.json$", RegexOptions.IgnoreCase)]
+    private static partial Regex TempFileNameRegex();
 
     private async Task GetLatestReleaseInfoAsync()
     {
