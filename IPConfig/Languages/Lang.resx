@@ -318,7 +318,7 @@
     <comment>IPv4ConfigView</comment>
   </data>
   <data name="DnsEligible" xml:space="preserve">
-    <value>Dns Eligible</value>
+    <value>DNS Eligible</value>
     <comment>NicConfigDetailView</comment>
   </data>
   <data name="DuplicateAddressDetectionState" xml:space="preserve">

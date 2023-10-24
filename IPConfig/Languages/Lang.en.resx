@@ -285,7 +285,7 @@
     <value>DNS 2</value>
   </data>
   <data name="DnsEligible" xml:space="preserve">
-    <value>Dns Eligible</value>
+    <value>DNS Eligible</value>
   </data>
   <data name="DuplicateAddressDetectionState" xml:space="preserve">
     <value>Duplicate Address Detection State</value>

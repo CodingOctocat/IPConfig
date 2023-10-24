@@ -747,7 +747,7 @@ namespace IPConfig.Languages {
         }
 
         /// <summary>
-        ///   Looks up a localized string similar to "Dns Eligible"
+        ///   Looks up a localized string similar to "DNS Eligible"
         /// </summary>
         /// <remarks>
         /// NicConfigDetailView
@@ -2472,7 +2472,7 @@ namespace IPConfig.Languages {
         /// </remarks>
         Dns2,
         /// <summary>
-        ///   Looks up a localized string similar to Dns Eligible.
+        ///   Looks up a localized string similar to DNS Eligible.
         /// </summary>
         /// <remarks>
         /// NicConfigDetailView
