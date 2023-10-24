@@ -205,7 +205,7 @@
                         <ListBox d:ItemsSource="{d:SampleData ItemCount=3}"
                                  ItemsSource="{Binding IPv4AdvancedCofnig.AlternateIPCollection}" />
 
-                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.IPv4Mask}}"
+                        <hc:TextBox hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.IPv4Netmask}}"
                                     Text="{Binding IPv4AdvancedCofnig.PreferredMask, Mode=OneWay}" />
 
                         <ListBox d:ItemsSource="{d:SampleData ItemCount=3}"

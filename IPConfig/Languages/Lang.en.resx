@@ -384,8 +384,8 @@
   <data name="IPv4Lifetimes_Header" xml:space="preserve">
     <value>IPv4 Lifetimes</value>
   </data>
-  <data name="IPv4Mask" xml:space="preserve">
-    <value>Mask</value>
+  <data name="IPv4Netmask" xml:space="preserve">
+    <value>Netmask</value>
   </data>
   <data name="IPv4Statistics_Header" xml:space="preserve">
     <value>IPv4 Statistics</value>

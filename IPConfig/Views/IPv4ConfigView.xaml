@@ -213,7 +213,7 @@
 
                 <hc:SimplePanel>
                     <c:ReadOnlyComboBox hc:InfoElement.Necessary="{Binding EditingIPConfig.IPv4Config.IsDhcpEnabled, Converter={StaticResource Boolean2BooleanReConverter}}"
-                                        hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.IPv4Mask}}"
+                                        hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.IPv4Netmask}}"
                                         IsEditable="True"
                                         ItemsSource="{Binding IPv4MaskListCollectionView}"
                                         Text="{Binding EditingIPConfig.IPv4Config.Mask, UpdateSourceTrigger=PropertyChanged}">

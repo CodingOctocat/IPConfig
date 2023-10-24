@@ -1160,9 +1160,9 @@ namespace IPConfig.Languages {
         /// <remarks>
         /// NicConfigDetailView
         /// </remarks>
-        public static string IPv4Mask {
+        public static string IPv4Netmask {
             get {
-                return ResourceManager.GetString("IPv4Mask", resourceCulture) ?? string.Empty;
+                return ResourceManager.GetString("IPv4Netmask", resourceCulture) ?? string.Empty;
             }
         }
 
@@ -2715,7 +2715,7 @@ namespace IPConfig.Languages {
         /// <remarks>
         /// NicConfigDetailView
         /// </remarks>
-        IPv4Mask,
+        IPv4Netmask,
         /// <summary>
         ///   Looks up a localized string similar to IPv4 统计信息.
         /// </summary>

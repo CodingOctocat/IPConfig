@@ -449,7 +449,7 @@
     <value>IPv4 剩余时间</value>
     <comment>NicConfigDetailView</comment>
   </data>
-  <data name="IPv4Mask" xml:space="preserve">
+  <data name="IPv4Netmask" xml:space="preserve">
     <value>子网掩码</value>
     <comment>NicConfigDetailView</comment>
   </data>
