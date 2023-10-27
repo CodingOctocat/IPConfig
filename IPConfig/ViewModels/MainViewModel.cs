@@ -617,9 +617,6 @@ public partial class MainViewModel : ObservableRecipient,
     [GeneratedRegex("^\\-\\s", RegexOptions.Multiline)]
     private static partial Regex ReleaseNoteFormatRegex();
 
-    [GeneratedRegex("^[0-9A-Z]{8}-[0-9A-Z]{4}-[0-9A-Z]{4}-[0-9A-Z]{4}-[0-9A-Z]{12}.json$", RegexOptions.IgnoreCase)]
-    private static partial Regex TempFileNameRegex();
-
     private async Task GetLatestReleaseInfoAsync()
     {
         try
