@@ -182,6 +182,9 @@
     <value>APIPA Enabled</value>
     
   </data>
+  <data name="AppCrashed" xml:space="preserve">
+    <value>Application Crashed~~~</value>
+  </data>
   <data name="ApplyAsk_Format" xml:space="preserve">
     <value>Are you sure you want to apply the configuration to {0} - {1}?</value>
   </data>
@@ -332,6 +335,9 @@
   </data>
   <data name="GoBack_" xml:space="preserve">
     <value>_Back</value>
+  </data>
+  <data name="Ignore" xml:space="preserve">
+    <value>Ignore</value>
   </data>
   <data name="IncomingPacketsDiscarded" xml:space="preserve">
     <value>Incoming Packets Discarded</value>
@@ -533,6 +539,12 @@
   </data>
   <data name="Required" xml:space="preserve">
     <value>Required</value>
+  </data>
+  <data name="RestartApp" xml:space="preserve">
+    <value>Restart</value>
+  </data>
+  <data name="RestartFailed" xml:space="preserve">
+    <value>Restart Failed!</value>
   </data>
   <data name="SaveAndApply_" xml:space="preserve">
     <value>Save &amp; Appl_y</value>

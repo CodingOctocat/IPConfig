@@ -339,6 +339,18 @@ namespace IPConfig.Languages {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to "程序已崩溃~~~"
+        /// </summary>
+        /// <remarks>
+        /// App
+        /// </remarks>
+        public static string AppCrashed {
+            get {
+                return ResourceManager.GetString("AppCrashed", resourceCulture) ?? string.Empty;
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to "应用(_A)"
         /// </summary>
         /// <remarks>
@@ -935,6 +947,18 @@ namespace IPConfig.Languages {
         public static string GoBack_ {
             get {
                 return ResourceManager.GetString("GoBack_", resourceCulture) ?? string.Empty;
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "忽略"
+        /// </summary>
+        /// <remarks>
+        /// App
+        /// </remarks>
+        public static string Ignore {
+            get {
+                return ResourceManager.GetString("Ignore", resourceCulture) ?? string.Empty;
             }
         }
 
@@ -1731,6 +1755,30 @@ namespace IPConfig.Languages {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to "重启程序"
+        /// </summary>
+        /// <remarks>
+        /// App
+        /// </remarks>
+        public static string RestartApp {
+            get {
+                return ResourceManager.GetString("RestartApp", resourceCulture) ?? string.Empty;
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "重启失败！"
+        /// </summary>
+        /// <remarks>
+        /// App
+        /// </remarks>
+        public static string RestartFailed {
+            get {
+                return ResourceManager.GetString("RestartFailed", resourceCulture) ?? string.Empty;
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to "保存(_S)"
         /// </summary>
         /// <remarks>
@@ -2234,6 +2282,13 @@ namespace IPConfig.Languages {
         /// </remarks>
         APIPAEnabled,
         /// <summary>
+        ///   Looks up a localized string similar to 程序已崩溃~~~.
+        /// </summary>
+        /// <remarks>
+        /// App
+        /// </remarks>
+        AppCrashed,
+        /// <summary>
         ///   Looks up a localized string similar to 应用(_A).
         /// </summary>
         /// <remarks>
@@ -2583,6 +2638,13 @@ namespace IPConfig.Languages {
         /// NicConfigDetailView
         /// </remarks>
         GoBack_,
+        /// <summary>
+        ///   Looks up a localized string similar to 忽略.
+        /// </summary>
+        /// <remarks>
+        /// App
+        /// </remarks>
+        Ignore,
         /// <summary>
         ///   Looks up a localized string similar to 传入丢包.
         /// </summary>
@@ -3045,6 +3107,20 @@ namespace IPConfig.Languages {
         /// IPConfigModel
         /// </remarks>
         Required,
+        /// <summary>
+        ///   Looks up a localized string similar to 重启程序.
+        /// </summary>
+        /// <remarks>
+        /// App
+        /// </remarks>
+        RestartApp,
+        /// <summary>
+        ///   Looks up a localized string similar to 重启失败！.
+        /// </summary>
+        /// <remarks>
+        /// App
+        /// </remarks>
+        RestartFailed,
         /// <summary>
         ///   Looks up a localized string similar to 保存(_S).
         /// </summary>

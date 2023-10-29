@@ -181,6 +181,10 @@
     <value>已启用 APIPA</value>
     <comment>NicConfigDetailView</comment>
   </data>
+  <data name="AppCrashed" xml:space="preserve">
+    <value>程序已崩溃~~~</value>
+    <comment>App</comment>
+  </data>
   <data name="ApplyAsk_Format" xml:space="preserve">
     <value>确定将配置应用到 {0} - {1}？</value>
     <comment>IPConfigDetailViewModel</comment>
@@ -380,6 +384,10 @@
   <data name="GoBack_" xml:space="preserve">
     <value>返回(_B)</value>
     <comment>NicConfigDetailView</comment>
+  </data>
+  <data name="Ignore" xml:space="preserve">
+    <value>忽略</value>
+    <comment>App</comment>
   </data>
   <data name="IncomingPacketsDiscarded" xml:space="preserve">
     <value>传入丢包</value>
@@ -646,6 +654,14 @@
   <data name="Required" xml:space="preserve">
     <value>必填</value>
     <comment>IPConfigModel</comment>
+  </data>
+  <data name="RestartApp" xml:space="preserve">
+    <value>重启程序</value>
+    <comment>App</comment>
+  </data>
+  <data name="RestartFailed" xml:space="preserve">
+    <value>重启失败！</value>
+    <comment>App</comment>
   </data>
   <data name="SaveAndApply_" xml:space="preserve">
     <value>保存并应用(_Y)</value>

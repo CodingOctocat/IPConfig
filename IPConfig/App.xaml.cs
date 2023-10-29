@@ -16,6 +16,7 @@ using HandyControl.Data;
 
 using IPConfig.Extensions;
 using IPConfig.Helpers;
+using IPConfig.Languages;
 using IPConfig.Models;
 using IPConfig.ViewModels;
 using IPConfig.Views;
@@ -212,7 +213,7 @@ public partial class App : Application
         catch
         { }
 
-        var sb = new StringBuilder($"程序已崩溃~~~\n\n[{source}]\n{exception.Message}");
+        var sb = new StringBuilder($"{Lang.AppCrashed}\n\n[{source}]\n{exception.Message}");
 
         var innerEx = exception.InnerException;
 
@@ -228,8 +229,8 @@ public partial class App : Application
         Growl.Ask(new GrowlInfo {
             Message = msg,
             ShowDateTime = true,
-            ConfirmStr = "重启程序",
-            CancelStr = "忽略",
+            ConfirmStr = Lang.RestartApp,
+            CancelStr = Lang.Ignore,
             IsCustom = true,
             IconKey = ResourceToken.FatalGeometry,
             IconBrushKey = ResourceToken.DangerBrush,
@@ -240,7 +241,7 @@ public partial class App : Application
 
                     if (module is null)
                     {
-                        Growl.Error("重启失败！");
+                        Growl.Error(Lang.RestartFailed);
                     }
                     else
                     {
