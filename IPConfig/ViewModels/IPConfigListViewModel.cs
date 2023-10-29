@@ -48,24 +48,23 @@ public partial class IPConfigListViewModel : ObservableRecipient
     private string _searchKeyword = String.Empty;
 
     [ObservableProperty]
+    [NotifyPropertyChangedRecipients]
     [NotifyCanExecuteChangedFor(nameof(MoveToTopCommand), nameof(MoveToBottomCommand))]
     private EditableIPConfigModel? _selectedIPConfig;
-
-    [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(SelectedIPConfigsCountString))]
-    private int _selectedIPConfigsCount;
 
     #endregion ObservableProperties
 
     #region Properties
 
-    public bool CanDeleteIPConfig => HasAnyIPConfigSelected;
+    public bool CanDeleteIPConfig => HasSelected;
 
-    public bool CanMoveToBottom => SelectedIPConfigIndex < IPConfigList.Count - 1;
+    public bool CanMoveToBottom => SelectedIndex < IPConfigList.Count - 1;
 
-    public bool CanMoveToTop => SelectedIPConfigIndex > 0;
+    public bool CanMoveToTop => SelectedIndex > 0;
 
-    public bool HasAnyIPConfigSelected => SelectedIPConfigsCount > 0;
+    public bool HasSelected => SelectedCount > 0;
+
+    public int IPConfigCount => IPConfigList.Count;
 
     public WpfObservableRangeCollection<EditableIPConfigModel> IPConfigList { get; } = new();
 
@@ -73,13 +72,15 @@ public partial class IPConfigListViewModel : ObservableRecipient
 
     public CollectionViewSource IPConfigListCvs { get; }
 
+    public string MultiSelectedCountString => SelectedCount > 1 ? SelectedCount.ToString() : "";
+
     public EditableIPConfigModel? PrimarySelectedIPConfig => SelectedIPConfigs.FirstOrDefault();
 
-    public int SelectedIPConfigIndex => IPConfigList.IndexOf(SelectedIPConfig!);
+    public int SelectedCount => SelectedIPConfigs.Count;
+
+    public int SelectedIndex => IPConfigList.IndexOf(SelectedIPConfig!);
 
     public WpfObservableRangeCollection<EditableIPConfigModel> SelectedIPConfigs { get; } = new();
-
-    public string SelectedIPConfigsCountString => SelectedIPConfigsCount > 1 ? SelectedIPConfigsCount.ToString() : "";
 
     #endregion Properties
 
@@ -114,7 +115,7 @@ public partial class IPConfigListViewModel : ObservableRecipient
     {
         base.OnActivated();
 
-        Messenger.Register<IPConfigListViewModel, ValueChangedMessage<bool>, string>(this, "SelectedNicIPConfigChecked",
+        Messenger.Register<IPConfigListViewModel, EmptyMessage, string>(this, "SelectedNicIPConfigChecked",
             (r, m) => SelectedIPConfig = null);
 
         Messenger.Register<IPConfigListViewModel, EditableIPConfigModel, string>(this, "MakeSelectedNicIPConfigCopy",
@@ -128,9 +129,6 @@ public partial class IPConfigListViewModel : ObservableRecipient
 
         Messenger.Register<IPConfigListViewModel, AddUntitledIPConfigMessage>(this,
             (r, m) => AddUntitledIPConfig());
-
-        Messenger.Register<IPConfigListViewModel, RequestMessage<EditableIPConfigModel?>, string>(this, "SelectedIPConfig",
-            (r, m) => m.Reply(SelectedIPConfig));
 
         Messenger.Register<IPConfigListViewModel, ChangeSelectionMessage<EditableIPConfigModel>>(this,
             (r, m) => SelectedIPConfig = m.Selection);
@@ -221,7 +219,7 @@ public partial class IPConfigListViewModel : ObservableRecipient
     private void DeleteIPConfig()
     {
         var toBeDeleted = SelectedIPConfigs.ToImmutableArray();
-        int idx = SelectedIPConfigIndex;
+        int idx = SelectedIndex;
 
         if (toBeDeleted.Length > 0)
         {
@@ -273,7 +271,7 @@ public partial class IPConfigListViewModel : ObservableRecipient
         IPConfigList.AddRange(col.OrderBy(x => x.Order).ToEnumerable());
     }
 
-    [RelayCommand(CanExecute = nameof(HasAnyIPConfigSelected))]
+    [RelayCommand(CanExecute = nameof(HasSelected))]
     private void MakeSelectedIPConfigCopy()
     {
         MakeSelectedIPConfigCopy(SelectedIPConfig);
@@ -282,19 +280,19 @@ public partial class IPConfigListViewModel : ObservableRecipient
     [RelayCommand(CanExecute = nameof(CanMoveToBottom))]
     private void MoveToBottom()
     {
-        IPConfigList.Move(SelectedIPConfigIndex, IPConfigList.Count - 1);
+        IPConfigList.Move(SelectedIndex, IPConfigList.Count - 1);
     }
 
     [RelayCommand(CanExecute = nameof(CanMoveToTop))]
     private void MoveToTop()
     {
-        IPConfigList.Move(SelectedIPConfigIndex, 0);
+        IPConfigList.Move(SelectedIndex, 0);
     }
 
     [RelayCommand]
-    private void Search()
+    private void Search(string keyword)
     {
-        if (!String.IsNullOrEmpty(SearchKeyword))
+        if (!String.IsNullOrEmpty(keyword))
         {
             _selectedIPConfigBeforeSearch = SelectedIPConfig;
         }
@@ -304,7 +302,7 @@ public partial class IPConfigListViewModel : ObservableRecipient
             IPConfigListCollectionView.Refresh();
         }
 
-        if (String.IsNullOrEmpty(SearchKeyword))
+        if (String.IsNullOrEmpty(keyword))
         {
             SelectedIPConfig = _selectedIPConfigBeforeSearch;
         }
@@ -328,9 +326,8 @@ public partial class IPConfigListViewModel : ObservableRecipient
         if (newValue is not null)
         {
             Messenger.Send<GoBackMessage>(new(this));
+            Messenger.Send<ToggleStateMessage<bool>, string>(new(this, false), "ToggleNicInfoCard");
         }
-
-        Messenger.Send<PropertyChangedMessage<EditableIPConfigModel?>>(new(this, nameof(SelectedIPConfig), oldValue, newValue));
     }
 
     #endregion Partial OnPropertyChanged Methods
@@ -339,10 +336,14 @@ public partial class IPConfigListViewModel : ObservableRecipient
 
     private void IPConfigList_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
+        OnPropertyChanged(nameof(IPConfigCount));
         MoveToTopCommand.NotifyCanExecuteChanged();
         MoveToBottomCommand.NotifyCanExecuteChanged();
 
-        Messenger.Send<ValueChangedMessage<int>, string>(new(IPConfigList.Count), "TotalIPConfigsCount");
+        if (IPConfigCount == 0)
+        {
+            Messenger.Send<ToggleStateMessage<bool>, string>(new(this, true), "ToggleNicInfoCard");
+        }
     }
 
     private void IPConfigListCvs_Filter(object sender, FilterEventArgs e)
@@ -355,11 +356,10 @@ public partial class IPConfigListViewModel : ObservableRecipient
         }
 
         var item = (IPConfigModel)e.Item;
-        string keyword = SearchKeyword.ToLower();
 
         void Contains(Func<IPConfigModel, string> property)
         {
-            if (property(item).ToLower().Contains(keyword))
+            if (property(item).Contains(SearchKeyword, StringComparison.OrdinalIgnoreCase))
             {
                 e.Accepted = true;
 
@@ -389,10 +389,10 @@ public partial class IPConfigListViewModel : ObservableRecipient
 
     private void SelectedIPConfigs_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
-        SelectedIPConfigsCount = SelectedIPConfigs.Count;
-        DeleteIPConfigCommand.NotifyCanExecuteChanged();
+        OnPropertyChanged(nameof(SelectedCount));
+        OnPropertyChanged(nameof(MultiSelectedCountString));
         OnPropertyChanged(nameof(PrimarySelectedIPConfig));
-        Messenger.Send<ValueChangedMessage<int>, string>(new(SelectedIPConfigsCount), "SelectedIPConfigsCount");
+        DeleteIPConfigCommand.NotifyCanExecuteChanged();
     }
 
     #endregion Event Handlers
@@ -401,7 +401,7 @@ public partial class IPConfigListViewModel : ObservableRecipient
 
     private void InsertNewIPConfig(EditableIPConfigModel iPConfig)
     {
-        IPConfigList.Insert(SelectedIPConfigIndex + 1, iPConfig);
+        IPConfigList.Insert(SelectedIndex + 1, iPConfig);
         SelectedIPConfig = iPConfig;
     }
 

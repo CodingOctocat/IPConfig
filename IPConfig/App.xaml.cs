@@ -183,11 +183,16 @@ public partial class App : Application
         var services = new ServiceCollection();
 
         services.AddSingleton<MainViewModel>();
+        services.AddSingleton<NicViewModel>();
         services.AddSingleton<IPConfigListViewModel>();
         services.AddSingleton<IPConfigDetailViewModel>();
         services.AddTransient<NicConfigDetailViewModel>();
 
         services.AddSingleton<MainWindow>();
+        services.AddSingleton<NicSelectorView>();
+        services.AddSingleton<NicInfoCardView>();
+        services.AddSingleton<IPConfigListSelectionCounterView>();
+        services.AddSingleton<NicSpeedMonitorView>();
         services.AddSingleton<IPConfigListView>();
         services.AddTransient<IPConfigDetailView>();
         services.AddTransient<IPv4ConfigView>();

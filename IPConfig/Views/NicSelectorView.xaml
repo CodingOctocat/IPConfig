@@ -1,0 +1,117 @@
+﻿<UserControl x:Class="IPConfig.Views.NicSelectorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:b="clr-namespace:IPConfig.Behaviors"
+             xmlns:conv="clr-namespace:IPConfig.Converters"
+             xmlns:lang="clr-namespace:IPConfig.Languages"
+             xmlns:m="clr-namespace:IPConfig.Models"
+             xmlns:vm="clr-namespace:IPConfig.ViewModels"
+             xmlns:net="clr-namespace:System.Net.NetworkInformation;assembly=System"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             b:InputBindingBehavior.PropagateInputBindingsToWindow="True"
+             d:DataContext="{d:DesignInstance Type=vm:NicViewModel,
+                                              IsDesignTimeCreatable=True}"
+             d:DesignWidth="400"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <conv:OperationalStatusToolTipConverter x:Key="OpStatusToolTipConverter" />
+    </UserControl.Resources>
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <UserControl.InputBindings>
+        <KeyBinding Key="F5"
+                    Command="{Binding RefreshCommand}" />
+    </UserControl.InputBindings>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <hc:ComboBox Height="36"
+                     hc:InfoElement.Placeholder="{Binding GetNicsToolTip}"
+                     ItemsSource="{Binding AllNics}"
+                     SelectedItem="{Binding SelectedNic}"
+                     ToolTip="{Binding SelectedNic}"
+                     UseLayoutRounding="False">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding ReadLastUsedIPv4ConfigCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+
+            <hc:ComboBox.ItemTemplate>
+                <DataTemplate DataType="{x:Type m:Nic}">
+                    <hc:SimpleStackPanel Orientation="Horizontal"
+                                         UseLayoutRounding="True">
+                        <Border x:Name="NicOpStatusBorder"
+                                Padding="2"
+                                VerticalAlignment="Center"
+                                Background="{StaticResource DarkOpacityBrush}"
+                                CornerRadius="4"
+                                ToolTip="{Binding OperationalStatus, Converter={StaticResource OpStatusToolTipConverter}}">
+                            <TextBlock Foreground="White">
+                                <Run Text="[" /><Run Text="{Binding OperationalStatus, Mode=OneTime}" /><Run Text="]" />
+                            </TextBlock>
+                        </Border>
+
+                        <Border x:Name="NicTypeBorder"
+                                Margin="4,0,0,0"
+                                Padding="2"
+                                VerticalAlignment="Center"
+                                Background="{StaticResource DarkWarningBrush}"
+                                CornerRadius="4"
+                                ToolTip="{Binding NetworkInterfaceType}">
+                            <TextBlock Foreground="White">
+                                <Run Text="[" /><Run Text="{Binding Name, Mode=OneTime}" /><Run Text="]" />
+                            </TextBlock>
+                        </Border>
+
+                        <TextBlock Margin="4,0,0,0"
+                                   VerticalAlignment="Center"
+                                   Text="{Binding Description}"
+                                   ToolTip="{Binding}" />
+                    </hc:SimpleStackPanel>
+
+                    <DataTemplate.Triggers>
+                        <DataTrigger Binding="{Binding OperationalStatus}"
+                                     Value="{x:Static net:OperationalStatus.Up}">
+                            <Setter TargetName="NicOpStatusBorder" Property="Background" Value="{StaticResource SuccessBrush}" />
+                        </DataTrigger>
+
+                        <DataTrigger Binding="{Binding SimpleNicType}"
+                                     Value="{x:Static m:SimpleNicType.Wlan}">
+                            <Setter TargetName="NicTypeBorder" Property="Background" Value="{StaticResource InfoBrush}" />
+                        </DataTrigger>
+
+                        <DataTrigger Binding="{Binding SimpleNicType}"
+                                     Value="{x:Static m:SimpleNicType.Vm}">
+                            <Setter TargetName="NicTypeBorder" Property="Background" Value="{StaticResource SecondaryBorderBrush}" />
+                        </DataTrigger>
+
+                        <DataTrigger Binding="{Binding SimpleNicType}"
+                                     Value="{x:Static m:SimpleNicType.Ethernet}">
+                            <Setter TargetName="NicTypeBorder" Property="Background" Value="{StaticResource PrimaryBrush}" />
+                        </DataTrigger>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+            </hc:ComboBox.ItemTemplate>
+        </hc:ComboBox>
+
+        <Button Grid.Column="1"
+                Height="36"
+                Margin="4,0,0,0"
+                Command="{Binding RefreshCommand}"
+                Content="{lang:Lang {x:Static lang:LangKey.Refresh}}"
+                ToolTip="{lang:Lang {x:Static lang:LangKey.Refresh_ToolTip}}" />
+    </Grid>
+</UserControl>

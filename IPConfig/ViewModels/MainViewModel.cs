@@ -6,14 +6,9 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
-using System.Net.NetworkInformation;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Timers;
 using System.Windows;
-using System.Windows.Data;
-
-using CodingNinja.Wpf.ObjectModel;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -34,31 +29,15 @@ using HcMessageBox = HandyControl.Controls.MessageBox;
 
 namespace IPConfig.ViewModels;
 
-public partial class MainViewModel : ObservableRecipient,
-    IRecipient<PropertyChangedMessage<EditableIPConfigModel?>>
+public partial class MainViewModel : ObservableRecipient
 {
     #region Fields
 
-    private readonly Timer _realTimeNicSpeed = new(1000);
-
-    private readonly object _syncLock = new();
-
     private GithubReleaseInfo? _githubReleaseInfo;
-
-    private long _lastBytesReceived = 0;
-
-    private long _lastBytesSent = 0;
-
-    private EditableIPConfigModel? _lastSelectedIPConfig;
-
-    private IPv4Config? _selectedNicIPv4Config;
 
     #endregion Fields
 
     #region ObservableProperties
-
-    [ObservableProperty]
-    private WpfObservableRangeCollection<Nic> _allNics = new();
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(NewVersionAvailableToolTip))]
@@ -72,55 +51,17 @@ public partial class MainViewModel : ObservableRecipient,
     private bool _hasNewVersion;
 
     [ObservableProperty]
-    private bool _isSelectedNicIPConfigChecked;
-
-    [ObservableProperty]
-    private bool _isViewToNicConfigDetail;
+    private bool _isInNicConfigDetailView;
 
     [ObservableProperty]
     private ObservableCollection<CultureInfo> _languages = null!;
 
     [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(CanLoadLastUsedIPv4Config))]
-    [NotifyCanExecuteChangedFor(nameof(LoadLastUsedIPv4ConfigCommand))]
-    private LastUsedIPv4Config? _lastUsedIPv4Config;
-
-    [ObservableProperty]
-    private int _selectedIPConfigsCount;
-
-    [ObservableProperty]
-    [NotifyPropertyChangedRecipients]
-    [NotifyPropertyChangedFor(nameof(IsSelectedNicNotNull))]
-    [NotifyCanExecuteChangedFor(nameof(CopySelectedNicIPConfigAsTextCommand),
-        nameof(MakeSelectedNicIPConfigCopyCommand),
-        nameof(ViewToNicConfigDetailCommand),
-        nameof(ReadLastUsedIPv4ConfigCommand))]
-    private Nic? _selectedNic;
-
-    [ObservableProperty]
-    private string _selectedNicDownloadSpeed = "…B/s";
-
-    [ObservableProperty]
-    private EditableIPConfigModel? _selectedNicIPConfig;
-
-    [ObservableProperty]
-    private string _selectedNicUploadSpeed = "…B/s";
-
-    [ObservableProperty]
     private bool _topmost = Settings.Default.Topmost;
-
-    [ObservableProperty]
-    private int _totalIPConfigsCount;
 
     #endregion ObservableProperties
 
     #region Properties
-
-    public bool CanLoadLastUsedIPv4Config => LastUsedIPv4Config is not null;
-
-    public string GetNicsToolTip { get; private set; } = Lang.AdapterNotFound;
-
-    public bool IsSelectedNicNotNull => SelectedNic is not null;
 
     public string NewVersionAvailableToolTip
     {
@@ -151,47 +92,16 @@ public partial class MainViewModel : ObservableRecipient,
     {
         IsActive = true;
 
-        BindingOperations.EnableCollectionSynchronization(AllNics, _syncLock);
-
-        LangSource.Instance.LanguageChanged += (s, e) => {
-            // 更新 ToolTip 信息。
-            OnPropertyChanged(nameof(SelectedNic));
-            OnPropertyChanged(nameof(SelectedNicIPConfig));
-            OnPropertyChanged(nameof(NewVersionAvailableToolTip));
-        };
-    }
-
-    public void Receive(PropertyChangedMessage<EditableIPConfigModel?> message)
-    {
-        if (message.Sender is IPConfigListViewModel)
-        {
-            if (message.NewValue is not null)
-            {
-                _lastSelectedIPConfig = message.NewValue;
-            }
-
-            IsSelectedNicIPConfigChecked = message.NewValue is null;
-        }
+        // 更新 ToolTip 信息。
+        LangSource.Instance.LanguageChanged += (s, e) => OnPropertyChanged(nameof(NewVersionAvailableToolTip));
     }
 
     protected override void OnActivated()
     {
         base.OnActivated();
 
-        Messenger.Register<MainViewModel, ValueChangedMessage<int>, string>(this, "SelectedIPConfigsCount",
-            (r, m) => SelectedIPConfigsCount = m.Value);
-
-        Messenger.Register<MainViewModel, ValueChangedMessage<int>, string>(this, "TotalIPConfigsCount",
-            (r, m) => TotalIPConfigsCount = m.Value);
-
-        Messenger.Register<MainViewModel, GoBackMessage>(this,
-            (r, m) => GoBack());
-
-        Messenger.Register<MainViewModel, RequestMessage<Nic?>>(this,
-            (r, m) => m.Reply(SelectedNic));
-
-        Messenger.Register<MainViewModel, RefreshMessage>(this,
-            (r, m) => RefreshCommand.Execute(null));
+        Messenger.Register<MainViewModel, ValueChangedMessage<bool>, string>(this, "IsInNicConfigDetailView",
+            (r, m) => IsInNicConfigDetailView = m.Value);
     }
 
     #endregion Constructors & Recipients
@@ -202,12 +112,6 @@ public partial class MainViewModel : ObservableRecipient,
     private static void ChangeLanguage(string name)
     {
         LangSource.Instance.SetLanguage(name);
-    }
-
-    [RelayCommand]
-    private void AddUntitledIPConfig()
-    {
-        Messenger.Send<AddUntitledIPConfigMessage>(new(this));
     }
 
     [RelayCommand]
@@ -310,35 +214,6 @@ public partial class MainViewModel : ObservableRecipient,
         });
     }
 
-    [RelayCommand(CanExecute = nameof(IsSelectedNicNotNull))]
-    private async Task CopySelectedNicIPConfigAsTextAsync()
-    {
-        string text = $"{SelectedNic}\n\n{SelectedNicIPConfig}".Trim();
-        await ClipboardHelper.SetTextAsync(text);
-    }
-
-    [RelayCommand]
-    private void GetAllNics()
-    {
-        var nics = NetworkInterface.GetAllNetworkInterfaces()
-            .Select(x => new Nic(x))
-            .OrderBy(x => x.OperationalStatus is OperationalStatus.Up
-                    && x.NetworkInterfaceType is not NetworkInterfaceType.Loopback or NetworkInterfaceType.Tunnel
-                    ? (int)x.OperationalStatus
-                    : Int32.MaxValue)
-            .ThenBy(x => x.SimpleNicType)
-            .ThenBy(x => x.Name);
-
-        AllNics = new(nics);
-        AllNics.CollectionChanged += (_, _) => GetNicsToolTip = AllNics.Count > 0 ? Lang.SelectAdapter_ToolTip : Lang.AdapterNotFound;
-    }
-
-    [RelayCommand]
-    private void GoBack()
-    {
-        IsViewToNicConfigDetail = false;
-    }
-
     [RelayCommand]
     private async Task LoadedAsync()
     {
@@ -365,65 +240,13 @@ public partial class MainViewModel : ObservableRecipient,
 
         ChangeTheme(skinType);
 
-        GetAllNics();
-        SelectedNic = AllNics.FirstOrDefault();
-
-        _realTimeNicSpeed.Elapsed += RealTimeNicSpeed_Elapsed;
-        ResetNicSpeedDisplay();
-        _realTimeNicSpeed.Start();
-
         await GetLatestReleaseInfoAsync();
-    }
-
-    [RelayCommand(CanExecute = nameof(CanLoadLastUsedIPv4Config))]
-    private void LoadLastUsedIPv4Config()
-    {
-        LastUsedIPv4Config!.DeepCloneTo(SelectedNicIPConfig!.IPv4Config);
-        SelectedNicIPConfigChecked();
-        GoBack();
-    }
-
-    [RelayCommand(CanExecute = nameof(IsSelectedNicNotNull))]
-    private void MakeSelectedNicIPConfigCopy()
-    {
-        Messenger.Send(SelectedNicIPConfig!, "MakeSelectedNicIPConfigCopy");
-    }
-
-    [RelayCommand(CanExecute = nameof(IsSelectedNicNotNull))]
-    private async Task ReadLastUsedIPv4ConfigAsync()
-    {
-        var backup = await LastUsedIPv4Config.ReadAsync(SelectedNic!.Id);
-
-        if (backup is null || backup.PropertyEquals(_selectedNicIPv4Config!))
-        {
-            LastUsedIPv4Config = null;
-        }
-        else
-        {
-            LastUsedIPv4Config = backup;
-        }
-    }
-
-    [RelayCommand]
-    private void Refresh()
-    {
-        string? id = SelectedNic?.Id;
-        GetAllNics();
-        SelectedNic = AllNics.FirstOrDefault(x => x.Id == id);
     }
 
     [RelayCommand]
     private void Save()
     {
         Messenger.Send<SaveMessage>(new(this));
-    }
-
-    [RelayCommand]
-    private void SelectedNicIPConfigChecked()
-    {
-        Messenger.Send<ValueChangedMessage<bool>, string>(new(true), "SelectedNicIPConfigChecked");
-
-        Broadcast(SelectedNicIPConfig, SelectedNicIPConfig, nameof(SelectedNicIPConfig));
     }
 
     [RelayCommand]
@@ -482,67 +305,9 @@ public partial class MainViewModel : ObservableRecipient,
         });
     }
 
-    [RelayCommand]
-    private void ViewNicIPConfig(bool enter = true)
-    {
-        if (enter)
-        {
-            IsSelectedNicIPConfigChecked = true;
-        }
-        else
-        {
-            if (IsViewToNicConfigDetail)
-            {
-                if (_lastSelectedIPConfig is null)
-                {
-                    IsViewToNicConfigDetail = false;
-                }
-                else
-                {
-                    Messenger.Send<ChangeSelectionMessage<EditableIPConfigModel>>(new(this, _lastSelectedIPConfig));
-                }
-            }
-        }
-    }
-
-    [RelayCommand(CanExecute = nameof(IsSelectedNicNotNull))]
-    private void ViewToNicConfigDetail()
-    {
-        _lastSelectedIPConfig = IsSelectedNicIPConfigChecked ? null : _lastSelectedIPConfig;
-
-        IsSelectedNicIPConfigChecked = true;
-        IsViewToNicConfigDetail = true;
-    }
-
     #endregion Relay Commands
 
     #region Partial OnPropertyChanged Methods
-
-    partial void OnSelectedNicChanged(Nic? value)
-    {
-        ResetNicSpeedDisplay();
-
-        var nic = value;
-
-        if (nic is null)
-        {
-            SelectedNicIPConfig = null;
-
-            return;
-        }
-
-        var oldSelectedNicIPConfig = SelectedNicIPConfig;
-        _selectedNicIPv4Config = NetworkManagement.GetIPv4Config(nic);
-
-        SelectedNicIPConfig = new($"{nic.Name} - {nic.Description}") {
-            IPv4Config = _selectedNicIPv4Config.DeepClone()
-        };
-
-        SelectedNicIPConfig.BeginEdit();
-
-        IsSelectedNicIPConfigChecked = true;
-        Broadcast(oldSelectedNicIPConfig, SelectedNicIPConfig, nameof(SelectedNicIPConfig));
-    }
 
     partial void OnTopmostChanged(bool value)
     {
@@ -551,47 +316,6 @@ public partial class MainViewModel : ObservableRecipient,
     }
 
     #endregion Partial OnPropertyChanged Methods
-
-    #region Event Handlers
-
-    private void RealTimeNicSpeed_Elapsed(object? sender, ElapsedEventArgs e)
-    {
-        var stats = SelectedNic?.GetIPStatistics();
-
-        if (stats is null)
-        {
-            SelectedNicUploadSpeed = "N/A";
-            SelectedNicDownloadSpeed = "N/A";
-
-            return;
-        }
-
-        if (_lastBytesSent < 0)
-        {
-            SelectedNicUploadSpeed = "?/s";
-        }
-        else
-        {
-            long deltaSent = stats.BytesSent - _lastBytesSent;
-            SelectedNicUploadSpeed = BytesFormatter.ToNetSpeed(deltaSent);
-        }
-
-        _lastBytesSent = stats.BytesSent;
-
-        if (_lastBytesReceived < 0)
-        {
-            SelectedNicDownloadSpeed = "?/s";
-        }
-        else
-        {
-            long deltaRecv = stats.BytesReceived - _lastBytesReceived;
-            SelectedNicDownloadSpeed = BytesFormatter.ToNetSpeed(deltaRecv);
-        }
-
-        _lastBytesReceived = stats.BytesReceived;
-    }
-
-    #endregion Event Handlers
 
     #region Private Methods
 
@@ -634,27 +358,6 @@ public partial class MainViewModel : ObservableRecipient,
             HasNewVersion = false;
             CheckUpdateError = ex;
         }
-    }
-
-    private void ResetNicSpeedDisplay()
-    {
-        _lastBytesSent = 0;
-        _lastBytesReceived = 0;
-        SelectedNicUploadSpeed = "…B/s";
-        SelectedNicDownloadSpeed = "…B/s";
-
-        var stats = SelectedNic?.GetIPStatistics();
-
-        if (stats is null)
-        {
-            SelectedNicUploadSpeed = "N/A";
-            SelectedNicDownloadSpeed = "N/A";
-
-            return;
-        }
-
-        _lastBytesSent = stats.BytesSent;
-        _lastBytesReceived = stats.BytesReceived;
     }
 
     #endregion Private Methods

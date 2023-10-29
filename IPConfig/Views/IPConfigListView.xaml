@@ -10,6 +10,7 @@
              xmlns:vm="clr-namespace:IPConfig.ViewModels"
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:dd="urn:gong-wpf-dragdrop"
+             d:Background="{DynamicResource RegionBrush}"
              d:DataContext="{d:DesignInstance Type=vm:IPConfigListViewModel,
                                               IsDesignTimeCreatable=True}"
              d:DesignHeight="450"
@@ -34,6 +35,7 @@
                       b:TripleClickToSelectAllBehavior.Enabled="True"
                       hc:InfoElement.ShowClearButton="True"
                       Command="{Binding SearchCommand}"
+                      CommandParameter="{Binding SearchKeyword}"
                       IsRealTime="False"
                       Style="{StaticResource SearchBarPlus}"
                       Text="{Binding SearchKeyword, Delay=100, UpdateSourceTrigger=PropertyChanged}" />
@@ -71,7 +73,7 @@
                              UseLayoutRounding="True">
                     <MenuItem Command="{Binding CopySelectedIPConfigsAsTextCommand}"
                               Header="{lang:Lang {x:Static lang:LangKey.CopySelectedIPConfigAsText_}}"
-                              InputGestureText="{Binding SelectedIPConfigsCountString}" />
+                              InputGestureText="{Binding MultiSelectedCountString}" />
 
                     <MenuItem Command="{Binding MakeSelectedIPConfigCopyCommand}"
                               Header="{lang:Lang {x:Static lang:LangKey.MakeSelectedIPConfigCopy_}}" />

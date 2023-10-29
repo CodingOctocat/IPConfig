@@ -245,7 +245,7 @@ public partial class NicConfigDetailViewModel : ObservableRecipient,
     [RelayCommand]
     private void Loaded()
     {
-        Nic = Messenger.Send<RequestMessage<Nic?>>().Response!;
+        Nic = Messenger.Send<RequestMessage<Nic>, string>("DeferredLoadingForNicConfigDetailView").Response;
     }
 
     #endregion Relay Commands

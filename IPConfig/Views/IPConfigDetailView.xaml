@@ -11,6 +11,7 @@
              xmlns:v="clr-namespace:IPConfig.Views"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:hc="https://handyorg.github.io/handycontrol"
+             d:Background="{DynamicResource RegionBrush}"
              d:DataContext="{d:DesignInstance Type=vm:IPConfigDetailViewModel,
                                               IsDesignTimeCreatable=True}"
              d:DesignWidth="500"

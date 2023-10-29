@@ -90,10 +90,6 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
     private EditableIPConfigModel _editingIPConfig = IPConfigModel.Empty.AsEditable();
 
     [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(IsNicIPConfig))]
-    private object _editingIPConfigSender = null!;
-
-    [ObservableProperty]
     private string? _gatewayAutoCompletePreview;
 
     [ObservableProperty]
@@ -133,13 +129,13 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
 
     public bool IsEditingIPConfigModifield => IsInContrastView || EditingIPConfig.IsChanged;
 
-    public bool IsNicIPConfig => EditingIPConfigSender is MainViewModel;
+    public bool IsNicIPConfig { get; private set; }
 
     public ICommand PrimarySaveOrApplyCommand
     {
         get
         {
-            if (EditingIPConfigSender is MainViewModel)
+            if (IsNicIPConfig)
             {
                 return ApplyCommand;
             }
@@ -159,7 +155,7 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
     {
         get
         {
-            if (EditingIPConfigSender is MainViewModel)
+            if (IsNicIPConfig)
             {
                 return $"{Lang.Apply_}";
             }
@@ -179,7 +175,7 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
     {
         get
         {
-            if (EditingIPConfigSender is MainViewModel)
+            if (IsNicIPConfig)
             {
                 return SaveCommand;
             }
@@ -199,7 +195,7 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
     {
         get
         {
-            if (EditingIPConfigSender is MainViewModel)
+            if (IsNicIPConfig)
             {
                 return $"{Lang.Save_}";
             }
@@ -264,7 +260,7 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
     }
 
     /// <summary>
-    /// 接收 <seealso cref="MainViewModel.SelectedNicIPConfig"/> 或 <seealso cref="IPConfigListViewModel.SelectedIPConfig"/>。
+    /// 接收 <seealso cref="NicViewModel.SelectedNicIPConfig"/> 或 <seealso cref="IPConfigListViewModel.SelectedIPConfig"/>。
     /// </summary>
     /// <param name="message"></param>
     public void Receive(PropertyChangedMessage<EditableIPConfigModel?> message)
@@ -279,7 +275,8 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
             oldIPConfig.IPv4Config.AllowAutoDisableAutoDns(false);
         }
 
-        EditingIPConfigSender = message.Sender;
+        IsNicIPConfig = message.Sender is NicViewModel;
+        OnPropertyChanged(nameof(IsNicIPConfig));
 
         if (newIPConfig is null)
         {
@@ -309,9 +306,6 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
     protected override void OnActivated()
     {
         base.OnActivated();
-
-        Messenger.Register<IPConfigDetailViewModel, RequestMessage<ConfirmSave>>(this,
-            (r, m) => m.Reply(new(EditingIPConfigSender, EditingIPConfig, !IsEditingIPConfigModifield)));
 
         Messenger.Register<IPConfigDetailViewModel, SaveMessage>(this,
             (r, m) => SaveCommand.Execute(null));
@@ -553,7 +547,7 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
                 col.Upsert(EditingIPConfig);
             });
 
-            if (EditingIPConfigSender is MainViewModel)
+            if (IsNicIPConfig)
             {
                 Messenger.Send(EditingIPConfig, "MakeSelectedNicIPConfigCopy");
             }

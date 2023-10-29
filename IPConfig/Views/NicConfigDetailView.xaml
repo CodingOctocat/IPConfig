@@ -10,6 +10,8 @@
              xmlns:vm="clr-namespace:IPConfig.ViewModels"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:hc="https://handyorg.github.io/handycontrol"
+             b:InputBindingBehavior.PropagateInputBindingsToWindow="True"
+             d:Background="{DynamicResource RegionBrush}"
              d:DataContext="{d:DesignInstance Type=vm:NicConfigDetailViewModel,
                                               IsDesignTimeCreatable=True}"
              d:DesignWidth="500"
@@ -18,86 +20,84 @@
              IsVisibleChanged="UserControl_IsVisibleChanged"
              mc:Ignorable="d">
     <UserControl.Resources>
-        <ResourceDictionary>
-            <conv:CopyContentFormatConverter x:Key="CopyContentFormatConverter" />
-            <conv:BytesToFileSizeConverter x:Key="BytesToFileSizeConverter" />
+        <conv:CopyContentFormatConverter x:Key="CopyContentFormatConverter" />
+        <conv:BytesToFileSizeConverter x:Key="BytesToFileSizeConverter" />
 
-            <Style x:Key="HeaderStyle"
-                   TargetType="{x:Type TextBlock}">
-                <Setter Property="FontSize" Value="12" />
-                <Setter Property="Padding" Value="0,4" />
+        <Style x:Key="HeaderStyle"
+               TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Padding" Value="0,4" />
 
-                <Setter Property="TextBlock.ContextMenu">
-                    <Setter.Value>
-                        <ContextMenu>
-                            <!--
-                                CommandPatameter 绑定问题解决方案：
-                                https://stackoverflow.com/a/505185
-                            -->
-                            <MenuItem Command="{Binding CopyContentsAsTextCommand}"
-                                      CommandParameter="{Binding PlacementTarget.Text, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}"
-                                      Header="{Binding PlacementTarget.Text, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Converter={StaticResource CopyContentFormatConverter}}" />
-                        </ContextMenu>
-                    </Setter.Value>
-                </Setter>
+            <Setter Property="TextBlock.ContextMenu">
+                <Setter.Value>
+                    <ContextMenu>
+                        <!--
+                            CommandPatameter 绑定问题解决方案：
+                            https://stackoverflow.com/a/505185
+                        -->
+                        <MenuItem Command="{Binding CopyContentsAsTextCommand}"
+                                  CommandParameter="{Binding PlacementTarget.Text, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}"
+                                  Header="{Binding PlacementTarget.Text, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Converter={StaticResource CopyContentFormatConverter}}" />
+                    </ContextMenu>
+                </Setter.Value>
+            </Setter>
 
-                <Setter Property="Width" Value="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Expander}}}" />
-            </Style>
+            <Setter Property="Width" Value="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Expander}}}" />
+        </Style>
 
-            <Style BasedOn="{StaticResource TextBoxPlusBaseStyle}"
-                   TargetType="{x:Type hc:TextBox}">
-                <Setter Property="IsReadOnly" Value="True" />
-                <Setter Property="ToolTip" Value="{Binding Text, RelativeSource={RelativeSource Self}}" />
-                <Setter Property="b:TripleClickToSelectAllBehavior.Enabled" Value="True" />
-                <Setter Property="hc:TitleElement.TitlePlacement" Value="Left" />
-            </Style>
+        <Style BasedOn="{StaticResource TextBoxPlusBaseStyle}"
+               TargetType="{x:Type hc:TextBox}">
+            <Setter Property="IsReadOnly" Value="True" />
+            <Setter Property="ToolTip" Value="{Binding Text, RelativeSource={RelativeSource Self}}" />
+            <Setter Property="b:TripleClickToSelectAllBehavior.Enabled" Value="True" />
+            <Setter Property="hc:TitleElement.TitlePlacement" Value="Left" />
+        </Style>
 
-            <Style BasedOn="{StaticResource ListBoxCustom}"
-                   TargetType="{x:Type ListBox}">
-                <Setter Property="Background" Value="{x:Null}" />
-                <Setter Property="BorderThickness" Value="0" />
+        <Style BasedOn="{StaticResource ListBoxCustom}"
+               TargetType="{x:Type ListBox}">
+            <Setter Property="Background" Value="{x:Null}" />
+            <Setter Property="BorderThickness" Value="0" />
 
-                <Setter Property="ItemContainerStyle">
-                    <Setter.Value>
-                        <Style BasedOn="{StaticResource ListBoxItemBaseStyle}"
-                               TargetType="{x:Type ListBoxItem}">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                            <Setter Property="Margin" Value="0,0,0,4" />
-                            <Setter Property="Padding" Value="0" />
+            <Setter Property="ItemContainerStyle">
+                <Setter.Value>
+                    <Style BasedOn="{StaticResource ListBoxItemBaseStyle}"
+                           TargetType="{x:Type ListBoxItem}">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        <Setter Property="Margin" Value="0,0,0,4" />
+                        <Setter Property="Padding" Value="0" />
 
-                            <Style.Triggers>
-                                <Trigger Property="IsSelected" Value="True">
-                                    <Setter Property="Background" Value="{x:Null}" />
-                                    <Setter Property="Foreground" Value="{x:Null}" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Setter.Value>
-                </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="{x:Null}" />
+                                <Setter Property="Foreground" Value="{x:Null}" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Setter.Value>
+            </Setter>
 
-                <Setter Property="ItemTemplate">
-                    <Setter.Value>
-                        <DataTemplate DataType="{x:Type sys:String}">
-                            <TextBox b:TripleClickToSelectAllBehavior.Enabled="True"
-                                     FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
-                                     IsReadOnly="True"
-                                     Text="{Binding Mode=OneWay}"
-                                     ToolTip="{Binding Text, RelativeSource={RelativeSource Self}}" />
-                        </DataTemplate>
-                    </Setter.Value>
-                </Setter>
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate DataType="{x:Type sys:String}">
+                        <TextBox b:TripleClickToSelectAllBehavior.Enabled="True"
+                                 FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                                 IsReadOnly="True"
+                                 Text="{Binding Mode=OneWay}"
+                                 ToolTip="{Binding Text, RelativeSource={RelativeSource Self}}" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
 
-                <Setter Property="Margin" Value="{Binding TitleWidthMargin, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" />
-                <Setter Property="Padding" Value="0,0,0,-4" />
-                <Setter Property="b:IgnoreMouseWheelBehavior.Enabled" Value="True" />
-            </Style>
+            <Setter Property="Margin" Value="{Binding TitleWidthMargin, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" />
+            <Setter Property="Padding" Value="0,0,0,-4" />
+            <Setter Property="b:IgnoreMouseWheelBehavior.Enabled" Value="True" />
+        </Style>
 
-            <Style TargetType="{x:Type hc:UniformSpacingPanel}">
-                <Setter Property="Margin" Value="4" />
-                <Setter Property="Orientation" Value="Vertical" />
-                <Setter Property="Spacing" Value="4" />
-            </Style>
-        </ResourceDictionary>
+        <Style TargetType="{x:Type hc:UniformSpacingPanel}">
+            <Setter Property="Margin" Value="4" />
+            <Setter Property="Orientation" Value="Vertical" />
+            <Setter Property="Spacing" Value="4" />
+        </Style>
     </UserControl.Resources>
 
     <i:Interaction.Triggers>
@@ -105,6 +105,11 @@
             <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
+
+    <UserControl.InputBindings>
+        <KeyBinding Key="Backspace"
+                    Command="{Binding GoBackCommand}" />
+    </UserControl.InputBindings>
 
     <Grid>
         <Grid.RowDefinitions>
