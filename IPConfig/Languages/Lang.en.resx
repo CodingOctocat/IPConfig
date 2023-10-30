@@ -275,6 +275,9 @@
   <data name="DhcpLeaseLifetime" xml:space="preserve">
     <value>DHCP Lease Lifetime</value>
   </data>
+  <data name="Disabled" xml:space="preserve">
+    <value>Disabled</value>
+  </data>
   <data name="DiscardAsk" xml:space="preserve">
     <value>Are you sure you want to discard changes?</value>
   </data>

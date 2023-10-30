@@ -32,6 +32,8 @@ public partial class NicViewModel : ObservableRecipient,
 
     private long _lastBytesSent = 0;
 
+    private Nic? _lastNic;
+
     private EditableIPConfigModel? _lastSelectedIPConfig;
 
     private IPv4Config? _selectedNicIPv4Config;
@@ -203,9 +205,8 @@ public partial class NicViewModel : ObservableRecipient,
     [RelayCommand]
     private void Refresh()
     {
-        string? id = SelectedNic?.Id;
         GetAllNics();
-        SelectedNic = AllNics.FirstOrDefault(x => x.Id == id);
+        SelectedNic = AllNics.FirstOrDefault(x => x.Id == _lastNic?.Id);
     }
 
     [RelayCommand]
@@ -253,6 +254,22 @@ public partial class NicViewModel : ObservableRecipient,
     partial void OnIsInNicConfigDetailViewChanged(bool value)
     {
         Messenger.Send<ValueChangedMessage<bool>, string>(new(value), "IsInNicConfigDetailView");
+    }
+
+    partial void OnSelectedNicChanged(Nic? oldValue, Nic? newValue)
+    {
+        _lastNic = oldValue;
+
+        if (oldValue is not null && newValue is null)
+        {
+            GetNicsToolTip = $"[{Lang.Disabled}] {oldValue.Name} - {oldValue.Description}";
+        }
+        else
+        {
+            GetNicsToolTip = Lang.AdapterNotFound;
+        }
+
+        OnPropertyChanged(nameof(GetNicsToolTip));
     }
 
     partial void OnSelectedNicChanged(Nic? value)

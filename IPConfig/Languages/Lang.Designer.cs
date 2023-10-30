@@ -711,6 +711,18 @@ namespace IPConfig.Languages {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to "未启用"
+        /// </summary>
+        /// <remarks>
+        /// NicViewModel
+        /// </remarks>
+        public static string Disabled {
+            get {
+                return ResourceManager.GetString("Disabled", resourceCulture) ?? string.Empty;
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to "确定放弃修改？"
         /// </summary>
         /// <remarks>
@@ -2498,6 +2510,13 @@ namespace IPConfig.Languages {
         /// NicConfigDetailView
         /// </remarks>
         DhcpLeaseLifetime,
+        /// <summary>
+        ///   Looks up a localized string similar to 未启用.
+        /// </summary>
+        /// <remarks>
+        /// NicViewModel
+        /// </remarks>
+        Disabled,
         /// <summary>
         ///   Looks up a localized string similar to 确定放弃修改？.
         /// </summary>

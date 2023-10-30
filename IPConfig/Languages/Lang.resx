@@ -305,6 +305,10 @@
     <value>DHCP 剩余</value>
     <comment>NicConfigDetailView</comment>
   </data>
+  <data name="Disabled" xml:space="preserve">
+    <value>未启用</value>
+    <comment>NicViewModel</comment>
+  </data>
   <data name="DiscardAsk" xml:space="preserve">
     <value>确定放弃修改？</value>
     <comment>IPConfigDetailViewModel</comment>
