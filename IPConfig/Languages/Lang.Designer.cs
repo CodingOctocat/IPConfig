@@ -162,7 +162,7 @@ namespace IPConfig.Languages {
         ///   Looks up a localized string similar to "未找到网卡/适配器"
         /// </summary>
         /// <remarks>
-        /// MainWindow
+        /// NicViewModel
         /// </remarks>
         public static string AdapterNotFound {
             get {
@@ -174,7 +174,7 @@ namespace IPConfig.Languages {
         ///   Looks up a localized string similar to "请检查网络适配器是否被卸载或禁用"
         /// </summary>
         /// <remarks>
-        /// MainWindow
+        /// NicInfoCardView
         /// </remarks>
         public static string AdapterNotFound_ToolTip {
             get {
@@ -582,7 +582,7 @@ namespace IPConfig.Languages {
         ///   Looks up a localized string similar to "将此配置复制为文本(_T)"
         /// </summary>
         /// <remarks>
-        /// MainWindow
+        /// IPConfigListView
         /// </remarks>
         public static string CopySelectedIPConfigAsText_ {
             get {
@@ -1386,7 +1386,7 @@ namespace IPConfig.Languages {
         ///   Looks up a localized string similar to "加载上次使用的配置(_L)"
         /// </summary>
         /// <remarks>
-        /// MainWindow
+        /// NicInfoCardView
         /// </remarks>
         public static string LoadLastUsedConfiguration_ {
             get {
@@ -1398,7 +1398,7 @@ namespace IPConfig.Languages {
         ///   Looks up a localized string similar to "生成副本(_C)"
         /// </summary>
         /// <remarks>
-        /// MainWindow
+        /// IPConfigListView
         /// </remarks>
         public static string MakeSelectedIPConfigCopy_ {
             get {
@@ -1710,7 +1710,7 @@ namespace IPConfig.Languages {
         ///   Looks up a localized string similar to "刷新"
         /// </summary>
         /// <remarks>
-        /// MainWindow
+        /// NicSelectorView
         /// </remarks>
         public static string Refresh {
             get {
@@ -1722,7 +1722,7 @@ namespace IPConfig.Languages {
         ///   Looks up a localized string similar to "刷新 (F5)"
         /// </summary>
         /// <remarks>
-        /// MainWindow
+        /// NicSelectorView
         /// </remarks>
         public static string Refresh_ToolTip {
             get {
@@ -1854,7 +1854,7 @@ namespace IPConfig.Languages {
         ///   Looks up a localized string similar to "请选择网卡/适配器..."
         /// </summary>
         /// <remarks>
-        /// MainViewModel
+        /// NicSelectorView
         /// </remarks>
         public static string SelectAdapter_ToolTip {
             get {
@@ -2106,7 +2106,7 @@ namespace IPConfig.Languages {
         ///   Looks up a localized string similar to "详细信息(_D)"
         /// </summary>
         /// <remarks>
-        /// MainWindow
+        /// NicInfoCardView
         /// </remarks>
         public static string ViewToAdapterConfigDetail_ {
             get {
@@ -2192,14 +2192,14 @@ namespace IPConfig.Languages {
         ///   Looks up a localized string similar to 未找到网卡/适配器.
         /// </summary>
         /// <remarks>
-        /// MainWindow
+        /// NicViewModel
         /// </remarks>
         AdapterNotFound,
         /// <summary>
         ///   Looks up a localized string similar to 请检查网络适配器是否被卸载或禁用.
         /// </summary>
         /// <remarks>
-        /// MainWindow
+        /// NicInfoCardView
         /// </remarks>
         AdapterNotFound_ToolTip,
         /// <summary>
@@ -2437,7 +2437,7 @@ namespace IPConfig.Languages {
         ///   Looks up a localized string similar to 将此配置复制为文本(_T).
         /// </summary>
         /// <remarks>
-        /// MainWindow
+        /// IPConfigListView
         /// </remarks>
         CopySelectedIPConfigAsText_,
         /// <summary>
@@ -2906,14 +2906,14 @@ namespace IPConfig.Languages {
         ///   Looks up a localized string similar to 加载上次使用的配置(_L).
         /// </summary>
         /// <remarks>
-        /// MainWindow
+        /// NicInfoCardView
         /// </remarks>
         LoadLastUsedConfiguration_,
         /// <summary>
         ///   Looks up a localized string similar to 生成副本(_C).
         /// </summary>
         /// <remarks>
-        /// MainWindow
+        /// IPConfigListView
         /// </remarks>
         MakeSelectedIPConfigCopy_,
         /// <summary>
@@ -3095,14 +3095,14 @@ namespace IPConfig.Languages {
         ///   Looks up a localized string similar to 刷新.
         /// </summary>
         /// <remarks>
-        /// MainWindow
+        /// NicSelectorView
         /// </remarks>
         Refresh,
         /// <summary>
         ///   Looks up a localized string similar to 刷新 (F5).
         /// </summary>
         /// <remarks>
-        /// MainWindow
+        /// NicSelectorView
         /// </remarks>
         Refresh_ToolTip,
         /// <summary>
@@ -3179,7 +3179,7 @@ namespace IPConfig.Languages {
         ///   Looks up a localized string similar to 请选择网卡/适配器....
         /// </summary>
         /// <remarks>
-        /// MainViewModel
+        /// NicSelectorView
         /// </remarks>
         SelectAdapter_ToolTip,
         /// <summary>
@@ -3326,7 +3326,7 @@ namespace IPConfig.Languages {
         ///   Looks up a localized string similar to 详细信息(_D).
         /// </summary>
         /// <remarks>
-        /// MainWindow
+        /// NicInfoCardView
         /// </remarks>
         ViewToAdapterConfigDetail_,
         /// <summary>

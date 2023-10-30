@@ -123,11 +123,11 @@
   </data>
   <data name="AdapterNotFound" xml:space="preserve">
     <value>未找到网卡/适配器</value>
-    <comment>MainWindow</comment>
+    <comment>NicViewModel</comment>
   </data>
   <data name="AdapterNotFound_ToolTip" xml:space="preserve">
     <value>请检查网络适配器是否被卸载或禁用</value>
-    <comment>MainWindow</comment>
+    <comment>NicInfoCardView</comment>
   </data>
   <data name="AdapterNotSupported" xml:space="preserve">
     <value>[不支持]</value>
@@ -255,7 +255,7 @@
   </data>
   <data name="CopySelectedIPConfigAsText_" xml:space="preserve">
     <value>将此配置复制为文本(_T)</value>
-    <comment>MainWindow</comment>
+    <comment>IPConfigListView</comment>
   </data>
   <data name="Copy_Noun" xml:space="preserve">
     <value>副本</value>
@@ -531,11 +531,11 @@
   </data>
   <data name="LoadLastUsedConfiguration_" xml:space="preserve">
     <value>加载上次使用的配置(_L)</value>
-    <comment>MainWindow</comment>
+    <comment>NicInfoCardView</comment>
   </data>
   <data name="MakeSelectedIPConfigCopy_" xml:space="preserve">
     <value>生成副本(_C)</value>
-    <comment>MainWindow</comment>
+    <comment>IPConfigListView</comment>
   </data>
   <data name="Manual" xml:space="preserve">
     <value>手动</value>
@@ -641,11 +641,11 @@
   </data>
   <data name="Refresh" xml:space="preserve">
     <value>刷新</value>
-    <comment>MainWindow</comment>
+    <comment>NicSelectorView</comment>
   </data>
   <data name="Refresh_ToolTip" xml:space="preserve">
     <value>刷新 (F5)</value>
-    <comment>MainWindow</comment>
+    <comment>NicSelectorView</comment>
   </data>
   <data name="Remark" xml:space="preserve">
     <value>备注</value>
@@ -689,7 +689,7 @@
   </data>
   <data name="SelectAdapter_ToolTip" xml:space="preserve">
     <value>请选择网卡/适配器...</value>
-    <comment>MainViewModel</comment>
+    <comment>NicSelectorView</comment>
   </data>
   <data name="Selected" xml:space="preserve">
     <value>已选择</value>
@@ -773,7 +773,7 @@
   </data>
   <data name="ViewToAdapterConfigDetail_" xml:space="preserve">
     <value>详细信息(_D)</value>
-    <comment>MainWindow</comment>
+    <comment>NicInfoCardView</comment>
   </data>
   <data name="Violet" xml:space="preserve">
     <value>紫罗兰</value>
