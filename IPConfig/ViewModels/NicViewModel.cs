@@ -79,9 +79,9 @@ public partial class NicViewModel : ObservableRecipient,
 
     public bool CanLoadLastUsedIPv4Config => LastUsedIPv4Config is not null;
 
-    public string GetNicsToolTip { get; private set; } = Lang.AdapterNotFound;
-
     public bool IsSelectedNicNotNull => SelectedNic is not null;
+
+    public string NicSelectorPlaceholder { get; private set; } = Lang.AdapterNotFound;
 
     #endregion Properties
 
@@ -159,7 +159,7 @@ public partial class NicViewModel : ObservableRecipient,
             .ThenBy(x => x.Name);
 
         AllNics = new(nics);
-        AllNics.CollectionChanged += (_, _) => GetNicsToolTip = AllNics.Count > 0 ? Lang.SelectAdapter_ToolTip : Lang.AdapterNotFound;
+        AllNics.CollectionChanged += (_, _) => NicSelectorPlaceholder = AllNics.Count > 0 ? Lang.SelectAdapter_ToolTip : Lang.AdapterNotFound;
     }
 
     [RelayCommand]
@@ -262,14 +262,14 @@ public partial class NicViewModel : ObservableRecipient,
 
         if (oldValue is not null && newValue is null)
         {
-            GetNicsToolTip = $"[{Lang.Disabled}] {oldValue.Name} - {oldValue.Description}";
+            NicSelectorPlaceholder = $"[{Lang.Disabled}] {oldValue.Name} - {oldValue.Description}";
         }
         else
         {
-            GetNicsToolTip = Lang.AdapterNotFound;
+            NicSelectorPlaceholder = Lang.AdapterNotFound;
         }
 
-        OnPropertyChanged(nameof(GetNicsToolTip));
+        OnPropertyChanged(nameof(NicSelectorPlaceholder));
     }
 
     partial void OnSelectedNicChanged(Nic? value)

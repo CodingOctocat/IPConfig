@@ -38,7 +38,7 @@
         </Grid.ColumnDefinitions>
 
         <hc:ComboBox Height="36"
-                     hc:InfoElement.Placeholder="{Binding GetNicsToolTip}"
+                     hc:InfoElement.Placeholder="{Binding NicSelectorPlaceholder}"
                      ItemsSource="{Binding AllNics}"
                      SelectedItem="{Binding SelectedNic}"
                      ToolTip="{Binding SelectedNic}"
