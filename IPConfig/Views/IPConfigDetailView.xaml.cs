@@ -27,7 +27,7 @@ public partial class IPConfigDetailView : UserControl
 
         DataContext = App.Current.Services.GetRequiredService<IPConfigDetailViewModel>();
 
-        WeakReferenceMessenger.Default.Register<KeyPressMessage>(this,
+        WeakReferenceMessenger.Default.Register<IPConfigDetailView, KeyPressMessage>(this,
             (r, m) => {
                 if (m.Gesture == "F2")
                 {

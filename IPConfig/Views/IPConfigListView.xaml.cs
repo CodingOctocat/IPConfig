@@ -34,7 +34,7 @@ public partial class IPConfigListView : UserControl
 
         DataContext = App.Current.Services.GetRequiredService<IPConfigListViewModel>();
 
-        WeakReferenceMessenger.Default.Register<KeyPressMessage>(this,
+        WeakReferenceMessenger.Default.Register<IPConfigListView, KeyPressMessage>(this,
             (r, m) => {
                 if (m.Gesture == "Ctrl+F")
                 {
