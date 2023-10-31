@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace IPConfig.Views;
 
 /// <summary>
-/// NicSelector.xaml 的交互逻辑
+/// NicSelectorView.xaml 的交互逻辑
 /// </summary>
 public partial class NicSelectorView : UserControl
 {

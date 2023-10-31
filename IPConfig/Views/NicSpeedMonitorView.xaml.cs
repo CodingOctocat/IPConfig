@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace IPConfig.Views;
 
 /// <summary>
-/// NicSpeedView.xaml 的交互逻辑
+/// NicSpeedMonitorView.xaml 的交互逻辑
 /// </summary>
 public partial class NicSpeedMonitorView : UserControl
 {
