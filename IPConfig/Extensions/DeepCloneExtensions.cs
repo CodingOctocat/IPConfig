@@ -8,7 +8,7 @@ namespace IPConfig.Extensions;
 public static class DeepCloneExtensions
 {
     /// <summary>
-    /// 基于序列化/反序列化技术的深层克隆。
+    /// 基于 JSON 序列化/反序列化技术的深层克隆。
     /// <para>
     /// 如果副本的嵌套(子)属性发生变化，并且副本赋值回原本后，嵌套(子)属性不会立马引发属性通知。
     /// </para>
