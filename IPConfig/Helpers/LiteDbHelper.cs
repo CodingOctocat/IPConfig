@@ -36,6 +36,7 @@ public static class LiteDbHelper
     {
         return Handle(col => {
             var result = col.Query();
+
             return result;
         });
     }
