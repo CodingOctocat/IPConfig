@@ -46,7 +46,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto"
-                               MaxHeight="{Binding ActualHeight, ElementName=iPv4ConfigView, Mode=OneTime}"
+                               MaxHeight="{Binding ElementName=iPv4ConfigView, Path=ActualHeight, Mode=OneTime}"
                                d:MaxHeight="{x:Static sys:Double.PositiveInfinity}" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition />
