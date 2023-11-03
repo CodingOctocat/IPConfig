@@ -42,7 +42,7 @@ public partial class IPConfigListViewModel : ObservableRecipient
 
     #endregion Fields
 
-    #region ObservableProperties
+    #region Observable Properties
 
     [ObservableProperty]
     private string _searchKeyword = String.Empty;
@@ -52,7 +52,7 @@ public partial class IPConfigListViewModel : ObservableRecipient
     [NotifyCanExecuteChangedFor(nameof(MoveToTopCommand), nameof(MoveToBottomCommand))]
     private EditableIPConfigModel? _selectedIPConfig;
 
-    #endregion ObservableProperties
+    #endregion Observable Properties
 
     #region Properties
 

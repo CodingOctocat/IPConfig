@@ -52,7 +52,7 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
 
     #endregion Fields
 
-    #region ObservableProperties
+    #region Observable Properties
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CanShowTitleChangedIndicator),
@@ -95,7 +95,7 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
     [ObservableProperty]
     private bool _isInContrastView;
 
-    #endregion ObservableProperties
+    #endregion Observable Properties
 
     #region Properties
 

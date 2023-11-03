@@ -32,7 +32,7 @@ public partial class NicConfigDetailViewModel : ObservableRecipient,
 
     #endregion Fields
 
-    #region ObservableProperties
+    #region Observable Properties
 
     [ObservableProperty]
     private bool _canUpdate;
@@ -49,7 +49,7 @@ public partial class NicConfigDetailViewModel : ObservableRecipient,
     [ObservableProperty]
     private Nic _nic = null!;
 
-    #endregion ObservableProperties
+    #endregion Observable Properties
 
     #region Constructors & Recipients
 

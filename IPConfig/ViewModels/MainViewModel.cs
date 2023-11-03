@@ -37,7 +37,7 @@ public partial class MainViewModel : ObservableRecipient
 
     #endregion Fields
 
-    #region ObservableProperties
+    #region Observable Properties
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(NewVersionAvailableToolTip))]
@@ -59,7 +59,7 @@ public partial class MainViewModel : ObservableRecipient
     [ObservableProperty]
     private bool _topmost = Settings.Default.Topmost;
 
-    #endregion ObservableProperties
+    #endregion Observable Properties
 
     #region Properties
 

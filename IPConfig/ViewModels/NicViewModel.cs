@@ -40,7 +40,7 @@ public partial class NicViewModel : ObservableRecipient,
 
     #endregion Fields
 
-    #region ObservableProperties
+    #region Observable Properties
 
     [ObservableProperty]
     private WpfObservableRangeCollection<Nic> _allNics = new();
@@ -73,7 +73,7 @@ public partial class NicViewModel : ObservableRecipient,
     [ObservableProperty]
     private string _selectedNicUploadSpeed = "…B/s";
 
-    #endregion ObservableProperties
+    #endregion Observable Properties
 
     #region Properties
 
