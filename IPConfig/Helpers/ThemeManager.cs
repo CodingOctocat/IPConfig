@@ -11,16 +11,16 @@ namespace IPConfig.Helpers;
 
 public static class ThemeManager
 {
-    private static SkinType _actualSkinType;
+    private static SkinType _currentSkinType;
 
-    private static SkinType? _currentSkinType;
+    private static SkinType? _currentSkinTypeMode;
 
-    public static SkinType ActualSkinType
+    public static SkinType CurrentSkinType
     {
-        get => _actualSkinType;
+        get => _currentSkinType;
         private set
         {
-            _actualSkinType = value;
+            _currentSkinType = value;
             OnStaticPropertyChanged();
         }
     }
@@ -31,12 +31,12 @@ public static class ThemeManager
     /// <para><see cref="SkinType.Violet"/>: Violet</para>
     /// <para><see langword="null"/>: Use System Setting</para>
     /// </summary>
-    public static SkinType? CurrentSkinType
+    public static SkinType? CurrentSkinTypeMode
     {
-        get => _currentSkinType;
+        get => _currentSkinTypeMode;
         private set
         {
-            _currentSkinType = value;
+            _currentSkinTypeMode = value;
             OnStaticPropertyChanged();
         }
     }
@@ -47,12 +47,12 @@ public static class ThemeManager
 
     public static void RaiseCurrentSkinTypeChanged()
     {
-        OnStaticPropertyChanged(nameof(CurrentSkinType));
+        OnStaticPropertyChanged(nameof(CurrentSkinTypeMode));
     }
 
     public static void UpdateSkin(SkinType? skin)
     {
-        if (skin == CurrentSkinType)
+        if (skin == CurrentSkinTypeMode)
         {
             return;
         }
@@ -103,8 +103,8 @@ public static class ThemeManager
         };
 
         App.Current.Resources.MergedDictionaries.Add(theme);
-        CurrentSkinType = skin;
-        ActualSkinType = actualSkinType;
+        CurrentSkinTypeMode = skin;
+        CurrentSkinType = actualSkinType;
 
         ThemeChanged?.Invoke(null, skin);
     }

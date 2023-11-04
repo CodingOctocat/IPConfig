@@ -223,7 +223,7 @@ public partial class App : Application
 
     private void ThemeWatcher_WindowsThemeChanged(object? sender, ThemeWatcher.ThemeChangedArgs e)
     {
-        if (ThemeManager.CurrentSkinType is null)
+        if (ThemeManager.CurrentSkinTypeMode is null)
         {
             ThemeManager.UpdateSkin(null);
         }

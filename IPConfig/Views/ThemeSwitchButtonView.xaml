@@ -30,7 +30,7 @@
             ContextMenuService.IsEnabled="false"
             ContextMenuService.Placement="Top"
             Style="{StaticResource ButtonCustom}"
-            ToolTip="{Binding Path=(h:ThemeManager.CurrentSkinType), Converter={StaticResource SkinTypeToolTipConverter}}">
+            ToolTip="{Binding Path=(h:ThemeManager.CurrentSkinTypeMode), Converter={StaticResource SkinTypeToolTipConverter}}">
         <Button.ContextMenu>
             <ContextMenu Width="144">
                 <ContextMenu.Resources>
@@ -75,7 +75,7 @@
         </Button.ContextMenu>
 
         <Image d:Source="/Resources/artist_palette_3d.png"
-               Source="{Binding Path=(h:ThemeManager.CurrentSkinType), Converter={StaticResource SkinTypeToImageConverter}}"
+               Source="{Binding Path=(h:ThemeManager.CurrentSkinTypeMode), Converter={StaticResource SkinTypeToImageConverter}}"
                Style="{StaticResource IconImageStyle}" />
     </Button>
 </UserControl>

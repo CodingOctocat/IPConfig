@@ -6,23 +6,12 @@ using CommunityToolkit.Mvvm.Input;
 using HandyControl.Data;
 
 using IPConfig.Helpers;
-using IPConfig.Languages;
 using IPConfig.Properties;
 
 namespace IPConfig.ViewModels;
 
 public partial class ThemeSwitchButtonViewModel : ObservableObject
 {
-    #region Constructors & Recipients
-
-    public ThemeSwitchButtonViewModel()
-    {
-        // 更新 ToolTip 信息。
-        LangSource.Instance.LanguageChanged += (s, e) => ThemeManager.RaiseCurrentSkinTypeChanged();
-    }
-
-    #endregion Constructors & Recipients
-
     #region Relay Commands
 
     [RelayCommand]
@@ -30,7 +19,7 @@ public partial class ThemeSwitchButtonViewModel : ObservableObject
     {
         ThemeManager.UpdateSkin(skin);
 
-        Settings.Default.Theme = ThemeManager.CurrentSkinType?.ToString();
+        Settings.Default.Theme = ThemeManager.CurrentSkinTypeMode?.ToString();
         Settings.Default.Save();
     }
 
