@@ -3,6 +3,7 @@ using System.Windows.Controls;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 
+using IPConfig.Helpers;
 using IPConfig.ViewModels;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -36,8 +37,8 @@ public partial class NicConfigDetailView : UserControl
 
         DataContext = App.Current.Services.GetRequiredService<NicConfigDetailViewModel>();
 
-        App.Current.ThemeChanging += (s, e) => _scrollViewerVOffset = scrollViewer.VerticalOffset;
-        App.Current.ThemeChanged += (s, e) => scrollViewer.ScrollToVerticalOffset(_scrollViewerVOffset);
+        ThemeManager.ThemeChanging += (s, e) => _scrollViewerVOffset = scrollViewer.VerticalOffset;
+        ThemeManager.ThemeChanged += (s, e) => scrollViewer.ScrollToVerticalOffset(_scrollViewerVOffset);
     }
 
     private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)

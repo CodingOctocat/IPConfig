@@ -5,6 +5,7 @@ using System.Windows.Media;
 
 using CommunityToolkit.Mvvm.Messaging;
 
+using IPConfig.Helpers;
 using IPConfig.Models.Messages;
 using IPConfig.ViewModels;
 
@@ -65,8 +66,8 @@ public partial class IPConfigListView : UserControl
                 }
             });
 
-        App.Current.ThemeChanging += (s, e) => _scrollViewerVOffset = _scrollViewer?.VerticalOffset ?? 0;
-        App.Current.ThemeChanged += (s, e) => _scrollViewer?.ScrollToVerticalOffset(_scrollViewerVOffset);
+        ThemeManager.ThemeChanging += (s, e) => _scrollViewerVOffset = _scrollViewer?.VerticalOffset ?? 0;
+        ThemeManager.ThemeChanged += (s, e) => _scrollViewer?.ScrollToVerticalOffset(_scrollViewerVOffset);
     }
 
     private void LbIPConfigs_Loaded(object sender, System.Windows.RoutedEventArgs e)

@@ -14,7 +14,6 @@ using System.Windows;
 using HandyControl.Controls;
 using HandyControl.Data;
 
-using IPConfig.Extensions;
 using IPConfig.Helpers;
 using IPConfig.Languages;
 using IPConfig.Models;
@@ -80,10 +79,6 @@ public partial class App : Application
     /// </summary>
     public IServiceProvider Services { get; }
 
-    public event EventHandler<SkinType>? ThemeChanged;
-
-    public event EventHandler<SkinType>? ThemeChanging;
-
     public App()
     {
         Services = ConfigureServices();
@@ -100,58 +95,6 @@ public partial class App : Application
 
         ThemeWatcher.WindowsThemeChanged += ThemeWatcher_WindowsThemeChanged;
         ThemeWatcher.StartThemeWatching();
-    }
-
-    #region Static Properties Change Notification
-
-    public static event EventHandler<PropertyChangedEventArgs> StaticPropertyChanged = delegate { };
-
-    private static void OnStaticPropertyChanged([CallerMemberName] string? staticPropertyName = null)
-    {
-        StaticPropertyChanged(null, new PropertyChangedEventArgs(staticPropertyName));
-    }
-
-    #endregion Static Properties Change Notification
-
-    public void UpdateSkin(SkinType skin)
-    {
-        ThemeChanging?.Invoke(this, skin);
-
-        Resources.MergedDictionaries.Clear();
-
-        Resources.MergedDictionaries.Add(new ResourceDictionary {
-            Source = new($"pack://application:,,,/HandyControl;component/Themes/Skin{skin}.xaml")
-        });
-
-        Resources.MergedDictionaries.Add(new ResourceDictionary {
-            Source = new("pack://application:,,,/HandyControl;component/Themes/Theme.xaml")
-        });
-
-        Resources.MergedDictionaries.Add(new ResourceDictionary {
-            Source = new("/Themes/MyResources.xaml", UriKind.Relative)
-        });
-
-        Resources.MergedDictionaries.Add(new ResourceDictionary {
-            Source = new("/Themes/MyStyles.xaml", UriKind.Relative)
-        });
-
-        // 优化显示效果。
-        var theme = skin switch {
-            SkinType.Default => new ResourceDictionary {
-                Source = new("/Themes/MyLightTheme.xaml", UriKind.Relative)
-            },
-            SkinType.Dark => new ResourceDictionary {
-                Source = new("/Themes/MyDarkTheme.xaml", UriKind.Relative)
-            },
-            SkinType.Violet => new ResourceDictionary {
-                Source = new("/Themes/MyVioletTheme.xaml", UriKind.Relative)
-            },
-            _ => throw new NotImplementedException()
-        };
-
-        Resources.MergedDictionaries.Add(theme);
-
-        ThemeChanged?.Invoke(this, skin);
     }
 
     protected override void OnExit(ExitEventArgs e)
@@ -188,16 +131,22 @@ public partial class App : Application
         services.AddSingleton<IPConfigListViewModel>();
         services.AddSingleton<IPConfigDetailViewModel>();
         services.AddTransient<NicConfigDetailViewModel>();
+        services.AddSingleton<ThemeSwitchButtonViewModel>();
+        services.AddSingleton<VersionInfoViewModel>();
+        services.AddSingleton<StatusBarViewModel>();
 
         services.AddSingleton<MainWindow>();
         services.AddSingleton<NicSelectorView>();
         services.AddSingleton<NicInfoCardView>();
-        services.AddSingleton<IPConfigListSelectionCounterView>();
-        services.AddSingleton<NicSpeedMonitorView>();
         services.AddSingleton<IPConfigListView>();
         services.AddTransient<IPConfigDetailView>();
         services.AddTransient<IPv4ConfigView>();
         services.AddTransient<NicConfigDetailView>();
+        services.AddSingleton<StatusBarView>();
+        services.AddSingleton<IPConfigListSelectionCounterView>();
+        services.AddSingleton<NicSpeedMonitorView>();
+        services.AddSingleton<ThemeSwitchButtonView>();
+        services.AddSingleton<VersionInfoView>();
 
         return services.BuildServiceProvider();
     }
@@ -274,9 +223,20 @@ public partial class App : Application
 
     private void ThemeWatcher_WindowsThemeChanged(object? sender, ThemeWatcher.ThemeChangedArgs e)
     {
-        if (Services.GetRequiredService<MainViewModel>().CurrentSkinType is null)
+        if (ThemeManager.CurrentSkinType is null)
         {
-            UpdateSkin(ThemeWatcher.GetCurrentWindowsTheme().ToSkinType());
+            ThemeManager.UpdateSkin(null);
         }
     }
+
+    #region Static Properties Change Notification
+
+    public static event EventHandler<PropertyChangedEventArgs> StaticPropertyChanged = delegate { };
+
+    private static void OnStaticPropertyChanged([CallerMemberName] string? staticPropertyName = null)
+    {
+        StaticPropertyChanged(null, new PropertyChangedEventArgs(staticPropertyName));
+    }
+
+    #endregion Static Properties Change Notification
 }

@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="IPConfig.Views.VersionInfoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:app="clr-namespace:IPConfig"
+             xmlns:vm="clr-namespace:IPConfig.ViewModels"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             d:Background="{DynamicResource RegionBrush}"
+             d:DataContext="{d:DesignInstance Type=vm:VersionInfoViewModel,
+                                              IsDesignTimeCreatable=True}"
+             mc:Ignorable="d">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <hc:SimpleStackPanel Orientation="Horizontal">
+        <Button Style="{StaticResource ButtonCustom}"
+                ToolTip="{x:Static app:App.GithubRepositoryUrl}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <i:LaunchUriOrFileAction Path="{x:Static app:App.GithubRepositoryUrl}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+
+            <Viewbox Style="{StaticResource IconViewBoxStyle}">
+                <Path Data="{StaticResource GithubGeometry}"
+                      Fill="{DynamicResource MyReverseBrush}"
+                      Style="{StaticResource IconParkStyle}" />
+            </Viewbox>
+        </Button>
+
+        <Button Margin="8,0,0,0"
+                Command="{Binding ShowUpdateGrowlCommand}"
+                Content="{x:Static app:App.VersionString}"
+                ToolTip="{Binding NewVersionAvailableToolTip}">
+            <Button.Style>
+                <Style BasedOn="{StaticResource ButtonCustom}"
+                       TargetType="{x:Type Button}">
+                    <Setter Property="Foreground" Value="{DynamicResource MyReverseBrush}" />
+
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding CheckUpdateError, Converter={StaticResource Object2BooleanConverter}}"
+                                     Value="{StaticResource True}">
+                            <Setter Property="Foreground" Value="{StaticResource DangerBrush}" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+
+        <TextBlock Margin="4,0,0,0"
+                   VerticalAlignment="Center"
+                   d:Visibility="Visible"
+                   FontWeight="Bold"
+                   Foreground="{DynamicResource MyPrimaryTextBrush}"
+                   IsHitTestVisible="False"
+                   Text="↑"
+                   Visibility="{Binding HasNewVersion, Converter={StaticResource Boolean2VisibilityConverter}}" />
+    </hc:SimpleStackPanel>
+</UserControl>

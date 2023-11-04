@@ -1,0 +1,81 @@
+﻿<UserControl x:Class="IPConfig.Views.ThemeSwitchButtonView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:hcd="clr-namespace:HandyControl.Data;assembly=HandyControl"
+             xmlns:b="clr-namespace:IPConfig.Behaviors"
+             xmlns:conv="clr-namespace:IPConfig.Converters"
+             xmlns:h="clr-namespace:IPConfig.Helpers"
+             xmlns:lang="clr-namespace:IPConfig.Languages"
+             xmlns:vm="clr-namespace:IPConfig.ViewModels"
+             d:Background="{DynamicResource RegionBrush}"
+             d:DataContext="{d:DesignInstance Type=vm:ThemeSwitchButtonViewModel,
+                                              IsDesignTimeCreatable=True}"
+             mc:Ignorable="d">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <UserControl.Resources>
+        <conv:SkinTypeToImageConverter x:Key="SkinTypeToImageConverter" />
+        <conv:SkinTypeToolTipConverter x:Key="SkinTypeToolTipConverter" />
+    </UserControl.Resources>
+
+    <Button b:ContextMenuLeftClickBehavior.IsLeftClickEnabled="True"
+            ContextMenuService.HorizontalOffset="-72"
+            ContextMenuService.IsEnabled="false"
+            ContextMenuService.Placement="Top"
+            Style="{StaticResource ButtonCustom}"
+            ToolTip="{Binding Path=(h:ThemeManager.CurrentSkinType), Converter={StaticResource SkinTypeToolTipConverter}}">
+        <Button.ContextMenu>
+            <ContextMenu Width="144">
+                <ContextMenu.Resources>
+                    <Style TargetType="{x:Type Image}">
+                        <Setter Property="Height" Value="16" />
+                        <Setter Property="Width" Value="16" />
+                    </Style>
+                </ContextMenu.Resources>
+
+                <MenuItem Command="{Binding ChangeThemeCommand}"
+                          CommandParameter="{x:Static hcd:SkinType.Default}"
+                          Header="{lang:Lang {x:Static lang:LangKey.Light}}">
+                    <MenuItem.Icon>
+                        <Image Source="/Resources/sun_3d.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+
+                <MenuItem Command="{Binding ChangeThemeCommand}"
+                          CommandParameter="{x:Static hcd:SkinType.Dark}"
+                          Header="{lang:Lang {x:Static lang:LangKey.Dark}}">
+                    <MenuItem.Icon>
+                        <Image Source="/Resources/crescent_moon_3d.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+
+                <MenuItem Command="{Binding ChangeThemeCommand}"
+                          CommandParameter="{x:Static hcd:SkinType.Violet}"
+                          Header="{lang:Lang {x:Static lang:LangKey.Violet}}">
+                    <MenuItem.Icon>
+                        <Image Source="/Resources/purple_circle_3d.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+
+                <MenuItem Command="{Binding ChangeThemeCommand}"
+                          CommandParameter="{x:Null}"
+                          Header="{lang:Lang {x:Static lang:LangKey.UseSystemSetting}}">
+                    <MenuItem.Icon>
+                        <Image Source="/Resources/artist_palette_3d.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </ContextMenu>
+        </Button.ContextMenu>
+
+        <Image d:Source="/Resources/artist_palette_3d.png"
+               Source="{Binding Path=(h:ThemeManager.CurrentSkinType), Converter={StaticResource SkinTypeToImageConverter}}"
+               Style="{StaticResource IconImageStyle}" />
+    </Button>
+</UserControl>
