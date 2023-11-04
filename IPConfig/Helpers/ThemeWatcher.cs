@@ -81,12 +81,12 @@ public static class ThemeWatcher
             var watcher = new ManagementEventWatcher(query);
             watcher.EventArrived += Watcher_EventArrived;
 
-            // Start listening for events
+            // Start listening for events.
             watcher.Start();
         }
         catch (Exception)
         {
-            // This can fail on Windows 7
+            // This can fail on Windows 7.
             _currentWindowsTheme = WindowsTheme.Default;
         }
     }

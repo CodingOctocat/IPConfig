@@ -65,11 +65,11 @@
                 <!--
                     d:DataContext="{Binding}" 提供设计时智能感知。
                     运行时 DataContext 不能直接用  DataContext="{Binding}"，这不起作用。
-                    解决方法：DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}}"
+                    解决方法：DataContext="{Binding DataContext, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}}"
                 -->
                 <ContextMenu x:Key="ItemContextMenu"
                              d:DataContext="{Binding}"
-                             DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}}"
+                             DataContext="{Binding DataContext, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}}"
                              UseLayoutRounding="True">
                     <MenuItem Command="{Binding CopySelectedIPConfigsAsTextCommand}"
                               Header="{lang:Lang {x:Static lang:LangKey.CopySelectedIPConfigAsText_}}"
@@ -133,7 +133,7 @@
                     <hc:SimplePanel>
                         <Border Background="{x:Null}"
                                 Style="{StaticResource BorderTipPrimary}"
-                                Visibility="{Binding Path=IsSelected, RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}, Converter={StaticResource Boolean2VisibilityConverter}}" />
+                                Visibility="{Binding IsSelected, RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}, Converter={StaticResource Boolean2VisibilityConverter}}" />
 
                         <hc:SimpleStackPanel Margin="12,10"
                                              ToolTip="{Binding}">
