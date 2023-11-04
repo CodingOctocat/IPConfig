@@ -25,7 +25,8 @@
         <conv:SkinTypeToolTipConverter x:Key="SkinTypeToolTipConverter" />
     </UserControl.Resources>
 
-    <Button b:ContextMenuLeftClickBehavior.IsLeftClickEnabled="True"
+    <Button x:Name="btnThemeSwitcher"
+            b:ContextMenuLeftClickBehavior.IsLeftClickEnabled="True"
             ContextMenuService.HorizontalOffset="-72"
             ContextMenuService.IsEnabled="false"
             ContextMenuService.Placement="Top"

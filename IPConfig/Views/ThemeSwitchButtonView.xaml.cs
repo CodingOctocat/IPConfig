@@ -1,5 +1,6 @@
 ﻿using System.Windows.Controls;
 
+using IPConfig.Languages;
 using IPConfig.ViewModels;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -21,5 +22,7 @@ public partial class ThemeSwitchButtonView : UserControl
         }
 
         DataContext = App.Current.Services.GetRequiredService<ThemeSwitchButtonViewModel>();
+
+        LangSource.Instance.LanguageChanged += (s, e) => btnThemeSwitcher.GetBindingExpression(ToolTipProperty).UpdateTarget();
     }
 }
