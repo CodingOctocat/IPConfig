@@ -45,11 +45,6 @@ public static class ThemeManager
 
     public static event EventHandler<SkinType?>? ThemeChanging;
 
-    public static void RaiseCurrentSkinTypeChanged()
-    {
-        OnStaticPropertyChanged(nameof(CurrentSkinTypeMode));
-    }
-
     public static void UpdateSkin(SkinType? skin)
     {
         if (skin == CurrentSkinTypeMode)
