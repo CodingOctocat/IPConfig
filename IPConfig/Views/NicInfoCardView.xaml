@@ -44,8 +44,13 @@
                 <i:InvokeCommandAction Command="{Binding SelectedNicIPConfigCheckedCommand}" />
             </i:EventTrigger>
 
+            <i:EventTrigger EventName="Click">
+                <i:InvokeCommandAction Command="{Binding RaiseNicViewCardClickCommand}" />
+            </i:EventTrigger>
+
             <i:EventTrigger EventName="MouseDoubleClick">
-                <i:InvokeCommandAction Command="{Binding ViewToNicConfigDetailCommand}" />
+                <i:InvokeCommandAction Command="{Binding ViewToNicConfigDetailByDoubleClickCommand}"
+                                       PassEventArgsToCommand="True" />
             </i:EventTrigger>
 
             <i:EventTrigger EventName="ContextMenuOpening">

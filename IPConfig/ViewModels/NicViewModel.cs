@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net.NetworkInformation;
 using System.Threading.Tasks;
 using System.Timers;
+using System.Windows;
 using System.Windows.Data;
 
 using CodingNinja.Wpf.ObjectModel;
@@ -27,6 +28,8 @@ public partial class NicViewModel : ObservableRecipient,
     private readonly Timer _realTimeNicSpeedMonitor = new(1000);
 
     private readonly object _syncLock = new();
+
+    private bool _clicked = true;
 
     private long _lastBytesReceived = 0;
 
@@ -187,6 +190,17 @@ public partial class NicViewModel : ObservableRecipient,
         Messenger.Send(SelectedNicIPConfig!, "MakeSelectedNicIPConfigCopy");
     }
 
+    [RelayCommand]
+    private void RaiseNicViewCardClick()
+    {
+        if (_clicked)
+        {
+            _lastSelectedIPConfig = null;
+        }
+
+        _clicked = true;
+    }
+
     [RelayCommand(CanExecute = nameof(IsSelectedNicNotNull))]
     private async Task ReadLastUsedIPv4ConfigAsync()
     {
@@ -247,6 +261,14 @@ public partial class NicViewModel : ObservableRecipient,
         IsInNicConfigDetailView = true;
     }
 
+    [RelayCommand(CanExecute = nameof(IsSelectedNicNotNull))]
+    private void ViewToNicConfigDetailByDoubleClick(RoutedEventArgs e)
+    {
+        e.Handled = true;
+        IsSelectedNicIPConfigChecked = true;
+        IsInNicConfigDetailView = true;
+    }
+
     #endregion Relay Commands
 
     #region Partial OnPropertyChanged Methods
@@ -254,6 +276,14 @@ public partial class NicViewModel : ObservableRecipient,
     partial void OnIsInNicConfigDetailViewChanged(bool value)
     {
         Messenger.Send<ValueChangedMessage<bool>, string>(new(value), "IsInNicConfigDetailView");
+    }
+
+    partial void OnIsSelectedNicIPConfigCheckedChanged(bool value)
+    {
+        if (!value)
+        {
+            _clicked = false;
+        }
     }
 
     partial void OnSelectedNicChanged(Nic? oldValue, Nic? newValue)
