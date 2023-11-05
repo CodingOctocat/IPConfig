@@ -87,7 +87,7 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsEditingIPConfigModifield))]
     [NotifyCanExecuteChangedFor(nameof(DiscardChangesCommand))]
-    private EditableIPConfigModel _editingIPConfig = IPConfigModel.Empty.AsEditable();
+    private EditableIPConfigModel _editingIPConfig = EditableIPConfigModel.Empty;
 
     [ObservableProperty]
     private string? _gatewayAutoCompletePreview;
@@ -280,7 +280,7 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
 
         if (newIPConfig is null)
         {
-            EditingIPConfig = IPConfigModel.Empty.AsEditable();
+            EditingIPConfig = EditableIPConfigModel.Empty;
         }
         else
         {
