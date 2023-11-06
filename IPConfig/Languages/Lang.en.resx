@@ -121,7 +121,7 @@
     <value>Description</value>
   </data>
   <data name="AdapterId" xml:space="preserve">
-    <value>Id</value>
+    <value>ID</value>
   </data>
   <data name="AdapterIsReceiveOnly" xml:space="preserve">
     <value>Receive Only</value>
