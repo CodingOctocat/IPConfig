@@ -12,6 +12,28 @@ namespace IPConfig.Models;
 public partial class Nic : NetworkInterface
 {
     private SimpleNicType? _simpleNicType;
+
+    public ConnectionType ConnectionType
+    {
+        get
+        {
+            var connType = NetworkInterfaceType switch {
+                NetworkInterfaceType.Ethernet
+                or NetworkInterfaceType.Ethernet3Megabit
+                or NetworkInterfaceType.FastEthernetT
+                or NetworkInterfaceType.FastEthernetFx
+                or NetworkInterfaceType.GigabitEthernet => ConnectionType.Ethernet,
+                NetworkInterfaceType.Wireless80211
+                or NetworkInterfaceType.Wman
+                or NetworkInterfaceType.Wwanpp
+                or NetworkInterfaceType.Wwanpp2 => ConnectionType.Wlan,
+                _ => ConnectionType.Other
+            };
+
+            return connType;
+        }
+    }
+
     public override string Description => Instance.Description;
 
     public string FormatedMacAddress
@@ -94,8 +116,8 @@ public partial class Nic : NetworkInterface
             _simpleNicType = simpleNicType;
 
             return simpleNicType;
-            }
-            }
+        }
+    }
 
     public override long Speed => Instance.Speed;
 

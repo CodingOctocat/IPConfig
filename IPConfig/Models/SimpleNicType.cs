@@ -12,3 +12,12 @@ public enum SimpleNicType
 
     Other
 }
+
+public enum ConnectionType
+{
+    Other,
+
+    Ethernet,
+
+    Wlan,
+}

@@ -56,11 +56,11 @@
                         <Border x:Name="NicOpStatusBorder"
                                 Padding="2"
                                 VerticalAlignment="Center"
-                                Background="{StaticResource DarkOpacityBrush}"
+                                Background="{DynamicResource ThirdlyTextBrush}"
                                 CornerRadius="4"
                                 ToolTip="{Binding OperationalStatus, Converter={StaticResource OpStatusToolTipConverter}}">
                             <TextBlock Foreground="White">
-                                <Run Text="[" /><Run Text="{Binding OperationalStatus, Mode=OneTime}" /><Run Text="]" />
+                                <Run Text="[" /><Run Text="{Binding OperationalStatus, Mode=OneWay}" /><Run Text="]" />
                             </TextBlock>
                         </Border>
 
@@ -68,11 +68,10 @@
                                 Margin="4,0,0,0"
                                 Padding="2"
                                 VerticalAlignment="Center"
-                                Background="{StaticResource DarkWarningBrush}"
                                 CornerRadius="4"
                                 ToolTip="{Binding NetworkInterfaceType}">
                             <TextBlock Foreground="White">
-                                <Run Text="[" /><Run Text="{Binding Name, Mode=OneTime}" /><Run Text="]" />
+                                <Run Text="[" /><Run Text="{Binding Name, Mode=OneWay}" /><Run Text="]" />
                             </TextBlock>
                         </Border>
 
@@ -88,7 +87,22 @@
                             <Setter TargetName="NicOpStatusBorder" Property="Background" Value="{StaticResource SuccessBrush}" />
                         </DataTrigger>
 
-                        <DataTrigger Binding="{Binding SimpleNicType}"
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding ConnectionType}" Value="{x:Static m:ConnectionType.Ethernet}" />
+                                <Condition Binding="{Binding SimpleNicType, IsAsync=True}" Value="{x:Static m:SimpleNicType.Other}" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="NicTypeBorder" Property="Style" Value="{StaticResource BorderTipPrimary}" />
+                        </MultiDataTrigger>
+
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding ConnectionType}" Value="{x:Static m:ConnectionType.Wlan}" />
+                                <Condition Binding="{Binding SimpleNicType, IsAsync=True}" Value="{x:Static m:SimpleNicType.Other}" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="NicTypeBorder" Property="Style" Value="{StaticResource BorderTipInfo}" />
+                        </MultiDataTrigger>
+
                         <DataTrigger Binding="{Binding SimpleNicType, IsAsync=True}"
                                      Value="{x:Static m:SimpleNicType.Ethernet}">
                             <Setter TargetName="NicTypeBorder" Property="Background" Value="{StaticResource PrimaryBrush}" />
