@@ -68,8 +68,9 @@
                                    Style="{StaticResource ContrastViewRectStyle}"
                                    Tag="{Binding CanShowTitleChangedIndicator}" />
 
-            <v:IPv4ConfigView x:Name="iPv4ConfigView"
-                              Grid.Row="1" />
+            <hc:ScrollViewer Grid.Row="1">
+                <v:IPv4ConfigView x:Name="iPv4ConfigView" />
+            </hc:ScrollViewer>
 
             <GridSplitter Grid.Row="2"
                           Width="64"
