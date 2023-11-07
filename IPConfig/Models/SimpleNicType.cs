@@ -8,5 +8,5 @@ public enum SimpleNicType
 
     Vm,
 
-    Ohter
+    Other
 }

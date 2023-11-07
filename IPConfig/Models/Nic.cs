@@ -105,7 +105,7 @@ public partial class Nic : NetworkInterface
             }
             else
             {
-                return SimpleNicType.Ohter;
+                return SimpleNicType.Other;
             }
         }
     }
