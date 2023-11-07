@@ -142,6 +142,17 @@ public static class NetworkManagement
         return dhcp is 1;
     }
 
+    public static bool IsPhysicalAdapter(string nicId)
+    {
+        using var searcher = new ManagementObjectSearcher(@"root\CIMV2",
+            @$"SELECT * FROM  Win32_NetworkAdapter WHERE GUID='{nicId}' AND NOT PNPDeviceID LIKE 'ROOT\\%'");
+
+        var managementObject = searcher.Get().OfType<ManagementObject>().FirstOrDefault();
+        bool isPhysical = Convert.ToBoolean(managementObject?.Properties["PhysicalAdapter"].Value);
+
+        return isPhysical;
+    }
+
     public static void SetIPv4(string nicId, string ipAddress, string subnetMask, string gateway)
     {
         using var networkConfigMng = new ManagementClass("Win32_NetworkAdapterConfiguration");

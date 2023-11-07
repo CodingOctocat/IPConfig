@@ -89,18 +89,29 @@
                         </DataTrigger>
 
                         <DataTrigger Binding="{Binding SimpleNicType}"
+                        <DataTrigger Binding="{Binding SimpleNicType, IsAsync=True}"
+                                     Value="{x:Static m:SimpleNicType.Ethernet}">
+                            <Setter TargetName="NicTypeBorder" Property="Background" Value="{StaticResource PrimaryBrush}" />
+                        </DataTrigger>
+
+                        <DataTrigger Binding="{Binding SimpleNicType, IsAsync=True}"
                                      Value="{x:Static m:SimpleNicType.Wlan}">
                             <Setter TargetName="NicTypeBorder" Property="Background" Value="{StaticResource InfoBrush}" />
                         </DataTrigger>
 
-                        <DataTrigger Binding="{Binding SimpleNicType}"
-                                     Value="{x:Static m:SimpleNicType.Vm}">
+                        <DataTrigger Binding="{Binding SimpleNicType, IsAsync=True}"
+                                     Value="{x:Static m:SimpleNicType.Loopback}">
+                            <Setter TargetName="NicTypeBorder" Property="Background" Value="{StaticResource WarningBrush}" />
+                        </DataTrigger>
+
+                        <DataTrigger Binding="{Binding SimpleNicType, IsAsync=True}"
+                                     Value="{x:Static m:SimpleNicType.Other}">
                             <Setter TargetName="NicTypeBorder" Property="Background" Value="{StaticResource SecondaryBorderBrush}" />
                         </DataTrigger>
 
-                        <DataTrigger Binding="{Binding SimpleNicType}"
-                                     Value="{x:Static m:SimpleNicType.Ethernet}">
-                            <Setter TargetName="NicTypeBorder" Property="Background" Value="{StaticResource PrimaryBrush}" />
+                        <DataTrigger Binding="{Binding SimpleNicType, IsAsync=True}"
+                                     Value="{x:Static m:SimpleNicType.Unknown}">
+                            <Setter TargetName="NicTypeBorder" Property="Background" Value="{StaticResource DangerBrush}" />
                         </DataTrigger>
                     </DataTemplate.Triggers>
                 </DataTemplate>

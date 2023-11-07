@@ -11,6 +11,7 @@ namespace IPConfig.Models;
 [INotifyPropertyChanged]
 public partial class Nic : NetworkInterface
 {
+    private SimpleNicType? _simpleNicType;
     public override string Description => Instance.Description;
 
     public string FormatedMacAddress
@@ -84,31 +85,17 @@ public partial class Nic : NetworkInterface
     {
         get
         {
-            string name = Name.ToLower();
-            string description = Description.ToLower();
-
-            if (name == "wlan" || description.Contains("wireless"))
+            if (_simpleNicType is not null)
             {
-                return SimpleNicType.Wlan;
+                return _simpleNicType.Value;
             }
 
-            if (name.Contains("vmware") || name.Contains("hyper-v") || name.Contains("vethernet")
-                || description.Contains("vmware") || description.Contains("virtual")
-                || description.Contains("tap") || description.Contains("tun"))
-            {
-                return SimpleNicType.Vm;
-            }
+            var simpleNicType = GetSimpleNicType();
+            _simpleNicType = simpleNicType;
 
-            if (name.Contains(Lang.Ethernet_Lower) || name.Contains("ethernet") || description.Contains("ethernet"))
-            {
-                return SimpleNicType.Ethernet;
+            return simpleNicType;
             }
-            else
-            {
-                return SimpleNicType.Other;
             }
-        }
-    }
 
     public override long Speed => Instance.Speed;
 
@@ -165,5 +152,37 @@ public partial class Nic : NetworkInterface
             {Lang.AdapterSupportsIPv4}: {SupportsIPv4}
             {Lang.AdapterSupportsIPv6}: {SupportsIPv6}
             """;
+    }
+
+    private SimpleNicType GetSimpleNicType()
+    {
+        var simpleType = NetworkInterfaceType switch {
+            NetworkInterfaceType.Ethernet
+            or NetworkInterfaceType.Ethernet3Megabit
+            or NetworkInterfaceType.FastEthernetT
+            or NetworkInterfaceType.FastEthernetFx
+            or NetworkInterfaceType.GigabitEthernet => SimpleNicType.Ethernet,
+            NetworkInterfaceType.Wireless80211
+            or NetworkInterfaceType.Wman
+            or NetworkInterfaceType.Wwanpp
+            or NetworkInterfaceType.Wwanpp2 => SimpleNicType.Wlan,
+            NetworkInterfaceType.Unknown => SimpleNicType.Unknown,
+            NetworkInterfaceType.Loopback => SimpleNicType.Loopback,
+            _ => SimpleNicType.Other
+        };
+
+        if (simpleType == SimpleNicType.Loopback)
+        {
+            return simpleType;
+        }
+
+        bool isPhysical = NetworkManagement.IsPhysicalAdapter(Id);
+
+        if (!isPhysical)
+        {
+            return SimpleNicType.Other;
+        }
+
+        return simpleType;
     }
 }

@@ -2,11 +2,13 @@
 
 public enum SimpleNicType
 {
+    Unknown,
+
     Ethernet,
 
     Wlan,
 
-    Vm,
+    Loopback,
 
     Other
 }
