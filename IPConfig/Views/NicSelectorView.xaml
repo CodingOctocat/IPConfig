@@ -41,8 +41,7 @@
                      hc:InfoElement.Placeholder="{Binding NicSelectorPlaceholder}"
                      ItemsSource="{Binding AllNics}"
                      SelectedItem="{Binding SelectedNic}"
-                     ToolTip="{Binding SelectedNic}"
-                     UseLayoutRounding="False">
+                     ToolTip="{Binding SelectedNic}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <i:InvokeCommandAction Command="{Binding ReadLastUsedIPv4ConfigCommand}" />
@@ -51,8 +50,7 @@
 
             <hc:ComboBox.ItemTemplate>
                 <DataTemplate DataType="{x:Type m:Nic}">
-                    <hc:SimpleStackPanel Orientation="Horizontal"
-                                         UseLayoutRounding="True">
+                    <hc:SimpleStackPanel Orientation="Horizontal">
                         <Border x:Name="NicOpStatusBorder"
                                 Padding="2"
                                 VerticalAlignment="Center"

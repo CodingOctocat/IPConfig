@@ -59,7 +59,6 @@
                  SelectedItem="{Binding SelectedIPConfig, Mode=TwoWay}"
                  SelectionChanged="LbIPConfigs_SelectionChanged"
                  SelectionMode="Extended"
-                 UseLayoutRounding="False"
                  VirtualizingStackPanel.ScrollUnit="Pixel">
             <ListBox.Resources>
                 <!--
@@ -69,8 +68,7 @@
                 -->
                 <ContextMenu x:Key="ItemContextMenu"
                              d:DataContext="{Binding}"
-                             DataContext="{Binding DataContext, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}}"
-                             UseLayoutRounding="True">
+                             DataContext="{Binding DataContext, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}}">
                     <MenuItem Command="{Binding CopySelectedIPConfigsAsTextCommand}"
                               Header="{lang:Lang {x:Static lang:LangKey.CopySelectedIPConfigAsText_}}"
                               InputGestureText="{Binding MultiSelectedCountString}" />

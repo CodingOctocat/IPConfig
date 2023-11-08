@@ -163,6 +163,7 @@
         <Setter Property="ItemContainerStyle" Value="{StaticResource MyComboBoxItemStyle}" />
         <Setter Property="ShowClearButton" Value="{Binding IsReadOnly, RelativeSource={RelativeSource Self}, Converter={StaticResource Boolean2BooleanReConverter}}" />
         <Setter Property="Template" Value="{StaticResource ComboBoxEditableLeftTemplate}" />
+        <!--  防止光标悬停在此控件边缘时导致高亮快速闪烁。  -->
         <Setter Property="UseLayoutRounding" Value="False" />
 
         <Setter Property="Validation.ErrorTemplate">
