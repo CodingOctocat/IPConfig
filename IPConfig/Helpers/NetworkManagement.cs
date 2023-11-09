@@ -159,7 +159,7 @@ public static class NetworkManagement
         using var networkConfigs = networkConfigMng.GetInstances();
 
         using var managementObject = networkConfigs
-            .Cast<ManagementObject>()
+            .OfType<ManagementObject>()
             .FirstOrDefault(objMO => (bool)objMO["IPEnabled"] && objMO["SettingID"].Equals(nicId));
 
         if (managementObject is null)
@@ -200,7 +200,7 @@ public static class NetworkManagement
         using var networkConfigs = networkConfigMng.GetInstances();
 
         using var managementObject = networkConfigs
-            .Cast<ManagementObject>()
+            .OfType<ManagementObject>()
             .FirstOrDefault(objMO => (bool)objMO["IPEnabled"] && objMO["SettingID"].Equals(nicId));
 
         if (managementObject is null)
@@ -218,7 +218,7 @@ public static class NetworkManagement
         using var networkConfigs = networkConfigMng.GetInstances();
 
         using var managementObject = networkConfigs
-            .Cast<ManagementObject>()
+            .OfType<ManagementObject>()
             .FirstOrDefault(objMO => (bool)objMO["IPEnabled"] && objMO["SettingID"].Equals(nicId));
 
         if (managementObject is null)
@@ -238,7 +238,7 @@ public static class NetworkManagement
         using var networkConfigs = networkConfigMng.GetInstances();
 
         using var managementObject = networkConfigs
-            .Cast<ManagementObject>()
+            .OfType<ManagementObject>()
             .FirstOrDefault(objMO => (bool)objMO["IPEnabled"] && objMO["SettingID"].Equals(nicId));
 
         if (managementObject is null)
