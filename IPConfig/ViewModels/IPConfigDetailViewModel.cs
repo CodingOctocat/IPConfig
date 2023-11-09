@@ -400,7 +400,9 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
 
         string msg = Lang.ApplyAsk_Format.Format(_nic.Name, _nic.Description);
 
-        if (EditingIPConfig.HasErrors)
+        var ipv4Config = EditingIPConfig.IPv4Config;
+
+        if (ipv4Config.HasErrors)
         {
             msg = $"{msg}\n\n{Lang.ValidationErrorWarning}";
         }
@@ -409,7 +411,7 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
             msg,
             App.AppName,
             MessageBoxButton.OKCancel,
-            EditingIPConfig.HasErrors ? MessageBoxImage.Warning : MessageBoxImage.Question,
+            ipv4Config.HasErrors ? MessageBoxImage.Warning : MessageBoxImage.Question,
             MessageBoxResult.OK);
 
         if (result != MessageBoxResult.OK)
@@ -418,8 +420,6 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
         }
 
         await BackupAsync();
-
-        var ipv4Config = EditingIPConfig.IPv4Config;
 
         if (ipv4Config.IsDhcpEnabled)
         {
