@@ -202,9 +202,16 @@
 
                 <hc:SimplePanel>
                     <hc:TextBox hc:InfoElement.Necessary="{Binding EditingIPConfig.IPv4Config.IsDhcpEnabled, Converter={StaticResource Boolean2BooleanReConverter}}"
+                                hc:InfoElement.Placeholder="{Binding AutoComplete.IPv4Config.IP}"
                                 hc:TitleElement.Title="IP"
                                 MaxLength="15"
-                                Text="{Binding EditingIPConfig.IPv4Config.IP, UpdateSourceTrigger=PropertyChanged}" />
+                                Text="{Binding EditingIPConfig.IPv4Config.IP, UpdateSourceTrigger=PropertyChanged}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseDoubleClick">
+                                <i:InvokeCommandAction Command="{Binding TryAutoCompleteIPCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </hc:TextBox>
 
                     <c:AlignDashCornerRect d:Visibility="Visible"
                                            Style="{StaticResource ContrastViewRectStyle}"
@@ -213,10 +220,17 @@
 
                 <hc:SimplePanel>
                     <c:ReadOnlyComboBox hc:InfoElement.Necessary="{Binding EditingIPConfig.IPv4Config.IsDhcpEnabled, Converter={StaticResource Boolean2BooleanReConverter}}"
+                                        hc:InfoElement.Placeholder="{Binding AutoComplete.IPv4Config.Mask}"
                                         hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.IPv4Netmask}}"
                                         IsEditable="True"
                                         ItemsSource="{Binding IPv4MaskListCollectionView}"
                                         Text="{Binding EditingIPConfig.IPv4Config.Mask, UpdateSourceTrigger=PropertyChanged}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseDoubleClick">
+                                <i:InvokeCommandAction Command="{Binding TryAutoCompleteMaskCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+
                         <c:ReadOnlyComboBox.GroupStyle>
                             <GroupStyle>
                                 <GroupStyle.HeaderTemplate>
@@ -260,7 +274,7 @@
                 </hc:SimplePanel>
 
                 <hc:SimplePanel>
-                    <hc:TextBox hc:InfoElement.Placeholder="{Binding GatewayAutoCompletePreview}"
+                    <hc:TextBox hc:InfoElement.Placeholder="{Binding AutoComplete.IPv4Config.Gateway}"
                                 hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.Gateway}}"
                                 MaxLength="15"
                                 Text="{Binding EditingIPConfig.IPv4Config.Gateway, UpdateSourceTrigger=PropertyChanged}">
@@ -298,7 +312,7 @@
 
                 <hc:SimplePanel>
                     <c:ReadOnlyComboBox hc:InfoElement.Necessary="{Binding EditingIPConfig.IPv4Config.IsAutoDns, Converter={StaticResource Boolean2BooleanReConverter}}"
-                                        hc:InfoElement.Placeholder="{Binding Dns1AutoCompletePreview}"
+                                        hc:InfoElement.Placeholder="{Binding AutoComplete.IPv4Config.Dns1}"
                                         hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.Dns1}}"
                                         IsEditable="True"
                                         IsSynchronizedWithCurrentItem="False"
@@ -337,7 +351,7 @@
                 </hc:SimplePanel>
 
                 <hc:SimplePanel>
-                    <c:ReadOnlyComboBox hc:InfoElement.Placeholder="{Binding Dns2AutoCompletePreview}"
+                    <c:ReadOnlyComboBox hc:InfoElement.Placeholder="{Binding AutoComplete.IPv4Config.Dns2}"
                                         hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.Dns2}}"
                                         IsEditable="True"
                                         IsSynchronizedWithCurrentItem="False"

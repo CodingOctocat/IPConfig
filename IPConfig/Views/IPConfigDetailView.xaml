@@ -59,13 +59,19 @@
             <hc:TextBox x:Name="tbIPConfigName"
                         Margin="0,0,0,4"
                         hc:InfoElement.Necessary="True"
-                        hc:InfoElement.Placeholder="{lang:Lang {x:Static lang:LangKey.NameMaxLength50}}"
+                        hc:InfoElement.Placeholder="{Binding AutoComplete.Name}"
                         hc:InfoElement.ShowClearButton="True"
                         hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.IPConfigName}}"
                         hc:TitleElement.TitlePlacement="Left"
                         MaxLength="50"
                         Style="{StaticResource MyTextBoxStyle}"
-                        Text="{Binding EditingIPConfig.Name, UpdateSourceTrigger=PropertyChanged}" />
+                        Text="{Binding EditingIPConfig.Name, UpdateSourceTrigger=PropertyChanged}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDoubleClick">
+                        <i:InvokeCommandAction Command="{Binding TryAutoCompleteNameCommand}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </hc:TextBox>
 
             <c:AlignDashCornerRect Margin="0,0,0,4"
                                    d:Visibility="Visible"
@@ -83,6 +89,7 @@
             <hc:TextBox Grid.Row="3"
                         Padding="4"
                         VerticalContentAlignment="Top"
+                        hc:InfoElement.Placeholder="{Binding AutoComplete.Remark}"
                         hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.Remark}}"
                         AcceptsReturn="True"
                         MinLines="1"
@@ -92,6 +99,10 @@
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="LostFocus">
                         <i:InvokeCommandAction Command="{Binding TrimRemarkTextCommand}" />
+                    </i:EventTrigger>
+
+                    <i:EventTrigger EventName="MouseDoubleClick">
+                        <i:InvokeCommandAction Command="{Binding TryAutoCompleteRemarkCommand}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </hc:TextBox>

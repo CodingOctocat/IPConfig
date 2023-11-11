@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -55,6 +54,9 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
     #region Observable Properties
 
     [ObservableProperty]
+    private IPConfigModel _autoComplete = IPConfigModel.Empty;
+
+    [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CanShowTitleChangedIndicator),
         nameof(CanShowDhcpEnabledChangedIndicator),
         nameof(CanShowIPChangedIndicator),
@@ -79,18 +81,9 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
     private bool _canShowUnchangedIndicator;
 
     [ObservableProperty]
-    private string? _dns1AutoCompletePreview;
-
-    [ObservableProperty]
-    private string? _dns2AutoCompletePreview;
-
-    [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsEditingIPConfigModifield))]
     [NotifyCanExecuteChangedFor(nameof(DiscardChangesCommand))]
     private EditableIPConfigModel _editingIPConfig = EditableIPConfigModel.Empty;
-
-    [ObservableProperty]
-    private string? _gatewayAutoCompletePreview;
 
     [ObservableProperty]
     private bool _isInContrastView;
@@ -271,6 +264,7 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
         if (oldIPConfig is not null)
         {
             oldIPConfig.EditableChanged -= EditingIPConfig_EditableChanged;
+            oldIPConfig.PropertyChanged -= EditingIPConfig_PropertyChanged;
             oldIPConfig.IPv4Config.AllowAutoDisableDhcp(false);
             oldIPConfig.IPv4Config.AllowAutoDisableAutoDns(false);
         }
@@ -291,11 +285,18 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
         EditingIPConfig.IPv4Config.AllowAutoDisableDhcp();
         EditingIPConfig.IPv4Config.AllowAutoDisableDhcp();
         EditingIPConfig.EditableChanged += EditingIPConfig_EditableChanged;
+        EditingIPConfig.PropertyChanged += EditingIPConfig_PropertyChanged;
 
         // 初始化页面状态。
         UpdateSaveAndApplyButton();
         CanShowChangedIndicator = false;
         CanShowUnchangedIndicator = false;
+
+        AutoComplete = EditingIPConfig.Backup;
+        GetAutoCompleteName();
+        GetAutoCompleteGateway();
+        GetAutoCompleteDns1();
+        GetAutoCompleteDns2();
     }
 
     public void Receive(PropertyChangedMessage<Nic?> message)
@@ -463,12 +464,14 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
             {
                 EditingIPConfig.RejectChanges();
                 RejectChanges();
+                AutoComplete = EditingIPConfig.Backup;
             }
         }
         else
         {
             EditingIPConfig.RejectChanges();
             RejectChanges();
+            AutoComplete = EditingIPConfig.Backup;
         }
 
         EditingIPConfig.ClearErrors();
@@ -558,6 +561,7 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
             });
 
             EditingIPConfig.AcceptChanges();
+            AutoComplete = EditingIPConfig.Backup;
 
             _isSaveSuccessful = true;
         }
@@ -592,34 +596,64 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
     [RelayCommand]
     private void TryAutoCompleteDns1()
     {
-        if (!String.IsNullOrEmpty(EditingIPConfig.IPv4Config.Dns1))
+        if (String.IsNullOrEmpty(EditingIPConfig.IPv4Config.Dns1))
         {
-            return;
+            EditingIPConfig.IPv4Config.Dns1 = AutoComplete.IPv4Config.Dns1;
         }
-
-        EditingIPConfig.IPv4Config.Dns1 = GetAutoCompleteDns1();
     }
 
     [RelayCommand]
     private void TryAutoCompleteDns2()
     {
-        if (!String.IsNullOrEmpty(EditingIPConfig.IPv4Config.Dns2))
+        if (String.IsNullOrEmpty(EditingIPConfig.IPv4Config.Dns2))
         {
-            return;
+            EditingIPConfig.IPv4Config.Dns2 = AutoComplete.IPv4Config.Dns2;
         }
-
-        EditingIPConfig.IPv4Config.Dns2 = GetAutoCompleteDns2();
     }
 
     [RelayCommand]
     private void TryAutoCompleteGateway()
     {
-        if (!String.IsNullOrEmpty(EditingIPConfig.IPv4Config.Gateway))
+        if (String.IsNullOrEmpty(EditingIPConfig.IPv4Config.Gateway))
         {
-            return;
+            EditingIPConfig.IPv4Config.Gateway = AutoComplete.IPv4Config.Gateway;
         }
+    }
 
-        EditingIPConfig.IPv4Config.Gateway = GetAutoCompleteGateway();
+    [RelayCommand]
+    private void TryAutoCompleteIP()
+    {
+        if (String.IsNullOrEmpty(EditingIPConfig.IPv4Config.IP))
+        {
+            EditingIPConfig.IPv4Config.IP = AutoComplete.IPv4Config.IP;
+        }
+    }
+
+    [RelayCommand]
+    private void TryAutoCompleteMask()
+    {
+        if (String.IsNullOrEmpty(EditingIPConfig.IPv4Config.Mask))
+        {
+            EditingIPConfig.IPv4Config.Mask = AutoComplete.IPv4Config.Mask;
+        }
+    }
+
+    [RelayCommand]
+    private void TryAutoCompleteName()
+    {
+        if (String.IsNullOrEmpty(EditingIPConfig.Name))
+        {
+            EditingIPConfig.Name = AutoComplete.Name;
+        }
+    }
+
+    [RelayCommand]
+    private void TryAutoCompleteRemark()
+    {
+        if (String.IsNullOrEmpty(EditingIPConfig.Remark))
+        {
+            EditingIPConfig.Remark = AutoComplete.Remark;
+        }
     }
 
     [RelayCommand]
@@ -642,24 +676,6 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
 
     #endregion RelayCommands
 
-    #region Partial OnPropertyChanged Methods
-
-    partial void OnEditingIPConfigChanged([DisallowNull] EditableIPConfigModel? oldValue, EditableIPConfigModel newValue)
-    {
-        // 注销旧对象事件。
-        oldValue.PropertyChanged -= EditingIPConfig_PropertyChanged;
-
-        // 确保新对象注册事件以实现实时自动完成预览及相关属性通知。
-        newValue.PropertyChanged -= EditingIPConfig_PropertyChanged;
-        newValue.PropertyChanged += EditingIPConfig_PropertyChanged;
-
-        GatewayAutoCompletePreview = GetAutoCompleteGateway();
-        Dns1AutoCompletePreview = GetAutoCompleteDns1();
-        Dns2AutoCompletePreview = GetAutoCompleteDns2();
-    }
-
-    #endregion Partial OnPropertyChanged Methods
-
     #region Event Handlers
 
     private void EditingIPConfig_EditableChanged(object? sender, bool e)
@@ -672,19 +688,25 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
         OnPropertyChanged(nameof(IsEditingIPConfigModifield));
         DiscardChangesCommand.NotifyCanExecuteChanged();
 
-        if (e.PropertyName is nameof(IPv4Config.IP) or nameof(IPv4Config.Mask))
+        if (e.PropertyName == nameof(IPConfigModel.Name))
         {
-            GatewayAutoCompletePreview = GetAutoCompleteGateway();
+            GetAutoCompleteName();
         }
-
-        if (e.PropertyName == nameof(IPv4Config.Dns1))
+        else if (e.PropertyName is nameof(IPv4Config.IP))
         {
-            Dns2AutoCompletePreview = GetAutoCompleteDns2();
+            GetAutoCompleteGateway();
         }
-
-        if (e.PropertyName == nameof(IPv4Config.Dns2))
+        else if (e.PropertyName == nameof(IPv4Config.Mask))
         {
-            Dns1AutoCompletePreview = GetAutoCompleteDns1();
+            GetAutoCompleteGateway();
+        }
+        else if (e.PropertyName == nameof(IPv4Config.Dns1))
+        {
+            GetAutoCompleteDns2();
+        }
+        else if (e.PropertyName == nameof(IPv4Config.Dns2))
+        {
+            GetAutoCompleteDns1();
         }
     }
 
@@ -761,37 +783,54 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
         }
     }
 
-    private string GetAutoCompleteDns1()
+    private void GetAutoCompleteDns1()
     {
+        if (!String.IsNullOrEmpty(EditingIPConfig.IPv4Config.Dns1))
+        {
+            return;
+        }
+
         // 查找 DNS2(备用) 是否正在使用 DNS 列表中的选项。
         var dns = _iPv4DnsList.FirstOrDefault(x => EditingIPConfig.IPv4Config.Dns2 == x.Dns1 || EditingIPConfig.IPv4Config.Dns2 == x.Dns2);
 
         if (dns is null)
         {
-            return "";
+            AutoComplete.IPv4Config.Dns1 = EditingIPConfig.Backup.IPv4Config.Dns1;
         }
-
-        string? dns1 = EditingIPConfig.IPv4Config.Dns2 == dns.Dns1 ? dns.Dns2 : dns.Dns1;
-
-        return dns1 ?? "";
+        else
+        {
+            string? dns1 = EditingIPConfig.IPv4Config.Dns2 == dns.Dns1 ? dns.Dns2 : dns.Dns1;
+            AutoComplete.IPv4Config.Dns1 = dns1 ?? EditingIPConfig.Backup.IPv4Config.Dns1;
+        }
     }
 
-    private string GetAutoCompleteDns2()
+    private void GetAutoCompleteDns2()
     {
+        if (!String.IsNullOrEmpty(EditingIPConfig.IPv4Config.Dns2))
+        {
+            return;
+        }
+
         var dns = _iPv4DnsList.FirstOrDefault(x => EditingIPConfig.IPv4Config.Dns1 == x.Dns1 || EditingIPConfig.IPv4Config.Dns1 == x.Dns2);
 
         if (dns is null)
         {
-            return "";
+            AutoComplete.IPv4Config.Dns2 = EditingIPConfig.Backup.IPv4Config.Dns2;
         }
-
-        string? dns2 = EditingIPConfig.IPv4Config.Dns1 == dns.Dns1 ? dns.Dns2 : dns.Dns1;
-
-        return dns2 ?? "";
+        else
+        {
+            string? dns2 = EditingIPConfig.IPv4Config.Dns1 == dns.Dns1 ? dns.Dns2 : dns.Dns1;
+            AutoComplete.IPv4Config.Dns2 = dns2 ?? EditingIPConfig.Backup.IPv4Config.Dns2;
+        }
     }
 
-    private string GetAutoCompleteGateway()
+    private void GetAutoCompleteGateway()
     {
+        if (!String.IsNullOrEmpty(EditingIPConfig.IPv4Config.Gateway))
+        {
+            return;
+        }
+
         bool isIPValid = IPAddress.TryParse(EditingIPConfig.IPv4Config.IP, out var ip);
         bool isMaskValid = IPAddress.TryParse(EditingIPConfig.IPv4Config.Mask, out var mask);
 
@@ -814,9 +853,25 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
             gatewayGroups[^1] = 1;
         }
 
-        string gateway = String.Join(".", gatewayGroups);
+        if (gatewayGroups is [])
+        {
+            AutoComplete.IPv4Config.Gateway = EditingIPConfig.Backup.IPv4Config.Gateway;
+        }
+        else
+        {
+            AutoComplete.IPv4Config.Gateway = String.Join(".", gatewayGroups);
+        }
+    }
 
-        return gateway;
+    private void GetAutoCompleteName()
+    {
+        if (String.IsNullOrEmpty(EditingIPConfig.Name))
+        {
+            if (String.IsNullOrEmpty(AutoComplete.Name))
+            {
+                AutoComplete.Name = Lang.NameMaxLength50;
+            }
+        }
     }
 
     #endregion Private Methods

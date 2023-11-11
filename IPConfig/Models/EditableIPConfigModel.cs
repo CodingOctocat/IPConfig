@@ -14,7 +14,7 @@ using LiteDB;
 namespace IPConfig.Models;
 
 public partial class EditableIPConfigModel : IPConfigModel,
-    IDeepCloneTo<EditableIPConfigModel>,
+    IDeepCloneable<EditableIPConfigModel>, IDeepCloneTo<EditableIPConfigModel>,
     IEditableObject, IRevertibleChangeTracking
 {
     private IPConfigModel _backup = IPConfigModel.Empty;
@@ -22,6 +22,11 @@ public partial class EditableIPConfigModel : IPConfigModel,
     private bool _inTxn = false;
 
     public static new EditableIPConfigModel Empty => new("");
+
+    /// <summary>
+    /// 获取备份对象的副本。
+    /// </summary>
+    public IPConfigModel Backup => _backup.DeepClone();
 
     [JsonIgnore]
     public int Order { get; set; } = -1;
@@ -100,6 +105,18 @@ public partial class EditableIPConfigModel : IPConfigModel,
         }
     }
 
+    #region IDeepCloneable
+
+    public new EditableIPConfigModel DeepClone()
+    {
+        var clone = Empty;
+        DeepCloneTo(clone);
+
+        return clone;
+    }
+
+    #endregion IDeepCloneable
+
     #region IDeepCloneTo
 
     public void DeepCloneTo(EditableIPConfigModel other)
@@ -118,7 +135,8 @@ public partial class EditableIPConfigModel : IPConfigModel,
     {
         if (!_inTxn)
         {
-            DeepCloneTo(_backup);
+            _backup = DeepClone();
+            OnPropertyChanged(nameof(Backup));
             _inTxn = true;
             OnPropertyChanged(nameof(IsChanged));
         }
@@ -139,6 +157,7 @@ public partial class EditableIPConfigModel : IPConfigModel,
         if (_inTxn)
         {
             _backup = Empty;
+            OnPropertyChanged(nameof(Backup));
             _inTxn = false;
             OnPropertyChanged(nameof(IsChanged));
         }
