@@ -146,13 +146,6 @@ public partial class MainViewModel : ObservableRecipient
     {
         var cultures = LangSource.GetAvailableCultures().OrderBy(x => x.Name);
         Languages = new(cultures);
-
-        if (Settings.Default.UpgradeRequired)
-        {
-            Settings.Default.Upgrade();
-            Settings.Default.UpgradeRequired = false;
-            Settings.Default.Save();
-        }
     }
 
     [RelayCommand]

@@ -17,6 +17,7 @@ using HandyControl.Data;
 using IPConfig.Helpers;
 using IPConfig.Languages;
 using IPConfig.Models;
+using IPConfig.Properties;
 using IPConfig.ViewModels;
 using IPConfig.Views;
 
@@ -114,6 +115,13 @@ public partial class App : Application
         FrameworkElement.StyleProperty.OverrideMetadata(typeof(Window), new FrameworkPropertyMetadata {
             DefaultValue = Current.FindResource(typeof(Window))
         });
+
+        if (Settings.Default.UpgradeRequired)
+        {
+            Settings.Default.Upgrade();
+            Settings.Default.UpgradeRequired = false;
+            Settings.Default.Save();
+        }
 
         var mainWindow = Services.GetRequiredService<MainWindow>();
         mainWindow.Show();
