@@ -122,7 +122,7 @@ public static class NetworkManagement
 
     public static bool IsAutoDns(string nicId)
     {
-        string path = "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters\\Interfaces\\" + nicId;
+        string path = $@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\{nicId}";
         string? ns = Registry.GetValue(path, "NameServer", null) as string;
 
         // Wi-Fi 可能使用配置文件而不是网卡配置，需要优先判断。
@@ -136,7 +136,7 @@ public static class NetworkManagement
 
     public static bool IsDhcpEnabled(string nicId)
     {
-        string path = "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters\\Interfaces\\" + nicId;
+        string path = $@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\{nicId}";
         object? dhcp = Registry.GetValue(path, "EnableDHCP", 0);
 
         return dhcp is 1;
@@ -145,7 +145,7 @@ public static class NetworkManagement
     public static bool IsPhysicalAdapter(string nicId)
     {
         using var searcher = new ManagementObjectSearcher(@"root\CIMV2",
-            @$"SELECT * FROM Win32_NetworkAdapter WHERE GUID='{nicId}' AND NOT PNPDeviceID LIKE 'ROOT\\%'");
+            $@"SELECT * FROM Win32_NetworkAdapter WHERE GUID='{nicId}' AND NOT PNPDeviceID LIKE 'ROOT\\%'");
 
         var managementObject = searcher.Get().OfType<ManagementObject>().FirstOrDefault();
         bool isPhysical = Convert.ToBoolean(managementObject?.Properties["PhysicalAdapter"].Value);

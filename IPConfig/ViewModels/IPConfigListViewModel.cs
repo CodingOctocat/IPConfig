@@ -184,7 +184,7 @@ public partial class IPConfigListViewModel : ObservableRecipient
         if (String.IsNullOrWhiteSpace(name))
         {
             var orders = from x in IPConfigList
-                         let match = Regex.Match(x.Name, @$"^{Lang.Untitled}(\d+)$")
+                         let match = Regex.Match(x.Name, $@"^{Lang.Untitled}(\d+)$")
                          where match.Success
                          select Convert.ToInt32(match.Groups[1].Value);
 
@@ -413,7 +413,7 @@ public partial class IPConfigListViewModel : ObservableRecipient
         }
 
         var orders = from x in IPConfigList
-                     let match = Regex.Match(x.Name, @$"^{Lang.Copy_Noun}(\d+)-{Regex.Escape(original.Name)}$")
+                     let match = Regex.Match(x.Name, $@"^{Lang.Copy_Noun}(\d+)-{Regex.Escape(original.Name)}$")
                      where match.Success
                      select Convert.ToInt32(match.Groups[1].Value);
 
