@@ -834,32 +834,32 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
         bool isIPValid = IPAddress.TryParse(EditingIPConfig.IPv4Config.IP, out var ip);
         bool isMaskValid = IPAddress.TryParse(EditingIPConfig.IPv4Config.Mask, out var mask);
 
-        var gatewayGroups = new List<int>();
+        var gatewaySegments = new List<int>();
 
         if (isIPValid && isMaskValid)
         {
-            byte[] ipGroups = ip!.GetAddressBytes();
-            byte[] maskGroups = mask!.GetAddressBytes();
+            byte[] ipSegments = ip!.GetAddressBytes();
+            byte[] maskSegments = mask!.GetAddressBytes();
 
-            for (int i = 0; i < Math.Min(ipGroups.Length, maskGroups.Length); i++)
+            for (int i = 0; i < Math.Min(ipSegments.Length, maskSegments.Length); i++)
             {
-                int gatewayGroup = ipGroups[i] & maskGroups[i];
-                gatewayGroups.Add(gatewayGroup);
+                int gatewayGroup = ipSegments[i] & maskSegments[i];
+                gatewaySegments.Add(gatewayGroup);
             }
         }
 
-        if (gatewayGroups is [.., 0])
+        if (gatewaySegments is [.., 0])
         {
-            gatewayGroups[^1] = 1;
+            gatewaySegments[^1] = 1;
         }
 
-        if (gatewayGroups is [])
+        if (gatewaySegments is [])
         {
             AutoComplete.IPv4Config.Gateway = EditingIPConfig.Backup.IPv4Config.Gateway;
         }
         else
         {
-            AutoComplete.IPv4Config.Gateway = String.Join(".", gatewayGroups);
+            AutoComplete.IPv4Config.Gateway = String.Join(".", gatewaySegments);
         }
     }
 
