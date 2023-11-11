@@ -419,8 +419,6 @@ public partial class IPConfigListViewModel : ObservableRecipient
 
         int order = FileOrderHelper.GetOrder(orders);
         var copy = original.DeepClone();
-        // Order 属性被标记为 [JsonIgnore]，需要手动赋值。
-        copy.Order = original.Order;
         copy.Name = $"{Lang.Copy_Noun}{order}-{original.Name}";
         copy.BeginEdit();
         InsertNewIPConfig(copy);

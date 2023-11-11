@@ -16,7 +16,6 @@ namespace IPConfig.Models;
 
 /// <summary>
 /// 表示一个 IP 配置。
-/// <para>MVVM Toolkit 源生成器暂不支持 <seealso cref="JsonIgnoreAttribute"/> 等其他特性，可以使用传统的完整属性(SetProperty)代替。</para>
 /// </summary>
 public partial class IPConfigModel : ObservableValidator, IDeepCloneable<IPConfigModel>, IDeepCloneTo<IPConfigModel>
 {
