@@ -323,7 +323,7 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
     {
         if (!_inTxn)
         {
-            EditingIPConfig.DeepCloneTo(_backup);
+            _backup = EditingIPConfig.DeepClone();
             _inTxn = true;
         }
     }
@@ -692,11 +692,7 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
         {
             GetAutoCompleteName();
         }
-        else if (e.PropertyName is nameof(IPv4Config.IP))
-        {
-            GetAutoCompleteGateway();
-        }
-        else if (e.PropertyName == nameof(IPv4Config.Mask))
+        else if (e.PropertyName is nameof(IPv4Config.IP) or nameof(IPv4Config.Mask))
         {
             GetAutoCompleteGateway();
         }
