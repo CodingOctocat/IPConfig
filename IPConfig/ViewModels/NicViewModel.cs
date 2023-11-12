@@ -155,10 +155,10 @@ public partial class NicViewModel : ObservableRecipient,
         var nics = NetworkInterface.GetAllNetworkInterfaces()
             .Select(x => new Nic(x))
             .OrderBy(x => x.OperationalStatus is OperationalStatus.Up
-                    && x.NetworkInterfaceType is not NetworkInterfaceType.Loopback or NetworkInterfaceType.Tunnel
+                    && x.SimpleNicType is SimpleNicType.Ethernet or SimpleNicType.Wlan
                     ? (int)x.OperationalStatus
                     : Int32.MaxValue)
-            .ThenBy(x => x.SimpleNicType)
+            .ThenBy(x => x.SimpleNicType, SimpleNicTypeComparer.Instance)
             .ThenBy(x => x.Name);
 
         AllNics = new(nics);

@@ -1,4 +1,16 @@
-﻿namespace IPConfig.Models;
+﻿using System;
+using System.Collections.Generic;
+
+namespace IPConfig.Models;
+
+public enum ConnectionType
+{
+    Other,
+
+    Ethernet,
+
+    Wlan,
+}
 
 public enum SimpleNicType
 {
@@ -13,11 +25,27 @@ public enum SimpleNicType
     Other
 }
 
-public enum ConnectionType
+public class SimpleNicTypeComparer : IComparer<SimpleNicType>
 {
-    Other,
+    public static readonly SimpleNicTypeComparer Instance = new();
 
-    Ethernet,
+    public int Compare(SimpleNicType x, SimpleNicType y)
+    {
+        int xOrder = GetSimpleNicTypeOrder(x);
+        int yOrder = GetSimpleNicTypeOrder(y);
 
-    Wlan,
+        return xOrder.CompareTo(yOrder);
+    }
+
+    private static int GetSimpleNicTypeOrder(SimpleNicType simpleNicType)
+    {
+        return simpleNicType switch {
+            SimpleNicType.Ethernet => 0,
+            SimpleNicType.Wlan => 1,
+            SimpleNicType.Other => 2,
+            SimpleNicType.Loopback => 3,
+            SimpleNicType.Unknown => 4,
+            _ => throw new ArgumentOutOfRangeException(nameof(simpleNicType), simpleNicType, null)
+        };
+    }
 }
