@@ -46,9 +46,6 @@ public partial class NicViewModel : ObservableRecipient,
     #region Observable Properties
 
     [ObservableProperty]
-    private WpfObservableRangeCollection<Nic> _allNics = new();
-
-    [ObservableProperty]
     private bool _isInNicConfigDetailView;
 
     [ObservableProperty]
@@ -80,6 +77,8 @@ public partial class NicViewModel : ObservableRecipient,
 
     #region Properties
 
+    public WpfObservableRangeCollection<Nic> AllNics { get; } = new();
+
     public bool CanLoadLastUsedIPv4Config => LastUsedIPv4Config is not null;
 
     public bool IsSelectedNicNotNull => SelectedNic is not null;
@@ -94,6 +93,7 @@ public partial class NicViewModel : ObservableRecipient,
     {
         IsActive = true;
 
+        AllNics.CollectionChanged += (s, e) => NicSelectorPlaceholder = AllNics.Count > 0 ? Lang.SelectAdapter_ToolTip : Lang.AdapterNotFound;
         BindingOperations.EnableCollectionSynchronization(AllNics, _syncLock);
 
         LangSource.Instance.LanguageChanged += (s, e) => {
@@ -147,22 +147,6 @@ public partial class NicViewModel : ObservableRecipient,
             """;
 
         await ClipboardHelper.SetTextAsync(text.Trim());
-    }
-
-    [RelayCommand]
-    private void GetAllNics()
-    {
-        var nics = NetworkInterface.GetAllNetworkInterfaces()
-            .Select(x => new Nic(x))
-            .OrderBy(x => x.OperationalStatus is OperationalStatus.Up
-                    && x.SimpleNicType is SimpleNicType.Ethernet or SimpleNicType.Wlan
-                    ? (int)x.OperationalStatus
-                    : Int32.MaxValue)
-            .ThenBy(x => x.SimpleNicType, SimpleNicTypeComparer.Instance)
-            .ThenBy(x => x.Name);
-
-        AllNics = new(nics);
-        AllNics.CollectionChanged += (_, _) => NicSelectorPlaceholder = AllNics.Count > 0 ? Lang.SelectAdapter_ToolTip : Lang.AdapterNotFound;
     }
 
     [RelayCommand]
@@ -372,6 +356,20 @@ public partial class NicViewModel : ObservableRecipient,
     #endregion Event Handlers
 
     #region Private Methods
+
+    private void GetAllNics()
+    {
+        var nics = NetworkInterface.GetAllNetworkInterfaces()
+            .Select(x => new Nic(x))
+            .OrderBy(x => x.OperationalStatus is OperationalStatus.Up
+                    && x.SimpleNicType is SimpleNicType.Ethernet or SimpleNicType.Wlan
+                    ? (int)x.OperationalStatus
+                    : Int32.MaxValue)
+            .ThenBy(x => x.SimpleNicType, SimpleNicTypeComparer.Instance)
+            .ThenBy(x => x.Name);
+
+        AllNics.ReplaceRange(nics);
+    }
 
     private void GoBack()
     {
