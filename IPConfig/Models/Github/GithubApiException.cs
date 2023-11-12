@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace IPConfig.Models.Github;
+namespace IPConfig.Models.GitHub;
 
-public class GithubApiException : Exception
+public class GitHubApiException : Exception
 {
-    public GithubApiException()
+    public GitHubApiException()
     { }
 
-    public GithubApiException(string? message) : base(message)
+    public GitHubApiException(string? message) : base(message)
     { }
 
-    public GithubApiException(string? message, Exception? innerException) : base(message, innerException)
+    public GitHubApiException(string? message, Exception? innerException) : base(message, innerException)
     { }
 
-    protected GithubApiException(SerializationInfo info, StreamingContext context) : base(info, context)
+    protected GitHubApiException(SerializationInfo info, StreamingContext context) : base(info, context)
     { }
 }

@@ -10,7 +10,7 @@ using HandyControl.Controls;
 using IPConfig.Extensions;
 using IPConfig.Helpers;
 using IPConfig.Languages;
-using IPConfig.Models.Github;
+using IPConfig.Models.GitHub;
 
 namespace IPConfig.ViewModels;
 
@@ -18,7 +18,7 @@ public partial class VersionInfoViewModel : ObservableObject
 {
     #region Fields
 
-    private GithubReleaseInfo? _githubReleaseInfo;
+    private GitHubReleaseInfo? _githubReleaseInfo;
 
     #endregion Fields
 
@@ -112,7 +112,7 @@ public partial class VersionInfoViewModel : ObservableObject
         }
 
         Growl.Ask(new() {
-            ConfirmStr = Lang.JumpToGithub,
+            ConfirmStr = Lang.JumpToGitHub,
             CancelStr = Lang.Cancel,
             Message = $"""
                 {Lang.LatestVersion}{_githubReleaseInfo.Name}
@@ -125,7 +125,7 @@ public partial class VersionInfoViewModel : ObservableObject
             ActionBeforeClose = (isConfirm) => {
                 if (isConfirm)
                 {
-                    UriHelper.OpenUri(GithubApi.ReleasesUrl);
+                    UriHelper.OpenUri(GitHubApi.ReleasesUrl);
                 }
 
                 return true;
@@ -144,7 +144,7 @@ public partial class VersionInfoViewModel : ObservableObject
     {
         try
         {
-            _githubReleaseInfo = await GithubApi.GetLatestReleaseInfoAsync();
+            _githubReleaseInfo = await GitHubApi.GetLatestReleaseInfoAsync();
 
             if (Version.Parse(_githubReleaseInfo.TagName.TrimStart('v')) > App.Version)
             {

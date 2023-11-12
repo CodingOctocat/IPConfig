@@ -5,9 +5,9 @@ using System.Net.Http.Json;
 using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 
-namespace IPConfig.Models.Github;
+namespace IPConfig.Models.GitHub;
 
-public static class GithubApi
+public static class GitHubApi
 {
     public const string GetLatestReleaseApi = $"https://api.github.com/repos/{Owner}/{RepositoryName}/releases/latest";
 
@@ -21,12 +21,12 @@ public static class GithubApi
 
     private static readonly HttpClient _httpClient = new();
 
-    static GithubApi()
+    static GitHubApi()
     {
         _httpClient.DefaultRequestHeaders.UserAgent.Add(new(new ProductHeaderValue($"{Owner}-{RepositoryName}", App.VersionString)));
     }
 
-    public static async Task<GithubReleaseInfo> GetLatestReleaseInfoAsync()
+    public static async Task<GitHubReleaseInfo> GetLatestReleaseInfoAsync()
     {
         var jObj = await _httpClient.GetFromJsonAsync<JsonObject>(GetLatestReleaseApi);
 
@@ -37,7 +37,7 @@ public static class GithubApi
         string releaseNote = jObj.GetValueEx("body", "");
         var createdAt = jObj.GetValueEx("created_at", DateTimeOffset.MinValue);
         string htmlUrl = jObj.GetValueEx("html_url", "");
-        var info = new GithubReleaseInfo(tagName, name, releaseNote, createdAt, htmlUrl);
+        var info = new GitHubReleaseInfo(tagName, name, releaseNote, createdAt, htmlUrl);
 
         return info;
     }
@@ -54,7 +54,7 @@ public static class GithubApi
             }
             catch (Exception ex)
             {
-                throw new GithubApiException(ex.Message, ex);
+                throw new GitHubApiException(ex.Message, ex);
             }
         }
         else

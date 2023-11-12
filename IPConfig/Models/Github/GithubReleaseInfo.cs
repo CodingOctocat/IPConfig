@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IPConfig.Models.Github;
+namespace IPConfig.Models.GitHub;
 
-public record GithubReleaseInfo(string TagName, string Name, string ReleaseNote, DateTimeOffset CreatedAt, string HtmlUrl)
+public record GitHubReleaseInfo(string TagName, string Name, string ReleaseNote, DateTimeOffset CreatedAt, string HtmlUrl)
 { }

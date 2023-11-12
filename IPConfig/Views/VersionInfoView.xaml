@@ -5,7 +5,7 @@
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:app="clr-namespace:IPConfig"
-             xmlns:github="clr-namespace:IPConfig.Models.Github"
+             xmlns:github="clr-namespace:IPConfig.Models.GitHub"
              xmlns:vm="clr-namespace:IPConfig.ViewModels"
              xmlns:hc="https://handyorg.github.io/handycontrol"
              d:Background="{DynamicResource RegionBrush}"
@@ -20,15 +20,15 @@
 
     <hc:SimpleStackPanel Orientation="Horizontal">
         <Button Style="{StaticResource ButtonCustom}"
-                ToolTip="{x:Static github:GithubApi.RepositoryUrl}">
+                ToolTip="{x:Static github:GitHubApi.RepositoryUrl}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Click">
-                    <i:LaunchUriOrFileAction Path="{x:Static github:GithubApi.RepositoryUrl}" />
+                    <i:LaunchUriOrFileAction Path="{x:Static github:GitHubApi.RepositoryUrl}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
 
             <Viewbox Style="{StaticResource IconViewBoxStyle}">
-                <Path Data="{StaticResource GithubGeometry}"
+                <Path Data="{StaticResource GitHubGeometry}"
                       Fill="{DynamicResource MyReverseBrush}"
                       Style="{StaticResource IconParkStyle}" />
             </Viewbox>

@@ -1335,14 +1335,14 @@ namespace IPConfig.Languages {
         }
 
         /// <summary>
-        ///   Looks up a localized string similar to "跳转到 Github..."
+        ///   Looks up a localized string similar to "跳转到 GitHub..."
         /// </summary>
         /// <remarks>
         /// MainViewModel
         /// </remarks>
-        public static string JumpToGithub {
+        public static string JumpToGitHub {
             get {
-                return ResourceManager.GetString("JumpToGithub", resourceCulture) ?? string.Empty;
+                return ResourceManager.GetString("JumpToGitHub", resourceCulture) ?? string.Empty;
             }
         }
 
@@ -2875,12 +2875,12 @@ namespace IPConfig.Languages {
         /// </remarks>
         IsTransient,
         /// <summary>
-        ///   Looks up a localized string similar to 跳转到 Github....
+        ///   Looks up a localized string similar to 跳转到 GitHub....
         /// </summary>
         /// <remarks>
         /// MainViewModel
         /// </remarks>
-        JumpToGithub,
+        JumpToGitHub,
         /// <summary>
         ///   Looks up a localized string similar to 语言.
         /// </summary>

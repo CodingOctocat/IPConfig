@@ -513,8 +513,8 @@
     <value>瞬态 (群集地址)</value>
     <comment>NicConfigDetailView</comment>
   </data>
-  <data name="JumpToGithub" xml:space="preserve">
-    <value>跳转到 Github...</value>
+  <data name="JumpToGitHub" xml:space="preserve">
+    <value>跳转到 GitHub...</value>
     <comment>MainViewModel</comment>
   </data>
   <data name="Language" xml:space="preserve">

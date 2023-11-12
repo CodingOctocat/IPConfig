@@ -432,8 +432,8 @@
   <data name="IsTransient" xml:space="preserve">
     <value>Transient</value>
   </data>
-  <data name="JumpToGithub" xml:space="preserve">
-    <value>Jump to Github...</value>
+  <data name="JumpToGitHub" xml:space="preserve">
+    <value>Jump to GitHub...</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Language</value>
