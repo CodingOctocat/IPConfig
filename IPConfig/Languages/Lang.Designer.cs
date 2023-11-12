@@ -450,7 +450,7 @@ namespace IPConfig.Languages {
         ///   Looks up a localized string similar to "检查更新失败"
         /// </summary>
         /// <remarks>
-        /// MainViewModel
+        /// VersionInfoViewModel
         /// </remarks>
         public static string CheckUpdateFailed {
             get {
@@ -510,7 +510,7 @@ namespace IPConfig.Languages {
         ///   Looks up a localized string similar to "打开控制面板 &amp;gt; 网络和 Internet &amp;gt; 网络连接"
         /// </summary>
         /// <remarks>
-        /// MainWindow
+        /// StatusBarView
         /// </remarks>
         public static string ControlPanel_ToolTip {
             get {
@@ -594,7 +594,7 @@ namespace IPConfig.Languages {
         ///   Looks up a localized string similar to "深色"
         /// </summary>
         /// <remarks>
-        /// MainWindow
+        /// ThemeSwitchButtonView
         /// </remarks>
         public static string Dark {
             get {
@@ -815,18 +815,6 @@ namespace IPConfig.Languages {
         public static string Error {
             get {
                 return ResourceManager.GetString("Error", resourceCulture) ?? string.Empty;
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to "以太网"
-        /// </summary>
-        /// <remarks>
-        /// Nic
-        /// </remarks>
-        public static string Ethernet_Lower {
-            get {
-                return ResourceManager.GetString("Ethernet_Lower", resourceCulture) ?? string.Empty;
             }
         }
 
@@ -1338,7 +1326,7 @@ namespace IPConfig.Languages {
         ///   Looks up a localized string similar to "跳转到 GitHub..."
         /// </summary>
         /// <remarks>
-        /// MainViewModel
+        /// VersionInfoViewModel
         /// </remarks>
         public static string JumpToGitHub {
             get {
@@ -1362,7 +1350,7 @@ namespace IPConfig.Languages {
         ///   Looks up a localized string similar to "最新版本: "
         /// </summary>
         /// <remarks>
-        /// MainViewModel
+        /// VersionInfoViewModel
         /// </remarks>
         public static string LatestVersion {
             get {
@@ -1374,7 +1362,7 @@ namespace IPConfig.Languages {
         ///   Looks up a localized string similar to "浅色"
         /// </summary>
         /// <remarks>
-        /// MainWindow
+        /// ThemeSwitchButtonView
         /// </remarks>
         public static string Light {
             get {
@@ -1470,7 +1458,7 @@ namespace IPConfig.Languages {
         ///   Looks up a localized string similar to "新版本可用: {0}&amp;#13;&amp;#10;&amp;#13;&amp;#10;{1} ..."
         /// </summary>
         /// <remarks>
-        /// MainWindow
+        /// VersionInfoViewModel
         /// </remarks>
         public static string NewVersionAvailable_Format_ToolTip {
             get {
@@ -1554,7 +1542,7 @@ namespace IPConfig.Languages {
         ///   Looks up a localized string similar to "打开 Internet 属性"
         /// </summary>
         /// <remarks>
-        /// MainWindow
+        /// StatusBarView
         /// </remarks>
         public static string OpenInternetProperties_ToolTip {
             get {
@@ -1830,7 +1818,7 @@ namespace IPConfig.Languages {
         ///   Looks up a localized string similar to "保存失败，配置存在验证错误"
         /// </summary>
         /// <remarks>
-        /// MainViewModel
+        /// IPConfigDetailViewModel
         /// </remarks>
         public static string SaveFailedValidationError {
             get {
@@ -1866,7 +1854,7 @@ namespace IPConfig.Languages {
         ///   Looks up a localized string similar to "已选择"
         /// </summary>
         /// <remarks>
-        /// MainWindow
+        /// IPConfigListSelectionCounterView
         /// </remarks>
         public static string Selected {
             get {
@@ -2046,7 +2034,7 @@ namespace IPConfig.Languages {
         ///   Looks up a localized string similar to "使用系统设置"
         /// </summary>
         /// <remarks>
-        /// MainWindow
+        /// ThemeSwitchButtonView
         /// </remarks>
         public static string UseSystemSetting {
             get {
@@ -2118,7 +2106,7 @@ namespace IPConfig.Languages {
         ///   Looks up a localized string similar to "紫罗兰"
         /// </summary>
         /// <remarks>
-        /// MainWindow
+        /// ThemeSwitchButtonView
         /// </remarks>
         public static string Violet {
             get {
@@ -2130,7 +2118,7 @@ namespace IPConfig.Languages {
         ///   Looks up a localized string similar to "你使用的是最新版本"
         /// </summary>
         /// <remarks>
-        /// MainViewModel
+        /// VersionInfoViewModel
         /// </remarks>
         public static string YouAreUpToDate {
             get {
@@ -2360,7 +2348,7 @@ namespace IPConfig.Languages {
         ///   Looks up a localized string similar to 检查更新失败.
         /// </summary>
         /// <remarks>
-        /// MainViewModel
+        /// VersionInfoViewModel
         /// </remarks>
         CheckUpdateFailed,
         /// <summary>
@@ -2395,7 +2383,7 @@ namespace IPConfig.Languages {
         ///   Looks up a localized string similar to 打开控制面板 &amp;gt; 网络和 Internet &amp;gt; 网络连接.
         /// </summary>
         /// <remarks>
-        /// MainWindow
+        /// StatusBarView
         /// </remarks>
         ControlPanel_ToolTip,
         /// <summary>
@@ -2444,7 +2432,7 @@ namespace IPConfig.Languages {
         ///   Looks up a localized string similar to 深色.
         /// </summary>
         /// <remarks>
-        /// MainWindow
+        /// ThemeSwitchButtonView
         /// </remarks>
         Dark,
         /// <summary>
@@ -2573,13 +2561,6 @@ namespace IPConfig.Languages {
         /// PingDnsLabelContentConverter
         /// </remarks>
         Error,
-        /// <summary>
-        ///   Looks up a localized string similar to 以太网.
-        /// </summary>
-        /// <remarks>
-        /// Nic
-        /// </remarks>
-        Ethernet_Lower,
         /// <summary>
         ///   Looks up a localized string similar to 导出失败.
         /// </summary>
@@ -2878,7 +2859,7 @@ namespace IPConfig.Languages {
         ///   Looks up a localized string similar to 跳转到 GitHub....
         /// </summary>
         /// <remarks>
-        /// MainViewModel
+        /// VersionInfoViewModel
         /// </remarks>
         JumpToGitHub,
         /// <summary>
@@ -2892,14 +2873,14 @@ namespace IPConfig.Languages {
         ///   Looks up a localized string similar to 最新版本: .
         /// </summary>
         /// <remarks>
-        /// MainViewModel
+        /// VersionInfoViewModel
         /// </remarks>
         LatestVersion,
         /// <summary>
         ///   Looks up a localized string similar to 浅色.
         /// </summary>
         /// <remarks>
-        /// MainWindow
+        /// ThemeSwitchButtonView
         /// </remarks>
         Light,
         /// <summary>
@@ -2955,7 +2936,7 @@ namespace IPConfig.Languages {
         ///   Looks up a localized string similar to 新版本可用: {0}&amp;#13;&amp;#10;&amp;#13;&amp;#10;{1} ....
         /// </summary>
         /// <remarks>
-        /// MainWindow
+        /// VersionInfoViewModel
         /// </remarks>
         NewVersionAvailable_Format_ToolTip,
         /// <summary>
@@ -3004,7 +2985,7 @@ namespace IPConfig.Languages {
         ///   Looks up a localized string similar to 打开 Internet 属性.
         /// </summary>
         /// <remarks>
-        /// MainWindow
+        /// StatusBarView
         /// </remarks>
         OpenInternetProperties_ToolTip,
         /// <summary>
@@ -3165,7 +3146,7 @@ namespace IPConfig.Languages {
         ///   Looks up a localized string similar to 保存失败，配置存在验证错误.
         /// </summary>
         /// <remarks>
-        /// MainViewModel
+        /// IPConfigDetailViewModel
         /// </remarks>
         SaveFailedValidationError,
         /// <summary>
@@ -3186,7 +3167,7 @@ namespace IPConfig.Languages {
         ///   Looks up a localized string similar to 已选择.
         /// </summary>
         /// <remarks>
-        /// MainWindow
+        /// IPConfigListSelectionCounterView
         /// </remarks>
         Selected,
         /// <summary>
@@ -3291,7 +3272,7 @@ namespace IPConfig.Languages {
         ///   Looks up a localized string similar to 使用系统设置.
         /// </summary>
         /// <remarks>
-        /// MainWindow
+        /// ThemeSwitchButtonView
         /// </remarks>
         UseSystemSetting,
         /// <summary>
@@ -3333,14 +3314,14 @@ namespace IPConfig.Languages {
         ///   Looks up a localized string similar to 紫罗兰.
         /// </summary>
         /// <remarks>
-        /// MainWindow
+        /// ThemeSwitchButtonView
         /// </remarks>
         Violet,
         /// <summary>
         ///   Looks up a localized string similar to 你使用的是最新版本.
         /// </summary>
         /// <remarks>
-        /// MainViewModel
+        /// VersionInfoViewModel
         /// </remarks>
         YouAreUpToDate,
     }

@@ -219,7 +219,7 @@
   </data>
   <data name="CheckUpdateFailed" xml:space="preserve">
     <value>检查更新失败</value>
-    <comment>MainViewModel</comment>
+    <comment>VersionInfoViewModel</comment>
   </data>
   <data name="ClosingInfoDbSyncing" xml:space="preserve">
     <value>正在同步数据库，请稍后再试。</value>
@@ -239,7 +239,7 @@
   </data>
   <data name="ControlPanel_ToolTip" xml:space="preserve">
     <value>打开控制面板 &gt; 网络和 Internet &gt; 网络连接</value>
-    <comment>MainWindow</comment>
+    <comment>StatusBarView</comment>
   </data>
   <data name="Copied" xml:space="preserve">
     <value>已复制</value>
@@ -267,7 +267,7 @@
   </data>
   <data name="Dark" xml:space="preserve">
     <value>深色</value>
-    <comment>MainWindow</comment>
+    <comment>ThemeSwitchButtonView</comment>
   </data>
   <data name="DataValidation_" xml:space="preserve">
     <value>数据验证(_V)</value>
@@ -340,10 +340,6 @@
   <data name="Error" xml:space="preserve">
     <value>错误</value>
     <comment>PingDnsLabelContentConverter</comment>
-  </data>
-  <data name="Ethernet_Lower" xml:space="preserve">
-    <value>以太网</value>
-    <comment>Nic</comment>
   </data>
   <data name="ExportFailed" xml:space="preserve">
     <value>导出失败</value>
@@ -515,7 +511,7 @@
   </data>
   <data name="JumpToGitHub" xml:space="preserve">
     <value>跳转到 GitHub...</value>
-    <comment>MainViewModel</comment>
+    <comment>VersionInfoViewModel</comment>
   </data>
   <data name="Language" xml:space="preserve">
     <value>语言</value>
@@ -523,11 +519,11 @@
   </data>
   <data name="LatestVersion" xml:space="preserve">
     <value>最新版本: </value>
-    <comment>MainViewModel</comment>
+    <comment>VersionInfoViewModel</comment>
   </data>
   <data name="Light" xml:space="preserve">
     <value>浅色</value>
-    <comment>MainWindow</comment>
+    <comment>ThemeSwitchButtonView</comment>
   </data>
   <data name="LoadLastUsedConfiguration_" xml:space="preserve">
     <value>加载上次使用的配置(_L)</value>
@@ -561,7 +557,7 @@
     <value>新版本可用: {0}
 
 {1} -&gt; {2}</value>
-    <comment>MainWindow</comment>
+    <comment>VersionInfoViewModel</comment>
   </data>
   <data name="NoConfiguration" xml:space="preserve">
     <value>暂无配置</value>
@@ -589,7 +585,7 @@
   </data>
   <data name="OpenInternetProperties_ToolTip" xml:space="preserve">
     <value>打开 Internet 属性</value>
-    <comment>MainWindow</comment>
+    <comment>StatusBarView</comment>
   </data>
   <data name="OpStatus_Dormant_ToolTip" xml:space="preserve">
     <value>[Dormant] 网络接口不处于传输数据包的状态；它正等待外部事件</value>
@@ -677,7 +673,7 @@
   </data>
   <data name="SaveFailedValidationError" xml:space="preserve">
     <value>保存失败，配置存在验证错误</value>
-    <comment>MainViewModel</comment>
+    <comment>IPConfigDetailViewModel</comment>
   </data>
   <data name="SaveSuccessful" xml:space="preserve">
     <value>保存成功</value>
@@ -693,7 +689,7 @@
   </data>
   <data name="Selected" xml:space="preserve">
     <value>已选择</value>
-    <comment>MainWindow</comment>
+    <comment>IPConfigListSelectionCounterView</comment>
   </data>
   <data name="Shortcut_F11" xml:space="preserve">
     <value>快捷键: F11</value>
@@ -753,7 +749,7 @@
   </data>
   <data name="UseSystemSetting" xml:space="preserve">
     <value>使用系统设置</value>
-    <comment>MainWindow</comment>
+    <comment>ThemeSwitchButtonView</comment>
   </data>
   <data name="ValidateSuccessful" xml:space="preserve">
     <value>配置验证成功</value>
@@ -777,10 +773,10 @@
   </data>
   <data name="Violet" xml:space="preserve">
     <value>紫罗兰</value>
-    <comment>MainWindow</comment>
+    <comment>ThemeSwitchButtonView</comment>
   </data>
   <data name="YouAreUpToDate" xml:space="preserve">
     <value>你使用的是最新版本</value>
-    <comment>MainViewModel</comment>
+    <comment>VersionInfoViewModel</comment>
   </data>
 </root>

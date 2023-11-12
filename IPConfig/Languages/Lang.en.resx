@@ -302,9 +302,6 @@
   <data name="Error" xml:space="preserve">
     <value>Error</value>
   </data>
-  <data name="Ethernet_Lower" xml:space="preserve">
-    <value>ethernet</value>
-  </data>
   <data name="ExportFailed" xml:space="preserve">
     <value>Export failed</value>
   </data>
