@@ -9,7 +9,7 @@ namespace IPConfig.Models.Validations;
 /// <para>
 /// 属性还需注册 <seealso cref="INotifyDataErrorInfo.ErrorsChanged"/> 事件以执行此验证。
 /// <code>
-/// ObjcetProperty.ErrorsChanged += (sender, e) => ValidateProperty(ObjcetProperty, nameof(ObjcetProperty));
+/// ObjcetProperty.ErrorsChanged += (s, e) => ValidateProperty(ObjcetProperty, nameof(ObjcetProperty));
 /// </code>
 /// </para>
 /// </summary>
