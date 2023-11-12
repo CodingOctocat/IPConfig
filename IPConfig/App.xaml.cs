@@ -36,10 +36,6 @@ public partial class App : Application
 {
     public const string AppName = "IPConfig";
 
-    public const string GithubRepositoryUrl = $"https://github.com/{Owner}/{AppName}";
-
-    public const string Owner = "CodingOctocat";
-
     public static readonly JsonSerializerOptions JsonOptions = new() {
         WriteIndented = true,
         IgnoreReadOnlyProperties = true,

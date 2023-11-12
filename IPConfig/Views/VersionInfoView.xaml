@@ -5,6 +5,7 @@
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:app="clr-namespace:IPConfig"
+             xmlns:github="clr-namespace:IPConfig.Models.Github"
              xmlns:vm="clr-namespace:IPConfig.ViewModels"
              xmlns:hc="https://handyorg.github.io/handycontrol"
              d:Background="{DynamicResource RegionBrush}"
@@ -19,10 +20,10 @@
 
     <hc:SimpleStackPanel Orientation="Horizontal">
         <Button Style="{StaticResource ButtonCustom}"
-                ToolTip="{x:Static app:App.GithubRepositoryUrl}">
+                ToolTip="{x:Static github:GithubApi.RepositoryUrl}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Click">
-                    <i:LaunchUriOrFileAction Path="{x:Static app:App.GithubRepositoryUrl}" />
+                    <i:LaunchUriOrFileAction Path="{x:Static github:GithubApi.RepositoryUrl}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
 
@@ -35,7 +36,6 @@
 
         <Button Margin="8,0,0,0"
                 Command="{Binding ShowUpdateGrowlCommand}"
-                Content="{x:Static app:App.VersionString}"
                 ToolTip="{Binding NewVersionAvailableToolTip}">
             <Button.Style>
                 <Style BasedOn="{StaticResource ButtonCustom}"
@@ -50,15 +50,17 @@
                     </Style.Triggers>
                 </Style>
             </Button.Style>
-        </Button>
 
-        <TextBlock Margin="4,0,0,0"
-                   VerticalAlignment="Center"
-                   d:Visibility="Visible"
-                   FontWeight="Bold"
-                   Foreground="{DynamicResource MyPrimaryTextBrush}"
-                   IsHitTestVisible="False"
-                   Text="↑"
-                   Visibility="{Binding HasNewVersion, Converter={StaticResource Boolean2VisibilityConverter}}" />
+            <hc:SimpleStackPanel Orientation="Horizontal">
+                <hc:SimpleText Text="{x:Static app:App.VersionString}" />
+
+                <hc:SimpleText Margin="2,0,0,0"
+                               d:Visibility="Visible"
+                               FontWeight="Bold"
+                               Foreground="{DynamicResource MyPrimaryTextBrush}"
+                               Text="↑"
+                               Visibility="{Binding HasNewVersion, Converter={StaticResource Boolean2VisibilityConverter}}" />
+            </hc:SimpleStackPanel>
+        </Button>
     </hc:SimpleStackPanel>
 </UserControl>

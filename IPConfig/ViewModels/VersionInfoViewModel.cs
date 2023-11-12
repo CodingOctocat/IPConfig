@@ -10,7 +10,7 @@ using HandyControl.Controls;
 using IPConfig.Extensions;
 using IPConfig.Helpers;
 using IPConfig.Languages;
-using IPConfig.Models;
+using IPConfig.Models.Github;
 
 namespace IPConfig.ViewModels;
 
@@ -117,7 +117,7 @@ public partial class VersionInfoViewModel : ObservableObject
             Message = $"""
                 {Lang.LatestVersion}{_githubReleaseInfo.Name}
                 {App.VersionString} -> {_githubReleaseInfo.TagName}
-                {_githubReleaseInfo.CreatedAt}
+                {_githubReleaseInfo.CreatedAt.ToLocalTime():yyyy/MM/dd HH:mm:ss 'GMT'z}
 
                 What's Changed
                 {note}
@@ -125,7 +125,7 @@ public partial class VersionInfoViewModel : ObservableObject
             ActionBeforeClose = (isConfirm) => {
                 if (isConfirm)
                 {
-                    UriHelper.OpenUri(_githubReleaseInfo.HtmlUrl ?? App.GithubRepositoryUrl);
+                    UriHelper.OpenUri(GithubApi.ReleasesUrl);
                 }
 
                 return true;
@@ -144,7 +144,7 @@ public partial class VersionInfoViewModel : ObservableObject
     {
         try
         {
-            _githubReleaseInfo = await GithubReleaseInfo.GetLatestReleaseInfoAsync();
+            _githubReleaseInfo = await GithubApi.GetLatestReleaseInfoAsync();
 
             if (Version.Parse(_githubReleaseInfo.TagName.TrimStart('v')) > App.Version)
             {
