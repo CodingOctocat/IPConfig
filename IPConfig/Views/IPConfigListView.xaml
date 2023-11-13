@@ -68,7 +68,8 @@
                 -->
                 <ContextMenu x:Key="ItemContextMenu"
                              d:DataContext="{Binding}"
-                             DataContext="{Binding DataContext, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}}">
+                             DataContext="{Binding DataContext, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}}"
+                             UseLayoutRounding="True">
                     <MenuItem Command="{Binding CopySelectedIPConfigsAsTextCommand}"
                               Header="{lang:Lang {x:Static lang:LangKey.CopySelectedIPConfigAsText_}}"
                               InputGestureText="{Binding MultiSelectedCountString}" />
