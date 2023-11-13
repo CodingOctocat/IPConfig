@@ -78,7 +78,7 @@ public partial class IPConfigListView : UserControl
 
     private void LbIPConfigs_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        // 防止多选时总是滚动到 SelectedItem。
+        // 修复多选时总是滚动到 SelectedItem 的问题。
         if (lbIPConfigs.SelectedItems.Count == 1)
         {
             lbIPConfigs.ScrollIntoView(lbIPConfigs.SelectedItem);
