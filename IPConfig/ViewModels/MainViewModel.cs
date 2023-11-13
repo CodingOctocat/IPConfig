@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -65,7 +66,7 @@ public partial class MainViewModel : ObservableRecipient
     }
 
     [RelayCommand]
-    private void Closing(CancelEventArgs e)
+    private async Task ClosingAsync(CancelEventArgs e)
     {
         if (App.IsDbSyncing)
         {
@@ -129,16 +130,23 @@ public partial class MainViewModel : ObservableRecipient
             }
         }
 
+        e.Cancel = true;
+
         var iPConfigList = Messenger.Send<RequestMessage<IEnumerable<EditableIPConfigModel>>, string>("IPConfigList").Response.ToImmutableArray();
 
-        LiteDbHelper.Handle(col => {
-            for (int i = 0; i < iPConfigList.Length; i++)
-            {
-                var item = iPConfigList[i];
-                item.Order = i;
-                col.Update(item);
-            }
+        await Task.Run(() => {
+            LiteDbHelper.Handle(col => {
+                for (int i = 0; i < iPConfigList.Length; i++)
+                {
+                    var item = iPConfigList[i];
+                    item.Order = i;
+                    col.Update(item);
+                }
+            });
         });
+
+        App.CanForceClose = true;
+        App.Current.Shutdown();
     }
 
     [RelayCommand]
