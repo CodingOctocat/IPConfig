@@ -420,7 +420,7 @@ public partial class IPConfigListViewModel : ObservableRecipient
         int order = FileOrderHelper.GetOrder(orders);
         var copy = original.DeepClone();
         copy.Name = $"{Lang.Copy_Noun}{order}-{original.Name}";
-        copy.BeginEdit();
+        copy.AcceptChanges();
         InsertNewIPConfig(copy);
 
         copy.ValidateAllProperties();
