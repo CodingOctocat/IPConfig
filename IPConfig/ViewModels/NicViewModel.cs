@@ -58,6 +58,9 @@ public partial class NicViewModel : ObservableRecipient,
     private LastUsedIPv4Config? _lastUsedIPv4Config;
 
     [ObservableProperty]
+    private string _nicSelectorPlaceholder = Lang.GettingAdapterInfo;
+
+    [ObservableProperty]
     [NotifyPropertyChangedRecipients]
     [NotifyPropertyChangedFor(nameof(IsSelectedNicNotNull))]
     [NotifyCanExecuteChangedFor(nameof(CopySelectedNicIPConfigAsTextCommand),
@@ -84,8 +87,6 @@ public partial class NicViewModel : ObservableRecipient,
 
     public bool IsSelectedNicNotNull => SelectedNic is not null;
 
-    public string NicSelectorPlaceholder { get; private set; } = Lang.AdapterNotFound;
-
     #endregion Properties
 
     #region Constructors & Recipients
@@ -94,7 +95,6 @@ public partial class NicViewModel : ObservableRecipient,
     {
         IsActive = true;
 
-        AllNics.CollectionChanged += (s, e) => NicSelectorPlaceholder = AllNics.Count > 0 ? Lang.SelectAdapter_ToolTip : Lang.AdapterNotFound;
         BindingOperations.EnableCollectionSynchronization(AllNics, _syncLock);
 
         LangSource.Instance.LanguageChanged += (s, e) => {
@@ -366,8 +366,11 @@ public partial class NicViewModel : ObservableRecipient,
 
     #region Private Methods
 
-    private static async Task<List<Nic>> GetAllNicsAsync()
+    private async Task<List<Nic>> GetAllNicsAsync()
     {
+        string lastNicSelectorPlaceholder = NicSelectorPlaceholder;
+        NicSelectorPlaceholder = Lang.GettingAdapterInfo;
+
         var nics = await Task.Run(() => NetworkInterface.GetAllNetworkInterfaces()
                         .Select(x => new Nic(x))
                         .OrderBy(x => x.OperationalStatus is OperationalStatus.Up
@@ -377,6 +380,8 @@ public partial class NicViewModel : ObservableRecipient,
                         .ThenBy(x => x.SimpleNicType, SimpleNicTypeComparer.Instance)
                         .ThenBy(x => x.Name)
                         .ToList());
+
+        NicSelectorPlaceholder = lastNicSelectorPlaceholder;
 
         return nics;
     }

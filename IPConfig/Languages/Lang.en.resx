@@ -633,4 +633,7 @@
   <data name="YouAreUpToDate" xml:space="preserve">
     <value>You're up to date</value>
   </data>
+  <data name="GettingAdapterInfo" xml:space="preserve">
+    <value>Getting Network Adapter Information...</value>
+  </data>
 </root>

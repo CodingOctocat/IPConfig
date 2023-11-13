@@ -306,7 +306,7 @@
     <comment>NicConfigDetailView</comment>
   </data>
   <data name="Disabled" xml:space="preserve">
-    <value>未启用</value>
+    <value>已禁用</value>
     <comment>NicViewModel</comment>
   </data>
   <data name="DiscardAsk" xml:space="preserve">
@@ -778,5 +778,9 @@
   <data name="YouAreUpToDate" xml:space="preserve">
     <value>你使用的是最新版本</value>
     <comment>VersionInfoViewModel</comment>
+  </data>
+  <data name="GettingAdapterInfo" xml:space="preserve">
+    <value>正在获取网卡/适配器...</value>
+    <comment>NicViewModel</comment>
   </data>
 </root>

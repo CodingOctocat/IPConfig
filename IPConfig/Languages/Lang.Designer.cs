@@ -711,7 +711,7 @@ namespace IPConfig.Languages {
         }
 
         /// <summary>
-        ///   Looks up a localized string similar to "未启用"
+        ///   Looks up a localized string similar to "已禁用"
         /// </summary>
         /// <remarks>
         /// NicViewModel
@@ -935,6 +935,18 @@ namespace IPConfig.Languages {
         public static string Gateway {
             get {
                 return ResourceManager.GetString("Gateway", resourceCulture) ?? string.Empty;
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "正在获取网卡/适配器..."
+        /// </summary>
+        /// <remarks>
+        /// NicViewModel
+        /// </remarks>
+        public static string GettingAdapterInfo {
+            get {
+                return ResourceManager.GetString("GettingAdapterInfo", resourceCulture) ?? string.Empty;
             }
         }
 
@@ -2499,7 +2511,7 @@ namespace IPConfig.Languages {
         /// </remarks>
         DhcpLeaseLifetime,
         /// <summary>
-        ///   Looks up a localized string similar to 未启用.
+        ///   Looks up a localized string similar to 已禁用.
         /// </summary>
         /// <remarks>
         /// NicViewModel
@@ -2631,6 +2643,13 @@ namespace IPConfig.Languages {
         /// NicConfigDetailView
         /// </remarks>
         Gateway,
+        /// <summary>
+        ///   Looks up a localized string similar to 正在获取网卡/适配器....
+        /// </summary>
+        /// <remarks>
+        /// NicViewModel
+        /// </remarks>
+        GettingAdapterInfo,
         /// <summary>
         ///   Looks up a localized string similar to 返回(_B).
         /// </summary>
