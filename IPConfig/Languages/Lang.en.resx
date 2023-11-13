@@ -333,6 +333,9 @@
   <data name="Gateway" xml:space="preserve">
     <value>Gateway</value>
   </data>
+  <data name="GettingAdapterInfo" xml:space="preserve">
+    <value>Getting Network Adapter Information...</value>
+  </data>
   <data name="GoBack_" xml:space="preserve">
     <value>_Back</value>
   </data>
@@ -440,6 +443,9 @@
   </data>
   <data name="Light" xml:space="preserve">
     <value>Light</value>
+  </data>
+  <data name="LoadingIPConfigurations" xml:space="preserve">
+    <value>Loading IP Configurations...</value>
   </data>
   <data name="LoadLastUsedConfiguration_" xml:space="preserve">
     <value>_Load Last Used Configuration</value>
@@ -632,8 +638,5 @@
   </data>
   <data name="YouAreUpToDate" xml:space="preserve">
     <value>You're up to date</value>
-  </data>
-  <data name="GettingAdapterInfo" xml:space="preserve">
-    <value>Getting Network Adapter Information...</value>
   </data>
 </root>

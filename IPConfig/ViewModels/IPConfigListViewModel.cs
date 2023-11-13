@@ -265,10 +265,11 @@ public partial class IPConfigListViewModel : ObservableRecipient
     }
 
     [RelayCommand]
-    private void Loaded()
+    private async Task LoadedAsync()
     {
-        var col = LiteDbHelper.Query();
-        IPConfigList.AddRange(col.OrderBy(x => x.Order).ToEnumerable());
+        var col = await Task.Run(() => LiteDbHelper.Query().OrderBy(x => x.Order).ToList());
+
+        IPConfigList.AddRange(col);
     }
 
     [RelayCommand(CanExecute = nameof(HasSelected))]

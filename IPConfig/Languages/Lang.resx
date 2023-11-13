@@ -381,6 +381,10 @@
     <value>默认网关</value>
     <comment>NicConfigDetailView</comment>
   </data>
+  <data name="GettingAdapterInfo" xml:space="preserve">
+    <value>正在获取网卡/适配器...</value>
+    <comment>NicViewModel</comment>
+  </data>
   <data name="GoBack_" xml:space="preserve">
     <value>返回(_B)</value>
     <comment>NicConfigDetailView</comment>
@@ -524,6 +528,10 @@
   <data name="Light" xml:space="preserve">
     <value>浅色</value>
     <comment>ThemeSwitchButtonView</comment>
+  </data>
+  <data name="LoadingIPConfigurations" xml:space="preserve">
+    <value>正在加载 IP 配置...</value>
+    <comment>IPConfigListView</comment>
   </data>
   <data name="LoadLastUsedConfiguration_" xml:space="preserve">
     <value>加载上次使用的配置(_L)</value>
@@ -778,9 +786,5 @@
   <data name="YouAreUpToDate" xml:space="preserve">
     <value>你使用的是最新版本</value>
     <comment>VersionInfoViewModel</comment>
-  </data>
-  <data name="GettingAdapterInfo" xml:space="preserve">
-    <value>正在获取网卡/适配器...</value>
-    <comment>NicViewModel</comment>
   </data>
 </root>

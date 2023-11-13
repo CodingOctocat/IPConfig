@@ -219,28 +219,48 @@
             </ListBox.ItemContainerStyle>
         </ListBox>
 
-        <hc:Empty Grid.Row="1"
-                  d:Visibility="Visible"
-                  hc:Empty.ShowEmpty="True"
-                  IsHitTestVisible="False"
-                  Visibility="{Binding ElementName=lbIPConfigs, Path=HasItems, Converter={StaticResource Boolean2VisibilityReConverter}}">
-            <hc:Empty.Logo>
-                <Viewbox Width="36"
-                         Height="36">
-                    <Path Data="{StaticResource DataGeometry}"
-                          Stroke="{DynamicResource EmptyBrush}"
-                          StrokeThickness="2"
-                          Style="{StaticResource IconParkStyle}" />
-                </Viewbox>
-            </hc:Empty.Logo>
+        <hc:ToggleBlock Grid.Row="1"
+                        d:IsChecked="True"
+                        IsChecked="{Binding LoadedCommand.IsRunning, Mode=OneWay}"
+                        IsHitTestVisible="False">
+            <hc:ToggleBlock.UnCheckedContent>
+                <hc:Empty d:Visibility="Visible"
+                          hc:Empty.ShowEmpty="True"
+                          Visibility="{Binding ElementName=lbIPConfigs, Path=HasItems, Converter={StaticResource Boolean2VisibilityReConverter}}">
+                    <hc:Empty.Logo>
+                        <Viewbox Width="36"
+                                 Height="36">
+                            <Path Data="{StaticResource DataGeometry}"
+                                  Stroke="{DynamicResource EmptyBrush}"
+                                  StrokeThickness="2"
+                                  Style="{StaticResource IconParkStyle}" />
+                        </Viewbox>
+                    </hc:Empty.Logo>
 
-            <hc:Empty.Description>
-                <TextBlock Margin="0,8"
-                           HorizontalAlignment="Center"
-                           Foreground="{DynamicResource EmptyBrush}"
-                           Text="{lang:Lang {x:Static lang:LangKey.NoConfiguration}}" />
-            </hc:Empty.Description>
-        </hc:Empty>
+                    <hc:Empty.Description>
+                        <TextBlock Margin="0,8"
+                                   HorizontalAlignment="Center"
+                                   Foreground="{DynamicResource EmptyBrush}"
+                                   Text="{lang:Lang {x:Static lang:LangKey.NoConfiguration}}" />
+                    </hc:Empty.Description>
+                </hc:Empty>
+            </hc:ToggleBlock.UnCheckedContent>
+
+            <hc:ToggleBlock.CheckedContent>
+                <hc:Empty hc:Empty.ShowEmpty="True">
+                    <hc:Empty.Logo>
+                        <hc:LoadingCircle />
+                    </hc:Empty.Logo>
+
+                    <hc:Empty.Description>
+                        <TextBlock Margin="0,8"
+                                   HorizontalAlignment="Center"
+                                   Foreground="{DynamicResource EmptyBrush}"
+                                   Text="{lang:Lang {x:Static lang:LangKey.LoadingIPConfigurations}}" />
+                    </hc:Empty.Description>
+                </hc:Empty>
+            </hc:ToggleBlock.CheckedContent>
+        </hc:ToggleBlock>
 
         <UniformGrid Grid.Row="2"
                      Margin="0,4,0,0"

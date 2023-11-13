@@ -1383,6 +1383,18 @@ namespace IPConfig.Languages {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to "正在加载 IP 配置..."
+        /// </summary>
+        /// <remarks>
+        /// IPConfigListView
+        /// </remarks>
+        public static string LoadingIPConfigurations {
+            get {
+                return ResourceManager.GetString("LoadingIPConfigurations", resourceCulture) ?? string.Empty;
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to "加载上次使用的配置(_L)"
         /// </summary>
         /// <remarks>
@@ -2902,6 +2914,13 @@ namespace IPConfig.Languages {
         /// ThemeSwitchButtonView
         /// </remarks>
         Light,
+        /// <summary>
+        ///   Looks up a localized string similar to 正在加载 IP 配置....
+        /// </summary>
+        /// <remarks>
+        /// IPConfigListView
+        /// </remarks>
+        LoadingIPConfigurations,
         /// <summary>
         ///   Looks up a localized string similar to 加载上次使用的配置(_L).
         /// </summary>
