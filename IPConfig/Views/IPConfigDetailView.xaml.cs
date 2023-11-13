@@ -32,6 +32,8 @@ public partial class IPConfigDetailView : UserControl
                 if (m.Gesture == "F2")
                 {
                     tbIPConfigName.Focus();
+                    tbIPConfigName.SelectAll();
+                    tbIPConfigName.ScrollToHome();
                 }
             });
     }

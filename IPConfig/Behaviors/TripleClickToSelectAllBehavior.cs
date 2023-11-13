@@ -41,9 +41,10 @@ public class TripleClickToSelectAllBehavior
 
     private static void OnTextBoxMouseDown(object sender, MouseButtonEventArgs e)
     {
-        if (e.ClickCount == 3)
+        if (sender is TextBox textBox && e.ClickCount == 3)
         {
-            ((TextBox)sender).SelectAll();
+            textBox.SelectAll();
+            textBox.ScrollToHome();
         }
     }
 }
