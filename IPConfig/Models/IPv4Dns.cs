@@ -34,8 +34,8 @@ public partial class IPv4Dns : ObservableObject
     [Ignore]
     public bool IsRunning
     {
-        get => _isRunning; private
-        set => SetProperty(ref _isRunning, value);
+        get => _isRunning;
+        private set => SetProperty(ref _isRunning, value);
     }
 
     [Ignore]
