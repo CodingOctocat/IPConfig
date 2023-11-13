@@ -200,6 +200,8 @@
                     <Setter Property="ContextMenu" Value="{StaticResource ItemContextMenu}" />
                     <Setter Property="Margin" Value="4,2" />
                     <Setter Property="Padding" Value="0" />
+                    <!--  修复在切换选择到未完全显示在视口的项目时，列表项出现闪烁的问题。  -->
+                    <Setter Property="UseLayoutRounding" Value="False" />
 
                     <Style.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
