@@ -259,15 +259,15 @@ public static class NetworkManagement
         managementObject.InvokeMethod("SetDNSServerSearchOrder", dnsObj, null!);
     }
 
-    private static void ConcatManagementBaseObjectValues<T>(ManagementBaseObject mbo, string propertyName, T[] newValues)
+    private static void ConcatManagementBaseObjectValues<T>(ManagementBaseObject objMBO, string propertyName, T[] newValues)
     {
-        if (mbo[propertyName] is T[] oldValues)
+        if (objMBO[propertyName] is T[] oldValues)
         {
-            mbo[propertyName] = newValues.Concat(oldValues.Skip(newValues.Length)).ToArray();
+            objMBO[propertyName] = newValues.Concat(oldValues.Skip(newValues.Length)).ToArray();
         }
         else
         {
-            mbo[propertyName] = newValues;
+            objMBO[propertyName] = newValues;
         }
     }
 
@@ -415,17 +415,17 @@ public static class NetworkManagement
         return result;
     }
 
-    private static void SetManagementObjectArrayValue<T>(ManagementObject mo, string methodName, string propertyName, T[] newValues)
+    private static void SetManagementObjectArrayValue<T>(ManagementObject objMO, string methodName, string propertyName, T[] newValues)
     {
-        using var mbo = mo.GetMethodParameters(methodName);
+        using var objMBO = objMO.GetMethodParameters(methodName);
 
-        if (mbo is null)
+        if (objMBO is null)
         {
             return;
         }
 
-        var oldValues = mbo[propertyName] as T[] ?? Array.Empty<T>();
-        mbo[propertyName] = newValues.Concat(oldValues.Skip(newValues.Length)).ToArray();
-        mo.InvokeMethod(methodName, mbo, null!);
+        var oldValues = objMBO[propertyName] as T[] ?? Array.Empty<T>();
+        objMBO[propertyName] = newValues.Concat(oldValues.Skip(newValues.Length)).ToArray();
+        objMO.InvokeMethod(methodName, objMBO, null!);
     }
 }
