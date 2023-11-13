@@ -77,7 +77,7 @@ public static class ContextMenuLeftClickBehavior
             fe.ContextMenu.IsOpen = true;
 
             // 设置切换形式打开上下文菜单。
-            // 建议在 XAML 设置 ContextMenuService.IsEnabled="false" 以禁用右键打开功能，避免产生打开状态的切换冲突。
+            // 建议在 XAML 设置 ContextMenuService.IsEnabled="False" 以禁用右键打开功能，避免产生打开状态的切换冲突。
             fe.ContextMenu.Closed += (s, e) => fe.IsEnabled = true;
             fe.IsEnabled = false;
         }

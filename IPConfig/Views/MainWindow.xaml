@@ -81,7 +81,7 @@
                 <Button b:ContextMenuLeftClickBehavior.IsLeftClickEnabled="True"
                         Background="Transparent"
                         ContextMenuService.HorizontalOffset="-94"
-                        ContextMenuService.IsEnabled="false"
+                        ContextMenuService.IsEnabled="False"
                         ContextMenuService.Placement="Bottom"
                         Style="{StaticResource ButtonCustom}"
                         Tag="{Binding DataContext, RelativeSource={RelativeSource Self}}">

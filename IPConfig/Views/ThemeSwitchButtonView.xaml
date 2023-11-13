@@ -28,7 +28,7 @@
     <Button x:Name="btnThemeSwitcher"
             b:ContextMenuLeftClickBehavior.IsLeftClickEnabled="True"
             ContextMenuService.HorizontalOffset="-72"
-            ContextMenuService.IsEnabled="false"
+            ContextMenuService.IsEnabled="False"
             ContextMenuService.Placement="Top"
             Style="{StaticResource ButtonCustom}"
             ToolTip="{Binding Path=(h:ThemeManager.CurrentSkinTypeMode), Converter={StaticResource SkinTypeToolTipConverter}}">

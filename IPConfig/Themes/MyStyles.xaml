@@ -134,7 +134,7 @@
                         <ResizeGrip x:Name="WindowResizeGrip"
                                     HorizontalAlignment="Right"
                                     VerticalAlignment="Bottom"
-                                    IsTabStop="false"
+                                    IsTabStop="False"
                                     Visibility="Collapsed" />
                     </Grid>
 
