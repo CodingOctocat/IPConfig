@@ -200,7 +200,7 @@ public partial class App : Application
                     {
                         Process.Start(module.FileName);
                         CanForceClose = true;
-                        Current?.Shutdown();
+                        Current.Shutdown();
                     }
                 }
 
