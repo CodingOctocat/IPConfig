@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Management;
@@ -18,6 +19,8 @@ namespace IPConfig.Helpers;
 /// </summary>
 public static class NetworkManagement
 {
+    private static readonly Lazy<Dictionary<string, bool>> _physicalAdapters = new(GetPhysicalAdapters);
+
     public static NetworkInterface? GetActiveNetworkInterface()
     {
         var networks = NetworkInterface.GetAllNetworkInterfaces();
@@ -144,13 +147,12 @@ public static class NetworkManagement
 
     public static bool IsPhysicalAdapter(string nicId)
     {
-        using var searcher = new ManagementObjectSearcher(@"root\CIMV2",
-            $@"SELECT * FROM Win32_NetworkAdapter WHERE GUID='{nicId}' AND NOT PNPDeviceID LIKE 'ROOT\\%'");
+        if (!_physicalAdapters.IsValueCreated)
+        {
+            GetPhysicalAdapters();
+        }
 
-        var managementObject = searcher.Get().OfType<ManagementObject>().FirstOrDefault();
-        bool isPhysical = Convert.ToBoolean(managementObject?.Properties["PhysicalAdapter"].Value);
-
-        return isPhysical;
+        return _physicalAdapters.Value.GetValueOrDefault(nicId);
     }
 
     public static void SetIPv4(string nicId, string ipAddress, string subnetMask, string gateway)
@@ -391,6 +393,26 @@ public static class NetworkManagement
         }
 
         throw new ArgumentOutOfRangeException(nameof(addressFamily), addressFamily, $"Supports {AddressFamily.InterNetwork} and {AddressFamily.InterNetworkV6} only.");
+    }
+
+    private static Dictionary<string, bool> GetPhysicalAdapters()
+    {
+        using var searcher = new ManagementObjectSearcher(@"root\CIMV2",
+            $@"SELECT PhysicalAdapter, GUID FROM Win32_NetworkAdapter WHERE NOT PNPDeviceID LIKE 'ROOT\\%'");
+
+        var managementObjects = searcher.Get().OfType<ManagementObject>();
+        var result = new Dictionary<string, bool>();
+
+        foreach (var objMO in managementObjects)
+        {
+            if (objMO?.Properties["GUID"].Value is string id)
+            {
+                bool isPhysical = Convert.ToBoolean(objMO?.Properties["PhysicalAdapter"].Value);
+                result[id] = isPhysical;
+            }
+        }
+
+        return result;
     }
 
     private static void SetManagementObjectArrayValue<T>(ManagementObject mo, string methodName, string propertyName, T[] newValues)

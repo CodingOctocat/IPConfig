@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Threading.Tasks;
@@ -150,10 +151,9 @@ public partial class NicViewModel : ObservableRecipient,
     }
 
     [RelayCommand]
-    private void Loaded()
+    private async Task LoadedAsync()
     {
-        GetAllNics();
-        SelectedNic = AllNics.FirstOrDefault();
+        await RefreshCommand.ExecuteAsync(false);
 
         _realTimeNicSpeedMonitor.Elapsed += RealTimeNicSpeedMonitor_Elapsed;
         ResetNicSpeedDisplay();
@@ -201,10 +201,19 @@ public partial class NicViewModel : ObservableRecipient,
     }
 
     [RelayCommand]
-    private void Refresh()
+    private async Task RefreshAsync(bool keepSelected = true)
     {
-        GetAllNics();
-        SelectedNic = AllNics.FirstOrDefault(x => x.Id == _lastNic?.Id);
+        var nics = await GetAllNicsAsync();
+        AllNics.ReplaceRange(nics);
+
+        if (keepSelected)
+        {
+            SelectedNic = AllNics.FirstOrDefault(x => x.Id == _lastNic?.Id);
+        }
+        else
+        {
+            SelectedNic = AllNics.FirstOrDefault();
+        }
     }
 
     [RelayCommand]
@@ -357,18 +366,19 @@ public partial class NicViewModel : ObservableRecipient,
 
     #region Private Methods
 
-    private void GetAllNics()
+    private static async Task<List<Nic>> GetAllNicsAsync()
     {
-        var nics = NetworkInterface.GetAllNetworkInterfaces()
-            .Select(x => new Nic(x))
-            .OrderBy(x => x.OperationalStatus is OperationalStatus.Up
-                    && x.SimpleNicType is SimpleNicType.Ethernet or SimpleNicType.Wlan
-                    ? (int)x.OperationalStatus
-                    : Int32.MaxValue)
-            .ThenBy(x => x.SimpleNicType, SimpleNicTypeComparer.Instance)
-            .ThenBy(x => x.Name);
+        var nics = await Task.Run(() => NetworkInterface.GetAllNetworkInterfaces()
+                        .Select(x => new Nic(x))
+                        .OrderBy(x => x.OperationalStatus is OperationalStatus.Up
+                                && x.SimpleNicType is SimpleNicType.Ethernet or SimpleNicType.Wlan
+                                ? (int)x.OperationalStatus
+                                : Int32.MaxValue)
+                        .ThenBy(x => x.SimpleNicType, SimpleNicTypeComparer.Instance)
+                        .ThenBy(x => x.Name)
+                        .ToList());
 
-        AllNics.ReplaceRange(nics);
+        return nics;
     }
 
     private void GoBack()

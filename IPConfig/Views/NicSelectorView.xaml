@@ -28,7 +28,8 @@
 
     <UserControl.InputBindings>
         <KeyBinding Key="F5"
-                    Command="{Binding RefreshCommand}" />
+                    Command="{Binding RefreshCommand}"
+                    CommandParameter="{StaticResource True}" />
     </UserControl.InputBindings>
 
     <Grid>
@@ -38,7 +39,7 @@
         </Grid.ColumnDefinitions>
 
         <hc:ComboBox Height="36"
-                     hc:InfoElement.Placeholder="{Binding NicSelectorPlaceholder}"
+                     hc:InfoElement.Placeholder="{Binding NicSelectorPlaceholder, UpdateSourceTrigger=PropertyChanged}"
                      ItemsSource="{Binding AllNics}"
                      SelectedItem="{Binding SelectedNic}"
                      ToolTip="{Binding SelectedNic}">
@@ -130,10 +131,19 @@
             </hc:ComboBox.ItemTemplate>
         </hc:ComboBox>
 
+        <ProgressBar Height="4"
+                     Margin="1,0,1,1"
+                     VerticalAlignment="Bottom"
+                     d:Visibility="Visible"
+                     IsIndeterminate="True"
+                     Opacity="0.5"
+                     Visibility="{Binding RefreshCommand.IsRunning, Converter={StaticResource Boolean2VisibilityConverter}}" />
+
         <Button Grid.Column="1"
                 Height="36"
                 Margin="4,0,0,0"
                 Command="{Binding RefreshCommand}"
+                CommandParameter="{StaticResource True}"
                 Content="{lang:Lang {x:Static lang:LangKey.Refresh}}"
                 ToolTip="{lang:Lang {x:Static lang:LangKey.Refresh_ToolTip}}" />
     </Grid>

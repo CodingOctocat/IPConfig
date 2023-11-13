@@ -11,8 +11,6 @@ namespace IPConfig.Models;
 [INotifyPropertyChanged]
 public partial class Nic : NetworkInterface
 {
-    private SimpleNicType? _simpleNicType;
-
     public ConnectionType ConnectionType
     {
         get
@@ -103,21 +101,7 @@ public partial class Nic : NetworkInterface
 
     public override OperationalStatus OperationalStatus => Instance.OperationalStatus;
 
-    public SimpleNicType SimpleNicType
-    {
-        get
-        {
-            if (_simpleNicType is not null)
-            {
-                return _simpleNicType.Value;
-            }
-
-            var simpleNicType = GetSimpleNicType();
-            _simpleNicType = simpleNicType;
-
-            return simpleNicType;
-        }
-    }
+    public SimpleNicType SimpleNicType => GetSimpleNicType();
 
     public override long Speed => Instance.Speed;
 
