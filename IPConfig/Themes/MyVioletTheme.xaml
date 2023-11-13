@@ -8,5 +8,5 @@
                      Color="{DynamicResource PrimaryColor}" />
 
     <SolidColorBrush x:Key="EmptyBrush"
-                     Color="LightGray" />
+                     Color="{DynamicResource ThirdlyTextColor}" />
 </ResourceDictionary>
