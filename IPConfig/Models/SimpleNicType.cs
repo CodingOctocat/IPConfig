@@ -3,6 +3,28 @@ using System.Collections.Generic;
 
 namespace IPConfig.Models;
 
+public class ConnectionTypeComparer : IComparer<ConnectionType>
+{
+    public static readonly ConnectionTypeComparer Instance = new();
+
+    public int Compare(ConnectionType x, ConnectionType y)
+    {
+        int xOrder = GetConnectionTypeOrder(x);
+        int yOrder = GetConnectionTypeOrder(y);
+
+        return xOrder.CompareTo(yOrder);
+    }
+
+    private static int GetConnectionTypeOrder(ConnectionType connectionType)
+    {
+        return connectionType switch {
+            ConnectionType.Ethernet => 0,
+            ConnectionType.Wlan => 1,
+            _ => throw new ArgumentOutOfRangeException(nameof(connectionType), connectionType, null)
+        };
+    }
+}
+
 public enum ConnectionType
 {
     Other,

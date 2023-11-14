@@ -378,6 +378,7 @@ public partial class NicViewModel : ObservableRecipient,
                                 ? (int)x.OperationalStatus
                                 : Int32.MaxValue)
                         .ThenBy(x => x.SimpleNicType, SimpleNicTypeComparer.Instance)
+                        .ThenBy(x => x.ConnectionType, ConnectionTypeComparer.Instance)
                         .ThenBy(x => x.Name)
                         .ToList());
 
