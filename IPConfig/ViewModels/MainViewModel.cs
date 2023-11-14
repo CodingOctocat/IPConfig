@@ -68,10 +68,10 @@ public partial class MainViewModel : ObservableRecipient
     [RelayCommand]
     private async Task ClosingAsync(CancelEventArgs e)
     {
-        if (App.IsDbSyncing)
+        if (LiteDbHelper.IsDbBusy)
         {
             HcMessageBox.Show(
-                Lang.ClosingInfoDbSyncing,
+                Lang.ClosingInfoDbBusy,
                 App.AppName,
                 MessageBoxButton.OK,
                 MessageBoxImage.Information,

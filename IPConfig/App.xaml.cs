@@ -1,9 +1,7 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
@@ -43,27 +41,12 @@ public partial class App : Application
         Converters = { new JsonStringEnumConverter() }
     };
 
-    private static bool _isDbSyncing;
-
     public static bool CanForceClose { get; set; }
 
     /// <summary>
     /// Gets the current <see cref="App"/> instance in use.
     /// </summary>
     public static new App Current => (App)Application.Current;
-
-    public static bool IsDbSyncing
-    {
-        get => _isDbSyncing;
-        set
-        {
-            if (_isDbSyncing != value)
-            {
-                _isDbSyncing = value;
-                OnStaticPropertyChanged();
-            }
-        }
-    }
 
     public static bool IsInDesignMode => Application.Current is not App;
 
@@ -232,15 +215,4 @@ public partial class App : Application
             ThemeManager.UpdateSkin(null);
         }
     }
-
-    #region Static Properties Change Notification
-
-    public static event EventHandler<PropertyChangedEventArgs> StaticPropertyChanged = delegate { };
-
-    private static void OnStaticPropertyChanged([CallerMemberName] string? staticPropertyName = null)
-    {
-        StaticPropertyChanged(null, new PropertyChangedEventArgs(staticPropertyName));
-    }
-
-    #endregion Static Properties Change Notification
 }

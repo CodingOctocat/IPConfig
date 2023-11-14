@@ -459,14 +459,14 @@ namespace IPConfig.Languages {
         }
 
         /// <summary>
-        ///   Looks up a localized string similar to "正在同步数据库，请稍后再试。"
+        ///   Looks up a localized string similar to "数据库繁忙，请稍后再试。"
         /// </summary>
         /// <remarks>
         /// MainViewModel
         /// </remarks>
-        public static string ClosingInfoDbSyncing {
+        public static string ClosingInfoDbBusy {
             get {
-                return ResourceManager.GetString("ClosingInfoDbSyncing", resourceCulture) ?? string.Empty;
+                return ResourceManager.GetString("ClosingInfoDbBusy", resourceCulture) ?? string.Empty;
             }
         }
 
@@ -627,14 +627,14 @@ namespace IPConfig.Languages {
         }
 
         /// <summary>
-        ///   Looks up a localized string similar to "正在同步到数据库..."
+        ///   Looks up a localized string similar to "数据库繁忙..."
         /// </summary>
         /// <remarks>
-        /// MainWindow
+        /// StatusBarView
         /// </remarks>
-        public static string DbSyncing_ToolTip {
+        public static string DbBusy_ToolTip {
             get {
-                return ResourceManager.GetString("DbSyncing_ToolTip", resourceCulture) ?? string.Empty;
+                return ResourceManager.GetString("DbBusy_ToolTip", resourceCulture) ?? string.Empty;
             }
         }
 
@@ -2376,12 +2376,12 @@ namespace IPConfig.Languages {
         /// </remarks>
         CheckUpdateFailed,
         /// <summary>
-        ///   Looks up a localized string similar to 正在同步数据库，请稍后再试。.
+        ///   Looks up a localized string similar to 数据库繁忙，请稍后再试。.
         /// </summary>
         /// <remarks>
         /// MainViewModel
         /// </remarks>
-        ClosingInfoDbSyncing,
+        ClosingInfoDbBusy,
         /// <summary>
         ///   Looks up a localized string similar to 是否要将更改保存到 {0}？.
         /// </summary>
@@ -2474,12 +2474,12 @@ namespace IPConfig.Languages {
         /// </remarks>
         DataValidation_ToolTip,
         /// <summary>
-        ///   Looks up a localized string similar to 正在同步到数据库....
+        ///   Looks up a localized string similar to 数据库繁忙....
         /// </summary>
         /// <remarks>
-        /// MainWindow
+        /// StatusBarView
         /// </remarks>
-        DbSyncing_ToolTip,
+        DbBusy_ToolTip,
         /// <summary>
         ///   Looks up a localized string similar to 默认.
         /// </summary>

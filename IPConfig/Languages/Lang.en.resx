@@ -212,8 +212,8 @@
   <data name="CheckUpdateFailed" xml:space="preserve">
     <value>Failed to check for updates</value>
   </data>
-  <data name="ClosingInfoDbSyncing" xml:space="preserve">
-    <value>Syncing the database, please try again later.</value>
+  <data name="ClosingInfoDbBusy" xml:space="preserve">
+    <value>The database is busy, please try again later.</value>
   </data>
   <data name="ClosingSaveAsk_Format" xml:space="preserve">
     <value>Do you want to save the changes to {0}?</value>
@@ -254,8 +254,8 @@
   <data name="DataValidation_ToolTip" xml:space="preserve">
     <value>Check that the configuration meets the basic requirements</value>
   </data>
-  <data name="DbSyncing_ToolTip" xml:space="preserve">
-    <value>Database syncing...</value>
+  <data name="DbBusy_ToolTip" xml:space="preserve">
+    <value>Database busy...</value>
   </data>
   <data name="Default" xml:space="preserve">
     <value>Default</value>

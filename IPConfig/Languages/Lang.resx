@@ -221,8 +221,8 @@
     <value>检查更新失败</value>
     <comment>VersionInfoViewModel</comment>
   </data>
-  <data name="ClosingInfoDbSyncing" xml:space="preserve">
-    <value>正在同步数据库，请稍后再试。</value>
+  <data name="ClosingInfoDbBusy" xml:space="preserve">
+    <value>数据库繁忙，请稍后再试。</value>
     <comment>MainViewModel</comment>
   </data>
   <data name="ClosingSaveAsk_Format" xml:space="preserve">
@@ -277,9 +277,9 @@
     <value>检查配置是否符合基本要求</value>
     <comment>IPConfigDetailView</comment>
   </data>
-  <data name="DbSyncing_ToolTip" xml:space="preserve">
-    <value>正在同步到数据库...</value>
-    <comment>MainWindow</comment>
+  <data name="DbBusy_ToolTip" xml:space="preserve">
+    <value>数据库繁忙...</value>
+    <comment>StatusBarView</comment>
   </data>
   <data name="Default" xml:space="preserve">
     <value>默认</value>

@@ -4,7 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:app="clr-namespace:IPConfig"
+             xmlns:h="clr-namespace:IPConfig.Helpers"
              xmlns:lang="clr-namespace:IPConfig.Languages"
              xmlns:vm="clr-namespace:IPConfig.ViewModels"
              xmlns:v="clr-namespace:IPConfig.Views"
@@ -42,9 +42,9 @@
                                       Margin="0,0,4,0"
                                       d:Visibility="Visible"
                                       IsIndeterminate="True"
-                                      ToolTip="{lang:Lang {x:Static lang:LangKey.DbSyncing_ToolTip}}"
+                                      ToolTip="{lang:Lang {x:Static lang:LangKey.DbBusy_ToolTip}}"
                                       ToolTipService.ShowOnDisabled="True"
-                                      Visibility="{Binding Path=(app:App.IsDbSyncing), Mode=OneWay, Converter={StaticResource Boolean2VisibilityConverter}}" />
+                                      Visibility="{Binding Path=(h:LiteDbHelper.IsDbBusy), Mode=OneWay, Converter={StaticResource Boolean2VisibilityConverter}}" />
 
                 <v:IPConfigListSelectionCounterView />
             </hc:SimpleStackPanel>
