@@ -66,7 +66,7 @@ public partial class IPConfigListViewModel : ObservableRecipient
 
     public int IPConfigCount => IPConfigList.Count;
 
-    public WpfObservableRangeCollection<EditableIPConfigModel> IPConfigList { get; } = new();
+    public WpfObservableRangeCollection<EditableIPConfigModel> IPConfigList { get; } = [];
 
     public ICollectionView IPConfigListCollectionView { get; }
 
@@ -80,7 +80,7 @@ public partial class IPConfigListViewModel : ObservableRecipient
 
     public int SelectedIndex => IPConfigList.IndexOf(SelectedIPConfig!);
 
-    public WpfObservableRangeCollection<EditableIPConfigModel> SelectedIPConfigs { get; } = new();
+    public WpfObservableRangeCollection<EditableIPConfigModel> SelectedIPConfigs { get; } = [];
 
     #endregion Properties
 

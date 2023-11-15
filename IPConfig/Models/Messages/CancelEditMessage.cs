@@ -1,14 +1,8 @@
 ﻿namespace IPConfig.Models.Messages;
 
-public class CancelEditMessage : ISender
+public class CancelEditMessage(object sender, bool ask) : ISender
 {
-    public bool Ask { get; }
+    public bool Ask { get; } = ask;
 
-    public object Sender { get; }
-
-    public CancelEditMessage(object sender, bool ask)
-    {
-        Sender = sender;
-        Ask = ask;
-    }
+    public object Sender { get; } = sender;
 }

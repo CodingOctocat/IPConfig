@@ -13,15 +13,15 @@ public abstract record IPAdvancedConfigBase
 {
     #region TCP/IPv4 和 TCP/IPv6 常规属性
 
-    public ImmutableList<string> AlternateDnsCollection { get; init; } = ImmutableList.Create<string>();
+    public ImmutableList<string> AlternateDnsCollection { get; init; } = [];
 
-    public ImmutableList<string> AlternateGatewayCollection { get; init; } = ImmutableList.Create<string>();
+    public ImmutableList<string> AlternateGatewayCollection { get; init; } = [];
 
-    public ImmutableList<string> AlternateIPCollection { get; init; } = ImmutableList.Create<string>();
+    public ImmutableList<string> AlternateIPCollection { get; init; } = [];
 
     public required string DhcpLeaseLifetime { get; init; }
 
-    public ImmutableList<string> DhcpLeaseLifetimeCollection { get; init; } = ImmutableList.Create<string>();
+    public ImmutableList<string> DhcpLeaseLifetimeCollection { get; init; } = [];
 
     public required string PreferredDns { get; init; }
 
@@ -31,11 +31,11 @@ public abstract record IPAdvancedConfigBase
 
     public required string PreferredLifetime { get; init; }
 
-    public ImmutableList<string> PreferredLifetimeCollection { get; init; } = ImmutableList.Create<string>();
+    public ImmutableList<string> PreferredLifetimeCollection { get; init; } = [];
 
     public required string ValidLifetime { get; init; }
 
-    public ImmutableList<string> ValidLifetimeCollection { get; init; } = ImmutableList.Create<string>();
+    public ImmutableList<string> ValidLifetimeCollection { get; init; } = [];
 
     #endregion TCP/IPv4 和 TCP/IPv6 常规属性
 
@@ -43,15 +43,15 @@ public abstract record IPAdvancedConfigBase
 
     public required DuplicateAddressDetectionState DuplicateAddressDetectionState { get; init; }
 
-    public ImmutableList<DuplicateAddressDetectionState> DuplicateAddressDetectionStateCollcetion { get; init; } = ImmutableList.Create<DuplicateAddressDetectionState>();
+    public ImmutableList<DuplicateAddressDetectionState> DuplicateAddressDetectionStateCollcetion { get; init; } = [];
 
     public required bool IsDnsEligible { get; init; }
 
-    public ImmutableList<bool> IsDnsEligibleCollcetion { get; init; } = ImmutableList.Create<bool>();
+    public ImmutableList<bool> IsDnsEligibleCollcetion { get; init; } = [];
 
     public required bool IsTransient { get; init; }
 
-    public ImmutableList<bool> IsTransientCollection { get; init; } = ImmutableList.Create<bool>();
+    public ImmutableList<bool> IsTransientCollection { get; init; } = [];
 
     #endregion TCP/IPv4 和 TCP/IPv6 高级信息
 

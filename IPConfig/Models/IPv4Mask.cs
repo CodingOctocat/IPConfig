@@ -13,6 +13,8 @@ namespace IPConfig.Models;
 
 public record IPv4Mask(string Mask, int CIDR, string Group)
 {
+    private static readonly string[] _emptyAndNull = ["", "NULL"];
+
     public static List<IPv4Mask> ReadIPv4MaskList()
     {
         string[] files = Directory.GetFiles(@".\.mask", "*.csv");
@@ -31,7 +33,7 @@ public record IPv4Mask(string Mask, int CIDR, string Group)
             };
 
             using var csv = new CsvReader(reader, config);
-            csv.Context.TypeConverterOptionsCache.GetOptions<string?>().NullValues.AddRange(new[] { "", "NULL" });
+            csv.Context.TypeConverterOptionsCache.GetOptions<string?>().NullValues.AddRange(_emptyAndNull);
             var records = csv.GetRecords<IPv4Mask>();
             list.AddRange(records);
         }

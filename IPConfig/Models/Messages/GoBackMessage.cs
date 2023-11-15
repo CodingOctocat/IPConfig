@@ -1,11 +1,6 @@
 ﻿namespace IPConfig.Models.Messages;
 
-public class GoBackMessage : ISender
+public class GoBackMessage(object sender) : ISender
 {
-    public object Sender { get; }
-
-    public GoBackMessage(object sender)
-    {
-        Sender = sender;
-    }
+    public object Sender { get; } = sender;
 }

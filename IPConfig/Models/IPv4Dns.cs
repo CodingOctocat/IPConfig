@@ -17,6 +17,8 @@ namespace IPConfig.Models;
 
 public partial class IPv4Dns : ObservableObject
 {
+    private static readonly string[] _emptyAndNull = ["", "NULL"];
+
     private bool _isRunning;
 
     private PingReply? _pingReply;
@@ -47,7 +49,11 @@ public partial class IPv4Dns : ObservableObject
 
     public string Provider { get; set; }
 
-    public IPv4Dns([Name(nameof(Provider))] string provider,
+#pragma warning disable IDE0290 // 使用主构造函数
+
+    public IPv4Dns(
+#pragma warning restore IDE0290 // 使用主构造函数
+        [Name(nameof(Provider))] string provider,
         [Name(nameof(Filter))] string? filter,
         [Name(nameof(Dns1))] string dns1,
         [Name(nameof(Dns2))] string? dns2,
@@ -80,7 +86,7 @@ public partial class IPv4Dns : ObservableObject
             };
 
             using var csv = new CsvReader(reader, config);
-            csv.Context.TypeConverterOptionsCache.GetOptions<string?>().NullValues.AddRange(new[] { "", "NULL" });
+            csv.Context.TypeConverterOptionsCache.GetOptions<string?>().NullValues.AddRange(_emptyAndNull);
             var records = csv.GetRecords<IPv4Dns>();
             list.AddRange(records);
         }

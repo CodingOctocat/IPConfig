@@ -13,7 +13,8 @@ using LiteDB;
 
 namespace IPConfig.Models;
 
-public partial class EditableIPConfigModel : IPConfigModel,
+[method: BsonCtor]
+public partial class EditableIPConfigModel(string name) : IPConfigModel(name),
     IDeepCloneable<EditableIPConfigModel>, IDeepCloneTo<EditableIPConfigModel>,
     IEditableObject, IRevertibleChangeTracking
 {
@@ -34,10 +35,6 @@ public partial class EditableIPConfigModel : IPConfigModel,
     public event EventHandler<bool>? EditableChanged;
 
     public event PropertyChangedEventHandler? EditablePropertyChanged;
-
-    [BsonCtor]
-    public EditableIPConfigModel(string name) : base(name)
-    { }
 
     public bool IsPropertyChanged<T>(Func<IPConfigModel, T> property) where T : notnull
     {

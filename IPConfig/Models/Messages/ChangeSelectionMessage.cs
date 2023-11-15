@@ -1,14 +1,8 @@
 ﻿namespace IPConfig.Models.Messages;
 
-public class ChangeSelectionMessage<T> : ISender
+public class ChangeSelectionMessage<T>(object sender, T selection) : ISender
 {
-    public T Selection { get; }
+    public T Selection { get; } = selection;
 
-    public object Sender { get; }
-
-    public ChangeSelectionMessage(object sender, T selection)
-    {
-        Sender = sender;
-        Selection = selection;
-    }
+    public object Sender { get; } = sender;
 }

@@ -8,18 +8,13 @@ using IPConfig.Languages;
 
 namespace IPConfig.Models;
 
-public partial class LastUsedIPv4Config : IPv4Config
+public partial class LastUsedIPv4Config(DateTime lastUsedTime) : IPv4Config
 {
-    public static readonly Dictionary<string, LastUsedIPv4Config> Backups = new();
+    public static readonly Dictionary<string, LastUsedIPv4Config> Backups = [];
 
     public string FormatedLastUsedTime => LastUsedTime.ToString(LangSource.Instance.CurrentCulture);
 
-    public DateTime LastUsedTime { get; }
-
-    public LastUsedIPv4Config(DateTime lastUsedTime)
-    {
-        LastUsedTime = lastUsedTime;
-    }
+    public DateTime LastUsedTime { get; } = lastUsedTime;
 
     public static async Task BackupAsync(string nicId, IPv4Config value)
     {

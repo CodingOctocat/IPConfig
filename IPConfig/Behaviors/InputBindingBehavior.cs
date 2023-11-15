@@ -20,8 +20,7 @@ public class InputBindingBehavior
         DependencyProperty.RegisterAttached("PropagateInputBindingsToWindow", typeof(bool), typeof(InputBindingBehavior),
             new PropertyMetadata(false, OnPropagateInputBindingsToWindowChanged));
 
-    private static readonly Dictionary<int, Tuple<WeakReference<FrameworkElement>, List<InputBinding>>> _trackedFrameWorkElementsToBindings =
-        new();
+    private static readonly Dictionary<int, Tuple<WeakReference<FrameworkElement>, List<InputBinding>>> _trackedFrameWorkElementsToBindings = [];
 
     public static bool GetPropagateInputBindingsToWindow(FrameworkElement obj)
     {

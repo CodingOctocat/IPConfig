@@ -1,14 +1,8 @@
 ﻿namespace IPConfig.Models.Messages;
 
-public class ToggleStateMessage<T> : ISender
+public class ToggleStateMessage<T>(object sender, T newValue) : ISender
 {
-    public T NewValue { get; }
+    public T NewValue { get; } = newValue;
 
-    public object Sender { get; }
-
-    public ToggleStateMessage(object sender, T newValue)
-    {
-        Sender = sender;
-        NewValue = newValue;
-    }
+    public object Sender { get; } = sender;
 }

@@ -1,11 +1,6 @@
 ﻿namespace IPConfig.Models.Messages;
 
-public class RefreshMessage : ISender
+public class RefreshMessage(object sender) : ISender
 {
-    public object Sender { get; }
-
-    public RefreshMessage(object sender)
-    {
-        Sender = sender;
-    }
+    public object Sender { get; } = sender;
 }

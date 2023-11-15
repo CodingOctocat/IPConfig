@@ -1,14 +1,8 @@
 ﻿namespace IPConfig.Models.Messages;
 
-public class AddUntitledIPConfigMessage : ISender
+public class AddUntitledIPConfigMessage(object sender, string name = "") : ISender
 {
-    public string Name { get; set; }
+    public string Name { get; set; } = name;
 
-    public object Sender { get; }
-
-    public AddUntitledIPConfigMessage(object sender, string name = "")
-    {
-        Sender = sender;
-        Name = name;
-    }
+    public object Sender { get; } = sender;
 }

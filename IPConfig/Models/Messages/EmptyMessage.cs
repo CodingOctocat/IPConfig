@@ -1,11 +1,6 @@
 ﻿namespace IPConfig.Models.Messages;
 
-public class EmptyMessage : ISender
+public class EmptyMessage(object sender) : ISender
 {
-    public object Sender { get; }
-
-    public EmptyMessage(object sender)
-    {
-        Sender = sender;
-    }
+    public object Sender { get; } = sender;
 }

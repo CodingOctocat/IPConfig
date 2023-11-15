@@ -6,17 +6,11 @@ using IPConfig.Languages;
 
 namespace IPConfig.Models.Validations;
 
-public sealed class RequiredIfAttribute<T> : ValidationAttribute
+public sealed class RequiredIfAttribute<T>(string propertyName, T? desiredValue) : ValidationAttribute
 {
-    public T? DesiredValue { get; set; }
+    public T? DesiredValue { get; set; } = desiredValue;
 
-    public string PropertyName { get; set; }
-
-    public RequiredIfAttribute(string propertyName, T? desiredValue)
-    {
-        PropertyName = propertyName;
-        DesiredValue = desiredValue;
-    }
+    public string PropertyName { get; set; } = propertyName;
 
     protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
     {

@@ -1,11 +1,6 @@
 ﻿namespace IPConfig.Models.Messages;
 
-public class SaveMessage : ISender
+public class SaveMessage(object sender) : ISender
 {
-    public object Sender { get; }
-
-    public SaveMessage(object sender)
-    {
-        Sender = sender;
-    }
+    public object Sender { get; } = sender;
 }

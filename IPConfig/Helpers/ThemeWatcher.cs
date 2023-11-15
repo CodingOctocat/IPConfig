@@ -12,14 +12,9 @@ namespace IPConfig.Helpers;
 /// </summary>
 public static class ThemeWatcher
 {
-    public class ThemeChangedArgs
+    public class ThemeChangedArgs(WindowsTheme windowsTheme)
     {
-        public WindowsTheme WindowsTheme { set; get; }
-
-        public ThemeChangedArgs(WindowsTheme windowsTheme)
-        {
-            WindowsTheme = windowsTheme;
-        }
+        public WindowsTheme WindowsTheme { set; get; } = windowsTheme;
     }
 
     public enum WindowsTheme

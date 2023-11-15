@@ -13,17 +13,17 @@ public record IPv6AdvancedConfig : IPAdvancedConfigBase
 {
     #region TCP/IPv6 常规属性
 
-    public virtual ImmutableList<int> AlternatePrefixLengthCollection { get; init; } = ImmutableList.Create<int>();
+    public virtual ImmutableList<int> AlternatePrefixLengthCollection { get; init; } = [];
 
     public virtual int PreferredPrefixLength { get; init; }
 
     public virtual PrefixOrigin PrefixOrigin { get; init; }
 
-    public virtual ImmutableList<PrefixOrigin> PrefixOriginCollection { get; init; } = ImmutableList.Create<PrefixOrigin>();
+    public virtual ImmutableList<PrefixOrigin> PrefixOriginCollection { get; init; } = [];
 
     public virtual SuffixOrigin SuffixOrigin { get; init; }
 
-    public virtual ImmutableList<SuffixOrigin> SuffixOriginCollection { get; init; } = ImmutableList.Create<SuffixOrigin>();
+    public virtual ImmutableList<SuffixOrigin> SuffixOriginCollection { get; init; } = [];
 
     #endregion TCP/IPv6 常规属性
 

@@ -81,7 +81,7 @@ public partial class NicViewModel : ObservableRecipient,
 
     #region Properties
 
-    public WpfObservableRangeCollection<Nic> AllNics { get; } = new();
+    public WpfObservableRangeCollection<Nic> AllNics { get; } = [];
 
     public bool CanLoadLastUsedIPv4Config => LastUsedIPv4Config is not null;
 

@@ -19,6 +19,8 @@ namespace IPConfig.Helpers;
 /// </summary>
 public static class NetworkManagement
 {
+    private static readonly int[] _gatewayCostMetric1 = [1];
+
     private static readonly Lazy<Dictionary<string, bool>> _physicalAdapters = new(GetPhysicalAdapters);
 
     public static NetworkInterface? GetActiveNetworkInterface()
@@ -191,7 +193,7 @@ public static class NetworkManagement
             using var newGateway = managementObject.GetMethodParameters("SetGateways");
 
             ConcatManagementBaseObjectValues(newGateway, "DefaultIPGateway", new[] { gateway });
-            ConcatManagementBaseObjectValues(newGateway, "GatewayCostMetric", new[] { 1 });
+            ConcatManagementBaseObjectValues(newGateway, "GatewayCostMetric", _gatewayCostMetric1);
             managementObject.InvokeMethod("SetGateways", newGateway, null!);
         }
     }
@@ -424,7 +426,7 @@ public static class NetworkManagement
             return;
         }
 
-        var oldValues = objMBO[propertyName] as T[] ?? Array.Empty<T>();
+        var oldValues = objMBO[propertyName] as T[] ?? [];
         objMBO[propertyName] = newValues.Concat(oldValues.Skip(newValues.Length)).ToArray();
         objMO.InvokeMethod(methodName, objMBO, null!);
     }

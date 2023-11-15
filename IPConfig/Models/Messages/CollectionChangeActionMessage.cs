@@ -2,18 +2,11 @@
 
 namespace IPConfig.Models.Messages;
 
-public class CollectionChangeActionMessage<T> : ISender
+public class CollectionChangeActionMessage<T>(object sender, CollectionChangeAction action, T item) : ISender
 {
-    public CollectionChangeAction Action { get; }
+    public CollectionChangeAction Action { get; } = action;
 
-    public T Item { get; }
+    public T Item { get; } = item;
 
-    public object Sender { get; }
-
-    public CollectionChangeActionMessage(object sender, CollectionChangeAction action, T item)
-    {
-        Sender = sender;
-        Action = action;
-        Item = item;
-    }
+    public object Sender { get; } = sender;
 }

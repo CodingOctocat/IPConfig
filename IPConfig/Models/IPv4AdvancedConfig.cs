@@ -13,7 +13,7 @@ public record IPv4AdvancedConfig : IPAdvancedConfigBase
 {
     #region TCP/IPv4 常规属性
 
-    public ImmutableList<string> AlternateMaskCollection { get; init; } = ImmutableList.Create<string>();
+    public ImmutableList<string> AlternateMaskCollection { get; init; } = [];
 
     public required bool IsAutoDns { get; init; }
 
@@ -23,7 +23,7 @@ public record IPv4AdvancedConfig : IPAdvancedConfigBase
 
     public required string WinsServerAddress { get; init; }
 
-    public ImmutableList<string> WinsServerAddressCollection { get; init; } = ImmutableList.Create<string>();
+    public ImmutableList<string> WinsServerAddressCollection { get; init; } = [];
 
     #endregion TCP/IPv4 常规属性
 

@@ -35,9 +35,9 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
 {
     #region Fields
 
-    private readonly WpfObservableRangeCollection<IPv4Dns> _iPv4DnsList = new();
+    private readonly WpfObservableRangeCollection<IPv4Dns> _iPv4DnsList = [];
 
-    private readonly WpfObservableRangeCollection<IPv4Mask> _iPv4MaskList = new();
+    private readonly WpfObservableRangeCollection<IPv4Mask> _iPv4MaskList = [];
 
     private EditableIPConfigModel _backup = EditableIPConfigModel.Empty;
 

@@ -9,7 +9,7 @@ public class Error
 {
     public class SerializableException
     {
-        public Dictionary<string, string?> Datas = new();
+        public Dictionary<string, string?> Datas = [];
 
         public string? HelpLink { get; }
 

@@ -4,11 +4,11 @@ namespace IPConfig.Helpers;
 
 public static class BytesFormatter
 {
-    private static readonly string[] _bandUnits = new[] { "bps", "Kbps", "Mbps", "Gbps", "Tbps", "Pbps", "Ebps", "Zbps", "Ybps" };
+    private static readonly string[] _bandUnits = ["bps", "Kbps", "Mbps", "Gbps", "Tbps", "Pbps", "Ebps", "Zbps", "Ybps"];
 
-    private static readonly string[] _fileUnits = new[] { "B", "KB", "MB", "GB", "TB", "PB", "EB", "Zb", "Yb" };
+    private static readonly string[] _fileUnits = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "Zb", "Yb"];
 
-    private static readonly string[] _speedUnits = new[] { "B/s", "KB/s", "MB/s", "GB/s", "TB/s", "PB/s", "EB/s", "Zb/s", "Yb/s" };
+    private static readonly string[] _speedUnits = ["B/s", "KB/s", "MB/s", "GB/s", "TB/s", "PB/s", "EB/s", "Zb/s", "Yb/s"];
 
     public static string ToFileSize(long size, int sys = 1024)
     {
