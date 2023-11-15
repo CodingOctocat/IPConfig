@@ -1,6 +1,6 @@
 # IPConfig
 
-[![Target framework](https://img.shields.io/badge/support-.NET_7.0--Windows-blue)](https://github.com/CodingOctocat/IPConfig)
+[![Target framework](https://img.shields.io/badge/support-.NET_8.0--Windows7.0-blue)](https://github.com/CodingOctocat/IPConfig)
 [![GitHub issues](https://img.shields.io/github/issues/CodingOctocat/IPConfig)](https://github.com/CodingOctocat/IPConfig/issues)
 [![GitHub stars](https://img.shields.io/github/stars/CodingOctocat/IPConfig)](https://github.com/CodingOctocat/IPConfig/stargazers)
 [![GitHub license](https://img.shields.io/github/license/CodingOctocat/IPConfig)](https://github.com/CodingOctocat/IPConfig/blob/master/LICENSE)
@@ -16,11 +16,12 @@ A simple and easy IP configuration tool.
 
 ## Features
 
-- Simple, easy, forget the network settings portal in the Control Panel <img src="/IPConfig/Resources/shell32.dll(22).png" alt="Control Panel" height="16">
-- Switching between your preset IP configurations
-- Support for viewing network adapter details
+- Simple and easy - no need to navigate through the Control Panel for network settings <img src="/IPConfig/Resources/shell32.dll(22).png" alt="Control Panel" height="16">
+- Quick switch between your preset IP configurations
+- View detailed information about network adapters
 - Customizable subnet mask and DNS preset list
 - Batch ping DNS list
+- Form auto-completion
 - Light, Dark, Violet themes
 - ...
 
