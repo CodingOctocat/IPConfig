@@ -101,6 +101,7 @@ public partial class NicViewModel : ObservableRecipient,
             // 更新 ToolTip 信息。
             OnPropertyChanged(nameof(SelectedNic));
             OnPropertyChanged(nameof(SelectedNicIPConfig));
+            OnPropertyChanged(nameof(NicSelectorPlaceholder));
         };
     }
 
