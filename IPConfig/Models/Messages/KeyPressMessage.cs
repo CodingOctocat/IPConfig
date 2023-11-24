@@ -21,15 +21,15 @@ public class KeyPressMessage : ISender
         GetGesture();
     }
 
-    public bool GestureEquals(string gestureString)
+    public bool GestureEquals(string gesture)
     {
         var gestureConverter = new KeyGestureConverter();
-        var keyGesture = gestureConverter.ConvertFromInvariantString(gestureString) as KeyGesture;
-        string? normalizedGestureString = keyGesture?.GetDisplayStringForCulture(CultureInfo.InvariantCulture);
+        var keyGesture = gestureConverter.ConvertFromInvariantString(gesture) as KeyGesture;
+        string? normalizedGesture = keyGesture?.GetDisplayStringForCulture(CultureInfo.InvariantCulture);
 
-        if (normalizedGestureString is not null)
+        if (normalizedGesture is not null)
         {
-            return normalizedGestureString.Equals(Gesture, StringComparison.OrdinalIgnoreCase);
+            return normalizedGesture.Equals(Gesture, StringComparison.OrdinalIgnoreCase);
         }
 
         return false;
