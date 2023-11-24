@@ -29,7 +29,7 @@ public partial class IPConfigDetailView : UserControl
 
         WeakReferenceMessenger.Default.Register<IPConfigDetailView, KeyPressMessage>(this,
             (r, m) => {
-                if (m.Gesture == "F2")
+                if (m.GestureEquals("F2"))
                 {
                     tbIPConfigName.Focus();
                     tbIPConfigName.SelectAll();

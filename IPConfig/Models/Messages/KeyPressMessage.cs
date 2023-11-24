@@ -1,23 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Windows.Input;
 
 namespace IPConfig.Models.Messages;
 
 public class KeyPressMessage : ISender
 {
-    public KeyEventArgs? Args { get; }
+    public KeyEventArgs Args { get; }
 
     public string Gesture { get; private set; }
 
     public object Sender { get; }
-
-    public KeyPressMessage(object sender, string gesture)
-    {
-        Sender = sender;
-        Gesture = gesture;
-    }
 
     public KeyPressMessage(object sender, KeyEventArgs args)
     {
@@ -27,40 +21,31 @@ public class KeyPressMessage : ISender
         GetGesture();
     }
 
+    public bool GestureEquals(string gestureString)
+    {
+        var gestureConverter = new KeyGestureConverter();
+        var keyGesture = gestureConverter.ConvertFromInvariantString(gestureString) as KeyGesture;
+        string? normalizedGestureString = keyGesture?.GetDisplayStringForCulture(CultureInfo.InvariantCulture);
+
+        if (normalizedGestureString is not null)
+        {
+            return normalizedGestureString.Equals(Gesture, StringComparison.OrdinalIgnoreCase);
+        }
+
+        return false;
+    }
+
     [MemberNotNull(nameof(Gesture))]
     private void GetGesture()
     {
-        var keys = new List<string>();
-
-        if (Args!.KeyboardDevice.Modifiers.HasFlag(ModifierKeys.Windows))
+        try
         {
-            keys.Add("Win");
+            var gesture = new KeyGesture(Args.Key, Args.KeyboardDevice.Modifiers);
+            Gesture = gesture.GetDisplayStringForCulture(CultureInfo.InvariantCulture);
         }
-
-        if (Args.KeyboardDevice.Modifiers.HasFlag(ModifierKeys.Control))
+        catch (NotSupportedException)
         {
-            keys.Add("Ctrl");
+            Gesture = Args.Key.ToString();
         }
-
-        if (Args.KeyboardDevice.Modifiers.HasFlag(ModifierKeys.Alt))
-        {
-            keys.Add("Alt");
-        }
-
-        if (Args.KeyboardDevice.Modifiers.HasFlag(ModifierKeys.Shift))
-        {
-            keys.Add("Shift");
-        }
-
-        if (Args.Key == Key.Escape)
-        {
-            keys.Add("Esc");
-        }
-        else
-        {
-            keys.Add(Args.Key.ToString());
-        }
-
-        Gesture = String.Join('+', keys);
     }
 }

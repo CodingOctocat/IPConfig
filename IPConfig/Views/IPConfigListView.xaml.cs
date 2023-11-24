@@ -37,11 +37,11 @@ public partial class IPConfigListView : UserControl
 
         WeakReferenceMessenger.Default.Register<IPConfigListView, KeyPressMessage>(this,
             (r, m) => {
-                if (m.Gesture == "Ctrl+F")
+                if (m.GestureEquals("Ctrl+F"))
                 {
                     tbSearchBar.Focus();
                 }
-                else if (m.Gesture == "Esc" && Keyboard.FocusedElement == tbSearchBar)
+                else if (m.GestureEquals("Esc") && Keyboard.FocusedElement == tbSearchBar)
                 {
                     string text = tbSearchBar.Text;
 
@@ -52,7 +52,7 @@ public partial class IPConfigListView : UserControl
                         lbIPConfigs.Focus();
                     }
                 }
-                else if (m.Gesture == "F9")
+                else if (m.GestureEquals("F9"))
                 {
                     lbIPConfigs.UpdateLayout();
 
