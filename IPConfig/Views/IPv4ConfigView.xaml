@@ -71,7 +71,7 @@
                                 <MenuItem.InputBindings>
                                     <KeyBinding Command="{x:Static ApplicationCommands.Copy}"
                                                 CommandParameter="{Binding Dns1}"
-                                                Gesture="CTRL+C" />
+                                                Gesture="Ctrl+C" />
                                 </MenuItem.InputBindings>
                             </MenuItem>
                         </ContextMenu>
