@@ -67,7 +67,7 @@ public partial class IPConfigListView : UserControl
             });
 
         ThemeManager.ThemeChanging += (s, e) => _scrollViewerVOffset = _scrollViewer?.VerticalOffset ?? 0;
-        ThemeManager.ThemeChanged += (s, e) => _scrollViewer?.ScrollToVerticalOffset(_scrollViewerVOffset);
+        ThemeManager.ThemeChanged += (s, e) => Dispatcher.Invoke(() => _scrollViewer?.ScrollToVerticalOffset(_scrollViewerVOffset));
     }
 
     private void LbIPConfigs_Loaded(object sender, System.Windows.RoutedEventArgs e)
