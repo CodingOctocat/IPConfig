@@ -47,13 +47,6 @@ public static class ThemeManager
 
     public static void UpdateSkin(SkinType? skin)
     {
-        if (skin == CurrentSkinTypeMode)
-        {
-            return;
-        }
-
-        ThemeChanging?.Invoke(null, skin);
-
         SkinType actualSkinType;
 
         if (skin is null)
@@ -64,6 +57,13 @@ public static class ThemeManager
         {
             actualSkinType = skin.Value;
         }
+
+        if (actualSkinType == CurrentSkinType)
+        {
+            return;
+        }
+
+        ThemeChanging?.Invoke(null, skin);
 
         App.Current.Resources.MergedDictionaries.Clear();
 
