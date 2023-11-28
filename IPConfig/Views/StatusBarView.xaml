@@ -13,8 +13,7 @@
              d:DataContext="{d:DesignInstance Type=vm:StatusBarViewModel,
                                               IsDesignTimeCreatable=True}"
              mc:Ignorable="d">
-    <StatusBar Grid.Row="1"
-               HorizontalContentAlignment="Stretch"
+    <StatusBar HorizontalContentAlignment="Stretch"
                VerticalContentAlignment="Stretch"
                hc:WindowAttach.IsDragElement="True"
                FontFamily="{Binding ElementName=root, Path=FontFamily}"
