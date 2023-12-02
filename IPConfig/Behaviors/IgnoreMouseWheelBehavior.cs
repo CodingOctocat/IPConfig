@@ -15,7 +15,11 @@ public sealed class IgnoreMouseWheelBehavior : Behavior<UIElement>
 {
     // Using a DependencyProperty as the backing store for Enabled.  This enables animation, styling, binding, etc...
     public static readonly DependencyProperty EnabledProperty =
-        DependencyProperty.RegisterAttached("Enabled", typeof(bool), typeof(IgnoreMouseWheelBehavior), new PropertyMetadata(false, OnEnabledChanged));
+        DependencyProperty.RegisterAttached(
+            "Enabled",
+            typeof(bool),
+            typeof(IgnoreMouseWheelBehavior),
+            new PropertyMetadata(false, OnEnabledChanged));
 
     public static bool GetEnabled(DependencyObject obj)
     {

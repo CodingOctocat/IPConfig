@@ -10,35 +10,75 @@ namespace IPConfig.Controls;
 /// </summary>
 public class AlignDashCornerRect : FrameworkElement
 {
-    public static readonly DependencyProperty FillProperty = DependencyProperty.Register(
-        "Fill", typeof(Brush), typeof(AlignDashCornerRect), new PropertyMetadata(default(Brush), OnVisualPropertyChanged));
+    public static readonly DependencyProperty FillProperty =
+        DependencyProperty.Register(
+            "Fill",
+            typeof(Brush),
+            typeof(AlignDashCornerRect),
+            new PropertyMetadata(default(Brush), OnVisualPropertyChanged));
 
     public static readonly DependencyProperty StrokeDashCapProperty =
-        DependencyProperty.Register("StrokeDashCap", typeof(PenLineCap), typeof(AlignDashCornerRect), new PropertyMetadata(PenLineCap.Flat, OnVisualPropertyChanged));
+        DependencyProperty.Register(
+            "StrokeDashCap",
+            typeof(PenLineCap),
+            typeof(AlignDashCornerRect),
+            new PropertyMetadata(PenLineCap.Flat, OnVisualPropertyChanged));
 
-    public static readonly DependencyProperty StrokeDashLineProperty = DependencyProperty.Register(
-            "StrokeDashLine", typeof(double), typeof(AlignDashCornerRect), new PropertyMetadata(default(double), OnVisualPropertyChanged));
+    public static readonly DependencyProperty StrokeDashLineProperty =
+        DependencyProperty.Register(
+            "StrokeDashLine",
+            typeof(double),
+            typeof(AlignDashCornerRect),
+            new PropertyMetadata(default(double), OnVisualPropertyChanged));
 
-    public static readonly DependencyProperty StrokeDashSpaceProperty = DependencyProperty.Register(
-        "StrokeDashSpace", typeof(double), typeof(AlignDashCornerRect), new PropertyMetadata(default(double), OnVisualPropertyChanged));
+    public static readonly DependencyProperty StrokeDashSpaceProperty =
+        DependencyProperty.Register(
+            "StrokeDashSpace",
+            typeof(double),
+            typeof(AlignDashCornerRect),
+            new PropertyMetadata(default(double), OnVisualPropertyChanged));
 
     public static readonly DependencyProperty StrokeEndLineCapProperty =
-        DependencyProperty.Register("StrokeEndLineCap", typeof(PenLineCap), typeof(AlignDashCornerRect), new PropertyMetadata(PenLineCap.Flat, OnVisualPropertyChanged));
+        DependencyProperty.Register(
+            "StrokeEndLineCap",
+            typeof(PenLineCap),
+            typeof(AlignDashCornerRect),
+            new PropertyMetadata(PenLineCap.Flat, OnVisualPropertyChanged));
 
     public static readonly DependencyProperty StrokeLineJoinProperty =
-        DependencyProperty.Register("StrokeLineJoin", typeof(PenLineJoin), typeof(AlignDashCornerRect), new PropertyMetadata(PenLineJoin.Miter, OnVisualPropertyChanged));
+        DependencyProperty.Register(
+            "StrokeLineJoin",
+            typeof(PenLineJoin),
+            typeof(AlignDashCornerRect),
+            new PropertyMetadata(PenLineJoin.Miter, OnVisualPropertyChanged));
 
     public static readonly DependencyProperty StrokeMiterLimitProperty =
-        DependencyProperty.Register("StrokeMiterLimit", typeof(double), typeof(AlignDashCornerRect), new PropertyMetadata(10.0d, OnVisualPropertyChanged));
+        DependencyProperty.Register(
+            "StrokeMiterLimit",
+            typeof(double),
+            typeof(AlignDashCornerRect),
+            new PropertyMetadata(10.0d, OnVisualPropertyChanged));
 
-    public static readonly DependencyProperty StrokeProperty = DependencyProperty.Register(
-                    "Stroke", typeof(Brush), typeof(AlignDashCornerRect), new PropertyMetadata(default(Brush), OnVisualPropertyChanged));
+    public static readonly DependencyProperty StrokeProperty =
+        DependencyProperty.Register(
+            "Stroke",
+            typeof(Brush),
+            typeof(AlignDashCornerRect),
+            new PropertyMetadata(default(Brush), OnVisualPropertyChanged));
 
     public static readonly DependencyProperty StrokeStartLineCapProperty =
-        DependencyProperty.Register("StrokeStartLineCap", typeof(PenLineCap), typeof(AlignDashCornerRect), new PropertyMetadata(PenLineCap.Flat, OnVisualPropertyChanged));
+        DependencyProperty.Register(
+            "StrokeStartLineCap",
+            typeof(PenLineCap),
+            typeof(AlignDashCornerRect),
+            new PropertyMetadata(PenLineCap.Flat, OnVisualPropertyChanged));
 
-    public static readonly DependencyProperty StrokeThicknessProperty = DependencyProperty.Register(
-            "StrokeThickness", typeof(double), typeof(AlignDashCornerRect), new PropertyMetadata(default(double), OnVisualPropertyChanged));
+    public static readonly DependencyProperty StrokeThicknessProperty =
+        DependencyProperty.Register(
+            "StrokeThickness",
+            typeof(double),
+            typeof(AlignDashCornerRect),
+            new PropertyMetadata(default(double), OnVisualPropertyChanged));
 
     public Brush Fill
     {

@@ -15,13 +15,15 @@ namespace IPConfig.Behaviors;
 public sealed class SelectedItemsBehavior
 {
     public static readonly DependencyProperty SelectedItemsProperty =
-        DependencyProperty.RegisterAttached("SelectedItems",
+        DependencyProperty.RegisterAttached(
+            "SelectedItems",
             typeof(INotifyCollectionChanged),
             typeof(SelectedItemsBehavior),
             new PropertyMetadata(default(IList), OnSelectedItemsChanged));
 
     private static readonly DependencyProperty _isBusyProperty =
-        DependencyProperty.RegisterAttached("IsBusy",
+        DependencyProperty.RegisterAttached(
+            "IsBusy",
             typeof(bool),
             typeof(SelectedItemsBehavior),
             new PropertyMetadata(default(bool)));

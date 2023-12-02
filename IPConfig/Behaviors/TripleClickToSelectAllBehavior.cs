@@ -9,8 +9,12 @@ namespace IPConfig.Behaviors;
 /// </summary>
 public class TripleClickToSelectAllBehavior
 {
-    public static readonly DependencyProperty EnabledProperty = DependencyProperty.RegisterAttached(
-          "Enabled", typeof(bool), typeof(TripleClickToSelectAllBehavior), new PropertyMetadata(false, OnPropertyChanged));
+    public static readonly DependencyProperty EnabledProperty =
+        DependencyProperty.RegisterAttached(
+            "Enabled",
+            typeof(bool),
+            typeof(TripleClickToSelectAllBehavior),
+            new PropertyMetadata(false, OnPropertyChanged));
 
     public static bool GetEnabled(DependencyObject element)
     {

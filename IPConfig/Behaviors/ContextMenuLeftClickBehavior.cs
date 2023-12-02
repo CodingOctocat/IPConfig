@@ -10,9 +10,12 @@ namespace IPConfig.Behaviors;
 /// </summary>
 public static class ContextMenuLeftClickBehavior
 {
-    public static readonly DependencyProperty IsLeftClickEnabledProperty = DependencyProperty.RegisterAttached(
-        "IsLeftClickEnabled", typeof(bool), typeof(ContextMenuLeftClickBehavior),
-        new UIPropertyMetadata(false, OnIsLeftClickEnabledChanged));
+    public static readonly DependencyProperty IsLeftClickEnabledProperty =
+        DependencyProperty.RegisterAttached(
+            "IsLeftClickEnabled",
+            typeof(bool),
+            typeof(ContextMenuLeftClickBehavior),
+            new UIPropertyMetadata(false, OnIsLeftClickEnabledChanged));
 
     public static bool GetIsLeftClickEnabled(DependencyObject obj)
     {

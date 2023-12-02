@@ -10,8 +10,11 @@ namespace IPConfig.Controls;
 public class DeferredContent : ContentPresenter
 {
     public static readonly DependencyProperty DeferredContentTemplateProperty =
-        DependencyProperty.Register("DeferredContentTemplate",
-        typeof(DataTemplate), typeof(DeferredContent), null);
+        DependencyProperty.Register(
+            "DeferredContentTemplate",
+            typeof(DataTemplate),
+            typeof(DeferredContent),
+            null);
 
     public DataTemplate DeferredContentTemplate
     {

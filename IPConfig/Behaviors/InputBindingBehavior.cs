@@ -17,7 +17,10 @@ namespace IPConfig.Behaviors;
 public class InputBindingBehavior
 {
     public static readonly DependencyProperty PropagateInputBindingsToWindowProperty =
-        DependencyProperty.RegisterAttached("PropagateInputBindingsToWindow", typeof(bool), typeof(InputBindingBehavior),
+        DependencyProperty.RegisterAttached(
+            "PropagateInputBindingsToWindow",
+            typeof(bool),
+            typeof(InputBindingBehavior),
             new PropertyMetadata(false, OnPropagateInputBindingsToWindowChanged));
 
     private static readonly Dictionary<int, Tuple<WeakReference<FrameworkElement>, List<InputBinding>>> _trackedFrameWorkElementsToBindings = [];
