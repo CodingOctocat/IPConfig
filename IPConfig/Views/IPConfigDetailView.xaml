@@ -154,6 +154,10 @@
                             Command="{Binding PrimarySaveOrApplyCommand}"
                             Content="{Binding PrimarySaveOrApplyString, Mode=OneWay}"
                             Style="{StaticResource SplitButtonPrimary}">
+                <i:Interaction.Behaviors>
+                    <b:SplitButtonToggleDropDownBehavior />
+                </i:Interaction.Behaviors>
+
                 <hc:SplitButton.DropDownContent>
                     <Menu Style="{StaticResource SplitButtonDropDownMenuStyle}">
                         <MenuItem Command="{Binding ValidateCommand}"

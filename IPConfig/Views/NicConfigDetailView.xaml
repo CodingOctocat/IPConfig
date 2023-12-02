@@ -527,7 +527,7 @@
                             Content="{lang:Lang {x:Static lang:LangKey.CopyContents_}}"
                             Style="{StaticResource SplitButtonPrimary}">
                 <i:Interaction.Behaviors>
-                    <b:SplitButtonToggleDropDownBehavior />
+                    <b:CopyContentsSplitButtonBehavior />
                 </i:Interaction.Behaviors>
 
                 <hc:SplitButton.DropDownContent>
