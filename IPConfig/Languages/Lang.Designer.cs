@@ -699,6 +699,18 @@ namespace IPConfig.Languages {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to "详细信息"
+        /// </summary>
+        /// <remarks>
+        /// App
+        /// </remarks>
+        public static string Details {
+            get {
+                return ResourceManager.GetString("Details", resourceCulture) ?? string.Empty;
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to "DHCP 剩余"
         /// </summary>
         /// <remarks>
@@ -1403,6 +1415,18 @@ namespace IPConfig.Languages {
         public static string LoadLastUsedConfiguration_ {
             get {
                 return ResourceManager.GetString("LoadLastUsedConfiguration_", resourceCulture) ?? string.Empty;
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to "日志记录失败！"
+        /// </summary>
+        /// <remarks>
+        /// App
+        /// </remarks>
+        public static string LoggingFailed {
+            get {
+                return ResourceManager.GetString("LoggingFailed", resourceCulture) ?? string.Empty;
             }
         }
 
@@ -2516,6 +2540,13 @@ namespace IPConfig.Languages {
         /// </remarks>
         DeleteIPConfig_,
         /// <summary>
+        ///   Looks up a localized string similar to 详细信息.
+        /// </summary>
+        /// <remarks>
+        /// App
+        /// </remarks>
+        Details,
+        /// <summary>
         ///   Looks up a localized string similar to DHCP 剩余.
         /// </summary>
         /// <remarks>
@@ -2928,6 +2959,13 @@ namespace IPConfig.Languages {
         /// NicInfoCardView
         /// </remarks>
         LoadLastUsedConfiguration_,
+        /// <summary>
+        ///   Looks up a localized string similar to 日志记录失败！.
+        /// </summary>
+        /// <remarks>
+        /// App
+        /// </remarks>
+        LoggingFailed,
         /// <summary>
         ///   Looks up a localized string similar to 生成副本(_C).
         /// </summary>

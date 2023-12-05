@@ -301,6 +301,10 @@
     <value>删除配置(_D)</value>
     <comment>IPConfigListView</comment>
   </data>
+  <data name="Details" xml:space="preserve">
+    <value>详细信息</value>
+    <comment>App</comment>
+  </data>
   <data name="DhcpLeaseLifetime" xml:space="preserve">
     <value>DHCP 剩余</value>
     <comment>NicConfigDetailView</comment>
@@ -536,6 +540,10 @@
   <data name="LoadLastUsedConfiguration_" xml:space="preserve">
     <value>加载上次使用的配置(_L)</value>
     <comment>NicInfoCardView</comment>
+  </data>
+  <data name="LoggingFailed" xml:space="preserve">
+    <value>日志记录失败！</value>
+    <comment>App</comment>
   </data>
   <data name="MakeSelectedIPConfigCopy_" xml:space="preserve">
     <value>生成副本(_C)</value>

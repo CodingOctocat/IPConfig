@@ -272,6 +272,9 @@
   <data name="DeleteIPConfig_" xml:space="preserve">
     <value>_Delete</value>
   </data>
+  <data name="Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
   <data name="DhcpLeaseLifetime" xml:space="preserve">
     <value>DHCP Lease Lifetime</value>
   </data>
@@ -449,6 +452,9 @@
   </data>
   <data name="LoadLastUsedConfiguration_" xml:space="preserve">
     <value>_Load Last Used Configuration</value>
+  </data>
+  <data name="LoggingFailed" xml:space="preserve">
+    <value>Logging Failed!</value>
   </data>
   <data name="MakeSelectedIPConfigCopy_" xml:space="preserve">
     <value>Make _Copy</value>

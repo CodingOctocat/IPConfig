@@ -140,16 +140,20 @@ public partial class App : Application
 
     private static async Task ShowUnhandledExceptionAsync(Exception exception, string source)
     {
+        string logStatus = $"{Lang.Details}: ./error.log";
+
         try
         {
             var err = new Error(exception, source);
 
-            await File.WriteAllTextAsync("error.log", err.ToString());
+            await Current.Dispatcher.InvokeAsync(() => File.WriteAllTextAsync("error.log", err.ToString()));
         }
         catch
-        { }
+        {
+            logStatus = Lang.LoggingFailed;
+        }
 
-        var sb = new StringBuilder($"{Lang.AppCrashed}\n\n[{source}]\n{exception.Message}");
+        var sb = new StringBuilder($"{Lang.AppCrashed}\n\n[{source}]\n{exception.Message}\n\n{logStatus}");
 
         var innerEx = exception.InnerException;
 
