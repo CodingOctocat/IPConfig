@@ -123,7 +123,7 @@ public partial class NicViewModel : ObservableRecipient,
         base.OnActivated();
 
         Messenger.Register<NicViewModel, RefreshMessage>(this,
-            (r, m) => RefreshCommand.Execute(null));
+            (r, m) => RefreshCommand.Execute(true));
 
         Messenger.Register<NicViewModel, GoBackMessage>(this,
             (r, m) => GoBack());
