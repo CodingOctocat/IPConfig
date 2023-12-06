@@ -317,54 +317,7 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
 
     #endregion Constructors & Recipients
 
-    #region IEditableObject
-
-    public void BeginEdit()
-    {
-        if (!_inTxn)
-        {
-            _backup = EditingIPConfig.DeepClone();
-            _inTxn = true;
-        }
-    }
-
-    public void CancelEdit()
-    {
-        if (_inTxn)
-        {
-            _backup.DeepCloneTo(EditingIPConfig);
-            _inTxn = false;
-        }
-    }
-
-    public void EndEdit()
-    {
-        if (_inTxn)
-        {
-            _backup = EditableIPConfigModel.Empty;
-            _inTxn = false;
-        }
-    }
-
-    #endregion IEditableObject
-
-    #region IRevertibleChangeTracking
-
-    public bool IsChanged => !EditingIPConfig.PropertyEquals(_backup);
-
-    public void AcceptChanges()
-    {
-        EndEdit();
-    }
-
-    public void RejectChanges()
-    {
-        CancelEdit();
-    }
-
-    #endregion IRevertibleChangeTracking
-
-    #region RelayCommands
+    #region Relay Commands
 
     [RelayCommand]
     private static async Task CopyDnsAsync(string dns)
@@ -674,7 +627,7 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
         }
     }
 
-    #endregion RelayCommands
+    #endregion Relay Commands
 
     #region Event Handlers
 
@@ -871,4 +824,51 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
     }
 
     #endregion Private Methods
+
+    #region IEditableObject
+
+    public void BeginEdit()
+    {
+        if (!_inTxn)
+        {
+            _backup = EditingIPConfig.DeepClone();
+            _inTxn = true;
+        }
+    }
+
+    public void CancelEdit()
+    {
+        if (_inTxn)
+        {
+            _backup.DeepCloneTo(EditingIPConfig);
+            _inTxn = false;
+        }
+    }
+
+    public void EndEdit()
+    {
+        if (_inTxn)
+        {
+            _backup = EditableIPConfigModel.Empty;
+            _inTxn = false;
+        }
+    }
+
+    #endregion IEditableObject
+
+    #region IRevertibleChangeTracking
+
+    public bool IsChanged => !EditingIPConfig.PropertyEquals(_backup);
+
+    public void AcceptChanges()
+    {
+        EndEdit();
+    }
+
+    public void RejectChanges()
+    {
+        CancelEdit();
+    }
+
+    #endregion IRevertibleChangeTracking
 }
