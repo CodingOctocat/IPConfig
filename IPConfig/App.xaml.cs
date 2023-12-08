@@ -138,7 +138,7 @@ public partial class App : Application
         return services.BuildServiceProvider();
     }
 
-    private static async Task ShowUnhandledExceptionAsync(Exception exception, string source)
+    private static async void ShowUnhandledExceptionAsync(Exception exception, string source)
     {
         string logStatus = $"{Lang.Details}: ./error.log";
 
@@ -146,7 +146,7 @@ public partial class App : Application
         {
             var err = new Error(exception, source);
 
-            await Current.Dispatcher.InvokeAsync(() => File.WriteAllTextAsync("error.log", err.ToString()));
+            await File.WriteAllTextAsync("error.log", err.ToString());
         }
         catch
         {
@@ -198,16 +198,16 @@ public partial class App : Application
 
     private void SetupExceptionHandling()
     {
-        AppDomain.CurrentDomain.UnhandledException += async (s, e) =>
-           await ShowUnhandledExceptionAsync((Exception)e.ExceptionObject, nameof(AppDomain.CurrentDomain.UnhandledException));
+        AppDomain.CurrentDomain.UnhandledException += (s, e) =>
+           ShowUnhandledExceptionAsync((Exception)e.ExceptionObject, nameof(AppDomain.CurrentDomain.UnhandledException));
 
-        DispatcherUnhandledException += async (s, e) => {
-            await ShowUnhandledExceptionAsync(e.Exception, nameof(DispatcherUnhandledException));
+        DispatcherUnhandledException += (s, e) => {
+            ShowUnhandledExceptionAsync(e.Exception, nameof(DispatcherUnhandledException));
             e.Handled = true;
         };
 
-        TaskScheduler.UnobservedTaskException += async (s, e) => {
-            await ShowUnhandledExceptionAsync(e.Exception, nameof(TaskScheduler.UnobservedTaskException));
+        TaskScheduler.UnobservedTaskException += (s, e) => {
+            ShowUnhandledExceptionAsync(e.Exception, nameof(TaskScheduler.UnobservedTaskException));
             e.SetObserved();
         };
     }
