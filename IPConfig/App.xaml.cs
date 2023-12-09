@@ -166,6 +166,9 @@ public partial class App : Application
 
         string msg = sb.ToString();
 
+        // 窗口未处于活动状态可能导致 Growl 不显示。
+        Current.MainWindow.Activate();
+
         Growl.Ask(new GrowlInfo {
             Message = msg,
             ShowDateTime = true,
