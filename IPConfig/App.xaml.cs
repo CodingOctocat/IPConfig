@@ -153,17 +153,20 @@ public partial class App : Application
             logStatus = Lang.LoggingFailed;
         }
 
-        var sb = new StringBuilder($"{Lang.AppCrashed}\n\n[{source}]\n{exception.Message}\n\n{logStatus}");
+        var sb = new StringBuilder($"{Lang.AppCrashed}\n\n[{source}]\n{exception.Message}\n");
+
+        int indent = 0;
 
         var innerEx = exception.InnerException;
 
         while (innerEx is not null)
         {
-            sb.AppendLine(new string('-', 16));
-            sb.AppendLine(innerEx.Message);
+            sb.AppendLine($"{new string(' ', indent)}└── {innerEx.Message}");
             innerEx = innerEx.InnerException;
+            indent += 4;
         }
 
+        sb.Append($"\n{logStatus}");
         string msg = sb.ToString();
 
         // 窗口未处于活动状态可能导致 Growl 不显示。
