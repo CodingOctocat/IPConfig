@@ -27,31 +27,32 @@
                            TextTrimming="CharacterEllipsis"
                            TextWrapping="NoWrap" />
             </DockPanel>
-            <Border Name="border"
+            <Border x:Name="border"
                     Grid.Row="1"
                     Background="{TemplateBinding Background}"
                     BorderBrush="{TemplateBinding BorderBrush}"
                     BorderThickness="{TemplateBinding BorderThickness}"
                     CornerRadius="{Binding Path=(hc:BorderElement.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}"
-                    SnapsToDevicePixels="True" />
-            <hc:SimplePanel Name="root"
+                    SnapsToDevicePixels="true" />
+            <hc:SimplePanel x:Name="root"
                             Grid.Row="1"
                             ClipToBounds="True"
                             SnapsToDevicePixels="true">
-                <TextBlock Margin="{TemplateBinding Padding}"
+                <TextBlock Margin="2"
+                           Padding="{TemplateBinding Padding}"
                            HorizontalAlignment="Stretch"
                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                            Style="{StaticResource TextBlockDefaultThiLight}"
                            Text="{Binding Path=(hc:InfoElement.Placeholder), RelativeSource={RelativeSource TemplatedParent}}"
                            Visibility="{TemplateBinding Text,
                                                         Converter={StaticResource String2VisibilityReConverter}}" />
-                <ScrollViewer Name="PART_ContentHost"
+                <ScrollViewer x:Name="PART_ContentHost"
                               Margin="0"
                               Padding="{TemplateBinding Padding}"
                               VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                               Focusable="false"
-                              ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                              ScrollViewer.VerticalScrollBarVisibility="Hidden" />
+                              HorizontalScrollBarVisibility="Hidden"
+                              VerticalScrollBarVisibility="Hidden" />
                 <Button Name="ButtonClear"
                         Width="Auto"
                         Height="Auto"
@@ -120,14 +121,19 @@
                            TextTrimming="CharacterEllipsis"
                            TextWrapping="NoWrap" />
             </DockPanel>
+            <Border x:Name="border"
+                    Grid.Column="1"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="{Binding Path=(hc:BorderElement.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}"
+                    SnapsToDevicePixels="true" />
             <hc:SimplePanel x:Name="root"
-                            Grid.Column="1">
-                <Border x:Name="border"
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="{Binding Path=(hc:BorderElement.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}" />
-                <TextBlock Margin="{TemplateBinding Padding}"
+                            Grid.Column="1"
+                            ClipToBounds="True"
+                            SnapsToDevicePixels="true">
+                <TextBlock Margin="2"
+                           Padding="{TemplateBinding Padding}"
                            HorizontalAlignment="Stretch"
                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                            Style="{StaticResource TextBlockDefaultThiLight}"
@@ -187,7 +193,7 @@
     <Style x:Key="TextBoxPlusBaseStyle"
            BasedOn="{StaticResource TextBoxExtendBaseStyle}"
            TargetType="hc:TextBox">
-        <Setter Property="Padding" Value="4,0" />
+        <Setter Property="Padding" Value="5,0" />
         <Setter Property="Template" Value="{StaticResource TextBoxPlusTopTemplate}" />
         <Style.Triggers>
             <Trigger Property="hc:InfoElement.TitlePlacement" Value="Left">
