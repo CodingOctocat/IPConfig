@@ -53,7 +53,7 @@
                               ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                               ScrollViewer.VerticalScrollBarVisibility="Hidden" />
                 <Border Margin="8,0,0,0"
-                        Padding="8,0,0,0"
+                        Padding="8,0"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Stretch"
                         Panel.ZIndex="99"
@@ -152,7 +152,7 @@
                               HorizontalScrollBarVisibility="Hidden"
                               VerticalScrollBarVisibility="Hidden" />
                 <Border Margin="8,0,0,0"
-                        Padding="8,0,0,0"
+                        Padding="8,0"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Stretch"
                         Panel.ZIndex="99"
