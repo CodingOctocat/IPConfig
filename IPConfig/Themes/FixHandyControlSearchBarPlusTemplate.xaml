@@ -39,17 +39,14 @@
                     <ColumnDefinition />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <Border Margin="4,0,-4,0"
-                        Padding="8,0,0,0"
+                <Border Margin="8,0,0,0"
+                        Padding="0"
                         HorizontalAlignment="Right"
-                        VerticalAlignment="Stretch"
+                        VerticalAlignment="Center"
                         Panel.ZIndex="99"
                         Background="{TemplateBinding Background}"
-                        BorderBrush="{x:Null}"
-                        BorderThickness="{TemplateBinding BorderThickness,
-                                                          Converter={StaticResource ThicknessSplitConverter},
-                                                          ConverterParameter='0,1,0,1'}"
-                        CornerRadius="{Binding Path=(hc:BorderElement.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}"
+                        BorderThickness="0"
+                        CornerRadius="8"
                         Visibility="{Binding ElementName=ButtonClear, Path=Visibility}">
                     <Button Name="ButtonClear"
                             Width="Auto"
@@ -58,10 +55,12 @@
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
                             hc:BorderElement.CornerRadius="4"
                             hc:IconElement.Geometry="{StaticResource DeleteFillCircleGeometry}"
                             hc:IconElement.Width="14"
                             Background="{TemplateBinding Background}"
+                            BorderThickness="0"
                             Command="{x:Static hc:ControlCommands.Clear}"
                             Foreground="{Binding BorderBrush, ElementName=border}"
                             Style="{StaticResource ButtonIcon}"
@@ -79,7 +78,7 @@
                 <ScrollViewer x:Name="PART_ContentHost"
                               Grid.Row="0"
                               Grid.Column="0"
-                              Margin="-2,0"
+                              Margin="2,0"
                               Padding="{TemplateBinding Padding}"
                               VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                               Focusable="false"
@@ -163,17 +162,14 @@
                     <ColumnDefinition />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <Border Margin="4,0,-4,0"
-                        Padding="8,0,0,0"
+                <Border Margin="8,0,0,0"
+                        Padding="0"
                         HorizontalAlignment="Right"
-                        VerticalAlignment="Stretch"
+                        VerticalAlignment="Center"
                         Panel.ZIndex="99"
                         Background="{TemplateBinding Background}"
-                        BorderBrush="{x:Null}"
-                        BorderThickness="{TemplateBinding BorderThickness,
-                                                          Converter={StaticResource ThicknessSplitConverter},
-                                                          ConverterParameter='0,1,0,1'}"
-                        CornerRadius="{Binding Path=(hc:BorderElement.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}"
+                        BorderThickness="0"
+                        CornerRadius="8"
                         Visibility="{Binding ElementName=ButtonClear, Path=Visibility}">
                     <Button Name="ButtonClear"
                             Width="Auto"
@@ -182,10 +178,12 @@
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
                             hc:BorderElement.CornerRadius="4"
                             hc:IconElement.Geometry="{StaticResource DeleteFillCircleGeometry}"
                             hc:IconElement.Width="14"
                             Background="{TemplateBinding Background}"
+                            BorderThickness="0"
                             Command="{x:Static hc:ControlCommands.Clear}"
                             Foreground="{Binding BorderBrush, ElementName=border}"
                             Style="{StaticResource ButtonIcon}"
@@ -203,7 +201,7 @@
                 <ScrollViewer x:Name="PART_ContentHost"
                               Grid.Row="0"
                               Grid.Column="0"
-                              Margin="-2,0"
+                              Margin="2,0"
                               Padding="{TemplateBinding Padding}"
                               VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                               Focusable="false"
@@ -254,6 +252,7 @@
     <Style x:Key="SearchBarPlusBaseStyle"
            BasedOn="{StaticResource SearchBarExtendBaseStyle}"
            TargetType="hc:SearchBar">
+        <Setter Property="Padding" Value="4,0" />
         <Setter Property="Template" Value="{StaticResource SearchBarPlusTopTemplate}" />
         <Style.Triggers>
             <Trigger Property="hc:InfoElement.TitlePlacement" Value="Left">
