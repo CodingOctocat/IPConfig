@@ -61,9 +61,11 @@
                         hc:InfoElement.Necessary="True"
                         hc:InfoElement.Placeholder="{Binding AutoComplete.Name}"
                         hc:InfoElement.ShowClearButton="True"
+                        hc:ScrollViewerAttach.Orientation="Horizontal"
                         hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.IPConfigName}}"
                         hc:TitleElement.TitlePlacement="Left"
                         MaxLength="50"
+                        HorizontalScrollBarVisibility="Auto"
                         Style="{StaticResource MyTextBoxStyle}"
                         Text="{Binding EditingIPConfig.Name, UpdateSourceTrigger=PropertyChanged}">
                 <i:Interaction.Triggers>
