@@ -52,10 +52,6 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
 
-            <!--
-                当光标悬停在此文本框边缘时，会导致高亮快速闪烁。
-                通常可以通过设置 UseLayoutRounding="False" 来解决，但对此文本框无帮助。
-            -->
             <hc:TextBox x:Name="tbIPConfigName"
                         Margin="0,0,0,4"
                         hc:InfoElement.Necessary="True"
@@ -64,8 +60,8 @@
                         hc:ScrollViewerAttach.Orientation="Horizontal"
                         hc:TitleElement.Title="{lang:Lang {x:Static lang:LangKey.IPConfigName}}"
                         hc:TitleElement.TitlePlacement="Left"
-                        MaxLength="50"
                         HorizontalScrollBarVisibility="Auto"
+                        MaxLength="50"
                         Style="{StaticResource MyTextBoxStyle}"
                         Text="{Binding EditingIPConfig.Name, UpdateSourceTrigger=PropertyChanged}">
                 <i:Interaction.Triggers>
