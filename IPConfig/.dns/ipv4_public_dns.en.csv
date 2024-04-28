@@ -10,7 +10,7 @@ OneDNS,Pure,117.50.10.10,52.80.52.52,Public DNS(China),"Not to intercept any fil
 OneDNS,Blocking,117.50.11.11,52.80.66.66,Public DNS(China),"Protect against all kinds of malware, filter ads and nuisances"
 OneDNS,Family,117.50.60.30,52.80.60.30,Public DNS(China),"On the basis of the blocking version, pornographic and violent site filtering and gambling site filtering are added to better purify the home network environment"
 SDNS,NULL,1.2.4.8,202.98.0.68,Public DNS(China),China Internet Network Information Centre (CNNIC)
-Alibaba Cloud,NULL,223.5.5.5,223.5.5.5,Public DNS(China),"Fast, stable and secure"
+AliDNS,NULL,223.5.5.5,223.6.6.6,Public DNS(China),"Fast, stable and secure"
 Baidu DNS,NULL,180.76.76.76,NULL,Public DNS(China),"Secure, hijack-free and more accurate"
 Tencent DNSPod,NULL,119.29.29.29,182.254.116.116,Public DNS(China),Free and reliable public resolution
 AdGuard,Default,94.140.14.14,94.140.15.15,Public DNS,AdGuard DNS will block ads and trackers
