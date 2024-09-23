@@ -117,7 +117,7 @@
                                 Spacing="4">
             <hc:ElementGroup HorizontalAlignment="Stretch"
                              Layout="Stack">
-                <Button IsEnabled="{Binding IsEditingIPConfigModifield}"
+                <Button IsEnabled="{Binding IsEditingIPConfigModified}"
                         ToolTip="{lang:Lang {x:Static lang:LangKey.Contrast_ToolTip}}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseEnter">

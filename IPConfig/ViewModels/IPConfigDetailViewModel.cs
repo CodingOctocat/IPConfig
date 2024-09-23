@@ -81,7 +81,7 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
     private bool _canShowUnchangedIndicator;
 
     [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(IsEditingIPConfigModifield))]
+    [NotifyPropertyChangedFor(nameof(IsEditingIPConfigModified))]
     [NotifyCanExecuteChangedFor(nameof(DiscardChangesCommand))]
     private EditableIPConfigModel _editingIPConfig = EditableIPConfigModel.Empty;
 
@@ -120,7 +120,7 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
 
     public CollectionViewSource? IPv4MaskListCvs { get; }
 
-    public bool IsEditingIPConfigModifield => IsInContrastView || EditingIPConfig.IsChanged;
+    public bool IsEditingIPConfigModified => IsInContrastView || EditingIPConfig.IsChanged;
 
     public bool IsNicIPConfig { get; private set; }
 
@@ -401,7 +401,7 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
         });
     }
 
-    [RelayCommand(CanExecute = nameof(IsEditingIPConfigModifield))]
+    [RelayCommand(CanExecute = nameof(IsEditingIPConfigModified))]
     private void DiscardChanges(bool ask = true)
     {
         if (ask)
@@ -442,7 +442,7 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
         _iPv4DnsList.AddRange(iPv4DnsList);
     }
 
-    [RelayCommand(CanExecute = nameof(IsEditingIPConfigModifield))]
+    [RelayCommand(CanExecute = nameof(IsEditingIPConfigModified))]
     private void RaiseContrastViewButtonMouseDown()
     {
         IsInContrastView = true;
@@ -465,7 +465,7 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
         CanShowChangedIndicator = false;
     }
 
-    [RelayCommand(CanExecute = nameof(IsEditingIPConfigModifield))]
+    [RelayCommand(CanExecute = nameof(IsEditingIPConfigModified))]
     private void RaiseContrastViewButtonMouseUp()
     {
         IsInContrastView = false;
@@ -638,7 +638,7 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
 
     private void EditingIPConfig_PropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        OnPropertyChanged(nameof(IsEditingIPConfigModifield));
+        OnPropertyChanged(nameof(IsEditingIPConfigModified));
         DiscardChangesCommand.NotifyCanExecuteChanged();
 
         if (e.PropertyName == nameof(IPConfigModel.Name))

@@ -82,9 +82,9 @@ public partial class MainViewModel : ObservableRecipient
             return;
         }
 
-        var modifieldIPConfigs = Messenger.Send<RequestMessage<IEnumerable<EditableIPConfigModel>>, string>("ModifieldIPConfigs").Response.ToImmutableArray();
+        var modifiedIPConfigs = Messenger.Send<RequestMessage<IEnumerable<EditableIPConfigModel>>, string>("ModifiedIPConfigs").Response.ToImmutableArray();
 
-        foreach (var item in modifieldIPConfigs)
+        foreach (var item in modifiedIPConfigs)
         {
             Messenger.Send<ChangeSelectionMessage<EditableIPConfigModel>>(new(this, item));
 

@@ -124,7 +124,7 @@ public partial class IPConfigListViewModel : ObservableRecipient
         Messenger.Register<IPConfigListViewModel, RequestMessage<IEnumerable<EditableIPConfigModel>>, string>(this, "IPConfigList",
             (r, m) => m.Reply(IPConfigList));
 
-        Messenger.Register<IPConfigListViewModel, RequestMessage<IEnumerable<EditableIPConfigModel>>, string>(this, "ModifieldIPConfigs",
+        Messenger.Register<IPConfigListViewModel, RequestMessage<IEnumerable<EditableIPConfigModel>>, string>(this, "ModifiedIPConfigs",
             (r, m) => m.Reply(IPConfigList.Where(x => x.IsChanged)));
 
         Messenger.Register<IPConfigListViewModel, AddUntitledIPConfigMessage>(this,
