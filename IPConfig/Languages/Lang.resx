@@ -545,8 +545,8 @@
     <value>日志记录失败！</value>
     <comment>App</comment>
   </data>
-  <data name="MakeSelectedIPConfigCopy_" xml:space="preserve">
-    <value>生成副本(_C)</value>
+  <data name="Duplicate_" xml:space="preserve">
+    <value>生成副本(_D)</value>
     <comment>IPConfigListView</comment>
   </data>
   <data name="Manual" xml:space="preserve">
@@ -784,7 +784,7 @@
     <comment>NicConfigDetailView</comment>
   </data>
   <data name="ViewToAdapterConfigDetail_" xml:space="preserve">
-    <value>详细信息(_D)</value>
+    <value>详细信息(_I)</value>
     <comment>NicInfoCardView</comment>
   </data>
   <data name="Violet" xml:space="preserve">

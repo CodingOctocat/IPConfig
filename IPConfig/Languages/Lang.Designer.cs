@@ -795,6 +795,18 @@ namespace IPConfig.Languages {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to "生成副本(_D)"
+        /// </summary>
+        /// <remarks>
+        /// IPConfigListView
+        /// </remarks>
+        public static string Duplicate_ {
+            get {
+                return ResourceManager.GetString("Duplicate_", resourceCulture) ?? string.Empty;
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to "重复地址检测状态"
         /// </summary>
         /// <remarks>
@@ -1427,18 +1439,6 @@ namespace IPConfig.Languages {
         public static string LoggingFailed {
             get {
                 return ResourceManager.GetString("LoggingFailed", resourceCulture) ?? string.Empty;
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to "生成副本(_C)"
-        /// </summary>
-        /// <remarks>
-        /// IPConfigListView
-        /// </remarks>
-        public static string MakeSelectedIPConfigCopy_ {
-            get {
-                return ResourceManager.GetString("MakeSelectedIPConfigCopy_", resourceCulture) ?? string.Empty;
             }
         }
 
@@ -2139,7 +2139,7 @@ namespace IPConfig.Languages {
         }
 
         /// <summary>
-        ///   Looks up a localized string similar to "详细信息(_D)"
+        ///   Looks up a localized string similar to "详细信息(_I)"
         /// </summary>
         /// <remarks>
         /// NicInfoCardView
@@ -2596,6 +2596,13 @@ namespace IPConfig.Languages {
         /// </remarks>
         DnsEligible,
         /// <summary>
+        ///   Looks up a localized string similar to 生成副本(_D).
+        /// </summary>
+        /// <remarks>
+        /// IPConfigListView
+        /// </remarks>
+        Duplicate_,
+        /// <summary>
         ///   Looks up a localized string similar to 重复地址检测状态.
         /// </summary>
         /// <remarks>
@@ -2966,13 +2973,6 @@ namespace IPConfig.Languages {
         /// App
         /// </remarks>
         LoggingFailed,
-        /// <summary>
-        ///   Looks up a localized string similar to 生成副本(_C).
-        /// </summary>
-        /// <remarks>
-        /// IPConfigListView
-        /// </remarks>
-        MakeSelectedIPConfigCopy_,
         /// <summary>
         ///   Looks up a localized string similar to 手动.
         /// </summary>
@@ -3380,7 +3380,7 @@ namespace IPConfig.Languages {
         /// </remarks>
         ValidLifetime,
         /// <summary>
-        ///   Looks up a localized string similar to 详细信息(_D).
+        ///   Looks up a localized string similar to 详细信息(_I).
         /// </summary>
         /// <remarks>
         /// NicInfoCardView

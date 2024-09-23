@@ -456,8 +456,8 @@
   <data name="LoggingFailed" xml:space="preserve">
     <value>Logging Failed!</value>
   </data>
-  <data name="MakeSelectedIPConfigCopy_" xml:space="preserve">
-    <value>Make _Copy</value>
+  <data name="Duplicate_" xml:space="preserve">
+    <value>_Duplicate</value>
   </data>
   <data name="Manual" xml:space="preserve">
     <value>Manual</value>
@@ -637,7 +637,7 @@
     <value>Valid Lifetime</value>
   </data>
   <data name="ViewToAdapterConfigDetail_" xml:space="preserve">
-    <value>_Details</value>
+    <value>Deta_ils</value>
   </data>
   <data name="Violet" xml:space="preserve">
     <value>Violet</value>

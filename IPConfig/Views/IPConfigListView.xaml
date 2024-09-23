@@ -75,7 +75,7 @@
                               InputGestureText="{Binding MultiSelectedCountString}" />
 
                     <MenuItem Command="{Binding MakeSelectedIPConfigCopyCommand}"
-                              Header="{lang:Lang {x:Static lang:LangKey.MakeSelectedIPConfigCopy_}}" />
+                              Header="{lang:Lang {x:Static lang:LangKey.Duplicate_}}" />
 
                     <Separator />
 

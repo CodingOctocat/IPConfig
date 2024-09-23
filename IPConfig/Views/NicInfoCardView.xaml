@@ -73,7 +73,7 @@
                           Header="{lang:Lang {x:Static lang:LangKey.CopySelectedIPConfigAsText_}}" />
 
                 <MenuItem Command="{Binding MakeSelectedNicIPConfigCopyCommand}"
-                          Header="{lang:Lang {x:Static lang:LangKey.MakeSelectedIPConfigCopy_}}" />
+                          Header="{lang:Lang {x:Static lang:LangKey.Duplicate_}}" />
 
                 <Separator />
 
