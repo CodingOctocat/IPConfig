@@ -17,7 +17,7 @@ public abstract partial class IPConfigBase<T> : ObservableValidator,
 
     protected string _dns2 = "";
 
-    protected string _gatway = "";
+    protected string _gateway = "";
 
     protected string _iP = "";
 
@@ -56,12 +56,12 @@ public abstract partial class IPConfigBase<T> : ObservableValidator,
     [JsonPropertyOrder(3)]
     public virtual string Gateway
     {
-        get => _gatway;
+        get => _gateway;
         set
         {
             if (TryNormalizeIPAddress(value, out string gatway))
             {
-                SetProperty(ref _gatway, gatway, true);
+                SetProperty(ref _gateway, gatway, true);
             }
         }
     }
