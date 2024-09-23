@@ -64,7 +64,7 @@ public partial class NicViewModel : ObservableRecipient,
     [NotifyPropertyChangedRecipients]
     [NotifyPropertyChangedFor(nameof(IsSelectedNicNotNull))]
     [NotifyCanExecuteChangedFor(nameof(CopySelectedNicIPConfigAsTextCommand),
-        nameof(MakeSelectedNicIPConfigCopyCommand),
+        nameof(DuplicateSelectedNicIPConfigCommand),
         nameof(ViewToNicConfigDetailCommand))]
     private Nic? _selectedNic;
 
@@ -170,9 +170,9 @@ public partial class NicViewModel : ObservableRecipient,
     }
 
     [RelayCommand(CanExecute = nameof(IsSelectedNicNotNull))]
-    private void MakeSelectedNicIPConfigCopy()
+    private void DuplicateSelectedNicIPConfig()
     {
-        Messenger.Send(SelectedNicIPConfig!, "MakeSelectedNicIPConfigCopy");
+        Messenger.Send(SelectedNicIPConfig!, "DuplicateSelectedNicIPConfig");
     }
 
     [RelayCommand]

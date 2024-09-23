@@ -72,7 +72,7 @@
                 <MenuItem Command="{Binding CopySelectedNicIPConfigAsTextCommand}"
                           Header="{lang:Lang {x:Static lang:LangKey.CopySelectedIPConfigAsText_}}" />
 
-                <MenuItem Command="{Binding MakeSelectedNicIPConfigCopyCommand}"
+                <MenuItem Command="{Binding DuplicateSelectedNicIPConfigCommand}"
                           Header="{lang:Lang {x:Static lang:LangKey.Duplicate_}}" />
 
                 <Separator />

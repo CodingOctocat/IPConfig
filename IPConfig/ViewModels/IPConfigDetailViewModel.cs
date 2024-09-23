@@ -505,7 +505,7 @@ public partial class IPConfigDetailViewModel : ObservableRecipient, IEditableObj
 
             if (IsNicIPConfig)
             {
-                Messenger.Send(EditingIPConfig, "MakeSelectedNicIPConfigCopy");
+                Messenger.Send(EditingIPConfig, "DuplicateSelectedNicIPConfig");
             }
 
             Growl.Success(new() {

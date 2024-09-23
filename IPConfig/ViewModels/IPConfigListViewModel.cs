@@ -118,8 +118,8 @@ public partial class IPConfigListViewModel : ObservableRecipient
         Messenger.Register<IPConfigListViewModel, EmptyMessage, string>(this, "SelectedNicIPConfigChecked",
             (r, m) => SelectedIPConfig = null);
 
-        Messenger.Register<IPConfigListViewModel, EditableIPConfigModel, string>(this, "MakeSelectedNicIPConfigCopy",
-            (r, m) => MakeSelectedIPConfigCopy(m));
+        Messenger.Register<IPConfigListViewModel, EditableIPConfigModel, string>(this, "DuplicateSelectedNicIPConfig",
+            (r, m) => DuplicateSelectedIPConfig(m));
 
         Messenger.Register<IPConfigListViewModel, RequestMessage<IEnumerable<EditableIPConfigModel>>, string>(this, "IPConfigList",
             (r, m) => m.Reply(IPConfigList));
@@ -277,9 +277,9 @@ public partial class IPConfigListViewModel : ObservableRecipient
     }
 
     [RelayCommand(CanExecute = nameof(HasSelected))]
-    private void MakeSelectedIPConfigCopy()
+    private void DuplicateSelectedIPConfig()
     {
-        MakeSelectedIPConfigCopy(SelectedIPConfig);
+        DuplicateSelectedIPConfig(SelectedIPConfig);
     }
 
     [RelayCommand(CanExecute = nameof(CanMoveToBottom))]
@@ -410,7 +410,7 @@ public partial class IPConfigListViewModel : ObservableRecipient
         SelectedIPConfig = iPConfig;
     }
 
-    private void MakeSelectedIPConfigCopy(EditableIPConfigModel? original)
+    private void DuplicateSelectedIPConfig(EditableIPConfigModel? original)
     {
         if (original is null)
         {
