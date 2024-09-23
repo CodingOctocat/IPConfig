@@ -59,9 +59,9 @@ public abstract partial class IPConfigBase<T> : ObservableValidator,
         get => _gateway;
         set
         {
-            if (TryNormalizeIPAddress(value, out string gatway))
+            if (TryNormalizeIPAddress(value, out string gateway))
             {
-                SetProperty(ref _gateway, gatway, true);
+                SetProperty(ref _gateway, gateway, true);
             }
         }
     }
