@@ -45,7 +45,11 @@
                     </ContextMenu>
                 </Setter.Value>
             </Setter>
+        </Style>
 
+        <Style x:Key="ExpanderHeaderStyle"
+               BasedOn="{StaticResource HeaderStyle}"
+               TargetType="{x:Type TextBlock}">
             <Setter Property="Width" Value="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Expander}}}" />
         </Style>
 
@@ -146,7 +150,7 @@
             <hc:UniformSpacingPanel>
                 <Expander IsExpanded="True">
                     <Expander.Header>
-                        <TextBlock Style="{StaticResource HeaderStyle}"
+                        <TextBlock Style="{StaticResource ExpanderHeaderStyle}"
                                    Text="{lang:Lang {x:Static lang:LangKey.AdapterProperties_Header}}" />
                     </Expander.Header>
 
@@ -200,7 +204,7 @@
 
                 <Expander IsExpanded="{Binding Nic.SupportsIPv4, Mode=OneWay}">
                     <Expander.Header>
-                        <TextBlock Style="{StaticResource HeaderStyle}"
+                        <TextBlock Style="{StaticResource ExpanderHeaderStyle}"
                                    Text="{lang:Lang {x:Static lang:LangKey.IPv4GeneralProperties_Header}}" />
                     </Expander.Header>
 
@@ -239,7 +243,7 @@
 
                 <Expander IsExpanded="{Binding Nic.SupportsIPv4, Mode=OneWay}">
                     <Expander.Header>
-                        <TextBlock Style="{StaticResource HeaderStyle}"
+                        <TextBlock Style="{StaticResource ExpanderHeaderStyle}"
                                    Text="{lang:Lang {x:Static lang:LangKey.IPv4Lifetimes_Header}}" />
                     </Expander.Header>
 
@@ -266,7 +270,7 @@
 
                 <Expander IsExpanded="{Binding Nic.SupportsIPv4, Mode=OneWay}">
                     <Expander.Header>
-                        <TextBlock Style="{StaticResource HeaderStyle}"
+                        <TextBlock Style="{StaticResource ExpanderHeaderStyle}"
                                    Text="{lang:Lang {x:Static lang:LangKey.IPv4AdvancedProperties_Header}}" />
                     </Expander.Header>
 
@@ -317,7 +321,7 @@
 
                 <Expander IsExpanded="{Binding Nic.SupportsIPv4, Mode=OneWay}">
                     <Expander.Header>
-                        <TextBlock Style="{StaticResource HeaderStyle}"
+                        <TextBlock Style="{StaticResource ExpanderHeaderStyle}"
                                    Text="{lang:Lang {x:Static lang:LangKey.IPv4Statistics_Header}}" />
                     </Expander.Header>
 
@@ -403,7 +407,7 @@
 
                 <Expander IsExpanded="{Binding Nic.SupportsIPv6, Mode=OneWay}">
                     <Expander.Header>
-                        <TextBlock Style="{StaticResource HeaderStyle}"
+                        <TextBlock Style="{StaticResource ExpanderHeaderStyle}"
                                    Text="{lang:Lang {x:Static lang:LangKey.IPv6GeneralProperties_Header}}" />
                     </Expander.Header>
 
@@ -448,7 +452,7 @@
 
                 <Expander IsExpanded="{Binding Nic.SupportsIPv6, Mode=OneWay}">
                     <Expander.Header>
-                        <TextBlock Style="{StaticResource HeaderStyle}"
+                        <TextBlock Style="{StaticResource ExpanderHeaderStyle}"
                                    Text="{lang:Lang {x:Static lang:LangKey.IPv6Lifetimes_Header}}" />
                     </Expander.Header>
 
@@ -475,7 +479,7 @@
 
                 <Expander IsExpanded="{Binding Nic.SupportsIPv6, Mode=OneWay}">
                     <Expander.Header>
-                        <TextBlock Style="{StaticResource HeaderStyle}"
+                        <TextBlock Style="{StaticResource ExpanderHeaderStyle}"
                                    Text="{lang:Lang {x:Static lang:LangKey.IPv6AdvancedProperties_Header}}" />
                     </Expander.Header>
 
