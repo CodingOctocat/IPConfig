@@ -2,6 +2,7 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:b="clr-namespace:IPConfig.Behaviors"
+             xmlns:control="clr-namespace:IPConfig.Controls"
              xmlns:conv="clr-namespace:IPConfig.Converters"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:hc="https://handyorg.github.io/handycontrol"
@@ -16,20 +17,23 @@
              d:DesignWidth="200"
              mc:Ignorable="d">
     <UserControl.Resources>
+        <control:BindingProxy x:Key="Proxy"
+                              Data="{Binding}" />
+
         <conv:NicIPConfigToolTipConverter x:Key="NicIPConfigToolTipConverter" />
         <conv:SelectedNicIPConfigNameConverter x:Key="SelectedNicIPConfigNameConverter" />
     </UserControl.Resources>
 
     <UserControl.InputBindings>
         <KeyBinding Key="F11"
-                    Command="{Binding ViewNicIPConfigCommand}"
+                    Command="{Binding Data.ViewNicIPConfigCommand, Source={StaticResource Proxy}}"
                     CommandParameter="{StaticResource True}" />
 
         <KeyBinding Key="F12"
-                    Command="{Binding ViewToNicConfigDetailCommand}" />
+                    Command="{Binding Data.ViewToNicConfigDetailCommand, Source={StaticResource Proxy}}" />
 
         <KeyBinding Key="Esc"
-                    Command="{Binding ViewNicIPConfigCommand}"
+                    Command="{Binding Data.ViewNicIPConfigCommand, Source={StaticResource Proxy}}"
                     CommandParameter="{StaticResource False}" />
     </UserControl.InputBindings>
 
