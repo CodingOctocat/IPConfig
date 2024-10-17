@@ -49,3 +49,5 @@ A simple and easy IP configuration tool.
 1. How to customise subnet mask and DNS preset list?
     > You can create a copy of the template and edit it, while following to file naming convention: `filename[.lang].csv` (Don't use English periods(`.`) in filename).
     For example, `ipv4_public_dns.fr.csv` is good, `ipv4.public.dns.fr.csv` is bad.
+2. Where is the settings file?
+    > `%LOCALAPPDATA%\IPConfig`
