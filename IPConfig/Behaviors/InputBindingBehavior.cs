@@ -5,14 +5,16 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
+using IPConfig.Controls;
+
 namespace IPConfig.Behaviors;
 
 /// <summary>
 /// <see href="https://stackoverflow.com/a/55903060/4380178">InputBindings work only when focused</see>
 /// <para>
-/// 此行为将在运行时引发 XAML 绑定错误，但不影响工作。
-/// System.Windows.Data Error: Cannot find governing FrameworkElement or FrameworkContentElement for target element.
+/// 此行为将在运行时引发 XAML 绑定错误，但不影响工作。使用 <see cref="BindingProxy"/> 可以消除错误。
 /// </para>
+/// <para>System.Windows.Data Error: Cannot find governing FrameworkElement or FrameworkContentElement for target element.</para>
 /// </summary>
 public class InputBindingBehavior
 {
