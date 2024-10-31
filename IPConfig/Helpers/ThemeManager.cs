@@ -60,6 +60,8 @@ public static class ThemeManager
 
         if (actualSkinType == CurrentSkinType)
         {
+            CurrentSkinTypeMode = skin;
+
             return;
         }
 
