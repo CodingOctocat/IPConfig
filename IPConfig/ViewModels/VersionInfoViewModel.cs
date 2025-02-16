@@ -72,17 +72,16 @@ public partial class VersionInfoViewModel : ObservableObject
     #region Relay Commands
 
     [RelayCommand]
-    private async Task LoadedAsync()
-    {
-        await GetLatestReleaseInfoAsync();
-    }
-
-    [RelayCommand]
-    private async Task ShowUpdateGrowlAsync()
+    private async Task CheckUpdateAsync(bool showGrowl)
     {
         if (_githubReleaseInfo is null)
         {
             await GetLatestReleaseInfoAsync();
+        }
+
+        if (!showGrowl)
+        {
+            return;
         }
 
         if (CheckUpdateError is not null)
@@ -133,6 +132,12 @@ public partial class VersionInfoViewModel : ObservableObject
         });
     }
 
+    [RelayCommand]
+    private async Task LoadedAsync()
+    {
+        await CheckUpdateCommand.ExecuteAsync(false);
+    }
+
     #endregion Relay Commands
 
     #region Private Methods
@@ -150,6 +155,8 @@ public partial class VersionInfoViewModel : ObservableObject
             {
                 HasNewVersion = true;
             }
+
+            CheckUpdateError = null;
         }
         catch (Exception ex)
         {
