@@ -116,7 +116,7 @@ public partial class VersionInfoViewModel : ObservableObject
             Message = $"""
                 {Lang.LatestVersion}{_githubReleaseInfo.Name}
                 {App.VersionString} -> {_githubReleaseInfo.TagName}
-                {_githubReleaseInfo.CreatedAt.ToLocalTime():yyyy/MM/dd HH:mm:ss 'GMT'z}
+                {_githubReleaseInfo.PublishedAt.ToLocalTime():yyyy/MM/dd HH:mm:ss 'GMT'z}
 
                 What's Changed
                 {note}

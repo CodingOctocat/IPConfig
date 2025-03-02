@@ -35,9 +35,9 @@ public static class GitHubApi
         string tagName = jObj.GetValueEx("tag_name", "");
         string name = jObj.GetValueEx("name", "");
         string releaseNote = jObj.GetValueEx("body", "");
-        var createdAt = jObj.GetValueEx("created_at", DateTimeOffset.MinValue);
+        var publishedAt = jObj.GetValueEx("published_at", DateTimeOffset.MinValue);
         string htmlUrl = jObj.GetValueEx("html_url", "");
-        var info = new GitHubReleaseInfo(tagName, name, releaseNote, createdAt, htmlUrl);
+        var info = new GitHubReleaseInfo(tagName, name, releaseNote, publishedAt, htmlUrl);
 
         return info;
     }
