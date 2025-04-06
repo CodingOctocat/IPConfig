@@ -98,6 +98,8 @@ public partial class App : Application
         if (Settings.Default.UpgradeRequired)
         {
             Settings.Default.Upgrade();
+            Settings.Default.Save();
+            Settings.Default.Reload();
             Settings.Default.UpgradeRequired = false;
             Settings.Default.Save();
         }
