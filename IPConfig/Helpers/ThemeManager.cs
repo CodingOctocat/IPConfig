@@ -78,6 +78,14 @@ public static class ThemeManager
         });
 
         App.Current.Resources.MergedDictionaries.Add(new ResourceDictionary {
+            Source = new("/Themes/FixedHandyControlTextBoxPlusTemplate.xaml", UriKind.Relative)
+        });
+
+        App.Current.Resources.MergedDictionaries.Add(new ResourceDictionary {
+            Source = new("/Themes/FixedHandyControlSearchBarPlusTemplate.xaml", UriKind.Relative)
+        });
+
+        App.Current.Resources.MergedDictionaries.Add(new ResourceDictionary {
             Source = new("/Themes/MyResources.xaml", UriKind.Relative)
         });
 
