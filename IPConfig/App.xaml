@@ -7,8 +7,8 @@
                 <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/SkinDefault.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml" />
 
-                <ResourceDictionary Source="/Themes/FixHandyControlTextBoxPlusTemplate.xaml" />
-                <ResourceDictionary Source="/Themes/FixHandyControlSearchBarPlusTemplate.xaml" />
+                <ResourceDictionary Source="/Themes/FixedHandyControlTextBoxPlusTemplate.xaml" />
+                <ResourceDictionary Source="/Themes/FixedHandyControlSearchBarPlusTemplate.xaml" />
 
                 <ResourceDictionary Source="/Themes/MyResources.xaml" />
                 <ResourceDictionary Source="/Themes/MyLightTheme.xaml" />
